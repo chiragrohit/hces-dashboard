@@ -117,26 +117,6 @@ const cutline = {
     ctx.beginPath(); ctx.roundRect(x - pw / 2, a.top + 4, pw, 18, 5); ctx.fill();
     ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
     ctx.fillText(pctTxt, x, a.top + 14.5);
-    // value chip where the line cuts each dataset (skip chips too close together)
-    const fmtFn = opts.fmt || (v => ' ₹' + Math.round(v).toLocaleString('en-IN'));
-    let prevY = null;
-    chart.data.datasets.forEach(ds => {
-      const val = ds.data[idx];
-      const y = scales.y.getPixelForValue(val);
-      if (val == null || y < a.top || y > a.bottom) return;
-      if (prevY != null && Math.abs(y - prevY) < 16) return;
-      prevY = y;
-      const label = ds.label + fmtFn(val);
-      ctx.font = '600 10px Segoe UI, system-ui, sans-serif';
-      const w = ctx.measureText(label).width + 14;
-      const h = 18;
-      const bx = Math.min(a.right - w - 4, x + 6);
-      const by = Math.max(a.top + 2, y - h / 2);
-      ctx.fillStyle = ds.borderColor || '#101828';
-      ctx.beginPath(); ctx.roundRect(bx, by, w, h, 5); ctx.fill();
-      ctx.fillStyle = '#fff'; ctx.textAlign = 'left';
-      ctx.fillText(label, bx + 7, by + h / 2 + 0.5);
-    });
     ctx.restore();
   },
 };
