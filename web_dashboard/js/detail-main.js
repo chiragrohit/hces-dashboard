@@ -290,7 +290,9 @@ function downloadCsv() {
       <div class="prov-row"><span class="prov-k">File</span><code>${prov.file}</code></div>
       <div class="prov-row"><span class="prov-k">Columns</span>${prov.cols.map(c => `<code>${c}</code>`).join(' ')}</div>
       <div class="prov-row"><span class="prov-k">Aggregate</span><code>data/${prov.agg}</code></div>
-      <p class="prov-note">Weights use the survey <code>Multiplier</code>, normalized to national estimates for display. Open the <a href="/metadata">data catalog</a> for the full schema and value counts.</p>`;
+      <p class="prov-note">${TBL[chartId] && TBL[chartId].curve
+        ? 'Weights use the survey <code>Multiplier</code> to rank households. Percentile values are the raw rupee amounts, not scaled.'
+        : 'Weights use the survey <code>Multiplier</code>, normalized to national estimates for display.'} Open the <a href="/metadata">data catalog</a> for the full schema and value counts.</p>`;
     document.getElementById('dProvCard').hidden = false;
     if (TBL[chartId] && TBL[chartId].curve) document.getElementById('dCalc').hidden = false;
   }
