@@ -218,7 +218,7 @@ summary = {
     "states_covered": int(national[4]),
     "survey_year": "2023-24",
     "survey_name": "HCES",
-    "source": "NSSO, Government of India"
+    "source": "National Statistical Office (NSO) under the Ministry of Statistics and Programme Implementation (MoSPI), Government of India"
 }
 
 with open(os.path.join(WEB, "national_summary.json"), "w") as f:
