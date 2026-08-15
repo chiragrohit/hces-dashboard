@@ -196,6 +196,20 @@
 .btn.primary:hover { background: #1e40af; }
 .btn:disabled { opacity: 0.5; cursor: not-allowed; }
 .exp-note { font-size: 0.8rem; color: var(--muted); }
+.ask-box { display: flex; gap: 10px; margin-bottom: 10px; max-width: 760px; }
+.ask-box input { flex: 1; min-width: 0; background: var(--surface); border: 1px solid var(--border-strong); color: var(--ink); font: inherit; font-size: 0.95rem; padding: 11px 14px; border-radius: 8px; }
+.ask-box input:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+.ask-box .btn { padding: 11px 22px; font-size: 0.9rem; }
+.ask-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+.chip { border: 1px solid var(--border-strong); background: var(--surface-2); color: var(--ink-2); border-radius: 999px; padding: 6px 13px; font-size: 0.8rem; font-weight: 550; cursor: pointer; font-family: var(--font); transition: all 0.15s ease; }
+.chip:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+.adv { border-top: 1px solid var(--border); margin-top: 16px; padding-top: 12px; }
+.adv summary { cursor: pointer; font-size: 0.82rem; font-weight: 600; color: var(--muted); user-select: none; }
+.adv summary:hover { color: var(--accent); }
+@media (max-width: 480px) {
+  .ask-box { flex-direction: column; }
+  .ask-box .btn { width: 100%; }
+}
 .empty { padding: 40px 20px; text-align: center; color: var(--muted); font-size: 0.9rem; }
 .error { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; border-radius: 8px; padding: 10px 14px; font-size: 0.84rem; }
 @media (max-width: 480px) {

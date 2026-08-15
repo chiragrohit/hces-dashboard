@@ -42,13 +42,19 @@ async function init() {
     o.value = t.table; o.textContent = t.table + '  (' + t.rows.toLocaleString('en-IN') + ' rows)';
     sel.appendChild(o);
   });
-  sel.addEventListener('change', onTableChange);
+  sel.addEventListener('change', () => { onTableChange(); run(); });
   $('xDim2').addEventListener('change', () => { if ($('xDim2').value === $('xDim').value) $('xDim2').value = ''; });
   $('xRun').addEventListener('click', run);
   $('xCsv').addEventListener('click', downloadCsv);
   $('xState').addEventListener('change', run);
   $('xSector').addEventListener('change', run);
-  onTableChange();
+  $('xAskGo').addEventListener('click', () => ask($('xAsk').value));
+  $('xAsk').addEventListener('keydown', e => { if (e.key === 'Enter') ask($('xAsk').value); });
+  document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => {
+    $('xAsk').value = c.textContent.trim();
+    ask(c.textContent.trim());
+  }));
+  onTableChange();  // populate the pickers; wait for the user to ask
 }
 
 function onTableChange() {
@@ -87,7 +93,7 @@ function onTableChange() {
   }
   cols.filter(c => NUMERIC.includes(c.type) && c.name !== 'Multiplier').forEach(c =>
     measures.push({ value: c.name, label: c.name + (c.meaning ? ' — ' + c.meaning : '') }));
-  if (!measures.length) measures.push({ value: 'COUNT_STAR', label: 'Row count' });
+  measures.push({ value: 'COUNT_STAR', label: 'Row count' });
   fill('xMeasure', measures, measures[0].value);
 
   // sector filter (1=2= codes or names)
@@ -106,7 +112,41 @@ function onTableChange() {
   if (state && state.values) state.values.forEach(v => {
     const o = document.createElement('option'); o.value = v.value; o.textContent = v.value; stSel.appendChild(o);
   });
+}
 
+/* ---------- "Ask in English" via /api/ask ---------- */
+async function ask(q) {
+  q = (q || '').trim();
+  if (!q) return;
+  const note = $('xNote');
+  const btn = $('xAskGo');
+  btn.disabled = true;
+  note.textContent = 'Thinking…';
+  try {
+    const res = await fetch('/api/ask', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ question: q }),
+    }).then(r => r.json());
+    if (res.error) { note.textContent = 'Could not answer: ' + res.error; return; }
+    setConfig(res.config);
+    $('xTitle').textContent = res.config.title || 'Result';
+  } catch (e) {
+    note.textContent = 'Could not answer: ' + (e.message || e);
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+function setConfig(cfg) {
+  $('xTable').value = cfg.table;
+  onTableChange();
+  $('xDim').value = cfg.dim;
+  $('xDim2').value = cfg.dim2 || '';
+  $('xMeasure').value = cfg.measure;
+  $('xAgg').value = cfg.agg;
+  $('xSector').value = cfg.sector || '';
+  $('xState').value = cfg.state || '';
   run();
 }
 
