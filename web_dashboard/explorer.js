@@ -24,7 +24,18 @@ function colMeta(table, name) {
 const NUMERIC = ['BIGINT', 'INTEGER', 'DOUBLE', 'FLOAT', 'DECIMAL', 'HUGEINT', 'UBIGINT', 'SMALLINT'];
 
 async function init() {
-  CAT = await fetch('/api/tables').then(r => r.json());
+  try {
+    CAT = await fetch('/api/tables').then(r => r.json());
+  } catch (e) {
+    $('xTable').innerHTML = '<option>Could not load tables</option>';
+    $('xNote').textContent = 'Cannot reach /api/tables. Restart serve.py (stop old python.exe processes first).';
+    return;
+  }
+  if (!CAT || !CAT.tables || !CAT.tables.length) {
+    $('xTable').innerHTML = '<option>No tables found</option>';
+    $('xNote').textContent = 'The server returned no tables. Run aggregate_for_web.py and restart serve.py.';
+    return;
+  }
   const sel = $('xTable');
   CAT.tables.forEach(t => {
     const o = document.createElement('option');
