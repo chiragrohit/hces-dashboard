@@ -1,7 +1,7 @@
 /* Human labels for raw survey codes, from the data catalog (metadata.json).
  *
  * The microdata stores codes ("1", "09", "101"); the catalog carries the
- * meanings extracted from the official questionnaire (see extract_code_map.py):
+ * meanings extracted from the official questionnaire (see build_parquet_code_map.py):
  *   - c.meaning        -> answer codes (e.g. Religion 1 = Hinduism)
  *   - c.state_meaning  -> state codes (e.g. 09 = Uttar Pradesh)
  *   - c.item_meaning   -> consumption item codes (e.g. 101 = rice - PDS)

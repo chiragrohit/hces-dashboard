@@ -74,5 +74,5 @@ export const PROV = {
 };
 
 // Chart code->label maps, generated from the official questionnaire by
-// extract_code_map.py (single source of truth: hces-code/code_map.json).
+// build_parquet_code_map.py (single source of truth: hces-code/parquet-code-map.json).
 export { C } from './code-maps.generated.js';

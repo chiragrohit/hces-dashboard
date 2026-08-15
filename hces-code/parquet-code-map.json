@@ -2,8 +2,8 @@
  "_meta": {
   "source": "HCES 2023-24 official questionnaires (LCES/HCQ/FDQ/CSQ/DGQ), MOSPI",
   "primary_extraction": "Mistral-OCR structured annotation of the questionnaire",
-  "generated_by": "extract_code_map.py",
-  "actual_source": "Mistral-OCR annotation (hces-code/HCES-ocr-mistral/document-annotation.json)",
+  "generated_by": "build_parquet_code_map.py",
+  "actual_source": "Mistral-OCR annotation (hces-code/HCES-ocr-mistral/ocr-questionnaire-annotation.json)",
   "note": "Holistic code map: column meaning dicts, per-table consumption item codes, state codes, and the OCR answer-code transcript. Sampling identifiers and pure quantities carry notes instead of maps."
  },
  "columns": {

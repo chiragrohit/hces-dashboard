@@ -16,10 +16,10 @@ os.makedirs(WEB, exist_ok=True)
 con = duckdb.connect()
 
 # Holistic code map extracted from the official HCES 2023-24 questionnaire
-# (see extract_code_map.py): column meanings, per-table consumption item
+# (see build_parquet_code_map.py): column meanings, per-table consumption item
 # codes, state codes, and notes for identifiers/quantities.
 CODE_MAP_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                             "hces-code", "code_map.json")
+                             "hces-code", "parquet-code-map.json")
 with open(CODE_MAP_PATH, encoding="utf-8") as _f:
     _code_map = json.load(_f)
 CODE_MAP = {k: v["map"] for k, v in _code_map["columns"].items()}
