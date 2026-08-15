@@ -64,6 +64,11 @@ def run_query(sql):
 
 
 class Handler(http.server.SimpleHTTPRequestHandler):
+    def end_headers(self):
+        # local dev: never let the browser serve stale JS/HTML/JSON
+        self.send_header("Cache-Control", "no-store")
+        super().end_headers()
+
     def do_GET(self):
         path = self.path.split("?")[0]
         if path in DASHBOARD_PATHS:
@@ -101,15 +106,19 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
 
 os.chdir(DASH)
-print(f"HCES Dashboard running at http://localhost:{PORT}")
-print("  /              Overview")
-print("  /details?id=   Chart detail page")
-print("  /explore       Query explorer")
-print("  /metadata      Data catalog")
-print("  /api/query     POST read-only DuckDB over hces_parquet")
-print("Press Ctrl+C to stop")
+print(f"HCES Dashboard running at http://localhost:{PORT}", flush=True)
+print("  /              Overview", flush=True)
+print("  /details?id=   Chart detail page", flush=True)
+print("  /explore       Query explorer", flush=True)
+print("  /metadata      Data catalog", flush=True)
+print("  /api/query     POST read-only DuckDB over hces_parquet", flush=True)
+print("Press Ctrl+C to stop", flush=True)
 
-httpd = http.server.HTTPServer(("", PORT), Handler)
+# Fail loudly if the port is already taken instead of silently double-binding
+class LockedServer(http.server.HTTPServer):
+    allow_reuse_address = False
+
+httpd = LockedServer(("", PORT), Handler)
 try:
     httpd.serve_forever()
 except KeyboardInterrupt:
