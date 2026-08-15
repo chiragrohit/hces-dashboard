@@ -46,10 +46,4 @@ async function init() {
   onTableChange();
 }
 
-// modal wiring (same pattern as the dashboard pages)
-const modal = document.getElementById('infoModal');
-document.getElementById('modalClose').addEventListener('click', () => modal.close());
-modal.addEventListener('click', e => { if (e.target === modal) modal.close(); });
-document.getElementById('exploreInfo').addEventListener('click', () => modal.showModal());
-
 init();

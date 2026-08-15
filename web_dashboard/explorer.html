@@ -40,10 +40,6 @@
   <div class="explore-panel">
     <div style="display:flex; align-items:center; gap:10px; justify-content:space-between; flex-wrap:wrap;">
       <h2>Ask a question about the survey</h2>
-      <button class="info-btn big" id="exploreInfo" aria-label="How this works">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-        How this works
-      </button>
     </div>
     <p>Type a question in plain English. The chart and the number table update together, built from the same survey data as the dashboard.</p>
 
@@ -115,21 +111,6 @@
   <span>HCES 2023-24 · National Sample Survey Office, Ministry of Statistics &amp; Programme Implementation, Government of India</span>
   <span>Survey weights normalized to national estimates for display</span>
 </footer>
-
-<dialog id="infoModal" aria-labelledby="modalTitle">
-  <div class="modal-body">
-    <div class="modal-head">
-      <h3 id="modalTitle">Query explorer</h3>
-      <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
-    </div>
-    <h4>What this does</h4>
-    <p>Type a question in plain English and press Ask. The page turns your question into a query against the raw survey tables (parquet files), then shows a chart and a number table you can cross-check.</p>
-    <h4>What to look for</h4>
-    <p>Survey codes. Many columns store codes, not words. For example, Sector 1 means Rural and 2 means Urban. The answer is checked against the catalog before it is shown, and the exact query is displayed under &ldquo;How this result was made&rdquo;.</p>
-    <h4>Data source</h4>
-    <p>All 14 parquet tables from the HCES 2023-24 survey. Queries run read-only on your machine. <a href="/metadata">Full schema in the data catalog &rarr;</a></p>
-  </div>
-</dialog>
 
 <script type="module" src="js/explorer-main.js"></script>
 </body>
