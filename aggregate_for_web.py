@@ -431,7 +431,7 @@ schemes["ayushman"] = weighted_rows("""
 """, HH_SCALE)
 schemes["school"] = weighted_rows("""
     SELECT CASE WHEN Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
-           CASE WHEN Any_member_attended_school='1' THEN 'Yes' ELSE 'No' END attended,
+           CASE WHEN Any_member_attended_school='1' THEN 'Yes' ELSE 'No' END got,
            SUM(Multiplier) w
     FROM consumption_4_2
     WHERE Any_member_attended_school IN ('1','2')
