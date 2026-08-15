@@ -5,6 +5,7 @@ const $ = id => document.getElementById(id);
 let CAT = null;              // /api/tables payload
 let current = { cols: [], rows: [], headers: [], note: '' };
 let askFilter = null;        // optional value filter set by /api/ask
+let asking = false;          // an ask flow is in progress (shows the step list)
 
 function fmt(n) {
   const a = Math.abs(n);
@@ -125,25 +126,24 @@ async function ask(q) {
   const note = $('xNote');
   const btn = $('xAskGo');
   btn.disabled = true;
-  note.textContent = '';
-  stepsShow();
-  setStep(1, 'on');
+  asking = true;
+  $('xSteps').hidden = true;
+  note.textContent = 'Understanding your question…';
   try {
     const res = await fetch('/api/ask', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ question: q }),
     }).then(r => r.json());
-    if (res.error) { note.textContent = 'Could not answer: ' + res.error; $('xSteps').hidden = true; return; }
-    setStep(1, 'done');
-    setStep(2, 'done');
+    if (res.error) { note.textContent = 'Could not answer: ' + res.error; return; }
+    note.textContent = '';
     setConfig(res.config);
     $('xTitle').textContent = res.config.title || 'Result';
   } catch (e) {
     note.textContent = 'Could not answer: ' + (e.message || e);
-    $('xSteps').hidden = true;
   } finally {
     btn.disabled = false;
+    asking = false;
   }
 }
 
@@ -156,7 +156,7 @@ function setConfig(cfg) {
   $('xAgg').value = cfg.agg;
   $('xSector').value = cfg.sector || '';
   $('xState').value = cfg.state || '';
-  askFilter = cfg.filter || null;
+  askFilter = (cfg.filter && cfg.filter.col) ? cfg.filter : null;
   run();
 }
 
@@ -191,8 +191,8 @@ function buildSql() {
 }
 
 async function run() {
-  const stepsOn = !$('xSteps').hidden;
-  if (stepsOn) setStep(3, 'on');
+  const show = asking;
+  if (show) { stepsShow(); setStep(1, 'done'); setStep(2, 'done'); setStep(3, 'on'); }
   const sql = buildSql();
   const res = await fetch('/api/query', {
     method: 'POST',
@@ -202,7 +202,7 @@ async function run() {
   const note = $('xNote');
   if (res.error) {
     note.textContent = 'Query error: ' + res.error;
-    if (stepsOn) $('xSteps').hidden = true;
+    if (show) $('xSteps').hidden = true;
     $('xChartCard').hidden = true;
     $('xTableCard').hidden = true;
     return;
@@ -218,7 +218,7 @@ async function run() {
   drawChart(rows, dim, dim2, meas);
   drawTable(rows, dim, dim2, meas);
   drawProv(sql, table, dim, dim2, meas, scale);
-  if (stepsOn) { setStep(3, 'done'); setStep(4, 'done'); }
+  if (show) { setStep(3, 'done'); setStep(4, 'done'); }
   $('xChartCard').hidden = false;
   $('xTableCard').hidden = false;
   $('xCsv').disabled = false;
