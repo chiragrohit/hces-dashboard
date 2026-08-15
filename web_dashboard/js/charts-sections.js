@@ -151,7 +151,7 @@ function updateHouseholds() {
 function updateSpending() {
   const items = D('foodRankings').slice(0, 20).reverse();
   makeChart('chartFoodItems', { type: 'bar', data: { labels: items.map(d => d.item_name || 'Item ' + d.item_code), datasets: [{ label: 'Monthly value (₹ Cr)', data: items.map(d => d.total_value_cr), backgroundColor: '#1d4ed8', borderRadius: 4, borderSkipped: false, maxBarThickness: 20 }] },
-    options: { indexAxis: 'y', scales: { ...baseScales, x: { ...baseScales.x, ticks: { ...baseScales.x.ticks, callback: inrTicks } }, y: { ...baseScales.y, ticks: { ...baseScales.y.ticks, font: { size: 11 }, callback: v => clip(v, 26) } } }, plugins: { legend: { display: false }, tooltip: { callbacks: { label: moneyLabel } } } } });
+    options: { indexAxis: 'y', scales: { ...baseScales, x: { ...baseScales.x, ticks: { ...baseScales.x.ticks, callback: inrTicks } }, y: { ...baseScales.y, ticks: { ...baseScales.y.ticks, font: { size: 11 }, callback: function(v) { return clip(this.getLabelForValue(v), 26); } } } }, plugins: { legend: { display: false }, tooltip: { callbacks: { label: moneyLabel } } } } });
 
   const sc = D('stateConsumption'); const states = [...new Set(sc.map(d => d.state_name))].sort();
   makeChart('chartConsumpDist', { type: 'bar', data: { labels: states, datasets: [{ label: 'Monthly (₹ Cr)', data: states.map(s => sumBy(sc.filter(d => d.state_name === s), 'total_consumption_cr')), backgroundColor: '#0e9f8a', borderRadius: 3, borderSkipped: false, maxBarThickness: 22 }] },

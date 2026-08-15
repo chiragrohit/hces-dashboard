@@ -193,6 +193,7 @@ function downloadCsv() {
 }
 
 (async function main() {
+  await qPromise;
   const info = INFO[key];
   if (!info) {
     document.getElementById('dTitle').textContent = 'Chart not found';
