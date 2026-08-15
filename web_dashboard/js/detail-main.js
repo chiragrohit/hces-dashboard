@@ -12,24 +12,24 @@ const params = new URLSearchParams(location.search);
 const key = params.get('id');
 const CANVAS = {
   stateConsumption: 'chartStateConsumption', sectorShare: 'chartSectorShare', ooh: 'chartOOH',
-  ageGroup: 'chartAgeGroup', gender: 'chartGender', pyramid: 'chartPyramid', composition: 'chartComposition',
-  education: 'chartEducation', marital: 'chartMarital', internet: 'chartInternet', meals: 'chartMeals', relation: 'chartRelation',
+  ageGroup: 'chartAgeGroup', gender: 'chartGender', pyramid: 'chartPyramid',
+  education: 'chartEducation', marital: 'chartMarital', internet: 'chartInternet', relation: 'chartRelation',
   hhsize: 'chartHHSize', hhtype: 'chartHHType', socialgroup: 'chartSocialGroup', religion: 'chartReligion',
   dwelling: 'chartDwelling', energy: 'chartEnergy', lighting: 'chartLighting', land: 'chartLand',
   ration: 'chartRation', ujjwala: 'chartUjjwala',
-  foodItems: 'chartFoodItems', consumpDist: 'chartConsumpDist', perHH: 'chartPerHH', foodSource: 'chartFoodSource', onlineGrocery: 'chartOnlineGrocery',
+  foodItems: 'chartFoodItems', perHH: 'chartPerHH', foodSource: 'chartFoodSource',
   pds: 'chartPDS', lpg: 'chartLPG', electricity: 'chartElectricity', ayushman: 'chartAyushman', school: 'chartSchool', schoolSplit: 'chartSchoolSplit',
 };
 const chartId = CANVAS[key] || key;
 
 const SECTION = {
   chartStateConsumption: 'overview', chartSectorShare: 'overview', chartOOH: 'overview',
-  chartAgeGroup: 'people', chartGender: 'people', chartPyramid: 'people', chartComposition: 'people',
-  chartEducation: 'people', chartMarital: 'people', chartInternet: 'people', chartMeals: 'people', chartRelation: 'people',
+  chartAgeGroup: 'people', chartGender: 'people', chartPyramid: 'people',
+  chartEducation: 'people', chartMarital: 'people', chartInternet: 'people', chartRelation: 'people',
   chartHHSize: 'households', chartHHType: 'households', chartSocialGroup: 'households', chartReligion: 'households',
   chartDwelling: 'households', chartEnergy: 'households', chartLighting: 'households', chartLand: 'households',
   chartRation: 'households', chartUjjwala: 'households',
-  chartFoodItems: 'spending', chartConsumpDist: 'spending', chartPerHH: 'spending', chartFoodSource: 'spending', chartOnlineGrocery: 'spending',
+  chartFoodItems: 'spending', chartPerHH: 'spending', chartFoodSource: 'spending',
   chartPDS: 'schemes', chartLPG: 'schemes', chartElectricity: 'schemes', chartAyushman: 'schemes', chartSchool: 'schemes', chartSchoolSplit: 'schemes',
 };
 
@@ -40,11 +40,9 @@ const TBL = {
   chartAgeGroup: { key: 'demographics' },
   chartGender: { key: 'demographics' },
   chartPyramid: { key: 'demographics' },
-  chartComposition: { key: 'demographics' },
   chartEducation: { key: 'education' },
   chartMarital: { key: 'people.marital', map: 'marital' },
   chartInternet: { key: 'people.internet' },
-  chartMeals: { key: 'people.meals' },
   chartRelation: { key: 'people.relation', map: 'relation' },
   chartHHSize: { key: 'householdExtras.hh_size' },
   chartHHType: { key: 'householdChars', group: { by: 'household_type', sum: 'estimated_households', top: 7, map: 'hhtype' } },
@@ -57,10 +55,8 @@ const TBL = {
   chartLighting: { key: 'householdExtras.lighting', map: 'lighting' },
   chartUjjwala: { key: 'householdExtras.ujjwala' },
   chartFoodItems: { key: 'foodRankings' },
-  chartConsumpDist: { key: 'stateConsumption' },
   chartPerHH: { key: 'stateConsumption' },
   chartFoodSource: { key: 'spendingExtras.food_source', map: 'foodsrc' },
-  chartOnlineGrocery: { key: 'spendingExtras.online_grocery' },
   chartPDS: { key: 'schemes.pds' },
   chartLPG: { key: 'schemes.lpg_subsidy' },
   chartElectricity: { key: 'schemes.free_electricity' },

@@ -259,7 +259,7 @@ with open(os.path.join(WEB, "food_rankings.json"), "w") as f:
 print(f"    OK {len(food_rankings)} top food items")
 
 # ----------------------------------------------------------------
-# 7. People & lifestyle (marital status, internet, meals, family role)
+# 7. People & lifestyle (marital status, internet, family role)
 # ----------------------------------------------------------------
 def write_json(name, data):
     with open(os.path.join(WEB, name), "w") as f:
@@ -299,13 +299,6 @@ people["internet"] = weighted_rows("""
     FROM individual_characteristics
     WHERE Used_Internet_Last_30_Days IN ('1','2')
     GROUP BY 1,2,3
-""")
-people["meals"] = weighted_rows("""
-    SELECT CASE WHEN Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
-           Meals_Usually_Taken_Per_Day meals, SUM(Multiplier) w
-    FROM individual_characteristics
-    WHERE Meals_Usually_Taken_Per_Day IN ('0','1','2','3')
-    GROUP BY 1,2
 """)
 people["relation"] = weighted_rows("""
     SELECT CASE WHEN Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
@@ -381,14 +374,6 @@ spend_extra["food_source"] = weighted_rows("""
     WHERE Source IS NOT NULL AND Source IN ('1','2','3','4','5','6','7','9')
     GROUP BY 1,2
 """, 1)
-spend_extra["online_grocery"] = weighted_rows("""
-    SELECT CASE WHEN Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
-           CASE WHEN Online_Groceries='1' THEN 'Yes' ELSE 'No' END bought,
-           SUM(Multiplier) w
-    FROM consumption_4_1
-    WHERE Online_Groceries IN ('1', '2') OR Online_Groceries IS NULL
-    GROUP BY 1,2
-""", HH_SCALE)
 write_json("spending_extras.json", spend_extra)
 print(f"    OK spending_extras.json")
 

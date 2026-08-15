@@ -53,12 +53,6 @@ function updatePeople() {
     { label: 'Female', data: ageGroups.map(a => -byAge[a].Female), backgroundColor: '#be185d', borderRadius: 4, borderSkipped: false, maxBarThickness: 28 }] },
     options: { indexAxis: 'y', scales: { ...baseScales, x: { ...baseScales.x, ticks: { ...baseScales.x.ticks, callback: v => fmt(Math.abs(v)) } } }, plugins: { legend: { position: 'bottom' } } } });
 
-  const totals = ageGroups.map(a => byAge[a].Male + byAge[a].Female || 1);
-  makeChart('chartComposition', { type: 'bar', data: { labels: ageGroups, datasets: [
-    { label: 'Male %', data: ageGroups.map((a, i) => +(100 * byAge[a].Male / totals[i]).toFixed(1)), backgroundColor: '#1d4ed8', borderRadius: 4, borderSkipped: false, maxBarThickness: 30 },
-    { label: 'Female %', data: ageGroups.map((a, i) => +(100 * byAge[a].Female / totals[i]).toFixed(1)), backgroundColor: '#be185d', borderRadius: 4, borderSkipped: false, maxBarThickness: 30 }] },
-    options: { scales: { ...baseScales, y: { ...baseScales.y, suggestedMax: 60, ticks: { ...baseScales.y.ticks, callback: v => v + '%' } } }, plugins: { legend: { position: 'bottom' } } } });
-
   const edu = D('education');
   const levels = [...new Set(edu.map(d => d.education_level))].slice(0, 8);
   const topStates = [...new Set(edu.map(d => d.state_name))].slice(0, 12);
@@ -80,13 +74,6 @@ function updatePeople() {
   makeChart('chartInternet', { type: 'bar', data: { labels: netAges, datasets: [
     { label: 'Used internet', data: netAges.map(a => sumBy(net.filter(d => d.age_group === a && d.used === 'Yes'), 'w')), backgroundColor: '#1d4ed8', borderRadius: 4, borderSkipped: false, maxBarThickness: 34 },
     { label: 'No internet', data: netAges.map(a => sumBy(net.filter(d => d.age_group === a && d.used === 'No'), 'w')), backgroundColor: '#f87171', borderRadius: 4, borderSkipped: false, maxBarThickness: 34 }] },
-    options: { scales: { ...baseScales, y: { ...baseScales.y, ticks: { ...baseScales.y.ticks, callback: v => fmt(v) } } } } });
-
-  const meals = D('people', 'meals');
-  const mealVals = ['0', '1', '2', '3'];
-  makeChart('chartMeals', { type: 'bar', data: { labels: ['Rural', 'Urban'], datasets: mealVals.map((m, i) => ({
-    label: m + (m === '0' ? ' meals' : ' meal' + (m === '1' ? '' : 's')), data: ['Rural', 'Urban'].map(s => sumBy(meals.filter(d => d.sector === s && d.meals === m), 'w')),
-    backgroundColor: THEME.palette[(i + 2) % THEME.palette.length], borderRadius: 4, borderSkipped: false, maxBarThickness: 26 })) },
     options: { scales: { ...baseScales, y: { ...baseScales.y, ticks: { ...baseScales.y.ticks, callback: v => fmt(v) } } } } });
 
   const rel = D('people', 'relation');
@@ -153,10 +140,7 @@ function updateSpending() {
   makeChart('chartFoodItems', { type: 'bar', data: { labels: items.map(d => d.item_name || 'Item ' + d.item_code), datasets: [{ label: 'Monthly value (₹ Cr)', data: items.map(d => d.total_value_cr), backgroundColor: '#1d4ed8', borderRadius: 4, borderSkipped: false, maxBarThickness: 20 }] },
     options: { indexAxis: 'y', scales: { ...baseScales, x: { ...baseScales.x, ticks: { ...baseScales.x.ticks, callback: inrTicks } }, y: { ...baseScales.y, ticks: { ...baseScales.y.ticks, autoSkip: false, font: { size: 11 }, callback: function(v) { return clip(this.getLabelForValue(v), 26); } } } }, plugins: { legend: { display: false }, tooltip: { callbacks: { label: moneyLabel } } } } });
 
-  const sc = D('stateConsumption'); const states = [...new Set(sc.map(d => d.state_name))].sort();
-  makeChart('chartConsumpDist', { type: 'bar', data: { labels: states, datasets: [{ label: 'Monthly (₹ Cr)', data: states.map(s => sumBy(sc.filter(d => d.state_name === s), 'total_consumption_cr')), backgroundColor: '#0e9f8a', borderRadius: 3, borderSkipped: false, maxBarThickness: 22 }] },
-    options: { scales: { ...baseScales, x: { ...baseScales.x, ticks: { ...baseScales.x.ticks, maxRotation: 90, font: { size: 10 } } }, y: { ...baseScales.y, ticks: { ...baseScales.y.ticks, callback: inrTicks } } }, plugins: { legend: { display: false }, tooltip: { callbacks: { label: moneyLabel } } } }});
-
+  const sc = D('stateConsumption');
   const labels = [...new Set(sc.map(d => d.state_name))].sort().slice(0, 15);
   makeChart('chartPerHH', { type: 'bar', data: { labels, datasets: [
     { label: 'Rural', data: labels.map(s => sc.find(d => d.state_name === s && d.sector === 'Rural')?.avg_consumption_per_item || 0), backgroundColor: '#1d4ed8', borderRadius: 4, borderSkipped: false, maxBarThickness: 20 },
@@ -172,11 +156,6 @@ function updateSpending() {
     { label: 'Rural %', data: pct(fsRural), backgroundColor: '#1d4ed8', borderRadius: 4, borderSkipped: false, maxBarThickness: 26 },
     { label: 'Urban %', data: pct(fsUrban), backgroundColor: '#0e9f8a', borderRadius: 4, borderSkipped: false, maxBarThickness: 26 }] },
     options: { scales: { ...baseScales, y: { ...baseScales.y, suggestedMax: 100, ticks: { ...baseScales.y.ticks, callback: v => v + '%' } } } } });
-
-  const og = D('spendingExtras', 'online_grocery');
-  const ogYes = sumBy(og.filter(d => d.bought === 'Yes'), 'w');
-  const ogNo = sumBy(og.filter(d => d.bought === 'No'), 'w');
-  makeChart('chartOnlineGrocery', { type: 'doughnut', data: { labels: ['Bought online', 'Did not buy online'], datasets: [{ data: [ogYes, ogNo], backgroundColor: ['#0e9f8a', '#c8cfd9'], borderWidth: 0, hoverOffset: 6 }] }, options: { cutout: '62%', plugins: { legend: { position: 'bottom' } } } });
 }
 
 /* ---------- Schemes ---------- */
