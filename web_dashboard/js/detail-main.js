@@ -6,7 +6,6 @@ import { D, loadAll, setFocus, focusFilters } from './data.js';
 import { RENDERERS } from './charts-sections.js';
 import { setFocusChart } from './charts-core.js';
 import { INFO, PROV, C } from './content.js';
-import { openInfo, wireModal } from './modal.js';
 import { fmt } from './util.js';
 
 const params = new URLSearchParams(location.search);
@@ -190,8 +189,6 @@ function downloadCsv() {
   a.click();
 }
 
-wireModal();
-
 (async function main() {
   const info = INFO[key];
   if (!info) {
@@ -204,11 +201,9 @@ wireModal();
   setFocus(filters);
   document.getElementById('dTitle').textContent = info.title;
   document.getElementById('dWhat').textContent = info.what + ' ' + info.look;
+  document.getElementById('dSource').textContent = 'From: ' + info.source;
   document.getElementById('dCrumb').textContent = ' / ' + info.title;
   document.getElementById('dChart').id = chartId;
-  const infoBtn = document.getElementById('dInfo');
-  infoBtn.dataset.info = key;
-  infoBtn.addEventListener('click', () => openInfo(key));
   const prov = PROV[key];
   if (prov) {
     document.getElementById('dProv').innerHTML = `
