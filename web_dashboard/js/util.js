@@ -23,10 +23,13 @@ export function fmtCr(cr) {
 }
 
 /* value under the cursor, for chart tooltips */
-export const getVal = ctx =>
-  ctx.parsed && ctx.parsed.y !== undefined ? ctx.parsed.y
-  : ctx.parsed && ctx.parsed.x !== undefined ? ctx.parsed.x
-  : (ctx.raw ?? ctx.parsed);
+export const getVal = ctx => {
+  const p = ctx && ctx.parsed;
+  if (p == null) return ctx && ctx.raw;
+  if (typeof p === 'number') return p; // doughnut/pie
+  const horiz = ctx.chart && ctx.chart.options && ctx.chart.options.indexAxis === 'y';
+  return horiz ? p.x : p.y;
+};
 
 export const moneyLabel = ctx => ' ' + fmtCr(getVal(ctx));
 export const rupLabel = ctx => ' ₹' + Math.round(getVal(ctx)).toLocaleString('en-IN');
