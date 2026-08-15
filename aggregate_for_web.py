@@ -227,6 +227,10 @@ print(f"    OK Summary: {summary['estimated_total_households']:,} est. household
 
 # 6. Food item consumption rankings
 print("  6. Food item rankings ...")
+# Item names from the holistic code map (extract_code_map.py)
+with open(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                       "hces-code", "code_map.json"), encoding="utf-8") as _f:
+    _FOOD_ITEM_NAMES = json.load(_f)["tables"]["food_consumption"]["items"]
 food_items = con.execute(f"""
     SELECT
         f.Item_Code,
@@ -244,6 +248,7 @@ food_rankings = []
 for row in food_items:
     food_rankings.append({
         "item_code": row[0],
+        "item_name": _FOOD_ITEM_NAMES.get(str(row[0]), "Item " + str(row[0])),
         "total_value_cr": round(float(row[1]) * HH_SCALE / 1e7, 2),
         "total_quantity": round(float(row[2]) * HH_SCALE, 2),
         "households_consuming": int(row[3])

@@ -73,16 +73,6 @@ export const PROV = {
   schoolSplit: { file: 'consumption_4_2.parquet', cols: ['Num_govt_school_attended', 'Num_private_school_attended', 'Multiplier'], agg: 'schemes.json' },
 };
 
-export const C = {
-  marital: { 1: 'Never married', 2: 'Married', 3: 'Widowed', 4: 'Divorced or separated' },
-  relation: { 1: 'Head', 2: 'Spouse', 3: 'Married child', 4: 'Child\'s spouse', 5: 'Unmarried child', 6: 'Grandchild', 7: 'Parent', 8: 'Sibling', 9: 'Other relative' },
-  social: { 1: 'Scheduled Tribe', 2: 'Scheduled Caste', 3: 'OBC', 9: 'Others' },
-  lighting: { 1: 'Electricity', 2: 'Kerosene', 3: 'Solar', 5: 'Gas', 6: 'Candle', 9: 'No lighting' },
-  cooking: { '01': 'Firewood', '02': 'LPG / gas', '03': 'Other biofuel', '04': 'Dung cake', '05': 'Coal', '06': 'Kerosene', '09': 'Biogas', '11': 'No cooking', '12': 'Other' },
-  dwelling: { 1: 'Pucca', 2: 'Semi-pucca', 3: 'Katcha' },
-  land: { 1: 'Owns land', 2: 'No land' },
-  religion: { 1: 'Hindu', 2: 'Muslim', 3: 'Christian', 4: 'Sikh', 5: 'Buddhist', 6: 'Jain', 9: 'Others', 0: 'Not reported' },
-  hhtype: { 1: 'Self-employed, non-farm', 2: 'Self-employed, farm', 3: 'Casual labour, farm', 4: 'Casual labour, non-farm', 5: 'Regular wage or salary', 6: 'Others', 9: 'Other' },
-  ration: { 0: 'No ration card', 1: 'Card type 1', 2: 'Card type 2', 3: 'Card type 3', 4: 'Card type 4', 5: 'Card type 5', 9: 'Not reported' },
-  foodsrc: { 1: 'Purchased', 2: 'Home-produced', 3: 'Exchanged', 4: 'Gift', 5: 'Free collection', 6: 'From employer', 7: 'From others', 9: 'Other' },
-};
+// Chart code->label maps, generated from the official questionnaire by
+// extract_code_map.py (single source of truth: hces-code/code_map.json).
+export { C } from './code-maps.generated.js';

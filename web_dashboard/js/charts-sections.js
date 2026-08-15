@@ -105,7 +105,7 @@ function updateHouseholds() {
     const m = {};
     hh.forEach(d => { const k = d[key] || 'Not reported'; m[k] = (m[k] || 0) + d.estimated_households; });
     const entries = Object.entries(m).sort((a, b) => b[1] - a[1]).slice(0, top);
-    return entries.map(([k, v]) => [map[k] || ('Code ' + k), v]);
+    return entries.map(([k, v]) => [map[k] || (k === 'Not reported' ? k : 'Code ' + k), v]);
   };
   const pie = (id, entries) => makeChart(id, { type: 'doughnut', data: { labels: entries.map(e => e[0]), datasets: [{ data: entries.map(e => e[1]), backgroundColor: THEME.palette, borderWidth: 0, hoverOffset: 6 }] }, options: { cutout: '62%', plugins: { legend: { position: 'bottom', labels: { color: THEME.legend, font: { size: 11 } } } } } });
 
@@ -121,7 +121,7 @@ function updateHouseholds() {
     options: { scales: { ...baseScales, x: { ...baseScales.x, ticks: { ...baseScales.x.ticks, maxRotation: 30, font: { size: 11 } } }, y: { ...baseScales.y, ticks: { ...baseScales.y.ticks, callback: v => fmt(v) } } }, plugins: { legend: { display: false } } } });
 
   const sg = D('householdExtras', 'social_group');
-  const sgKeys = ['1', '2', '3', '9'];
+  const sgKeys = [...new Set(sg.map(d => d.code))];
   makeChart('chartSocialGroup', { type: 'bar', data: { labels: sgKeys.map(c => C.social[c]), datasets: ['Rural', 'Urban'].map((s, i) => ({
     label: s, data: sgKeys.map(c => sumBy(sg.filter(d => d.sector === s && d.code === c), 'w')),
     backgroundColor: i ? '#0e9f8a' : '#1d4ed8', borderRadius: 4, borderSkipped: false, maxBarThickness: 26 })) },
@@ -137,7 +137,7 @@ function updateHouseholds() {
   pie('chartRation', by('ration_card', C.ration, 6));
 
   const light = D('householdExtras', 'lighting');
-  const lightCodes = ['1', '2', '3', '5', '6', '9'];
+  const lightCodes = [...new Set(light.map(d => d.code))];
   const lightEntries = lightCodes.map(c => [C.lighting[c] || c, sumBy(light.filter(d => d.code === c), 'w')]).filter(e => e[1] > 0).sort((a, b) => b[1] - a[1]);
   makeChart('chartLighting', { type: 'doughnut', data: { labels: lightEntries.map(e => e[0]), datasets: [{ data: lightEntries.map(e => e[1]), backgroundColor: THEME.palette, borderWidth: 0, hoverOffset: 6 }] }, options: { cutout: '62%', plugins: { legend: { position: 'bottom', labels: { color: THEME.legend, font: { size: 11 } } } } } });
 
@@ -150,7 +150,7 @@ function updateHouseholds() {
 /* ---------- Spending ---------- */
 function updateSpending() {
   const items = D('foodRankings').slice(0, 20).reverse();
-  makeChart('chartFoodItems', { type: 'bar', data: { labels: items.map(d => 'Item ' + d.item_code), datasets: [{ label: 'Monthly value (₹ Cr)', data: items.map(d => d.total_value_cr), backgroundColor: '#1d4ed8', borderRadius: 4, borderSkipped: false, maxBarThickness: 20 }] },
+  makeChart('chartFoodItems', { type: 'bar', data: { labels: items.map(d => d.item_name || 'Item ' + d.item_code), datasets: [{ label: 'Monthly value (₹ Cr)', data: items.map(d => d.total_value_cr), backgroundColor: '#1d4ed8', borderRadius: 4, borderSkipped: false, maxBarThickness: 20 }] },
     options: { indexAxis: 'y', scales: { ...baseScales, x: { ...baseScales.x, ticks: { ...baseScales.x.ticks, callback: inrTicks } }, y: { ...baseScales.y, ticks: { ...baseScales.y.ticks, font: { size: 11 } } } }, plugins: { legend: { display: false }, tooltip: { callbacks: { label: moneyLabel } } } } });
 
   const sc = D('stateConsumption'); const states = [...new Set(sc.map(d => d.state_name))].sort();
