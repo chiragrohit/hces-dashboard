@@ -73,16 +73,20 @@ function updatePeople() {
   const netAges = ['Under 15', '15-24', '25-44', '45+'];
   makeChart('chartInternet', { type: 'bar', data: { labels: netAges, datasets: [
     { label: 'Used internet', data: netAges.map(a => sumBy(net.filter(d => d.age_group === a && d.used === 'Yes'), 'w')), backgroundColor: '#1d4ed8', borderRadius: 4, borderSkipped: false, maxBarThickness: 34 },
-    { label: 'No internet', data: netAges.map(a => sumBy(net.filter(d => d.age_group === a && d.used === 'No'), 'w')), backgroundColor: '#f87171', borderRadius: 4, borderSkipped: false, maxBarThickness: 34 }] },
+    { label: 'No internet', data: netAges.map(a => sumBy(net.filter(d => d.age_group === a && d.used === 'No'), 'w')), backgroundColor: '#be123c', borderRadius: 4, borderSkipped: false, maxBarThickness: 34 }] },
     options: { scales: { ...baseScales, y: { ...baseScales.y, ticks: { ...baseScales.y.ticks, callback: v => fmt(v) } } } } });
 
   const rel = D('people', 'relation');
   const relKeys = Object.keys(C.relation);
-  makeChart('chartRelation', { type: 'bar', data: { labels: ['Rural', 'Urban'], datasets: relKeys.map((c, i) => ({
-    label: C.relation[c], data: ['Rural', 'Urban'].map(s => sumBy(rel.filter(d => d.sector === s && d.code === c), 'w')),
-    backgroundColor: THEME.palette[i % THEME.palette.length], borderRadius: 3, borderSkipped: false, maxBarThickness: 20 })) },
-    options: { scales: { ...baseScales, y: { ...baseScales.y, ticks: { ...baseScales.y.ticks, callback: v => fmt(v) } } },
-      plugins: { legend: { labels: { color: THEME.legend, font: { size: 10 } } } } } });
+  // Horizontal bar of who lives in an Indian household, sorted largest first.
+  // A single national view reads better than 9 categories x 2 sectors.
+  const relTot = relKeys.map(c => ({ label: C.relation[c], v: sumBy(rel.filter(d => d.code === c), 'w') }))
+    .sort((a, b) => b.v - a.v);
+  const relSum = sumBy(relTot, 'v') || 1;
+  makeChart('chartRelation', { type: 'bar', data: { labels: relTot.map(e => e.label), datasets: [{
+    label: 'People', data: relTot.map(e => e.v),
+    backgroundColor: '#1d4ed8', borderRadius: 4, borderSkipped: false, maxBarThickness: 22 }] },
+    options: { indexAxis: 'y', scales: { ...baseScales, x: { ...baseScales.x, ticks: { ...baseScales.x.ticks, callback: v => fmt(v) } }, y: { ...baseScales.y, ticks: { ...baseScales.y.ticks, autoSkip: false, font: { size: 11 } } } }, plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => ' ' + fmt(getVal(c)) + ' (' + (100 * getVal(c) / relSum).toFixed(1) + '%)' } } } } });
 
   const lit = D('people', 'literacy');
   const litRate = (s, g) => {
@@ -150,11 +154,6 @@ function updateHouseholds() {
     label: st, data: ['Rural', 'Urban'].map(s => sumBy(emp.filter(d => d.sector === s && d.status === st), 'w')),
     backgroundColor: i ? '#c8cfd9' : '#1d4ed8', borderRadius: 4, borderSkipped: false, maxBarThickness: 40 })) },
     options: { scales: { ...baseScales, y: { ...baseScales.y, ticks: { ...baseScales.y.ticks, callback: v => fmt(v) } } } } });
-
-  const cer = D('householdExtras', 'ceremony');
-  const cerYes = sumBy(cer.filter(d => d.got === 'Yes'), 'w');
-  const cerNo = sumBy(cer.filter(d => d.got === 'No'), 'w');
-  makeChart('chartCeremony', { type: 'doughnut', data: { labels: ['Held a ceremony', 'No ceremony'], datasets: [{ data: [cerYes, cerNo], backgroundColor: ['#b45309', '#c8cfd9'], borderWidth: 0, hoverOffset: 6 }] }, options: { cutout: '62%', plugins: { legend: { position: 'bottom' } } } });
 }
 
 /* ---------- Spending ---------- */

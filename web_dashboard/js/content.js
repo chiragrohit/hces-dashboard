@@ -48,7 +48,6 @@ export const INFO = {
   onlineChannels: { title: 'Online purchases by category', what: 'These bars show households that bought goods online, by category such as medicine, services, and education.', look: 'Compare the categories.', source: 'Level 7 household online purchase records.' },
   literacy: { title: 'Literacy rate', what: 'These bars show the share of people who can read and write. A person with at least one year of education counts as literate.', look: 'Men have a higher literacy rate than women.', source: 'Level 3 individual records.' },
   employment: { title: 'Who is working', what: 'These bars show households engaged in an economic activity, such as farming or wage work.', look: 'Most households have at least one working member.', source: 'Level 3 household records.' },
-  ceremony: { title: 'Ceremonies last month', what: 'This circle shows households that held a ceremony, such as a wedding or festival event, in the last 30 days.', look: 'Very few households held a ceremony in a month.', source: 'Level 4 household records.' },
 };
 
 export const PROV = {
@@ -98,7 +97,6 @@ export const PROV = {
   onlineChannels: { file: 'consumption_4_2.parquet', cols: ['Online_purchase_medicine', 'Online_purchase_services', 'Online_purchase_education', 'Online_purchase_fuel_light', 'Online_purchase_toilet_articles'], agg: 'spending_extras.json' },
   literacy: { file: 'individual_characteristics.parquet', cols: ['Years_of_Education', 'Gender', 'Sector', 'Multiplier'], agg: 'people.json' },
   employment: { file: 'household_economic.parquet', cols: ['Engaged_in_Economic_Activity_Las', 'Sector', 'Multiplier'], agg: 'household_extras.json' },
-  ceremony: { file: 'consumption_4_1.parquet', cols: ['Ceremony_Performed_Last_30_Days', 'Sector', 'Multiplier'], agg: 'household_extras.json' },
 };
 
 // Chart code->label maps, generated from the official questionnaire by

@@ -1,6 +1,6 @@
 /* Pure helpers + chart defaults for the explorer. No DOM, no state. */
 
-export const PALETTE = ['#1d4ed8', '#0e9f8a', '#e9820c', '#be185d', '#6d28d9', '#0891b2', '#4d7c0f', '#b45309', '#475569', '#be123c', '#0369a1', '#a21caf'];
+export const PALETTE = ['#1d4ed8', '#0e9f8a', '#b45309', '#be123c', '#6d28d9', '#0d9488', '#c2410c', '#4f46e5', '#a16207', '#be185d'];
 
 export const NUMERIC = ['BIGINT', 'INTEGER', 'DOUBLE', 'FLOAT', 'DECIMAL', 'HUGEINT', 'UBIGINT', 'SMALLINT'];
 

@@ -479,6 +479,10 @@ income["dist"] = con.execute(f"""
     FROM supplementary_consumption
     WHERE VISIT='1' AND MONTHLY_CONSUMPTION_EXP>0 AND HOUSEHOLD_SIZE>0
 """).fetchone()
+income["dist"] = {
+    k: int(v) for k, v in zip(
+        ["p10", "p20", "p30", "p40", "p50", "p60", "p70", "p80", "p90", "mean"], income["dist"])
+}
 
 income["state"] = con.execute(f"""
     SELECT sm.name state_name,
@@ -608,9 +612,9 @@ write_json("spending_extras.json", spend_extra)
 print(f"    OK spending_extras.json")
 
 # ----------------------------------------------------------------
-# 13. Literacy + employment + ceremonies
+# 13. Literacy + employment
 # ----------------------------------------------------------------
-print("  13. Literacy, employment, ceremonies ...")
+print("  13. Literacy, employment ...")
 people["literacy"] = weighted_rows("""
     SELECT CASE WHEN Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
            CASE WHEN Gender='1' THEN 'Male' ELSE 'Female' END gender,
@@ -628,14 +632,6 @@ hh_extra["employment"] = weighted_rows("""
            SUM(Multiplier) w
     FROM household_economic
     WHERE Engaged_in_Economic_Activity_Las IN ('1','2')
-    GROUP BY 1,2
-""", HH_SCALE)
-hh_extra["ceremony"] = weighted_rows("""
-    SELECT CASE WHEN Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
-           CASE WHEN Ceremony_Performed_Last_30_Days='1' THEN 'Yes' ELSE 'No' END got,
-           SUM(Multiplier) w
-    FROM consumption_4_1
-    WHERE Ceremony_Performed_Last_30_Days IN ('1','2')
     GROUP BY 1,2
 """, HH_SCALE)
 write_json("household_extras.json", hh_extra)
