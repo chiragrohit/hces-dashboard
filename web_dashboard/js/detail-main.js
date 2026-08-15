@@ -137,7 +137,7 @@ function buildFilters() {
     lab.htmlFor = 'f-curve'; lab.textContent = 'Compare by';
     const sel = document.createElement('select');
     sel.id = 'f-curve';
-    [['sector', 'Rural / Urban'], ['state', 'State'], ['hhtype', 'Household type'], ['social', 'Social group'], ['religion', 'Religion'], ['land', 'Land ownership'], ['cooking', 'Cooking fuel'], ['ration', 'Ration card'], ['dwelling', 'House type'], ['month', 'Survey month']]
+    [['sector', 'Rural / Urban'], ['state', 'State / UT'], ['hhtype', 'Household type'], ['social', 'Social group'], ['religion', 'Religion'], ['land', 'Land ownership'], ['cooking', 'Cooking fuel'], ['ration', 'Ration card'], ['dwelling', 'House type'], ['month', 'Survey month']]
       .forEach(([v, t]) => { const o = document.createElement('option'); o.value = v; o.textContent = t; sel.appendChild(o); });
     sel.value = filters.curve || 'sector';
     window.CURVE_FILTER = filters.curve || 'sector';
