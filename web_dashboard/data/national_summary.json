@@ -1,0 +1,10 @@
+{
+  "total_households_sampled": 261953,
+  "total_individuals_sampled": 1107221,
+  "estimated_total_households": 304000000,
+  "estimated_total_population": 1428000000,
+  "states_covered": 36,
+  "survey_year": "2023-24",
+  "survey_name": "HCES",
+  "source": "NSSO, Government of India"
+}

@@ -1,0 +1,16 @@
+# Agent internal state
+.pi/
+
+# Survey data — large, regenerable (MOSPI public data, source zip exceeds GitHub limit)
+*.zip
+hces_parquet/
+*.duckdb
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# OS
+.DS_Store
+Thumbs.db

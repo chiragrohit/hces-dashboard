@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HCES 2023-24 — India Consumer Expenditure Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<style>
+  :root {
+    --bg: #f6f7f9;
+    --surface: #ffffff;
+    --surface-2: #f1f3f6;
+    --border: #e4e7ec;
+    --border-strong: #c8cfd9;
+    --ink: #101828;
+    --ink-2: #344054;
+    --muted: #5f6b7d;
+    --accent: #1d4ed8;
+    --accent-soft: #eaf0fe;
+    --accent-ink: #ffffff;
+    --saffron: #e9820c;
+    --green: #14804a;
+    --blue: #1d4ed8;
+    --teal: #0e9f8a;
+    --amber: #b45309;
+    --rose: #be123c;
+    --purple: #6d28d9;
+    --radius: 12px;
+    --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.06);
+    --shadow-md: 0 4px 12px rgba(16, 24, 40, 0.08);
+    --font: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font); background: var(--bg); color: var(--ink); font-size: 15px; line-height: 1.5; -webkit-tap-highlight-color: transparent; }
+  h1, h2, h3 { text-wrap: balance; }
+  ::selection { background: var(--accent-soft); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+  /* ---------- Header ---------- */
+  .header { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 20; }
+  .header-inner { max-width: 1400px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; gap: 16px; }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand-mark { width: 30px; height: 30px; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow-sm); border: 1px solid var(--border); flex-shrink: 0; }
+  .brand-mark i { display: block; flex: 1; }
+  .brand-mark .s { background: var(--saffron); }
+  .brand-mark .w { background: #ffffff; position: relative; }
+  .brand-mark .w::after { content: ""; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
+  .brand-mark .g { background: var(--green); }
+  .brand h1 { font-size: 1.05rem; font-weight: 650; letter-spacing: -0.01em; }
+  .brand .sub { font-size: 0.78rem; color: var(--muted); }
+
+  .nav { display: flex; align-items: center; gap: 10px; margin-left: auto; flex-wrap: wrap; }
+  .seg { display: flex; background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: 3px; gap: 2px; }
+  .seg a { border: 0; background: transparent; color: var(--ink-2); font: inherit; font-size: 0.86rem; font-weight: 550; padding: 6px 14px; border-radius: 8px; cursor: pointer; text-decoration: none; transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease; }
+  .seg a:hover { color: var(--ink); }
+  .seg a.active { background: var(--surface); color: var(--accent); box-shadow: var(--shadow-sm); }
+  .nav-sep { width: 1px; height: 24px; background: var(--border-strong); }
+  .nav-link { display: inline-flex; align-items: center; gap: 6px; color: var(--accent); font-size: 0.86rem; font-weight: 550; text-decoration: none; padding: 7px 12px; border-radius: 8px; transition: background 0.15s ease; }
+  .nav-link:hover { background: var(--accent-soft); }
+  .nav-link .ic { font-size: 0.95rem; line-height: 1; }
+
+  /* ---------- Content ---------- */
+  .wrap { max-width: 1400px; margin: 0 auto; padding: 24px 32px 56px; }
+  .toolbar { display: flex; gap: 20px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 20px; }
+  .field { display: flex; flex-direction: column; gap: 5px; }
+  .field label { font-size: 0.76rem; font-weight: 600; color: var(--muted); letter-spacing: 0.02em; }
+  select { background: var(--surface); border: 1px solid var(--border-strong); color: var(--ink); font: inherit; font-size: 0.88rem; padding: 8px 34px 8px 12px; border-radius: 8px; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235f6b7d' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; cursor: pointer; }
+  select:hover { border-color: var(--accent); }
+  select:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+
+  /* ---------- Stat cards ---------- */
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; margin-bottom: 24px; }
+  .stat { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; box-shadow: var(--shadow-sm); }
+  .stat .label { font-size: 0.78rem; font-weight: 600; color: var(--muted); letter-spacing: 0.03em; text-transform: uppercase; }
+  .stat .value { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); margin-top: 4px; font-variant-numeric: tabular-nums; }
+  .stat .sub { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
+  .stat .value .accent { color: var(--accent); }
+
+  /* ---------- Sections ---------- */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* ---------- Charts ---------- */
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 20px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 22px 18px; box-shadow: var(--shadow-sm); animation: rise 0.35s ease-out both; }
+  .card.wide { grid-column: 1 / -1; }
+  .card h3 { font-size: 0.92rem; font-weight: 650; color: var(--ink); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .card h3 .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+  .chart-box { position: relative; height: 320px; }
+  .card.wide .chart-box { height: 360px; }
+  .legend-note { font-size: 0.78rem; color: var(--muted); margin-top: 10px; }
+
+  /* ---------- Loading / error ---------- */
+  .loading { display: flex; align-items: center; gap: 12px; color: var(--muted); padding: 8px 2px; font-size: 0.9rem; }
+  .spinner { width: 20px; height: 20px; border: 2.5px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.7s linear infinite; }
+  .error { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; border-radius: var(--radius); padding: 14px 16px; font-size: 0.88rem; }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  .grid .card:nth-child(2) { animation-delay: 0.04s; }
+  .grid .card:nth-child(3) { animation-delay: 0.08s; }
+  .grid .card:nth-child(4) { animation-delay: 0.12s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    html { scroll-behavior: auto; }
+  }
+
+  /* ---------- Footer ---------- */
+  .footer { max-width: 1400px; margin: 0 auto; padding: 20px 32px 40px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.8rem; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 820px) {
+    .header-inner { padding: 12px 16px; flex-wrap: wrap; gap: 10px; }
+    .brand h1 { font-size: 0.98rem; }
+    .brand .sub { display: none; }
+    .nav { width: 100%; margin-left: 0; justify-content: space-between; }
+    .seg { max-width: calc(100vw - 150px); overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; flex-shrink: 1; }
+    .seg::-webkit-scrollbar { display: none; }
+    .seg a { white-space: nowrap; padding: 7px 13px; }
+    .wrap { padding: 18px 16px 40px; }
+    .grid { grid-template-columns: 1fr; }
+    .toolbar { gap: 12px; }
+    .footer { padding: 16px; }
+  }
+
+  @media (max-width: 480px) {
+    .header-inner { padding: 10px 14px; }
+    .brand-mark { width: 26px; height: 26px; }
+    .brand h1 { font-size: 0.92rem; }
+    .nav { flex-direction: column; align-items: stretch; gap: 8px; }
+    .seg { max-width: none; width: 100%; }
+    .seg a { flex: 1; padding: 8px 10px; font-size: 0.8rem; }
+    .nav-sep { display: none; }
+    .nav-link { justify-content: center; padding: 9px 12px; border: 1px solid var(--border); }
+    .wrap { padding: 14px 14px 32px; }
+    .toolbar { flex-direction: column; align-items: stretch; }
+    .field { width: 100%; }
+    select { width: 100%; }
+    .stats { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .stat { padding: 14px 14px 16px; }
+    .stat .value { font-size: 1.22rem; }
+    .stat .label { font-size: 0.7rem; }
+    .card { padding: 16px 14px 14px; }
+    .card h3 { font-size: 0.86rem; }
+    .chart-box { height: 260px; }
+    .card.wide .chart-box { height: 300px; }
+    .footer { flex-direction: column; gap: 6px; }
+  }
+
+  @media (max-width: 360px) {
+    .stats { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true"><i class="s"></i><i class="w"></i><i class="g"></i></div>
+      <div>
+        <h1>HCES 2023-24</h1>
+        <div class="sub">Household Consumer Expenditure Survey · NSSO</div>
+      </div>
+    </div>
+    <nav class="nav" aria-label="Dashboard sections">
+      <div class="seg" role="tablist">
+        <a role="tab" href="/" class="active" id="tab-overview" data-section="overview" aria-current="page">Overview</a>
+        <a role="tab" href="/consumption" id="tab-consumption" data-section="consumption">Consumption</a>
+        <a role="tab" href="/demographics" id="tab-demographics" data-section="demographics">Demographics</a>
+        <a role="tab" href="/households" id="tab-households" data-section="households">Households</a>
+      </div>
+      <span class="nav-sep" aria-hidden="true"></span>
+      <a class="nav-link" href="/metadata"><span class="ic">▤</span> Data catalog</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="stats" id="statsBar"><div class="loading"><span class="spinner"></span><span>Loading survey data…</span></div></div>
+
+  <!-- OVERVIEW -->
+  <section class="section active" id="sec-overview">
+    <div class="toolbar">
+      <div class="field">
+        <label for="sectorFilter">Sector</label>
+        <select id="sectorFilter" onchange="updateAll()">
+          <option value="all">All sectors</option>
+          <option value="Rural">Rural</option>
+          <option value="Urban">Urban</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="stateFilter">State / UT</label>
+        <select id="stateFilter" onchange="updateAll()"><option value="all">All states &amp; UTs</option></select>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="card wide"><h3><span class="dot"></span>State-wise monthly consumption (₹ crore)</h3><div class="chart-box"><canvas id="chartStateConsumption"></canvas></div><div class="legend-note">Top 20 states by total food expenditure · weighted survey estimates</div></div>
+      <div class="card"><h3><span class="dot"></span>Rural vs urban share</h3><div class="chart-box"><canvas id="chartSectorShare"></canvas></div></div>
+      <div class="card"><h3><span class="dot"></span>Home vs out-of-home</h3><div class="chart-box"><canvas id="chartOOH"></canvas></div></div>
+    </div>
+  </section>
+
+  <!-- CONSUMPTION -->
+  <section class="section" id="sec-consumption">
+    <div class="grid">
+      <div class="card wide"><h3><span class="dot"></span>Top 20 food items by monthly expenditure</h3><div class="chart-box"><canvas id="chartFoodItems"></canvas></div><div class="legend-note">Item codes per HCES 2023-24 schedule · see the codebook for labels</div></div>
+      <div class="card"><h3><span class="dot"></span>Consumption by state</h3><div class="chart-box"><canvas id="chartConsumpDist"></canvas></div></div>
+      <div class="card"><h3><span class="dot"></span>Weighted avg spend per item</h3><div class="chart-box"><canvas id="chartPerHH"></canvas></div></div>
+    </div>
+  </section>
+
+  <!-- DEMOGRAPHICS -->
+  <section class="section" id="sec-demographics">
+    <div class="toolbar">
+      <div class="field">
+        <label for="demoStateFilter">State / UT</label>
+        <select id="demoStateFilter" onchange="updateDemographics()"><option value="all">All states &amp; UTs</option></select>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="card"><h3><span class="dot"></span>Population by age group</h3><div class="chart-box"><canvas id="chartAgeGroup"></canvas></div></div>
+      <div class="card"><h3><span class="dot"></span>Gender distribution</h3><div class="chart-box"><canvas id="chartGender"></canvas></div></div>
+      <div class="card wide"><h3><span class="dot"></span>Education levels by state</h3><div class="chart-box"><canvas id="chartEducation"></canvas></div></div>
+      <div class="card"><h3><span class="dot"></span>Population pyramid</h3><div class="chart-box"><canvas id="chartPyramid"></canvas></div></div>
+      <div class="card"><h3><span class="dot"></span>Age × gender composition</h3><div class="chart-box"><canvas id="chartComposition"></canvas></div></div>
+    </div>
+  </section>
+
+  <!-- HOUSEHOLDS -->
+  <section class="section" id="sec-households">
+    <div class="toolbar">
+      <div class="field">
+        <label for="hhStateFilter">State / UT</label>
+        <select id="hhStateFilter" onchange="updateHouseholds()"><option value="all">All states &amp; UTs</option></select>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="card"><h3><span class="dot"></span>Dwelling unit types</h3><div class="chart-box"><canvas id="chartDwelling"></canvas></div></div>
+      <div class="card"><h3><span class="dot"></span>Cooking energy sources</h3><div class="chart-box"><canvas id="chartEnergy"></canvas></div></div>
+      <div class="card"><h3><span class="dot"></span>Ration card types</h3><div class="chart-box"><canvas id="chartRation"></canvas></div></div>
+      <div class="card"><h3><span class="dot"></span>Land ownership</h3><div class="chart-box"><canvas id="chartLand"></canvas></div></div>
+      <div class="card"><h3><span class="dot"></span>Religion of household head</h3><div class="chart-box"><canvas id="chartReligion"></canvas></div></div>
+      <div class="card"><h3><span class="dot"></span>Household type</h3><div class="chart-box"><canvas id="chartHHSize"></canvas></div></div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <span>HCES 2023-24 · National Sample Survey Office, Ministry of Statistics &amp; Programme Implementation, Government of India</span>
+  <span>Survey weights normalized to national estimates for display</span>
+</footer>
+
+<script>
+const DATA = {};
+const charts = {};
+const THEME = {
+  grid: '#eef1f5',
+  tick: '#5f6b7d',
+  legend: '#344054',
+  ink: '#101828',
+  palette: ['#1d4ed8', '#0e9f8a', '#b45309', '#be123c', '#6d28d9', '#0d9488', '#c2410c', '#4f46e5', '#a16207', '#be185d'],
+};
+
+Chart.defaults.font.family = 'Segoe UI, system-ui, sans-serif';
+Chart.defaults.font.size = 12;
+Chart.defaults.color = THEME.tick;
+
+async function loadJSON(name) { const r = await fetch(`data/${name}.json`); return r.json(); }
+
+function fmt(n) {
+  if (n == null || isNaN(n)) return '—';
+  const abs = Math.abs(n);
+  if (abs >= 1e9) return (n / 1e9).toFixed(1) + 'B';
+  if (abs >= 1e7) return (n / 1e7).toFixed(1) + 'Cr';
+  if (abs >= 1e5) return (n / 1e5).toFixed(1) + 'L';
+  if (abs >= 1e3) return (n / 1e3).toFixed(1) + 'K';
+  return n.toFixed(0);
+}
+const rup = n => '₹' + fmt(n);
+
+function showSection(name) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.seg a').forEach(a => { a.classList.remove('active'); a.removeAttribute('aria-current'); });
+  document.getElementById('sec-' + name).classList.add('active');
+  const tab = document.getElementById('tab-' + name);
+  tab.classList.add('active'); tab.setAttribute('aria-current', 'page');
+  // Re-render on every show: charts must be created in a visible container
+  // (Chart.js sizes to 0 inside display:none sections), and re-render keeps
+  // them consistent with any filter changes.
+  RENDERERS[name]();
+}
+
+const ROUTES = ['overview', 'consumption', 'demographics', 'households'];
+function routeName() {
+  const seg = location.pathname.replace(/\/+$/, '').split('/').pop() || 'overview';
+  return ROUTES.includes(seg) ? seg : 'overview';
+}
+
+function makeChart(id, cfg) {
+  if (charts[id]) charts[id].destroy();
+  const el = document.getElementById(id);
+  if (!el) return;
+  charts[id] = new Chart(el, {
+    ...cfg,
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      ...cfg.options,
+      plugins: {
+        legend: { labels: { color: THEME.legend, usePointStyle: true, boxWidth: 8, boxHeight: 8, padding: 18 }, ...(cfg.options?.plugins?.legend || {}) },
+        tooltip: {
+          backgroundColor: '#101828', padding: 10, cornerRadius: 8,
+          titleColor: '#e5e7eb', bodyColor: '#d1d5db',
+          callbacks: { label: ctx => ' ' + fmt(ctx.parsed && ctx.parsed.y !== undefined ? ctx.parsed.y : ctx.parsed && ctx.parsed.x !== undefined ? ctx.parsed.x : ctx.raw ?? ctx.parsed) },
+          ...(cfg.options?.plugins?.tooltip || {}),
+        },
+      },
+    },
+  });
+}
+
+const baseScales = {
+  x: { ticks: { color: THEME.tick }, grid: { color: THEME.grid }, border: { color: THEME.grid } },
+  y: { ticks: { color: THEME.tick }, grid: { color: THEME.grid }, border: { display: false } },
+};
+
+function populateStateFilter(id) {
+  const sel = document.getElementById(id);
+  [...new Set(DATA.stateConsumption.map(d => d.state_name))].sort().forEach(s => {
+    const o = document.createElement('option');
+    o.value = s; o.textContent = s;
+    sel.appendChild(o);
+  });
+}
+
+function currentFilters() {
+  const sector = document.getElementById('sectorFilter')?.value || 'all';
+  const state = document.getElementById('stateFilter')?.value || 'all';
+  return { sector, state };
+}
+
+function filterData(data) {
+  const { sector, state } = currentFilters();
+  return data.filter(d => (sector === 'all' || d.sector === sector) && (state === 'all' || d.state_name === state));
+}
+
+const sumBy = (arr, k) => arr.reduce((s, d) => s + (d[k] || 0), 0);
+
+/* ============ OVERVIEW ============ */
+function updateOverview() {
+  const filtered = filterData(DATA.stateConsumption);
+  const byState = {};
+  filtered.forEach(d => { (byState[d.state_name] = byState[d.state_name] || { Rural: 0, Urban: 0 })[d.sector] = d.total_consumption_cr; });
+  const names = Object.keys(byState).sort((a, b) => (byState[b].Rural + byState[b].Urban) - (byState[a].Rural + byState[a].Urban)).slice(0, 20);
+
+  makeChart('chartStateConsumption', {
+    type: 'bar',
+    data: {
+      labels: names,
+      datasets: [
+        { label: 'Rural', data: names.map(s => byState[s].Rural), backgroundColor: '#1d4ed8', borderRadius: 4, borderSkipped: false, maxBarThickness: 26 },
+        { label: 'Urban', data: names.map(s => byState[s].Urban), backgroundColor: '#0e9f8a', borderRadius: 4, borderSkipped: false, maxBarThickness: 26 },
+      ],
+    },
+    options: { scales: { ...baseScales, x: { ...baseScales.x, ticks: { ...baseScales.x.ticks, maxRotation: 45, font: { size: 11 } } } } },
+  });
+
+  const rural = sumBy(filtered.filter(d => d.sector === 'Rural'), 'total_consumption_cr');
+  const urban = sumBy(filtered.filter(d => d.sector === 'Urban'), 'total_consumption_cr');
+  makeChart('chartSectorShare', {
+    type: 'doughnut',
+    data: { labels: ['Rural', 'Urban'], datasets: [{ data: [rural, urban], backgroundColor: ['#1d4ed8', '#0e9f8a'], borderWidth: 0, hoverOffset: 6 }] },
+    options: { cutout: '68%', plugins: { legend: { position: 'bottom' } } },
+  });
+
+  const ooh = sumBy(filtered, 'ooh_consumption_cr');
+  const home = sumBy(filtered, 'total_consumption_cr') - ooh;
+  makeChart('chartOOH', {
+    type: 'doughnut',
+    data: { labels: ['At home', 'Out of home'], datasets: [{ data: [home, ooh], backgroundColor: ['#b45309', '#be123c'], borderWidth: 0, hoverOffset: 6 }] },
+    options: { cutout: '68%', plugins: { legend: { position: 'bottom' } } },
+  });
+}
+
+/* ============ CONSUMPTION ============ */
+function updateConsumption() {
+  const items = DATA.foodRankings.slice(0, 20).reverse();
+  makeChart('chartFoodItems', {
+    type: 'bar',
+    data: { labels: items.map(d => 'Item ' + d.item_code), datasets: [{ label: 'Monthly value (₹ Cr)', data: items.map(d => d.total_value_cr), backgroundColor: '#1d4ed8', borderRadius: 4, borderSkipped: false, maxBarThickness: 20 }] },
+    options: { indexAxis: 'y', scales: { ...baseScales, x: { ...baseScales.x }, y: { ...baseScales.y, ticks: { ...baseScales.y.ticks, font: { size: 11 } } } }, plugins: { legend: { display: false } } },
+  });
+
+  const filtered = filterData(DATA.stateConsumption);
+  const states = [...new Set(filtered.map(d => d.state_name))].sort();
+  makeChart('chartConsumpDist', {
+    type: 'bar',
+    data: { labels: states, datasets: [{ label: 'Monthly (₹ Cr)', data: states.map(s => sumBy(filtered.filter(d => d.state_name === s), 'total_consumption_cr')), backgroundColor: '#0e9f8a', borderRadius: 3, borderSkipped: false, maxBarThickness: 22 }] },
+    options: { scales: { ...baseScales, x: { ...baseScales.x, ticks: { ...baseScales.x.ticks, maxRotation: 90, font: { size: 10 } } } }, plugins: { legend: { display: false } } },
+  });
+
+  const labels = [...new Set(filtered.map(d => d.state_name))].sort().slice(0, 15);
+  makeChart('chartPerHH', {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        { label: 'Rural', data: labels.map(s => filtered.find(d => d.state_name === s && d.sector === 'Rural')?.avg_consumption_per_item || 0), backgroundColor: '#1d4ed8', borderRadius: 4, borderSkipped: false, maxBarThickness: 20 },
+        { label: 'Urban', data: labels.map(s => filtered.find(d => d.state_name === s && d.sector === 'Urban')?.avg_consumption_per_item || 0), backgroundColor: '#0e9f8a', borderRadius: 4, borderSkipped: false, maxBarThickness: 20 },
+      ],
+    },
+    options: { scales: { ...baseScales, x: { ...baseScales.x, ticks: { ...baseScales.x.ticks, maxRotation: 45, font: { size: 11 } } } } },
+  });
+}
+
+/* ============ DEMOGRAPHICS ============ */
+function updateDemographics() {
+  const state = document.getElementById('demoStateFilter')?.value || 'all';
+  let demo = DATA.demographics;
+  if (state !== 'all') demo = demo.filter(d => d.state_name === state);
+
+  const ageGroups = ['0-4', '5-14', '15-24', '25-34', '35-44', '45-54', '55-64', '65+'];
+  const byAge = {};
+  ageGroups.forEach(a => byAge[a] = { Male: 0, Female: 0 });
+  demo.forEach(d => { if (byAge[d.age_group]) byAge[d.age_group][d.gender] += d.estimated_population; });
+
+  makeChart('chartAgeGroup', {
+    type: 'bar',
+    data: {
+      labels: ageGroups,
+      datasets: [
+        { label: 'Male', data: ageGroups.map(a => byAge[a].Male), backgroundColor: '#1d4ed8', borderRadius: 4, borderSkipped: false, maxBarThickness: 30 },
+        { label: 'Female', data: ageGroups.map(a => byAge[a].Female), backgroundColor: '#be185d', borderRadius: 4, borderSkipped: false, maxBarThickness: 30 },
+      ],
+    },
+    options: { scales: { ...baseScales, y: { ...baseScales.y, ticks: { ...baseScales.y.ticks, callback: v => fmt(v) } } } },
+  });
+
+  const male = sumBy(demo.filter(d => d.gender === 'Male'), 'estimated_population');
+  const female = sumBy(demo.filter(d => d.gender === 'Female'), 'estimated_population');
+  makeChart('chartGender', {
+    type: 'doughnut',
+    data: { labels: ['Male', 'Female'], datasets: [{ data: [male, female], backgroundColor: ['#1d4ed8', '#be185d'], borderWidth: 0, hoverOffset: 6 }] },
+    options: { cutout: '68%', plugins: { legend: { position: 'bottom' } } },
+  });
+
+  const edu = DATA.education;
+  const levels = [...new Set(edu.map(d => d.education_level))].slice(0, 8);
+  const topStates = [...new Set(edu.map(d => d.state_name))].slice(0, 12);
+  makeChart('chartEducation', {
+    type: 'bar',
+    data: {
+      labels: topStates,
+      datasets: levels.map((lev, i) => ({
+        label: lev,
+        data: topStates.map(s => sumBy(edu.filter(d => d.state_name === s && d.education_level === lev), 'estimated_count')),
+        backgroundColor: THEME.palette[i % THEME.palette.length], borderRadius: 2, maxBarThickness: 18,
+      })),
+    },
+    options: {
+      scales: { ...baseScales, x: { ...baseScales.x, stacked: true, ticks: { ...baseScales.x.ticks, maxRotation: 45, font: { size: 10 } } }, y: { ...baseScales.y, stacked: true, ticks: { ...baseScales.y.ticks, callback: v => fmt(v) } } },
+      plugins: { legend: { labels: { color: THEME.legend, font: { size: 10 } } } },
+    },
+  });
+
+  makeChart('chartPyramid', {
+    type: 'bar',
+    data: {
+      labels: ageGroups,
+      datasets: [
+        { label: 'Male', data: ageGroups.map(a => byAge[a].Male), backgroundColor: '#1d4ed8', borderRadius: 4, borderSkipped: false, maxBarThickness: 28 },
+        { label: 'Female', data: ageGroups.map(a => -byAge[a].Female), backgroundColor: '#be185d', borderRadius: 4, borderSkipped: false, maxBarThickness: 28 },
+      ],
+    },
+    options: { indexAxis: 'y', scales: { ...baseScales, x: { ...baseScales.x, ticks: { ...baseScales.x.ticks, callback: v => fmt(Math.abs(v)) } } }, plugins: { legend: { position: 'bottom' } } },
+  });
+
+  // Age x gender composition (share of each age group)
+  const totals = ageGroups.map(a => byAge[a].Male + byAge[a].Female || 1);
+  makeChart('chartComposition', {
+    type: 'bar',
+    data: {
+      labels: ageGroups,
+      datasets: [
+        { label: 'Male %', data: ageGroups.map((a, i) => +(100 * byAge[a].Male / totals[i]).toFixed(1)), backgroundColor: '#1d4ed8', borderRadius: 4, borderSkipped: false, maxBarThickness: 30 },
+        { label: 'Female %', data: ageGroups.map((a, i) => +(100 * byAge[a].Female / totals[i]).toFixed(1)), backgroundColor: '#be185d', borderRadius: 4, borderSkipped: false, maxBarThickness: 30 },
+      ],
+    },
+    options: { scales: { ...baseScales, y: { ...baseScales.y, suggestedMax: 60, ticks: { ...baseScales.y.ticks, callback: v => v + '%' } } }, plugins: { legend: { position: 'bottom' } } },
+  });
+}
+
+/* ============ HOUSEHOLDS ============ */
+function updateHouseholds() {
+  const state = document.getElementById('hhStateFilter')?.value || 'all';
+  let hh = DATA.householdChars;
+  if (state !== 'all') hh = hh.filter(d => d.state_name === state);
+
+  const by = (key, top = 8) => {
+    const m = {};
+    hh.forEach(d => { const k = d[key] || 'Not reported'; m[k] = (m[k] || 0) + d.estimated_households; });
+    return Object.entries(m).sort((a, b) => b[1] - a[1]).slice(0, top);
+  };
+  const pie = (id, entries) => makeChart(id, {
+    type: 'doughnut',
+    data: { labels: entries.map(e => e[0]), datasets: [{ data: entries.map(e => e[1]), backgroundColor: THEME.palette, borderWidth: 0, hoverOffset: 6 }] },
+    options: { cutout: '62%', plugins: { legend: { position: 'bottom', labels: { color: THEME.legend, font: { size: 11 } } } } },
+  });
+
+  pie('chartDwelling', by('dwelling_type'));
+  pie('chartEnergy', by('cooking_energy'));
+  pie('chartRation', by('ration_card'));
+  pie('chartLand', by('land_ownership'));
+
+  const religion = by('religion', 10);
+  makeChart('chartReligion', {
+    type: 'bar',
+    data: { labels: religion.map(e => e[0]), datasets: [{ label: 'Households', data: religion.map(e => e[1]), backgroundColor: '#6d28d9', borderRadius: 4, borderSkipped: false, maxBarThickness: 30 }] },
+    options: { scales: { ...baseScales, x: { ...baseScales.x, ticks: { ...baseScales.x.ticks, maxRotation: 30, font: { size: 11 } } }, y: { ...baseScales.y, ticks: { ...baseScales.y.ticks, callback: v => fmt(v) } } }, plugins: { legend: { display: false } } },
+  });
+
+  const hhTypes = by('household_type', 12);
+  makeChart('chartHHSize', {
+    type: 'bar',
+    data: { labels: hhTypes.map(e => e[0]), datasets: [{ label: 'Households', data: hhTypes.map(e => e[1]), backgroundColor: '#0d9488', borderRadius: 4, borderSkipped: false, maxBarThickness: 30 }] },
+    options: { scales: { ...baseScales, x: { ...baseScales.x, ticks: { ...baseScales.x.ticks, maxRotation: 45, font: { size: 11 } } }, y: { ...baseScales.y, ticks: { ...baseScales.y.ticks, callback: v => fmt(v) } } }, plugins: { legend: { display: false } } },
+  });
+}
+
+function updateAll() { updateOverview(); updateConsumption(); }
+
+const RENDERERS = { overview: updateOverview, consumption: updateConsumption, demographics: updateDemographics, households: updateHouseholds };
+
+/* ============ INIT ============ */
+(async () => {
+  // Tab routing: pushState navigation + back/forward support
+  document.querySelectorAll('.seg a').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault();
+    const name = a.dataset.section;
+    if (routeName() !== name) history.pushState({}, '', a.getAttribute('href'));
+    showSection(name);
+  }));
+  window.addEventListener('popstate', () => showSection(routeName()));
+
+  try {
+    const [summary, stateC, demo, edu, hhChars, foodRank] = await Promise.all([
+      loadJSON('national_summary'), loadJSON('state_consumption'), loadJSON('demographics'),
+      loadJSON('education'), loadJSON('household_characteristics'), loadJSON('food_rankings'),
+    ]);
+    Object.assign(DATA, { summary, stateConsumption: stateC, demographics: demo, education: edu, householdChars: hhChars, foodRankings: foodRank });
+
+    document.getElementById('statsBar').innerHTML = `
+      <div class="stat"><div class="label">Survey year</div><div class="value">${DATA.summary.survey_year}</div><div class="sub">${DATA.summary.survey_name}</div></div>
+      <div class="stat"><div class="label">Households sampled</div><div class="value">${fmt(DATA.summary.total_households_sampled)}</div><div class="sub">est. ${fmt(DATA.summary.estimated_total_households)} nationally</div></div>
+      <div class="stat"><div class="label">Individuals sampled</div><div class="value">${fmt(DATA.summary.total_individuals_sampled)}</div><div class="sub">est. <span class="accent">${fmt(DATA.summary.estimated_total_population)}</span> population</div></div>
+      <div class="stat"><div class="label">Coverage</div><div class="value">${DATA.summary.states_covered}</div><div class="sub">states &amp; UTs · rural + urban</div></div>
+    `;
+
+    populateStateFilter('stateFilter');
+    populateStateFilter('demoStateFilter');
+    populateStateFilter('hhStateFilter');
+    showSection(routeName());
+  } catch (e) {
+    console.error('Load error:', e);
+    document.getElementById('statsBar').innerHTML = `<div class="error">Could not load survey data. Run <code>aggregate_for_web.py</code> first, then refresh.</div>`;
+  }
+})();
+</script>
+</body>
+</html>
