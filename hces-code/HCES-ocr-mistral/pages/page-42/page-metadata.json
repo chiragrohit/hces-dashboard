@@ -1,0 +1,84 @@
+{
+  "index": 41,
+  "dimensions": {
+    "dpi": 87,
+    "height": 1018,
+    "width": 720
+  },
+  "confidenceScores": null,
+  "blocks": [
+    {
+      "topLeftX": 72,
+      "topLeftY": 43,
+      "bottomRightX": 182,
+      "bottomRightY": 57,
+      "content": "Questionnaire CSQ",
+      "confidenceScores": null,
+      "type": "header"
+    },
+    {
+      "topLeftX": 105,
+      "topLeftY": 88,
+      "bottomRightX": 612,
+      "bottomRightY": 130,
+      "content": "## Section 9: Expenditure on toilet articles and other household consumables during the last 30 days",
+      "confidenceScores": null,
+      "type": "title"
+    },
+    {
+      "topLeftX": 106,
+      "topLeftY": 144,
+      "bottomRightX": 259,
+      "bottomRightY": 157,
+      "content": "### OBJECTIVES AND SCOPE",
+      "confidenceScores": null,
+      "type": "title"
+    },
+    {
+      "topLeftX": 127,
+      "topLeftY": 158,
+      "bottomRightX": 612,
+      "bottomRightY": 189,
+      "content": "- This section is for recording the expenditure incurred on toilet articles and other household consumable items during the last 30 days.",
+      "confidenceScores": null,
+      "type": "text"
+    },
+    {
+      "topLeftX": 106,
+      "topLeftY": 202,
+      "bottomRightX": 270,
+      "bottomRightY": 215,
+      "content": "### IMPLEMENTATION NOTES",
+      "confidenceScores": null,
+      "type": "title"
+    },
+    {
+      "topLeftX": 127,
+      "topLeftY": 217,
+      "bottomRightX": 384,
+      "bottomRightY": 230,
+      "content": "• To be canvassed for all the selected households.",
+      "confidenceScores": null,
+      "type": "text"
+    },
+    {
+      "topLeftX": 76,
+      "topLeftY": 231,
+      "bottomRightX": 641,
+      "bottomRightY": 904,
+      "content": "|  Section 9.1: Expenditure on toilet articles during the last 30 days  |   |   |   |\n| --- | --- | --- | --- |\n|  Question no. | Question description and code structure  |   |   |\n|  Q9.1 | What is the value of toilet articles procured by the householdduring last 30days?  |   |   |\n|   |  Item | item code | value (Rs.)  |\n|   |  (1) | (2) | (3)  |\n|   |  toilet soap, body-wash, hand-wash, shower gel, face-wash | 450 |   |\n|   |  sanitizer | 016 |   |\n|   |  toothpaste, mouthwash, toothbrush, etc. | 451 |   |\n|   |  shampoo, conditioner, hair serum/gel, hair cream | 453 |   |\n|   |  hair oil, hair colour | 017 |   |\n|   |  other hair products, accessories, comb, etc. | 018 |   |\n|   |  powder, cream, body lotion, moisturizers | 452 |   |\n|   |  other beauty products: lipstick, nail polish, compact & foundation, eye make-up kit (kajal/surma, mascara, shadow, liner, etc.), etc. | 020 |   |\n|   |  perfume, body spray, deodorant, roll-ons, etc. | 021 |   |\n|   |  sanitary napkins | 456 |   |\n|   |  baby products (diapers, lotion, powder, etc.) | 022 |   |\n|   |  shaving blades, shaving stick, razor | 454 |   |\n|   |  shaving cream, shaving foam, aftershave lotion, aftershave balm | 455 |   |\n|   |  other toilet articles (body oil, make-up brushes, etc.) | 457 |   |\n|  toilet articles: sub-total | 459 |   |   |\n|  Section 9.2: Expenditure on other household consumables during the last 30 days  |   |   |   |\n|  Question no. | Question description and code structure  |   |   |\n|  Q9.2 | What is the value of other household consumables procured by the householdduring last 30days?  |   |   |\n|   |  Item | item code | value (Rs.)  |\n|   |  (1) | (2) | (3)  |\n|   |  washing soap/soda/powder/liquid detergent | 466 |   |\n|   |  other washing requisites | 467 |   |\n|   |  floor cleaner, acid, toilet cleaner | 465 |   |\n|   |  mosquito repellent, insecticide, anti-rodent, etc. | 471 |   |\n|   |  bucket & other plastic goods | 464 |   |\n|   |  incense (agarbatti), room freshener | 468 |   |\n|   |  flower (fresh): all purposes | 470 |   |\n|   |  LED bulb, CFL bulbs | 023 |   |\n|   |  other electric bulb, tubelight, decorative lights | 460 |   |\n|   |  earthenware, paperware, thermocol plates, etc. | 462 |   |\n|   |  electric batteries | 461 |   |\n|   |  glassware | 463 |   |\n|   |  other petty articles like coir, rope, door mat, non-durable electric goods, etc. | 472 |   |\n|   |  other household consumables: sub-total | 479 |   |\n|  Go to Section 10  |   |   |   |",
+      "confidenceScores": null,
+      "type": "table",
+      "tableId": null
+    },
+    {
+      "topLeftX": 106,
+      "topLeftY": 946,
+      "bottomRightX": 399,
+      "bottomRightY": 962,
+      "content": "Household Consumption Expenditure Survey: 2023-24",
+      "confidenceScores": null,
+      "type": "footer"
+    }
+  ]
+}

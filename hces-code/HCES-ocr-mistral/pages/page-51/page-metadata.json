@@ -1,0 +1,111 @@
+{
+  "index": 50,
+  "dimensions": {
+    "dpi": 87,
+    "height": 1018,
+    "width": 720
+  },
+  "confidenceScores": null,
+  "blocks": [
+    {
+      "topLeftX": 72,
+      "topLeftY": 42,
+      "bottomRightX": 186,
+      "bottomRightY": 57,
+      "content": "Questionnaire DGQ",
+      "confidenceScores": null,
+      "type": "header"
+    },
+    {
+      "topLeftX": 159,
+      "topLeftY": 86,
+      "bottomRightX": 561,
+      "bottomRightY": 176,
+      "content": "# **GOVERNMENT OF INDIA**\n**NATIONAL STATISTICAL OFFICE**\n**HOUSEHOLD CONSUMPTION EXPENDITURE SURVEY:2023-24**\n**AUGUST, 2023 – JULY, 2024**\n**QUESTIONNAIRE - DGQ: DURABLE ITEMS**",
+      "confidenceScores": null,
+      "type": "title"
+    },
+    {
+      "topLeftX": 105,
+      "topLeftY": 204,
+      "bottomRightX": 613,
+      "bottomRightY": 256,
+      "content": "**Note:**(a) In order to record the present status of the surveyed household, information on survey code along with reason for substitution/casualty will be recorded in Section 1A, Questionnaire HCQ during Visits- 2 & 3.",
+      "confidenceScores": null,
+      "type": "text"
+    },
+    {
+      "topLeftX": 105,
+      "topLeftY": 256,
+      "bottomRightX": 613,
+      "bottomRightY": 307,
+      "content": "(b) To record the change in composition of the household, information on demographic particulars will also be collected in the Sections 2A & 3A, Questionnaire HCQ during Visits- 2 & 3.",
+      "confidenceScores": null,
+      "type": "text"
+    },
+    {
+      "topLeftX": 105,
+      "topLeftY": 347,
+      "bottomRightX": 508,
+      "bottomRightY": 368,
+      "content": "# **Section 4.3: General information on purchase/payment**",
+      "confidenceScores": null,
+      "type": "title"
+    },
+    {
+      "topLeftX": 105,
+      "topLeftY": 381,
+      "bottomRightX": 260,
+      "bottomRightY": 396,
+      "content": "# **OBJECTIVES AND SCOPE**",
+      "confidenceScores": null,
+      "type": "title"
+    },
+    {
+      "topLeftX": 132,
+      "topLeftY": 410,
+      "bottomRightX": 613,
+      "bottomRightY": 439,
+      "content": "- This section is for recording some basic information on purchase/payments made by the household.",
+      "confidenceScores": null,
+      "type": "list"
+    },
+    {
+      "topLeftX": 105,
+      "topLeftY": 445,
+      "bottomRightX": 270,
+      "bottomRightY": 460,
+      "content": "# **IMPLEMENTATION NOTES**",
+      "confidenceScores": null,
+      "type": "title"
+    },
+    {
+      "topLeftX": 128,
+      "topLeftY": 475,
+      "bottomRightX": 386,
+      "bottomRightY": 489,
+      "content": "- To be canvassed for all the selected households.",
+      "confidenceScores": null,
+      "type": "list"
+    },
+    {
+      "topLeftX": 75,
+      "topLeftY": 504,
+      "bottomRightX": 638,
+      "bottomRightY": 881,
+      "content": "| **Section 4.3: General information on purchase/payment** |\n| --- |\n| **Question no.** | **Question description and code structure** |\n| Q4.3.1 | Whether any online purchase/payment has been made to buy one or more of the following items during last 365 days? |\n| S. No. | item category | please select the check box if purchased online during last 365 days |\n| (1) | (2) | (3) |\n| 1. | Clothing | ☐ |\n| 2. | Footwear | ☐ |\n| 3. | Furniture & fixtures | ☐ |\n| 4. | Mobile handset | ☐ |\n| 5. | Personal goods (laptop/PC, tablet, clock, watch, spectacles, contact lenses, etc.) | ☐ |\n| 6. | Goods for recreation (TV, camera, pen-drive, musical instruments, etc.) | ☐ |\n| 7. | Cooking& other household appliances | ☐ |\n| 8. | Crockery & utensils | ☐ |\n| 9. | Sports goods | ☐ |\n| 10. | Medical equipment | ☐ |\n| 11. | Bedding (bedsheet, curtain, mattress, etc.) | ☐ |",
+      "confidenceScores": null,
+      "type": "table",
+      "tableId": null
+    },
+    {
+      "topLeftX": 105,
+      "topLeftY": 944,
+      "bottomRightX": 399,
+      "bottomRightY": 961,
+      "content": "Household Consumption Expenditure Survey: 2023-24",
+      "confidenceScores": null,
+      "type": "footer"
+    }
+  ]
+}

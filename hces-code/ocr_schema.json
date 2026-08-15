@@ -1,0 +1,168 @@
+{
+  "title": "HCES 2023-24 questionnaire -> structured code map",
+  "description": "Extract every code definition and item row from the HCES 2023-24 questionnaire PDF (schedules LCES, HCQ, FDQ, CSQ, DGQ). Transcribe text verbatim; do not paraphrase or translate. Item codes are zero-padded 3-digit strings.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schedules"],
+  "properties": {
+    "schedules": {
+      "type": "array",
+      "description": "One entry per questionnaire schedule in the PDF (LCES2023, HCQ, FDQ, CSQ, DGQ).",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "full_title", "sections"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Short schedule code: LCES, HCQ, FDQ, CSQ, DGQ",
+            "enum": ["LCES", "HCQ", "FDQ", "CSQ", "DGQ"]
+          },
+          "full_title": {
+            "type": "string",
+            "description": "e.g. 'HOUSEHOLD CHARACTERISTICS' as printed"
+          },
+          "sections": {
+            "type": "array",
+            "description": "All numbered sections of this schedule that contain item tables or coded questions.",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["number", "title"],
+              "properties": {
+                "number": {
+                  "type": "string",
+                  "description": "Section number exactly as printed, e.g. '5.1', '8.1', '11.4', '13.1'",
+                  "examples": ["5.1", "8.1", "11.4", "14.3"]
+                },
+                "title": {
+                  "type": "string",
+                  "description": "e.g. 'Consumption of cereals during the last 30 days'"
+                },
+                "reference_period": {
+                  "type": ["string", "null"],
+                  "description": "As printed: 'last 30 days', 'last 7 days', 'last 365 days', or null",
+                  "examples": ["last 30 days", "last 7 days"]
+                },
+                "question_text": {
+                  "type": ["string", "null"],
+                  "description": "The main question text (e.g. 'Q5.1 What is the quantity and value ...') if one exists"
+                },
+                "items": {
+                  "type": "array",
+                  "description": "Rows of the item table (the quantity/value tables). Sub-total rows are included as normal items.",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": ["code", "name"],
+                    "properties": {
+                      "code": {
+                        "type": "string",
+                        "description": "3-digit item code, zero-padded",
+                        "pattern": "^[0-9]{3}$",
+                        "examples": ["061", "101", "129"]
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "Item label ONLY, verbatim, footnote markers ($ & ^ @) stripped, unit removed",
+                        "examples": ["rice - PDS", "cereal: sub-total", "other fuel (charcoal, biogas, gobar gas, coal, dung cake, petrol, diesel, other natural gas, matches, candle, etc.)"]
+                      },
+                      "unit": {
+                        "type": ["string", "null"],
+                        "description": "Unit as printed in the item label, e.g. 'kg', 'litre', 'gm', 'no.', 'std. unit'; null when none",
+                        "examples": ["kg", "litre", "no."]
+                      },
+                      "source_default": {
+                        "type": ["string", "null"],
+                        "description": "Prefilled value in the source column for this row: '1', '@', or null",
+                        "enum": ["1", "@", null]
+                      },
+                      "is_subtotal": {
+                        "type": "boolean",
+                        "description": "true when the name contains 'sub-total' or 'sub total'",
+                        "default": false
+                      }
+                    }
+                  }
+                },
+                "instruction_codes": {
+                  "type": "array",
+                  "description": "Item codes defined ONLY inside the instruction/DDM blocks (not in the table), e.g. coarse-grain detail codes 055-068/115-121 in section 5.1 instructions, energy codes 333-346 in section 8.1 instructions.",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": ["code", "name"],
+                    "properties": {
+                      "code": { "type": "string", "pattern": "^[0-9]{3}$" },
+                      "name": { "type": "string", "description": "Item name as listed in the instruction" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "answer_codes": {
+            "type": "array",
+            "description": "Every coded checkbox/radio question in this schedule: question -> code map. One entry per question.",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["question_ref", "question_text", "codes"],
+              "properties": {
+                "question_ref": {
+                  "type": "string",
+                  "description": "Question number or block/col reference as printed",
+                  "examples": ["Q4.11", "Block 3 col. (2)", "Q4.2.1", "Q1.13"]
+                },
+                "section_ref": {
+                  "type": ["string", "null"],
+                  "description": "Section number where the question appears",
+                  "examples": ["4", "3", "4.2"]
+                },
+                "question_text": {
+                  "type": "string",
+                  "description": "The full question text verbatim",
+                  "examples": ["What is the Religion of the head of the household?"]
+                },
+                "data_column_hint": {
+                  "type": ["string", "null"],
+                  "description": "The matching microdata column name if obvious (used for cross-checking only)",
+                  "examples": ["Religion_of_HH_Head", "Gender", "Hospitalization_case"]
+                },
+                "codes": {
+                  "type": "object",
+                  "description": "code -> label map. Keys are strings (keep zero-padding), values are the printed labels verbatim.",
+                  "additionalProperties": { "type": "string" }
+                },
+                "codes_note": {
+                  "type": ["string", "null"],
+                  "description": "Any printed note about these codes (e.g. 'if code is 1 fill up Q4.2')"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "identification_codes": {
+      "type": "array",
+      "description": "Codes in the identification blocks (Section 1/1A of each schedule): survey code, reason for substitution, response code, informant code, etc. Same shape as answer_codes entries.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["question_ref", "question_text", "codes"],
+        "properties": {
+          "question_ref": { "type": "string" },
+          "section_ref": { "type": ["string", "null"] },
+          "question_text": { "type": "string" },
+          "data_column_hint": { "type": ["string", "null"] },
+          "codes": {
+            "type": "object",
+            "additionalProperties": { "type": "string" }
+          },
+          "codes_note": { "type": ["string", "null"] }
+        }
+      }
+    }
+  }
+}

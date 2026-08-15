@@ -1,0 +1,39 @@
+{
+  "index": 55,
+  "dimensions": {
+    "dpi": 87,
+    "height": 1018,
+    "width": 720
+  },
+  "confidenceScores": null,
+  "blocks": [
+    {
+      "topLeftX": 72,
+      "topLeftY": 43,
+      "bottomRightX": 185,
+      "bottomRightY": 57,
+      "content": "Questionnaire DGQ",
+      "confidenceScores": null,
+      "type": "header"
+    },
+    {
+      "topLeftX": 68,
+      "topLeftY": 86,
+      "bottomRightX": 649,
+      "bottomRightY": 807,
+      "content": "|  Section 14.2: Expenditure for purchase (including repair & maintenance)of transport equipment for domestic use during the last 365 days  |   |   |   |   |   |   |   |   |   |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |\n|  Question no. | Question description and code structure  |   |   |   |   |   |   |   |   |\n|  Q14.2 | What is the quantity and value of the transport equipmentprocuredby the householdfor personal use during last 365 days?  |   |   |   |   |   |   |   |   |\n|   |  item | item code | first-hand purchase |   |   | cost of repair &mainten-ance (Rs.) | second-hand purchase |   | total expenditure (Rs.) (5)+(6)+(8)  |\n|   |   |   |  no. of item purch-ased | whether purchased on hire yes-1, no-2 | value (Rs.) |   | no. of item purchased | value (Rs.)  |   |\n|   |  (1) | (2) | (3) | (4) | (5) | (6) | (7) | (8) | (9)  |\n|   |  motor cycle, scooter | 601 |  |  |  |  |  |  |   |\n|   |  motor car, jeep | 602 |  |  |  |  |  |  |   |\n|   |  bicycle | 600 |  |  |  |  |  |  |   |\n|   |  tyres & tubes | 603 |  |  |  |  |  |  |   |\n|   |  other transport equipment | 604 |  |  |  |  |  |  |   |\n|  personal transport equipment: sub-total | 609 |  |  |  |  |  |  |  |   |\n|  Section 14.3: Expenditure for purchase (including repair & maintenance)of sports goods for domestic use during the last 365 days  |   |   |   |   |   |   |   |   |   |\n|  Question no. | Question description and code structure  |   |   |   |   |   |   |   |   |\n|  Q14.3 | What is the quantity and value of the sports goodsprocured by the household for personal use during last 365 days?  |   |   |   |   |   |   |   |   |\n|   |  item | item code | first-hand purchase |   |   | cost of repair &mainten-ance (Rs.) | second-hand purchase |   | total expenditure (Rs.) (5)+(6)+(8)  |\n|   |   |   |  no. of item purch-ased | whether purchased on hire yes-1, no-2 | value (Rs.) |   | no. of item purchased | value (Rs.)  |   |\n|   |  (1) | (2) | (3) | (4) | (5) | (6) | (7) | (8) | (9)  |\n|   |  exercise equipment: treadmill, fitness cycle, etc. | 036 |  |  |  |  |  |  |   |\n|   |  weighing machine | 037 |  |  |  |  |  |  |   |\n|   |  sportsgoods (badminton racket, shuttle cock, football, cricket bat, etc.)&toys | 432 |  |  |  |  |  |  |   |\n|   |  other sports goods | 097 |  |  |  |  |  |  |   |\n|  sports goods: sub-total | 099 |  |  |  |  |  |  |   |   |",
+      "confidenceScores": null,
+      "type": "table",
+      "tableId": null
+    },
+    {
+      "topLeftX": 106,
+      "topLeftY": 946,
+      "bottomRightX": 398,
+      "bottomRightY": 962,
+      "content": "Household Consumption Expenditure Survey: 2023-24",
+      "confidenceScores": null,
+      "type": "footer"
+    }
+  ]
+}

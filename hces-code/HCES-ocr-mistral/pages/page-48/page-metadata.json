@@ -1,0 +1,39 @@
+{
+  "index": 47,
+  "dimensions": {
+    "dpi": 87,
+    "height": 1018,
+    "width": 720
+  },
+  "confidenceScores": null,
+  "blocks": [
+    {
+      "topLeftX": 73,
+      "topLeftY": 43,
+      "bottomRightX": 181,
+      "bottomRightY": 57,
+      "content": "Questionnaire CSQ",
+      "confidenceScores": null,
+      "type": "header"
+    },
+    {
+      "topLeftX": 75,
+      "topLeftY": 86,
+      "bottomRightX": 641,
+      "bottomRightY": 920,
+      "content": "|  Section 12.2: Consumption of tobaccoduring the last 7 days  |   |   |   |   |   |   |   |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n|  Question no. | Question description and code structure  |   |   |   |   |   |   |\n|  Q12.2 | What is the quantity and value of thetobaccoconsumed by the household during last 7 days?  |   |   |   |   |   |   |\n|   |  item | item code | quantity and value of the item consumed during last 7 days |   |   |   | source#  |\n|   |   |   |  consumption out of home produce |   | total consumption (incl. consumption out of home produce)  |   |   |\n|   |   |   |  quantity* (0.000) | value (Rs.) | quantity* (0.000) | value (Rs.)  |   |\n|   |  (1) | (2) | (3) | (4) | (5) | (6) | (7)  |\n|   |  bidi (no.) | 310 |  |  |  |  |   |\n|   |  cigarettes (no.) | 311 |  |  |  |  |   |\n|   |  gutka, zarda, kimam, surti (gm) | 316 |  |  |  |  |   |\n|   |  leaf tobacco (gm) | 312 |  |  |  |  |   |\n|   |  hookah tobacco (gm) | 314 |  |  |  |  |   |\n|   |  cheroot (no.) | 315 |  |  |  |  |   |\n|   |  snuff (gm) | 313 |  |  |  |  |   |\n|   |  other tobacco products | 317 |  |  |  |  |   |\n|   |  tobacco: sub-total | 319 |  |  |  |  |   |\n|  [Instruction to software: 1. *Unit is Kg. Unless otherwise specified in col. (1).2. # Source codes are: only purchase-1, only home-grown stock-2, both purchase and home-grown stock-3, only free collection-4, only exchange of goods and services-5, only gifts/charities-6, others-9 and given in dropdown list in software package.][Instruction to enumerator: total consumption of the item includes consumption of home produce.Consumption from home produce meansproduce of cultivation or produce of livestockand not obtained in the home by processing of other items.  |   |   |   |   |   |   |   |\n|  Section 12.3: Consumption of intoxicants during the last 7 days  |   |   |   |   |   |   |   |\n|  Question no. | Question description and code structure  |   |   |   |   |   |   |\n|  Q12.3 | What is the quantity and value of theintoxicantsconsumed by the household during last 7 days?  |   |   |   |   |   |   |\n|   |  item | item code | quantity and value of the item consumed during last 7 days |   |   |   | source#  |\n|   |   |   |  consumption out of home produce |   | total consumption (incl. consumption out of home produce)  |   |   |\n|   |   |   |  quantity* (0.000) | value (Rs.) | quantity* (0.000) | value (Rs.)  |   |\n|   |  (1) | (2) | (3) | (4) | (5) | (6) | (7)  |\n|   |  country liquor (litre) | 322 |  |  |  |  | @  |\n|   |  foreign/refined liquor or wine (litre) | 324 |  |  |  |  | @  |\n|   |  beer (litre) | 323 |  |  |  |  | @  |\n|   |  toddy (litre) | 321 |  |  |  |  |   |\n|   |  ganja (gm) | 320 |  |  |  |  |   |\n|   |  other intoxicants | 325 |  |  |  |  |   |\n|   |  intoxicants: sub-total | 329 |  |  |  |  |   |\n|  [Instruction to software: 1. *Unit is Kg. Unless otherwise specified in col. (1).2. # Source codes are: only purchase-1, only home-grown stock-2, both purchase and home-grown stock-3, only free collection-4, only exchange of goods and services-5, only gifts/charities-6, others-9 and given in dropdown list in software package.3. @ Source code cannot be 2, 3 or 4 for these items. For home-produced, consumption should be recorded against ingredients.][Instruction to enumerator: total consumption of the item includes consumption of home produce.Consumption from home produce meansproduce of cultivation or produce of livestockand not obtained in the home by processing of other items.  |   |   |   |   |   |   |   |",
+      "confidenceScores": null,
+      "type": "table",
+      "tableId": null
+    },
+    {
+      "topLeftX": 106,
+      "topLeftY": 947,
+      "bottomRightX": 398,
+      "bottomRightY": 962,
+      "content": "Household Consumption Expenditure Survey: 2023-24",
+      "confidenceScores": null,
+      "type": "footer"
+    }
+  ]
+}

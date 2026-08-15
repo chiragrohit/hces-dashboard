@@ -11,9 +11,19 @@ function fmtRows(n) {
   return n;
 }
 
+function decodeVal(col, v) {
+  if (v === null) return 'NULL';
+  const m = col.item_meaning || col.state_meaning || col.meaning;
+  return m && String(v) in m ? m[String(v)] : String(v);
+}
+
 function meaningText(col) {
-  if (!col.meaning) return '';
-  return '<div class="meaning">' + Object.entries(col.meaning).map(([k, v]) => k + ' = ' + v).join(' · ') + '</div>';
+  const parts = [];
+  if (col.meaning) parts.push(...Object.entries(col.meaning).map(([k, v]) => k + ' = ' + v));
+  if (col.state_meaning) parts.push('State codes -> names (36)');
+  if (col.item_meaning) parts.push(Object.keys(col.item_meaning).length + ' item codes -> names');
+  if (col.note) parts.push(col.note);
+  return parts.length ? '<div class="meaning">' + parts.join(' · ') + '</div>' : '';
 }
 
 function renderTable(t) {
@@ -45,7 +55,7 @@ function renderTable(t) {
                 <td class="${c.null_pct > 30 ? 'warn' : 'num'}">${c.null_pct}%</td>
                 <td class="num">${c.distinct}</td>
                 <td class="vals">${c.values && c.values.length
-                  ? c.values.slice(0, 10).map(v => `<span>${v.value === null ? 'NULL' : v.value} <span class="c">(${fmtRows(v.count)})</span></span>`).join('')
+                  ? c.values.slice(0, 10).map(v => `<span>${decodeVal(c, v.value)} <span class="c">(${fmtRows(v.count)})</span></span>`).join('')
                   : '<span class="hi">high cardinality — numeric / continuous</span>'}</td>
               </tr>`).join('')}
           </tbody>

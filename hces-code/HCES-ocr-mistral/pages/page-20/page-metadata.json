@@ -1,0 +1,197 @@
+{
+  "index": 19,
+  "dimensions": {
+    "dpi": 87,
+    "height": 1018,
+    "width": 720
+  },
+  "confidenceScores": null,
+  "blocks": [
+    {
+      "topLeftX": 72,
+      "topLeftY": 43,
+      "bottomRightX": 183,
+      "bottomRightY": 57,
+      "content": "Questionnaire HCQ",
+      "confidenceScores": null,
+      "type": "header"
+    },
+    {
+      "topLeftX": 92,
+      "topLeftY": 88,
+      "bottomRightX": 357,
+      "bottomRightY": 102,
+      "content": "relatives-8, servants/employees/other non-relatives-9",
+      "confidenceScores": null,
+      "type": "text"
+    },
+    {
+      "topLeftX": 71,
+      "topLeftY": 104,
+      "bottomRightX": 606,
+      "bottomRightY": 136,
+      "content": "Col.(6): marital status: never married - 1, currently married - 2, widowed - 3, divorced/separated - 4\nCol. (7): highest educational level attained:",
+      "confidenceScores": null,
+      "type": "list"
+    },
+    {
+      "topLeftX": 94,
+      "topLeftY": 138,
+      "bottomRightX": 613,
+      "bottomRightY": 167,
+      "content": "- not literate (i.e. not able to read or write a simple message with understanding in any language) -01\n○ literate with non-formal education (like NFEC, AEC, TLC, literate without any schooling, etc.)-02",
+      "confidenceScores": null,
+      "type": "list"
+    },
+    {
+      "topLeftX": 94,
+      "topLeftY": 170,
+      "bottomRightX": 245,
+      "bottomRightY": 183,
+      "content": "literate with formal education",
+      "confidenceScores": null,
+      "type": "text"
+    },
+    {
+      "topLeftX": 95,
+      "topLeftY": 186,
+      "bottomRightX": 371,
+      "bottomRightY": 343,
+      "content": "○ below primary-03\n○ primary -04\n○ upper primary/middle -05\n○ secondary -06\n○ higher secondary -07\n○ diploma /certificate course (up to secondary)-08\n○ diploma/certificate course (higher secondary)-10\n○ diploma/certificate course(graduation & above)-11\n○ graduate -12\n○ post graduate and above -13",
+      "confidenceScores": null,
+      "type": "list"
+    },
+    {
+      "topLeftX": 71,
+      "topLeftY": 346,
+      "bottomRightX": 379,
+      "bottomRightY": 361,
+      "content": "Col. (17): status of membership as on the date of re-visit:",
+      "confidenceScores": null,
+      "type": "text"
+    },
+    {
+      "topLeftX": 89,
+      "topLeftY": 362,
+      "bottomRightX": 663,
+      "bottomRightY": 440,
+      "content": "○ presently a household member(in respect of all the household members of the preceding visit) - 1\n○ presently not a household member (for those who left the household which includes separation of kitchen, marriage, death, out-migration etc.)– 2\n○ for those members who are added as a new household member (by virtue of marriage, in-migration, paying guest, whole time domestic help etc.) – 3",
+      "confidenceScores": null,
+      "type": "list"
+    },
+    {
+      "topLeftX": 79,
+      "topLeftY": 465,
+      "bottomRightX": 612,
+      "bottomRightY": 507,
+      "content": "### Section 1.1: Contact details of the household and time taken to canvass the questionnaire",
+      "confidenceScores": null,
+      "type": "title"
+    },
+    {
+      "topLeftX": 65,
+      "topLeftY": 523,
+      "bottomRightX": 606,
+      "bottomRightY": 542,
+      "content": "|  1.1.1. mobile number of the informant |  |  |  |  |  |  |  |  |   |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+      "confidenceScores": null,
+      "type": "table",
+      "tableId": null
+    },
+    {
+      "topLeftX": 65,
+      "topLeftY": 553,
+      "bottomRightX": 605,
+      "bottomRightY": 572,
+      "content": "|  1.1.2. alternate mobile number, if any |  |  |  |  |  |  |  |  |   |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+      "confidenceScores": null,
+      "type": "table",
+      "tableId": null
+    },
+    {
+      "topLeftX": 71,
+      "topLeftY": 572,
+      "bottomRightX": 554,
+      "bottomRightY": 599,
+      "content": "(Instruction: alternate mobile number will be of the informant, if any, otherwise any other member of the household)",
+      "confidenceScores": null,
+      "type": "text"
+    },
+    {
+      "topLeftX": 65,
+      "topLeftY": 612,
+      "bottomRightX": 605,
+      "bottomRightY": 630,
+      "content": "|  1.1.3. landline number of the household |  |  |  |  |  |  |  |  |   |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+      "confidenceScores": null,
+      "type": "table",
+      "tableId": null
+    },
+    {
+      "topLeftX": 71,
+      "topLeftY": 630,
+      "bottomRightX": 421,
+      "bottomRightY": 644,
+      "content": "(STD code without zero followed by land line number will be recorded)",
+      "confidenceScores": null,
+      "type": "text"
+    },
+    {
+      "topLeftX": 65,
+      "topLeftY": 660,
+      "bottomRightX": 605,
+      "bottomRightY": 693,
+      "content": "|  1.1.4. time taken to canvass the questionnaire (in minutes)(Instruction: will be system generated) | Text box  |\n| --- | --- |",
+      "confidenceScores": null,
+      "type": "table",
+      "tableId": null
+    },
+    {
+      "topLeftX": 71,
+      "topLeftY": 705,
+      "bottomRightX": 213,
+      "bottomRightY": 718,
+      "content": "1.1.5. name of the informant",
+      "confidenceScores": null,
+      "type": "text"
+    },
+    {
+      "topLeftX": 71,
+      "topLeftY": 719,
+      "bottomRightX": 595,
+      "bottomRightY": 763,
+      "content": "(Instruction: A pop-up with the details of household members as listed in Block 3, Cols.1 & 2 will appear along with an option ‘not a household member’. ‘Srl. no .99 will be provided against non-household member’, if he/she is the respondent. The enumerator should select the ‘informant’ from that list)",
+      "confidenceScores": null,
+      "type": "text"
+    },
+    {
+      "topLeftX": 82,
+      "topLeftY": 768,
+      "bottomRightX": 589,
+      "bottomRightY": 844,
+      "content": "|  Srl. no. of the household member | Name | Select the informant  |\n| --- | --- | --- |\n|   |  | ○  |\n|   |  | ○  |\n|  99 | not a household member | ○  |",
+      "confidenceScores": null,
+      "type": "table",
+      "tableId": null
+    },
+    {
+      "topLeftX": 65,
+      "topLeftY": 856,
+      "bottomRightX": 605,
+      "bottomRightY": 928,
+      "content": "|  1.1.6. response code of the informant as assessed by SE/JSO | ○ informant co-operative and capable-1○ informant co-operative but not capable-2○ informant busy-3○ informant reluctant-4  |\n| --- | --- |",
+      "confidenceScores": null,
+      "type": "table",
+      "tableId": null
+    },
+    {
+      "topLeftX": 71,
+      "topLeftY": 946,
+      "bottomRightX": 381,
+      "bottomRightY": 962,
+      "content": "Survey on Household Consumption Expenditure: 2023-24",
+      "confidenceScores": null,
+      "type": "footer"
+    }
+  ]
+}

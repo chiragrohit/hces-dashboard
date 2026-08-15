@@ -1,0 +1,39 @@
+{
+  "index": 51,
+  "dimensions": {
+    "dpi": 87,
+    "height": 1018,
+    "width": 720
+  },
+  "confidenceScores": null,
+  "blocks": [
+    {
+      "topLeftX": 72,
+      "topLeftY": 43,
+      "bottomRightX": 185,
+      "bottomRightY": 58,
+      "content": "Questionnaire DGQ",
+      "confidenceScores": null,
+      "type": "header"
+    },
+    {
+      "topLeftX": 76,
+      "topLeftY": 86,
+      "bottomRightX": 641,
+      "bottomRightY": 792,
+      "content": "|  Section 4.3: General information on purchase/payment  |   |   |   |\n| --- | --- | --- | --- |\n|  Question no. | Question description and code structure  |   |   |\n|  Q4.3.2 | Whether one or more member of the household received following items free of cost through social-welfare programme of the Government or any other charitable organizationduring last 365 days?  |   |   |\n|   |  S. No. | item category | please select the check box if received free of cost during last 365 days  |\n|   |  (1) | (2) | (3)  |\n|   |  1. | Laptop/PC |   |\n|   |  2. | Tablet |   |\n|   |  3. | Mobile handset |   |\n|   |  4. | Bicycle |   |\n|   |  5. | Motorcycle/scooty |   |\n|   |  6. | Clothing (School uniform, etc.) |   |\n|   |  7. | Footwear (School shoe, etc.) |   |\n|   |  8. | Others |   |\n|  Q4.3.3 | Whether the household possessed one or more of the following items as on the date of the survey?  |   |   |\n|   |  S. No. | item category | please select the check box if possessed as on the date of survey  |\n|   |  (1) | (2) | (3)  |\n|   |  1. | Television |   |\n|   |  2. | Radio |   |\n|   |  3. | Laptop/PC |   |\n|   |  4. | Mobile handset |   |\n|   |  5. | Bicycle |   |\n|   |  6. | Motorcycle, scooter |   |\n|   |  7. | Motor car/jeep/van |   |\n|   |  8. | Trucks |   |\n|   |  9. | Animal cart |   |\n|   |  10. | Refrigerator |   |\n|   |  11. | Washing machine |   |\n|   |  12. | Air conditioner/air cooler |   |\n|  Q4.3.4 | If checked srl. no. 1, Q4.3.3,Which type of multichannel television facility is used by the household as on the date of the survey?![img-23.jpeg](img-23.jpeg)  |   |   |\n|  • Go to Section 13  |   |   |   |",
+      "confidenceScores": null,
+      "type": "table",
+      "tableId": null
+    },
+    {
+      "topLeftX": 106,
+      "topLeftY": 947,
+      "bottomRightX": 399,
+      "bottomRightY": 963,
+      "content": "Household Consumption Expenditure Survey: 2023-24",
+      "confidenceScores": null,
+      "type": "footer"
+    }
+  ]
+}

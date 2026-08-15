@@ -1,0 +1,4474 @@
+{
+  "schedules": [
+    {
+      "name": "LCES",
+      "full_title": "LIST OF HOUSEHOLDS",
+      "sections": [
+        {
+          "number": "0",
+          "title": "descriptive identification of sample FSU",
+          "reference_period": null,
+          "question_text": null,
+          "items": [
+            {
+              "code": "001",
+              "name": "name of the State/UT",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "002",
+              "name": "name of the district",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "003",
+              "name": "name of the sub-district or tehsil",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "004",
+              "name": "name of the village/town",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "005",
+              "name": "specify investigator unit no.",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "006",
+              "name": "specify block no.",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "007",
+              "name": "specify SU no.",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            }
+          ]
+        },
+        {
+          "number": "1",
+          "title": "identification of sample FSU",
+          "reference_period": null,
+          "question_text": null,
+          "items": [
+            {
+              "code": "008",
+              "name": "serial number of sample FSU",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "009",
+              "name": "starting year of survey",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "010",
+              "name": "questionnaire number",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "011",
+              "name": "sector (rural-1, urban-2)",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "012",
+              "name": "NSS region code",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "013",
+              "name": "district code",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "014",
+              "name": "stratum number",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "015",
+              "name": "sub-stratum number",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "016",
+              "name": "Panel no",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "017",
+              "name": "Sub-sample no",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "018",
+              "name": "FOD sub-region code",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "019",
+              "name": "frame code",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "020",
+              "name": "population of village or number of households of UFS block",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "021",
+              "name": "approximate present population of the entire village/ UFS block (in which the SU is located)",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "022",
+              "name": "total number of SUs to be formed (D)",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "023",
+              "name": "approximate present population of selected SU",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "024",
+              "name": "number of Sub-divisions of SU to be formed (D1)",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "025",
+              "name": "survey code",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "026",
+              "name": "reason for substitution of original sample (code)",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            }
+          ]
+        },
+        {
+          "number": "2",
+          "title": "particulars of field operations",
+          "reference_period": null,
+          "question_text": null,
+          "items": [
+            {
+              "code": "027",
+              "name": "name of Junior Statistical Officer (JSO)/ Survey enumerator (SE) (in block letters)",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "028",
+              "name": "employee code of JSO/SE",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "029",
+              "name": "name of Senior Statistical Officer (SSO)/ Survey supervisor (SS) (in block letters)",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "030",
+              "name": "employee code of SSO/SS",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "031",
+              "name": "commencement of survey (to be filled by JSO/SE)",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "032",
+              "name": "commencement of inspection (to be filled by SSO/SS)",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "033",
+              "name": "completion of survey (to be filled by JSO/SE)",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "034",
+              "name": "completion of inspection (to be filled by SSO/SS)",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "035",
+              "name": "receipt (to be filled by SSO/SS)",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "036",
+              "name": "scrutiny (to be filled by SSO/SS)",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "037",
+              "name": "despatch (to be filled by SSO/SS)",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "038",
+              "name": "total time taken to canvass the questionnaire by the team of enumerators (in hours)",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "039",
+              "name": "whether any remark has been entered by JSO/SE (yes-1, no-2)",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "040",
+              "name": "whether any remark has been entered by supervisory officer (yes-1, no-2)",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            }
+          ]
+        },
+        {
+          "number": "4.1",
+          "title": "list of hamlets (only for rural samples with SU formation)",
+          "reference_period": null,
+          "question_text": null,
+          "items": [
+            {
+              "code": "041",
+              "name": "serial number",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "042",
+              "name": "name of hamlet",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "043",
+              "name": "percentage of population of each hamlet",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            }
+          ]
+        },
+        {
+          "number": "4.2",
+          "title": "list of sub-units (SU) and identification of selected SU",
+          "reference_period": null,
+          "question_text": null,
+          "items": [
+            {
+              "code": "044",
+              "name": "serial number of SU",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "045",
+              "name": "serial number of hamlet(s) in the SU (for rural only)",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "046",
+              "name": "percentage of population in the SU",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "047",
+              "name": "selected SU",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            }
+          ]
+        },
+        {
+          "number": "4.3",
+          "title": "list of Sub-divisions of selected SU with population equal to or more than 1500 (750 for special cases) and selection and identification of selected Sub-division",
+          "reference_period": null,
+          "question_text": null,
+          "items": [
+            {
+              "code": "048",
+              "name": "serial no. of Sub-division",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "049",
+              "name": "percentage population in the Sub-division",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "050",
+              "name": "Selected Sub-division",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            }
+          ]
+        },
+        {
+          "number": "5",
+          "title": "List of households and structures",
+          "reference_period": null,
+          "question_text": null,
+          "items": [
+            {
+              "code": "051",
+              "name": "house number",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "052",
+              "name": "is the house used only for non-residential purposes",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "053",
+              "name": "household serial number",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "054",
+              "name": "name of head of the household",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "055",
+              "name": "household size",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "056",
+              "name": "area of land possessed (lp) in acre",
+              "unit": "acre",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "057",
+              "name": "Whether the household owns one or more four wheeler cars for non-commercial use",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "058",
+              "name": "If 1 in item 5.7 then total purchase value of four wheeler cars",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "059",
+              "name": "Compute: SSS number",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "060",
+              "name": "mobile number of head of the household",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "061",
+              "name": "mobile number of any other member of the household",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "062",
+              "name": "land line number of the household",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            }
+          ]
+        }
+      ],
+      "answer_codes": [
+        {
+          "question_ref": "Q1.18",
+          "section_ref": "1",
+          "question_text": "survey code",
+          "data_column_hint": null,
+          "codes": {
+            "1": "inhabited",
+            "2": "uninhabited",
+            "3": "zero case",
+            "4": "inhabited (substitute FSU surveyed)",
+            "5": "uninhabited (substitute FSU surveyed)",
+            "6": "zero case (substitute FSU surveyed)",
+            "7": "selected FSU casualty"
+          },
+          "codes_note": null
+        },
+        {
+          "question_ref": "Q1.19",
+          "section_ref": "1",
+          "question_text": "reason for substitution of original sample (code)",
+          "data_column_hint": null,
+          "codes": {
+            "1": "not identifiable/traceable",
+            "2": "not accessible",
+            "3": "restricted area (not permitted to survey)",
+            "9": "others (specify)"
+          },
+          "codes_note": null
+        }
+      ]
+    },
+    {
+      "name": "HCQ",
+      "full_title": "HOUSEHOLD CHARACTERISTICS",
+      "sections": [
+        {
+          "number": "1",
+          "title": "Identification of sample household",
+          "reference_period": null,
+          "question_text": null,
+          "items": []
+        },
+        {
+          "number": "2",
+          "title": "Household size",
+          "reference_period": null,
+          "question_text": "Q2.1. How many persons are in the household, who are normally living together for six months or more or are expected to stay for six months or more and taking food from a common kitchen?",
+          "items": []
+        },
+        {
+          "number": "3",
+          "title": "Details of the household members",
+          "reference_period": null,
+          "question_text": null,
+          "items": []
+        },
+        {
+          "number": "4",
+          "title": "Household characteristics",
+          "reference_period": null,
+          "question_text": null,
+          "items": []
+        }
+      ]
+    },
+    {
+      "name": "FDQ",
+      "full_title": "FOOD ITEMS",
+      "sections": [
+        {
+          "number": "4.1",
+          "title": "General information on purchase/payment",
+          "reference_period": null,
+          "question_text": null,
+          "items": []
+        },
+        {
+          "number": "5.1",
+          "title": "Consumption of cereals during the last 30 days",
+          "reference_period": "last 30 days",
+          "question_text": "Q5.1 What is the quantity and value of the cereals and cereal substitutes consumed by the household during last 30 days?",
+          "items": [
+            {
+              "code": "061",
+              "name": "rice-free",
+              "unit": "kg",
+              "source_default": "1",
+              "is_subtotal": false
+            },
+            {
+              "code": "062",
+              "name": "wheat/atta-free",
+              "unit": "kg",
+              "source_default": "1",
+              "is_subtotal": false
+            },
+            {
+              "code": "063",
+              "name": "jowar & its products",
+              "unit": "kg",
+              "source_default": "1",
+              "is_subtotal": false
+            },
+            {
+              "code": "064",
+              "name": "bajra & its products",
+              "unit": "kg",
+              "source_default": "1",
+              "is_subtotal": false
+            },
+            {
+              "code": "065",
+              "name": "maize & its products",
+              "unit": "kg",
+              "source_default": "1",
+              "is_subtotal": false
+            },
+            {
+              "code": "066",
+              "name": "barley & its products",
+              "unit": "kg",
+              "source_default": "1",
+              "is_subtotal": false
+            },
+            {
+              "code": "067",
+              "name": "ragi & its products",
+              "unit": "kg",
+              "source_default": "1",
+              "is_subtotal": false
+            },
+            {
+              "code": "068",
+              "name": "small millets & its products",
+              "unit": "kg",
+              "source_default": "1",
+              "is_subtotal": false
+            },
+            {
+              "code": "070",
+              "name": "coarse grains-free",
+              "unit": "kg",
+              "source_default": "1",
+              "is_subtotal": false
+            },
+            {
+              "code": "101",
+              "name": "rice – PDS",
+              "unit": "kg",
+              "source_default": "1",
+              "is_subtotal": false
+            },
+            {
+              "code": "102",
+              "name": "rice – other sources",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "103",
+              "name": "chira",
+              "unit": "kg",
+              "source_default": "@",
+              "is_subtotal": false
+            },
+            {
+              "code": "105",
+              "name": "muri",
+              "unit": "kg",
+              "source_default": "@",
+              "is_subtotal": false
+            },
+            {
+              "code": "106",
+              "name": "other rice products",
+              "unit": "kg",
+              "source_default": "@",
+              "is_subtotal": false
+            },
+            {
+              "code": "107",
+              "name": "wheat/ atta – PDS",
+              "unit": "kg",
+              "source_default": "1",
+              "is_subtotal": false
+            },
+            {
+              "code": "108",
+              "name": "wheat/ atta – other sources",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "110",
+              "name": "maida",
+              "unit": "kg",
+              "source_default": "@",
+              "is_subtotal": false
+            },
+            {
+              "code": "111",
+              "name": "suji, rawa",
+              "unit": "kg",
+              "source_default": "@",
+              "is_subtotal": false
+            },
+            {
+              "code": "112",
+              "name": "vermicelli",
+              "unit": "kg",
+              "source_default": "@",
+              "is_subtotal": false
+            },
+            {
+              "code": "114",
+              "name": "other wheat products",
+              "unit": "kg",
+              "source_default": "@",
+              "is_subtotal": false
+            },
+            {
+              "code": "001",
+              "name": "coarse grains-PDS",
+              "unit": "kg",
+              "source_default": "1",
+              "is_subtotal": false
+            },
+            {
+              "code": "002",
+              "name": "coarse grains-other sources",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "115",
+              "name": "jowar & its products",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "116",
+              "name": "bajra & its products",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "117",
+              "name": "maize & its products",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "118",
+              "name": "barley & its products",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "121",
+              "name": "ragi & its products",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "120",
+              "name": "small millets & its products",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "122",
+              "name": "other cereals & products",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "129",
+              "name": "cereal: sub-total",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": true
+            },
+            {
+              "code": "139",
+              "name": "cereal substitutes: tapioca, etc.",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            }
+          ]
+        },
+        {
+          "number": "5.2",
+          "title": "Consumption of pulses during the last 30 days",
+          "reference_period": "last 30 days",
+          "question_text": "Q5.2 What is the quantity and value of the pulses & pulse products consumed by the household during last 30 days?",
+          "items": [
+            {
+              "code": "140",
+              "name": "arhar, tur",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "143",
+              "name": "moong",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "144",
+              "name": "masur",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "145",
+              "name": "urd",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "141",
+              "name": "gram: split",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "142",
+              "name": "gram: whole",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "146",
+              "name": "peas, chickpeas",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "148",
+              "name": "other pulses",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "150",
+              "name": "besan, gram products",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "158",
+              "name": "pulses - PDS",
+              "unit": "kg",
+              "source_default": "1",
+              "is_subtotal": false
+            },
+            {
+              "code": "152",
+              "name": "other pulse products",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "071",
+              "name": "pulses-free",
+              "unit": "kg",
+              "source_default": "1",
+              "is_subtotal": false
+            },
+            {
+              "code": "072",
+              "name": "gram-free",
+              "unit": "kg",
+              "source_default": "1",
+              "is_subtotal": false
+            },
+            {
+              "code": "159",
+              "name": "pulses & pulse products: sub-total",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": true
+            }
+          ]
+        },
+        {
+          "number": "5.3",
+          "title": "Consumption of sugar & salt during the last 30 days",
+          "reference_period": "last 30 days",
+          "question_text": "Q5.3 What is the quantity and value of the salt & sugar consumed by the household during last 30 days?",
+          "items": [
+            {
+              "code": "073",
+              "name": "salt-free",
+              "unit": "kg",
+              "source_default": "1",
+              "is_subtotal": false
+            },
+            {
+              "code": "074",
+              "name": "sugar-free",
+              "unit": "kg",
+              "source_default": "1",
+              "is_subtotal": false
+            },
+            {
+              "code": "178",
+              "name": "salt - PDS",
+              "unit": "kg",
+              "source_default": "1",
+              "is_subtotal": false
+            },
+            {
+              "code": "170",
+              "name": "salt - other sources",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "171",
+              "name": "sugar -PDS",
+              "unit": "kg",
+              "source_default": "1",
+              "is_subtotal": false
+            },
+            {
+              "code": "172",
+              "name": "sugar - other sources",
+              "unit": "kg",
+              "source_default": "@",
+              "is_subtotal": false
+            },
+            {
+              "code": "173",
+              "name": "jaggery (gur)",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "174",
+              "name": "candy, misri",
+              "unit": "kg",
+              "source_default": "@",
+              "is_subtotal": false
+            },
+            {
+              "code": "175",
+              "name": "honey",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "179",
+              "name": "salt & sugar: sub-total",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": true
+            }
+          ]
+        },
+        {
+          "number": "6.1",
+          "title": "Consumption of milk & milk products during the last 7 days",
+          "reference_period": "last 7 days",
+          "question_text": "Q6.1 What is the quantity and value of the milk & milk products consumed by the household during last 7 days?",
+          "items": [
+            {
+              "code": "160",
+              "name": "milk: liquid",
+              "unit": "litre",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "162",
+              "name": "milk: condensed/ powder",
+              "unit": "kg",
+              "source_default": "@",
+              "is_subtotal": false
+            },
+            {
+              "code": "164",
+              "name": "ghee",
+              "unit": "kg",
+              "source_default": "@",
+              "is_subtotal": false
+            },
+            {
+              "code": "163",
+              "name": "curd, yogurt",
+              "unit": "kg",
+              "source_default": "@",
+              "is_subtotal": false
+            },
+            {
+              "code": "165",
+              "name": "butter",
+              "unit": "kg",
+              "source_default": "@",
+              "is_subtotal": false
+            },
+            {
+              "code": "166",
+              "name": "ice-cream",
+              "unit": "kg",
+              "source_default": "@",
+              "is_subtotal": false
+            },
+            {
+              "code": "003",
+              "name": "paneer",
+              "unit": "kg",
+              "source_default": "@",
+              "is_subtotal": false
+            },
+            {
+              "code": "004",
+              "name": "prepared sweets",
+              "unit": "kg",
+              "source_default": "@",
+              "is_subtotal": false
+            },
+            {
+              "code": "005",
+              "name": "cheese",
+              "unit": "gm",
+              "source_default": "@",
+              "is_subtotal": false
+            },
+            {
+              "code": "092",
+              "name": "other milk products",
+              "unit": "kg",
+              "source_default": "@",
+              "is_subtotal": false
+            },
+            {
+              "code": "169",
+              "name": "milk & milk products: sub-total",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": true
+            }
+          ]
+        },
+        {
+          "number": "6.2",
+          "title": "Consumption of vegetables during the last 7 days",
+          "reference_period": "last 7 days",
+          "question_text": "Q6.2 What is the quantity and value of the vegetables consumed by the household during last 7 days?",
+          "items": [
+            {
+              "code": "201",
+              "name": "onion",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "200",
+              "name": "potato",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "202",
+              "name": "tomato",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "206",
+              "name": "palak/other leafy vegetables",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "203",
+              "name": "brinjal",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "208",
+              "name": "lady's finger",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "207",
+              "name": "green chillies",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "211",
+              "name": "cauliflower",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "213",
+              "name": "gourd, pumpkin",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "212",
+              "name": "cabbage",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "210",
+              "name": "parwal/patal, kundru",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "215",
+              "name": "beans, barbati",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "214",
+              "name": "peas",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "205",
+              "name": "carrot",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "204",
+              "name": "radish",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "216",
+              "name": "lemon",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "217",
+              "name": "other vegetables",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "219",
+              "name": "vegetables: sub-total",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": true
+            }
+          ]
+        },
+        {
+          "number": "6.3",
+          "title": "Consumption of fruits (fresh) during the last 7 days",
+          "reference_period": "last 7 days",
+          "question_text": "Q6.3 What is the quantity and value of the fruits (fresh) consumed by the household during last 7 days?",
+          "items": [
+            {
+              "code": "220",
+              "name": "banana",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "236",
+              "name": "apple",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "224",
+              "name": "coconut",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "231",
+              "name": "mango",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "237",
+              "name": "grapes",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "225",
+              "name": "green coconut",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "226",
+              "name": "guava",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "230",
+              "name": "papaya",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "228",
+              "name": "orange, sweet lime",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "222",
+              "name": "watermelon",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "232",
+              "name": "kharbooza",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "093",
+              "name": "other fresh fruits",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "239",
+              "name": "fruits (fresh): sub-total",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": true
+            }
+          ]
+        },
+        {
+          "number": "6.4",
+          "title": "Consumption of fruits (dry) during the last 7 days",
+          "reference_period": "last 7 days",
+          "question_text": "Q6.4 What is the quantity and value of the fruits (dry) consumed by the household during last 7 days?",
+          "items": [
+            {
+              "code": "240",
+              "name": "coconut: copra",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "241",
+              "name": "groundnut",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "243",
+              "name": "cashew nut",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "242",
+              "name": "dates",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "245",
+              "name": "other nuts",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "246",
+              "name": "raisin, monacca, etc.",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "094",
+              "name": "other dry fruits",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "249",
+              "name": "fruits (dry): sub-total",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": true
+            }
+          ]
+        },
+        {
+          "number": "6.5",
+          "title": "Consumption of egg, fish & meat during the last 7 days",
+          "reference_period": "last 7 days",
+          "question_text": "Q6.5 What is the quantity and value of the egg, fish & meat consumed by the household during last 7 days?",
+          "items": [
+            {
+              "code": "190",
+              "name": "eggs",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "195",
+              "name": "chicken",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "191",
+              "name": "fish, prawn",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "192",
+              "name": "goat meat/ mutton",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "193",
+              "name": "beef/ buffalo meat",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "194",
+              "name": "pork",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "196",
+              "name": "others: birds, crab, oyster, etc.",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "199",
+              "name": "egg, fish & meat: sub-total",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": true
+            }
+          ]
+        },
+        {
+          "number": "6.6",
+          "title": "Consumption of edible oil during the last 7 days",
+          "reference_period": "last 7 days",
+          "question_text": "Q6.6 What is the quantity and value of the edible oil consumed by the household during last 7 days?",
+          "items": [
+            {
+              "code": "181",
+              "name": "mustard oil",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "184",
+              "name": "refined oil",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "182",
+              "name": "groundnut oil",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "183",
+              "name": "coconut oil",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "188",
+              "name": "edible oil - PDS",
+              "unit": "kg",
+              "source_default": "1",
+              "is_subtotal": false
+            },
+            {
+              "code": "095",
+              "name": "edible oil: others",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "075",
+              "name": "edible oil-free",
+              "unit": "kg",
+              "source_default": "1",
+              "is_subtotal": false
+            },
+            {
+              "code": "189",
+              "name": "edible oil: sub-total",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": true
+            }
+          ]
+        },
+        {
+          "number": "6.7",
+          "title": "Consumption of spices during the last 7 days",
+          "reference_period": "last 7 days",
+          "question_text": "Q 6.7 What is the quantity and value of the spices consumed by the household during last 7 days?",
+          "items": [
+            {
+              "code": "256",
+              "name": "dry chillies",
+              "unit": "gm",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "254",
+              "name": "turmeric",
+              "unit": "gm",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "252",
+              "name": "cumin",
+              "unit": "gm",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "253",
+              "name": "coriander",
+              "unit": "gm",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "251",
+              "name": "garlic",
+              "unit": "gm",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "250",
+              "name": "ginger",
+              "unit": "gm",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "258",
+              "name": "curry powder",
+              "unit": "gm",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "255",
+              "name": "black pepper",
+              "unit": "gm",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "257",
+              "name": "tamarind",
+              "unit": "gm",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "260",
+              "name": "oilseeds",
+              "unit": "gm",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "263",
+              "name": "poppy seeds",
+              "unit": "gm",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "261",
+              "name": "other spices",
+              "unit": "gm",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "269",
+              "name": "spices: sub-total",
+              "unit": "gm",
+              "source_default": "null",
+              "is_subtotal": true
+            }
+          ]
+        },
+        {
+          "number": "6.8",
+          "title": "Consumption of beverages during the last 7 days",
+          "reference_period": "last 7 days",
+          "question_text": "Q6.8 What is the quantity and value of the beverages consumed by the household during last 7 days?",
+          "items": [
+            {
+              "code": "270",
+              "name": "tea: cups",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "271",
+              "name": "tea: leaf",
+              "unit": "gm",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "272",
+              "name": "coffee: cups",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "273",
+              "name": "coffee: powder",
+              "unit": "gm",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "274",
+              "name": "mineral water",
+              "unit": "litre",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "011",
+              "name": "soda drinks",
+              "unit": "litre",
+              "source_default": "@",
+              "is_subtotal": false
+            },
+            {
+              "code": "275",
+              "name": "other cold beverages: bottled/canned",
+              "unit": "litre",
+              "source_default": "@",
+              "is_subtotal": false
+            },
+            {
+              "code": "276",
+              "name": "fruit juice and shake, sugarcane/ date-palm juice, etc.",
+              "unit": "litre",
+              "source_default": "@",
+              "is_subtotal": false
+            },
+            {
+              "code": "278",
+              "name": "other beverages",
+              "unit": "litre",
+              "source_default": "@",
+              "is_subtotal": false
+            },
+            {
+              "code": "279",
+              "name": "beverages: sub-total",
+              "unit": "litre",
+              "source_default": "null",
+              "is_subtotal": true
+            }
+          ]
+        },
+        {
+          "number": "7.1",
+          "title": "Consumption of served processed food during the last 7 days",
+          "reference_period": "last 7 days",
+          "question_text": "Q7.1 What is the quantity and value of the served processed food purchased and/or consumed by the household during last 7 days?",
+          "items": [
+            {
+              "code": "076",
+              "name": "cooked meals purchased at subsidized rate",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "280",
+              "name": "cooked meals purchased",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "281",
+              "name": "cooked meals received free in workplace",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "282",
+              "name": "cooked meals received as assistance",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "283",
+              "name": "cooked snacks purchased",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "284",
+              "name": "other served processed food",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "289",
+              "name": "served processed food: sub-total",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": true
+            }
+          ]
+        },
+        {
+          "number": "7.2",
+          "title": "Consumption of packaged processed food during the last 7 days",
+          "reference_period": "last 7 days",
+          "question_text": "Q7.2 What is the quantity and value of the packaged processed food consumed by the household during last 7 days?",
+          "items": [
+            {
+              "code": "012",
+              "name": "breakfast cereals",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "161",
+              "name": "baby food",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "290",
+              "name": "cake, pastry",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "013",
+              "name": "biscuits",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "291",
+              "name": "chocolates, etc.",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "292",
+              "name": "papad, bhujia, namkeen, mixture, chanachur",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "293",
+              "name": "chips, nachos, puffs, wafers, etc.",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "294",
+              "name": "pickles",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "295",
+              "name": "sauce, jam, jelly, mayonnaise",
+              "unit": "gm",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "113",
+              "name": "bread (bakery)",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "014",
+              "name": "health supplements",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "015",
+              "name": "noodles",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "296",
+              "name": "other packaged processed food",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "299",
+              "name": "packaged processed food: sub-total",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": true
+            }
+          ]
+        }
+      ],
+      "answer_codes": [
+        {
+          "question_ref": "Q4.1.1",
+          "section_ref": "4.1",
+          "question_text": "Whether the household procured any item using the ration card during the last 30 days?",
+          "data_column_hint": null,
+          "codes": {
+            "1": "yes",
+            "2": "no"
+          },
+          "codes_note": null
+        },
+        {
+          "question_ref": "Q4.1.4",
+          "section_ref": "4.1",
+          "question_text": "Did the household perform any ceremony during the last 30 days?",
+          "data_column_hint": null,
+          "codes": {
+            "1": "yes",
+            "2": "no"
+          },
+          "codes_note": null
+        },
+        {
+          "question_ref": "Q5.1",
+          "section_ref": "5.1",
+          "question_text": "What is the quantity and value of the cereals and cereal substitutes consumed by the household during last 30 days?",
+          "data_column_hint": null,
+          "codes": {},
+          "codes_note": "Source codes are: only purchase-1, only home-grown stock-2, both purchase and home-grown stock-3, only free collection-4, only exchange of goods and services-5, only gifts/charities-6, received free through PDS – 7, others-9"
+        },
+        {
+          "question_ref": "Q5.2",
+          "section_ref": "5.2",
+          "question_text": "What is the quantity and value of the pulses & pulse products consumed by the household during last 30 days?",
+          "data_column_hint": null,
+          "codes": {},
+          "codes_note": "Source codes are: only purchase-1, only home-grown stock-2, both purchase and home-grown stock-3, only free collection-4, only exchange of goods and services-5, only gifts/charities-6, received free through PDS – 7, others-9"
+        },
+        {
+          "question_ref": "Q5.3",
+          "section_ref": "5.3",
+          "question_text": "What is the quantity and value of the salt & sugar consumed by the household during last 30 days?",
+          "data_column_hint": null,
+          "codes": {},
+          "codes_note": "Source codes are: only purchase-1, only home-grown stock-2, both purchase and home-grown stock-3, only free collection-4, only exchange of goods and services-5, only gifts/charities-6, received free through PDS – 7, others-9"
+        },
+        {
+          "question_ref": "Q6.1",
+          "section_ref": "6.1",
+          "question_text": "What is the quantity and value of the milk & milk products consumed by the household during last 7 days?",
+          "data_column_hint": null,
+          "codes": {},
+          "codes_note": "Source codes are: only purchase-1, only home-grown stock-2, both purchase and home-grown stock-3, only free collection-4, only exchange of goods and services-5, only gifts/charities-6, others-9"
+        },
+        {
+          "question_ref": "Q6.2",
+          "section_ref": "6.2",
+          "question_text": "What is the quantity and value of the vegetables consumed by the household during last 7 days?",
+          "data_column_hint": null,
+          "codes": {},
+          "codes_note": "Source codes are: only purchase-1, only home-grown stock-2, both purchase and home-grown stock-3, only free collection-4, only exchange of goods and services-5, only gifts/charities-6, others-9"
+        },
+        {
+          "question_ref": "Q6.3",
+          "section_ref": "6.3",
+          "question_text": "What is the quantity and value of the fruits (fresh) consumed by the household during last 7 days?",
+          "data_column_hint": null,
+          "codes": {},
+          "codes_note": "Source codes are: only purchase-1, only home-grown stock-2, both purchase and home-grown stock-3, only free collection-4, only exchange of goods and services-5, only gifts/charities-6, others-9"
+        },
+        {
+          "question_ref": "Q6.4",
+          "section_ref": "6.4",
+          "question_text": "What is the quantity and value of the fruits (dry) consumed by the household during last 7 days?",
+          "data_column_hint": null,
+          "codes": {},
+          "codes_note": "Source codes are: only purchase-1, only home-grown stock-2, both purchase and home-grown stock-3, only free collection-4, only exchange of goods and services-5, only gifts/charities-6, others-9"
+        },
+        {
+          "question_ref": "Q6.5",
+          "section_ref": "6.5",
+          "question_text": "What is the quantity and value of the egg, fish & meat consumed by the household during last 7 days?",
+          "data_column_hint": null,
+          "codes": {},
+          "codes_note": "Source codes are: only purchase-1, only home-grown stock-2, both purchase and home-grown stock-3, only free collection-4, only exchange of goods and services-5, only gifts/charities-6, others-9"
+        },
+        {
+          "question_ref": "Q6.6",
+          "section_ref": "6.6",
+          "question_text": "What is the quantity and value of the edible oil consumed by the household during last 7 days?",
+          "data_column_hint": null,
+          "codes": {},
+          "codes_note": "Source codes are: only purchase-1, only home-grown stock-2, both purchase and home-grown stock-3, only free collection-4, only exchange of goods and services-5, only gifts/charities-6, others-9"
+        },
+        {
+          "question_ref": "Q6.7",
+          "section_ref": "6.7",
+          "question_text": "What is the quantity and value of the spices consumed by the household during last 7 days?",
+          "data_column_hint": null,
+          "codes": {},
+          "codes_note": "Source codes are: only purchase-1, only home-grown stock-2, both purchase and home-grown stock-3, only free collection-4, only exchange of goods and services-5, only gifts/charities-6, others-9"
+        },
+        {
+          "question_ref": "Q6.8",
+          "section_ref": "6.8",
+          "question_text": "What is the quantity and value of the beverages consumed by the household during last 7 days?",
+          "data_column_hint": null,
+          "codes": {},
+          "codes_note": "Source codes are: only purchase-1, only home-grown stock-2, both purchase and home-grown stock-3, only free collection-4, only exchange of goods and services-5, only gifts/charities-6, others-9"
+        },
+        {
+          "question_ref": "Q7.1",
+          "section_ref": "7.1",
+          "question_text": "What is the quantity and value of the served processed food purchased and/or consumed by the household during last 7 days?",
+          "data_column_hint": null,
+          "codes": {},
+          "codes_note": "Source codes are: only purchase-1, only exchange of goods and services-5, only gifts/charities-6, others-9"
+        },
+        {
+          "question_ref": "Q7.2",
+          "section_ref": "7.2",
+          "question_text": "What is the quantity and value of the packaged processed food consumed by the household during last 7 days?",
+          "data_column_hint": null,
+          "codes": {},
+          "codes_note": "Source codes are: only purchase-1, only exchange of goods and services-5, only gifts/charities-6, others-9"
+        }
+      ]
+    },
+    {
+      "name": "CSQ",
+      "full_title": "CONSUMABLES & SERVICES",
+      "sections": [
+        {
+          "number": "4.2",
+          "title": "General information on purchase/payment",
+          "reference_period": null,
+          "question_text": null,
+          "items": []
+        },
+        {
+          "number": "8.1",
+          "title": "Consumption of energy (fuel, light) during the last 30 days",
+          "reference_period": "last 30 days",
+          "question_text": "Q8.1 What is the quantity and value of the consumed energy (fuel, light, etc.) during the last 30 days?",
+          "items": [
+            {
+              "code": "332",
+              "name": "electricity",
+              "unit": "std. unit",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "338",
+              "name": "LPG",
+              "unit": "kg",
+              "source_default": "@",
+              "is_subtotal": false
+            },
+            {
+              "code": "331",
+              "name": "firewood and chips",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "334",
+              "name": "kerosene – PDS",
+              "unit": "litre",
+              "source_default": "1",
+              "is_subtotal": false
+            },
+            {
+              "code": "335",
+              "name": "kerosene – other sources",
+              "unit": "litre",
+              "source_default": "@",
+              "is_subtotal": false
+            },
+            {
+              "code": "096",
+              "name": "other fuel",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "349",
+              "name": "fuel and light: sub-total",
+              "unit": "kg",
+              "source_default": "null",
+              "is_subtotal": true
+            }
+          ]
+        },
+        {
+          "number": "9.1",
+          "title": "Expenditure on toilet articles during the last 30 days",
+          "reference_period": "last 30 days",
+          "question_text": "Q9.1 What is the value of toilet articles procured by the household during last 30 days?",
+          "items": [
+            {
+              "code": "450",
+              "name": "toilet soap, body-wash, hand-wash, shower gel, face-wash",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "016",
+              "name": "sanitizer",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "451",
+              "name": "toothpaste, mouthwash, toothbrush, etc.",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "453",
+              "name": "shampoo, conditioner, hair serum/gel, hair cream",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "017",
+              "name": "hair oil, hair colour",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "018",
+              "name": "other hair products, accessories, comb, etc.",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "452",
+              "name": "powder, cream, body lotion, moisturizers",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "020",
+              "name": "other beauty products",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "021",
+              "name": "perfume, body spray, deodorant, roll-ons, etc.",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "456",
+              "name": "sanitary napkins",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "022",
+              "name": "baby products",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "454",
+              "name": "shaving blades, shaving stick, razor",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "455",
+              "name": "shaving cream, shaving foam, aftershave lotion, aftershave balm",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "457",
+              "name": "other toilet articles",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "459",
+              "name": "toilet articles: sub-total",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": true
+            }
+          ]
+        },
+        {
+          "number": "9.2",
+          "title": "Expenditure on other household consumables during the last 30 days",
+          "reference_period": "last 30 days",
+          "question_text": "Q9.2 What is the value of other household consumables procured by the household during last 30 days?",
+          "items": [
+            {
+              "code": "466",
+              "name": "washing soap/soda/powder/liquid detergent",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "467",
+              "name": "other washing requisites",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "465",
+              "name": "floor cleaner, acid, toilet cleaner",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "471",
+              "name": "mosquito repellent, insecticide, anti-rodent, etc.",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "464",
+              "name": "bucket & other plastic goods",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "468",
+              "name": "incense, room freshener",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "470",
+              "name": "flower (fresh): all purposes",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "023",
+              "name": "LED bulb, CFL bulbs",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "460",
+              "name": "other electric bulb, tubelight, decorative lights",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "462",
+              "name": "earthenware, paperware, thermocol plates, etc.",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "461",
+              "name": "electric batteries",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "463",
+              "name": "glassware",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "472",
+              "name": "other household consumables",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "479",
+              "name": "other household consumables: sub-total",
+              "unit": null,
+              "is_subtotal": true
+            }
+          ]
+        },
+        {
+          "number": "10.1",
+          "title": "Expenditure on education during the last 365 days",
+          "reference_period": "last 365 days",
+          "question_text": "Q10.1 What is the value of the items/services procured by the household for the purpose of education during last 365 days?",
+          "items": [
+            {
+              "code": "405",
+              "name": "tuition and other fees",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "406",
+              "name": "private tutor/ coaching centre",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "400",
+              "name": "books, journals: first hand",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "401",
+              "name": "books, journals, etc.: second hand",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "404",
+              "name": "stationery, photocopying charges",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "408",
+              "name": "other educational expenses",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "409",
+              "name": "education: sub-total",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": true
+            }
+          ]
+        },
+        {
+          "number": "10.2",
+          "title": "Expenditure on medical (hospitalisation) during the last 365 days",
+          "reference_period": "last 365 days",
+          "question_text": "Q10.2 What is the value of items/services procured by the household for the purpose of medical (hospitalisation) during last 365 days?",
+          "items": [
+            {
+              "code": "410",
+              "name": "medicine",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "412",
+              "name": "doctor's/surgeon's fee",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "411",
+              "name": "X-ray, ECG, pathological test, etc.",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "413",
+              "name": "hospital & nursing home charges",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "414",
+              "name": "other medical expenses",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "419",
+              "name": "medical - hospitalisation: sub-total",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": true
+            }
+          ]
+        },
+        {
+          "number": "10.3",
+          "title": "Expenditure on medical (non-hospitalisation) during the last 30 days",
+          "reference_period": "last 30 days",
+          "question_text": "Q10.3 What is the value of items/services procured by the household for the purpose of medical (non-hospitalisation) during last 30 days?",
+          "items": [
+            {
+              "code": "420",
+              "name": "medicine",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "422",
+              "name": "doctor's/surgeon's fee",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "421",
+              "name": "X-ray, ECG, pathological test, etc.",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "423",
+              "name": "family planning devices",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "424",
+              "name": "other medical expenses",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "429",
+              "name": "medical - non- hospitalisation: sub-total",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": true
+            }
+          ]
+        },
+        {
+          "number": "11.1",
+          "title": "Expenditure on conveyance during the last 30 days",
+          "reference_period": "last 30 days",
+          "question_text": "Q11.1 What is the value of the items/services procured by the household for the purpose of conveyance during last 30 days?",
+          "items": [
+            {
+              "code": "024",
+              "name": "railway fare",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "504",
+              "name": "bus fare for school, college, etc.: periodic (lumpsum) payment",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "025",
+              "name": "bus fare for commuting to work.: periodic (lumpsum) payment",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "506",
+              "name": "bus /tram fare for school, college: daily (miscellaneous) payments",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "505",
+              "name": "bus/tram fare for commuting to work: daily (miscellaneous) payments",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "500",
+              "name": "bus/tramfare: occasional",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "508",
+              "name": "taxi fare",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "501",
+              "name": "auto-rickshaw/e-rickshaw fare",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "510",
+              "name": "car/bus hired for ceremonial occasion, picnic, etc.",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "026",
+              "name": "steamer, boat fare",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "511",
+              "name": "rickshaw (hand-drawn & cycle) fare",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "503",
+              "name": "air fare",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "512",
+              "name": "petrol for vehicle",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "513",
+              "name": "diesel for vehicle",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "514",
+              "name": "other conveyance expenses",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "519",
+              "name": "conveyance: sub-total",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": true
+            }
+          ]
+        },
+        {
+          "number": "11.2",
+          "title": "Expenditure on consumer services (excluding conveyance) during the last 30 days",
+          "reference_period": "last 30 days",
+          "question_text": "Q11.2 What is the value of items/services procured by the household for the purpose of consumer services (excluding conveyance) during last 30 days?",
+          "items": [
+            {
+              "code": "488",
+              "name": "telephone charges: mobile",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "487",
+              "name": "telephone charges: landline",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "496",
+              "name": "internet expenses",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "540",
+              "name": "water charges",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "483",
+              "name": "barber, beautician, spas, etc.",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "480",
+              "name": "domestic helper/cook",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "484",
+              "name": "washerman, laundry, ironing, dry cleaning, dyeing of clothes",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "482",
+              "name": "sweeper",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "481",
+              "name": "attendant, babysitter",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "027",
+              "name": "watchmen/security guard, driver",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "485",
+              "name": "tailor",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "486",
+              "name": "grinding/husking charges, etc.",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "492",
+              "name": "priest",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "495",
+              "name": "pet animals",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "494",
+              "name": "repair charges for non-durables",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "493",
+              "name": "legal expenses",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "490",
+              "name": "postage, couriers, fax & money order",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "497",
+              "name": "other consumer services excluding conveyance",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "499",
+              "name": "consumer services excluding conveyance: sub-total",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": true
+            }
+          ]
+        },
+        {
+          "number": "11.3",
+          "title": "Expenditure on entertainment during the last 30 days",
+          "reference_period": "last 30 days",
+          "question_text": "Q11.3 What is the value of items/services procured by the household for the purpose of entertainment during last 30 days?",
+          "items": [
+            {
+              "code": "437",
+              "name": "cable TV/DTH/set top box",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "430",
+              "name": "cinema, theatre",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "402",
+              "name": "newspapers, periodicals",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "435",
+              "name": "photography",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "433",
+              "name": "club, gym, swimming fees & other subscriptions",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "028",
+              "name": "online media service provider/streaming services",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "438",
+              "name": "other entertainment",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "439",
+              "name": "entertainment: sub-total",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": true
+            }
+          ]
+        },
+        {
+          "number": "11.4",
+          "title": "Expenditure on rent during the last 30 days and other taxes & cesses during the last 365 days",
+          "reference_period": "last 30 days",
+          "question_text": "Q11.4 What is the value of items/services procured by the household or rent during the last 30 days and other taxes & cesses during last 365 days?",
+          "items": [
+            {
+              "code": "520",
+              "name": "house rent, garage rent (actual)",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "521",
+              "name": "hotel lodging charges",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "522",
+              "name": "residential land rent",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "523",
+              "name": "other consumer rent",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "529",
+              "name": "rent: sub-total",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": true
+            },
+            {
+              "code": "539",
+              "name": "house rent, garage rent (imputed)",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "899",
+              "name": "other consumer taxes & cesses",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            }
+          ]
+        },
+        {
+          "number": "12.1",
+          "title": "Consumption of pan during the last 7 days",
+          "reference_period": "last 7 days",
+          "question_text": "Q12.1 What is the quantity and value of the pan consumed by the household during last 7 days?",
+          "items": [
+            {
+              "code": "300",
+              "name": "pan: leaf",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "301",
+              "name": "pan: finished",
+              "unit": "no.",
+              "source_default": "@",
+              "is_subtotal": false
+            },
+            {
+              "code": "302",
+              "name": "ingredients for pan",
+              "unit": "gm",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "309",
+              "name": "pan: sub-total",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": true
+            }
+          ]
+        },
+        {
+          "number": "12.2",
+          "title": "Consumption of tobacco during the last 7 days",
+          "reference_period": "last 7 days",
+          "question_text": "Q12.2 What is the quantity and value of the tobacco consumed by the household during last 7 days?",
+          "items": [
+            {
+              "code": "310",
+              "name": "bidi",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "311",
+              "name": "cigarettes",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "316",
+              "name": "gutka, zarda, kimam, surti",
+              "unit": "gm",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "312",
+              "name": "leaf tobacco",
+              "unit": "gm",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "314",
+              "name": "hookah tobacco",
+              "unit": "gm",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "315",
+              "name": "cheroot",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "313",
+              "name": "snuff",
+              "unit": "gm",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "317",
+              "name": "other tobacco products",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "319",
+              "name": "tobacco: sub-total",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": true
+            }
+          ]
+        },
+        {
+          "number": "12.3",
+          "title": "Consumption of intoxicants during the last 7 days",
+          "reference_period": "last 7 days",
+          "question_text": "Q12.3 What is the quantity and value of the intoxicants consumed by the household during last 7 days?",
+          "items": [
+            {
+              "code": "322",
+              "name": "country liquor",
+              "unit": "litre",
+              "source_default": "@",
+              "is_subtotal": false
+            },
+            {
+              "code": "324",
+              "name": "foreign/refined liquor or wine",
+              "unit": "litre",
+              "source_default": "@",
+              "is_subtotal": false
+            },
+            {
+              "code": "323",
+              "name": "beer",
+              "unit": "litre",
+              "source_default": "@",
+              "is_subtotal": false
+            },
+            {
+              "code": "321",
+              "name": "toddy",
+              "unit": "litre",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "320",
+              "name": "ganja",
+              "unit": "gm",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "325",
+              "name": "other intoxicants",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "329",
+              "name": "intoxicants: sub-total",
+              "unit": "litre",
+              "source_default": "null",
+              "is_subtotal": true
+            }
+          ]
+        }
+      ],
+      "answer_codes": [
+        {
+          "question_ref": "Q4.2.0",
+          "section_ref": "4.2",
+          "question_text": "Whether the household procured kerosene using ration card during the last 30 days?",
+          "data_column_hint": null,
+          "codes": {
+            "1": "yes",
+            "2": "no"
+          },
+          "codes_note": null
+        },
+        {
+          "question_ref": "Q4.2.1",
+          "section_ref": "4.2",
+          "question_text": "Whether the household received subsidy on LPG cylinder during the last 3 months?",
+          "data_column_hint": null,
+          "codes": {
+            "1": "yes",
+            "2": "no"
+          },
+          "codes_note": null
+        },
+        {
+          "question_ref": "Q4.2.2",
+          "section_ref": "4.2",
+          "question_text": "Whether the household received free electricity during the last 30 days?",
+          "data_column_hint": null,
+          "codes": {
+            "1": "yes",
+            "2": "no"
+          },
+          "codes_note": null
+        },
+        {
+          "question_ref": "Q4.2.3",
+          "section_ref": "4.2",
+          "question_text": "Whether any member of the household is attending/attended educational institution during last 365 days?",
+          "data_column_hint": null,
+          "codes": {
+            "1": "yes",
+            "2": "no"
+          },
+          "codes_note": null
+        },
+        {
+          "question_ref": "Q4.2.7",
+          "section_ref": "4.2",
+          "question_text": "Is one or more member of the household is a beneficiary of PradhanMantri Jan AarogyaYojana (Ayushman Bharat) or any other state specific public health scheme as on the date of survey?",
+          "data_column_hint": null,
+          "codes": {
+            "1": "yes",
+            "2": "no"
+          },
+          "codes_note": null
+        },
+        {
+          "question_ref": "Q4.2.8",
+          "section_ref": "4.2",
+          "question_text": "Whether any member of the household (including deceased former member of the household) has taken hospitalized treatment during last 365 days?",
+          "data_column_hint": null,
+          "codes": {
+            "1": "yes, in Government/Public hospital",
+            "2": "yes, in Private (including Charitable/trust run) hospital",
+            "3": "yes, in both Government & Private hospital",
+            "4": "no"
+          },
+          "codes_note": null
+        },
+        {
+          "question_ref": "Q4.2.9",
+          "section_ref": "4.2",
+          "question_text": "Whether one or more member of the household has received benefits of medical treatment (medical – hospitalisation)under PradhanMantri Jan AarogyaYojana Card (Ayushman Bharat) or any other state specific public health scheme during the last 365 days?",
+          "data_column_hint": null,
+          "codes": {
+            "1": "yes",
+            "2": "no"
+          },
+          "codes_note": null
+        },
+        {
+          "question_ref": "Q8.1",
+          "section_ref": "8.1",
+          "question_text": "What is the quantity and value of the consumed energy (fuel, light, etc.) during the last 30 days?",
+          "data_column_hint": null,
+          "codes": {},
+          "codes_note": "Source codes are: only purchase-1, only home-grown stock-2, both purchase and home-grown stock-3, only free collection-4, only exchange of goods and services-5, only gifts/charities-6, others-9"
+        },
+        {
+          "question_ref": "Q9.1",
+          "section_ref": "9.1",
+          "question_text": "What is the value of toilet articles procured by the household during last 30 days?",
+          "data_column_hint": null,
+          "codes": {},
+          "codes_note": "Source codes are: only purchase-1, only exchange of goods and services-5, only gifts/charities-6, others-9"
+        },
+        {
+          "question_ref": "Q9.2",
+          "section_ref": "9.2",
+          "question_text": "What is the value of other household consumables procured by the household during last 30 days?",
+          "data_column_hint": null,
+          "codes": {},
+          "codes_note": "Source codes are: only purchase-1, only exchange of goods and services-5, only gifts/charities-6, others-9"
+        },
+        {
+          "question_ref": "Q10.1",
+          "section_ref": "10.1",
+          "question_text": "What is the value of the items/services procured by the household for the purpose of education during last 365 days?",
+          "data_column_hint": null,
+          "codes": {},
+          "codes_note": "Source codes are: only purchase-1, only exchange of goods and services-5, only gifts/charities-6, others-9"
+        },
+        {
+          "question_ref": "Q10.2",
+          "section_ref": "10.2",
+          "question_text": "What is the value of items/services procured by the household for the purpose of medical (hospitalisation) during last 365 days?",
+          "data_column_hint": null,
+          "codes": {},
+          "codes_note": "Source codes are: only purchase-1, only exchange of goods and services-5, only gifts/charities-6, others-9"
+        },
+        {
+          "question_ref": "Q10.3",
+          "section_ref": "10.3",
+          "question_text": "What is the value of items/services procured by the household for the purpose of medical (non-hospitalisation) during last 30 days?",
+          "data_column_hint": null,
+          "codes": {},
+          "codes_note": "Source codes are: only purchase-1, only exchange of goods and services-5, only gifts/charities-6, others-9"
+        },
+        {
+          "question_ref": "Q11.1",
+          "section_ref": "11.1",
+          "question_text": "What is the value of the items/services procured by the household for the purpose of conveyance during last 30 days?",
+          "data_column_hint": null,
+          "codes": {},
+          "codes_note": "Source codes are: only purchase-1, only exchange of goods and services-5, only gifts/charities-6, others-9"
+        },
+        {
+          "question_ref": "Q11.2",
+          "section_ref": "11.2",
+          "question_text": "What is the value of items/services procured by the household for the purpose of consumer services (excluding conveyance) during last 30 days?",
+          "data_column_hint": null,
+          "codes": {},
+          "codes_note": "Source codes are: only purchase-1, only exchange of goods and services-5, only gifts/charities-6, others-9"
+        },
+        {
+          "question_ref": "Q11.3",
+          "section_ref": "11.3",
+          "question_text": "What is the value of items/services procured by the household for the purpose of entertainment during last 30 days?",
+          "data_column_hint": null,
+          "codes": {},
+          "codes_note": "Source codes are: only purchase-1, only exchange of goods and services-5, only gifts/charities-6, others-9"
+        },
+        {
+          "question_ref": "Q11.4",
+          "section_ref": "11.4",
+          "question_text": "What is the value of items/services procured by the household or rent during the last 30 days and other taxes & cesses during last 365 days?",
+          "data_column_hint": null,
+          "codes": {},
+          "codes_note": "Source codes are: only purchase-1, only exchange of goods and services-5, only gifts/charities-6, others-9"
+        },
+        {
+          "question_ref": "Q12.1",
+          "section_ref": "12.1",
+          "question_text": "What is the quantity and value of the pan consumed by the household during last 7 days?",
+          "data_column_hint": null,
+          "codes": {},
+          "codes_note": "Source codes are: only purchase-1, only home-grown stock-2, both purchase and home-grown stock-3, only free collection-4, only exchange of goods and services-5, only gifts/charities-6, others-9"
+        },
+        {
+          "question_ref": "Q12.2",
+          "section_ref": "12.2",
+          "question_text": "What is the quantity and value of the tobacco consumed by the household during last 7 days?",
+          "data_column_hint": null,
+          "codes": {},
+          "codes_note": "Source codes are: only purchase-1, only home-grown stock-2, both purchase and home-grown stock-3, only free collection-4, only exchange of goods and services-5, only gifts/charities-6, others-9"
+        },
+        {
+          "question_ref": "Q12.3",
+          "section_ref": "12.3",
+          "question_text": "What is the quantity and value of the intoxicants consumed by the household during last 7 days?",
+          "data_column_hint": null,
+          "codes": {},
+          "codes_note": "Source codes are: only purchase-1, only home-grown stock-2, both purchase and home-grown stock-3, only free collection-4, only exchange of goods and services-5, only gifts/charities-6, others-9"
+        }
+      ]
+    },
+    {
+      "name": "DGQ",
+      "full_title": "DURABLE ITEMS",
+      "sections": [
+        {
+          "number": "4.3",
+          "title": "General information on purchase/payment",
+          "reference_period": null,
+          "question_text": null,
+          "items": []
+        },
+        {
+          "number": "13.1",
+          "title": "Expenditure for clothing during the last 365 days",
+          "reference_period": "last 365 days",
+          "question_text": "Q13.1 What is the quantity and value of the items procured by the household for clothing during last 365 days?",
+          "items": [
+            {
+              "code": "351",
+              "name": "saree",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "352",
+              "name": "cloth for shirt, pyjama, kurta, salwar, etc.",
+              "unit": "metre",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "353",
+              "name": "cloth for coat, trousers, suit, etc.",
+              "unit": "metre",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "030",
+              "name": "face mask, gloves",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "363",
+              "name": "T-shirts, polos, tops, shrugs",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "031",
+              "name": "shirts",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "364",
+              "name": "trousers, jeans, jeggings, skirts",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "354",
+              "name": "coat, jacket, blazer, sweater, sweatshirts, windcheater",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "032",
+              "name": "western suit set",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "358",
+              "name": "kurta-pajama suits: males",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "360",
+              "name": "kurta-pajama suits: females",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "356",
+              "name": "school/college uniform: boys",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "357",
+              "name": "school/college uniform: girls",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "033",
+              "name": "sherwani, lehenga, gown",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "361",
+              "name": "kurta, kameez, kurti",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "362",
+              "name": "pajamas, salwar, leggings, plazzo",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "365",
+              "name": "dresses, jumpsuits, frocks",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "034",
+              "name": "track suit, track pant, joggers",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "368",
+              "name": "shorts, bermuda, maxis, housecoats, baba suit, nightdress, loungewear, etc.",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "355",
+              "name": "shawl, chaddar",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "366",
+              "name": "blouse, dupatta/stole",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "367",
+              "name": "lungi",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "370",
+              "name": "innerwear, socks, and other hosiery items",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "350",
+              "name": "dhoti",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "371",
+              "name": "gamchha, towel, handkerchief",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "373",
+              "name": "headwear, belts, ties, hat, scarf, muffler, etc.",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "372",
+              "name": "infant clothing",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "374",
+              "name": "clothing: other",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "375",
+              "name": "clothing: second-hand",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "379",
+              "name": "clothing: sub-total",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": true
+            }
+          ]
+        },
+        {
+          "number": "13.2",
+          "title": "Expenditure for footwear during the last 365 days",
+          "reference_period": "last 365 days",
+          "question_text": "Q13.2 What is the quantity and value of the items procured by the household for footwear during last 365 days?",
+          "items": [
+            {
+              "code": "393",
+              "name": "rubber / PVC footwear",
+              "unit": "no. of pairs",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "390",
+              "name": "leather boots, shoes",
+              "unit": "no. of pairs",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "391",
+              "name": "leather sandals, chappals, etc.",
+              "unit": "no. of pairs",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "392",
+              "name": "other leather footwear",
+              "unit": "no. of pairs",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "394",
+              "name": "other footwear",
+              "unit": "no. of pairs",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "395",
+              "name": "footwear: second-hand",
+              "unit": "no. of pairs",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "399",
+              "name": "footwear: sub-total",
+              "unit": "no. of pairs",
+              "source_default": "null",
+              "is_subtotal": true
+            }
+          ]
+        },
+        {
+          "number": "13.3",
+          "title": "Expenditure for bedding during the last 365 days",
+          "reference_period": "last 365 days",
+          "question_text": "Q13.3 What is the quantity and value of the items procured by the household for bedding during last 365 days?",
+          "items": [
+            {
+              "code": "380",
+              "name": "bed sheet, bed cover",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "381",
+              "name": "rug, blanket",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "383",
+              "name": "quilt, mattress",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "382",
+              "name": "pillow, cushion",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "385",
+              "name": "mosquito net",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "384",
+              "name": "cloth for upholstery, curtains, tablecloth, etc.",
+              "unit": "metre",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "386",
+              "name": "bedding: others",
+              "unit": null,
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "389",
+              "name": "bedding, etc.: sub-total",
+              "unit": "no.",
+              "source_default": "null",
+              "is_subtotal": true
+            }
+          ]
+        },
+        {
+          "number": "14.1",
+          "title": "Expenditure for purchase (including repair & maintenance) of personal goods for domestic use during the last 365 days",
+          "reference_period": "last 365 days",
+          "question_text": "Q14.1 What is the quantity and value of the items procured by the household for personal use during last 365 days?",
+          "items": [
+            {
+              "code": "440",
+              "name": "spectacles/goggles, contact lenses",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "441",
+              "name": "umbrella, raincoat, helmet",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "442",
+              "name": "other minor durable-type goods",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "623",
+              "name": "mobile handset",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "624",
+              "name": "telephone instrument (landline)",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "622",
+              "name": "PC/ Laptop/ tablet, other peripherals incl. software",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "620",
+              "name": "clock, watch, smartwatch, fitness tracker",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "554",
+              "name": "back-pack, handbags, vanity bags, purse, clutch, etc.",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "035",
+              "name": "headphone, earphone, ear pod, airpod, bluetooth devices/speakers etc.",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "621",
+              "name": "other machines for household work",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "625",
+              "name": "any other personal goods",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "629",
+              "name": "other personal goods: sub-total",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": true
+            }
+          ]
+        },
+        {
+          "number": "14.2",
+          "title": "Expenditure for purchase (including repair & maintenance) of transport equipment for domestic use during the last 365 days",
+          "reference_period": "last 365 days",
+          "question_text": "Q14.2 What is the quantity and value of the transport equipment procured by the household for personal use during last 365 days?",
+          "items": [
+            {
+              "code": "601",
+              "name": "motor cycle, scooter",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "602",
+              "name": "motor car, jeep",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "600",
+              "name": "bicycle",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "603",
+              "name": "tyres & tubes",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "604",
+              "name": "other transport equipment",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "609",
+              "name": "personal transport equipment: sub-total",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": true
+            }
+          ]
+        },
+        {
+          "number": "14.3",
+          "title": "Expenditure for purchase (including repair & maintenance) of sports goods for domestic use during the last 365 days",
+          "reference_period": "last 365 days",
+          "question_text": "Q14.3 What is the quantity and value of the sports goods procured by the household for personal use during last 365 days?",
+          "items": [
+            {
+              "code": "036",
+              "name": "exercise equipment",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "037",
+              "name": "weighing machine",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "432",
+              "name": "sports goods & toys",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "097",
+              "name": "other sports goods",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "099",
+              "name": "sports goods: sub-total",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": true
+            }
+          ]
+        },
+        {
+          "number": "14.4",
+          "title": "Expenditure for purchase (including repair & maintenance) of medical equipment for domestic use during the last 365 days",
+          "reference_period": "last 365 days",
+          "question_text": "Q14.4 What is the quantity and value of the medical equipment procured by the household for personal use during last 365 days?",
+          "items": [
+            {
+              "code": "040",
+              "name": "wheelchair",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "041",
+              "name": "massagers",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "610",
+              "name": "hearing aids & orthopaedic equipment",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "042",
+              "name": "nebulizer",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "611",
+              "name": "other medical equipment",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "619",
+              "name": "medical equipment: sub-total",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": true
+            }
+          ]
+        },
+        {
+          "number": "14.5",
+          "title": "Expenditure for purchase (including repair & maintenance) of cooking & other household appliances for domestic use during the last 365 days",
+          "reference_period": "last 365 days",
+          "question_text": "Q14.5 What is the quantity and value of the cooking and other household appliances procured by the household during last 365 days?",
+          "items": [
+            {
+              "code": "580",
+              "name": "electric fan",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "043",
+              "name": "electric air heaters & blowers",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "581",
+              "name": "air conditioner",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "044",
+              "name": "air cooler",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "045",
+              "name": "air purifier",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "588",
+              "name": "refrigerator/freezers",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "585",
+              "name": "washing machine",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "582",
+              "name": "inverter, generators, stabilizers",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "046",
+              "name": "geysers & hot water systems, sterilizers",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "586",
+              "name": "stove, gas burner, induction",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "590",
+              "name": "water purifier",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "047",
+              "name": "ventilation system such as exhaust, chimney, etc.",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "048",
+              "name": "mixer/grinder, juicer, food processor",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "587",
+              "name": "pressure cooker/ pressure pan",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "591",
+              "name": "electric iron, heater, toaster, micro-oven, electric kettle, vacuum cleaner, & other electric heating appliances",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "584",
+              "name": "sewing machine",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "583",
+              "name": "lantern, lamp, electric lampshade, emergency light",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "592",
+              "name": "other cooking/ household appliances",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "599",
+              "name": "cooking & other household appliances: sub-total",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": true
+            }
+          ]
+        },
+        {
+          "number": "14.6",
+          "title": "Expenditure for purchase (including repair & maintenance) of crockery & utensils for domestic use during the last 365 days",
+          "reference_period": "last 365 days",
+          "question_text": "Q14.6 What is the quantity and value of the crockery & utensils procured by the household during last 365 days?",
+          "items": [
+            {
+              "code": "570",
+              "name": "stainless steel utensils",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "571",
+              "name": "other metal utensils",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "572",
+              "name": "casseroles, thermos, flask, thermoware",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "050",
+              "name": "water bottle/feeding bottle",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "573",
+              "name": "other crockery & utensils",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "579",
+              "name": "crockery & utensils: sub-total",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": true
+            }
+          ]
+        },
+        {
+          "number": "14.7",
+          "title": "Expenditure for purchase and construction of furniture & fixtures for domestic use during the last 365 days",
+          "reference_period": "last 365 days",
+          "question_text": "Q14.7 What is the quantity and value of the furniture and fixtures procured by the household during last 365 days?",
+          "items": [
+            {
+              "code": "550",
+              "name": "bedstead",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "551",
+              "name": "almirah, dressing table",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "552",
+              "name": "chair, stool, bench, table",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "553",
+              "name": "suitcase, trolley bag, duffle bag, trunk, etc.",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "555",
+              "name": "carpet, daree & other floor mattings",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "556",
+              "name": "paintings, drawings, engravings, etc.",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "557",
+              "name": "other furniture & fixtures",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "559",
+              "name": "furniture & fixtures: sub-total",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": true
+            }
+          ]
+        },
+        {
+          "number": "14.8",
+          "title": "Expenditure for purchase (including repair & maintenance) of goods for recreation for domestic use during the last 365 days",
+          "reference_period": "last 365 days",
+          "question_text": "Q14.8 What is the quantity and value of the items procured by the household for recreation purpose during last 365 days?",
+          "items": [
+            {
+              "code": "560",
+              "name": "television",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "561",
+              "name": "camera & photographic equipment",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "562",
+              "name": "CD, DVD, pen-drive, external hard disk",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "563",
+              "name": "musical instruments",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "564",
+              "name": "other goods for recreation",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "569",
+              "name": "goods for recreation: sub-total",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": true
+            }
+          ]
+        },
+        {
+          "number": "14.9",
+          "title": "Expenditure for purchase and construction of residential building, land and other durables for domestic use during the last 365 days",
+          "reference_period": "last 365 days",
+          "question_text": "Q14.9 What is the value of the items procured by the household for residential purpose during last 365 days?",
+          "items": [
+            {
+              "code": "632",
+              "name": "residential building & land",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "630",
+              "name": "bathroom and sanitary equipment",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "631",
+              "name": "plugs, switches & other electrical fittings",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "633",
+              "name": "other durables",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "639",
+              "name": "residential building, land and other durables: sub-total",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": true
+            }
+          ]
+        },
+        {
+          "number": "14.10",
+          "title": "Expenditure for purchase (including repair & maintenance) of jewellery & ornaments for domestic use during the last 365 days",
+          "reference_period": "last 365 days",
+          "question_text": "Q14.10 What is the value of the jewellery and ornaments procured by the household during last 365 days?",
+          "items": [
+            {
+              "code": "640",
+              "name": "gold /diamond /platinum jewellery",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "641",
+              "name": "silver jewellery",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "642",
+              "name": "jewels, pearls, precious stones",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "643",
+              "name": "other jewellery and ornaments",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": false
+            },
+            {
+              "code": "649",
+              "name": "jewellery & ornaments: sub-total",
+              "unit": "no. of item purchased",
+              "source_default": "null",
+              "is_subtotal": true
+            }
+          ]
+        }
+      ],
+      "answer_codes": [
+        {
+          "question_ref": "Q4.3.1",
+          "section_ref": "4.3",
+          "question_text": "Whether any online purchase/payment has been made to buy one or more of the following items during last 365 days?",
+          "data_column_hint": null,
+          "codes": {},
+          "codes_note": null
+        },
+        {
+          "question_ref": "Q4.3.2",
+          "section_ref": "4.3",
+          "question_text": "Whether one or more member of the household received following items free of cost through social-welfare programme of the Government or any other charitable organization during last 365 days?",
+          "data_column_hint": null,
+          "codes": {},
+          "codes_note": null
+        },
+        {
+          "question_ref": "Q4.3.3",
+          "section_ref": "4.3",
+          "question_text": "Whether the household possessed one or more of the following items as on the date of the survey?",
+          "data_column_hint": null,
+          "codes": {},
+          "codes_note": null
+        },
+        {
+          "question_ref": "Q4.3.4",
+          "section_ref": "4.3",
+          "question_text": "If checked srl. no. 1, Q4.3.3, Which type of multichannel television facility is used by the household as on the date of the survey?",
+          "data_column_hint": null,
+          "codes": {},
+          "codes_note": null
+        }
+      ]
+    },
+    {
+      "name": "HCQ",
+      "full_title": "HOUSEHOLD CHARACTERISTICS",
+      "sections": [
+        {
+          "number": "1A",
+          "title": "Identification of sample household (To be canvassed only in Visits -2 & 3)",
+          "reference_period": null,
+          "question_text": null,
+          "items": []
+        },
+        {
+          "number": "2A",
+          "title": "Household size (To be canvassed only in Visits -2 & 3)",
+          "reference_period": null,
+          "question_text": "Q2A.1. How many persons are in the household, who are normally living together for six months or more or are expected to stay for six months or more and taking food from a common kitchen?",
+          "items": []
+        },
+        {
+          "number": "3A",
+          "title": "Details of the household members (To be canvassed only in Visits -2 & 3)",
+          "reference_period": null,
+          "question_text": null,
+          "items": []
+        }
+      ]
+    },
+    {
+      "name": "HCQ",
+      "full_title": "HOUSEHOLD CHARACTERISTICS",
+      "sections": [
+        {
+          "number": "1.1",
+          "title": "Contact details of the household and time taken to canvass the questionnaire",
+          "reference_period": null,
+          "question_text": null,
+          "items": []
+        }
+      ]
+    },
+    {
+      "name": "FDQ",
+      "full_title": "FOOD ITEMS",
+      "sections": [
+        {
+          "number": "A1",
+          "title": "Summary information of item collected in Questionnaire - FDQ",
+          "reference_period": null,
+          "question_text": null,
+          "items": []
+        },
+        {
+          "number": "A2",
+          "title": "Contact details of the household and time taken to canvass the questionnaire",
+          "reference_period": null,
+          "question_text": null,
+          "items": []
+        }
+      ]
+    },
+    {
+      "name": "CSQ",
+      "full_title": "CONSUMABLES & SERVICES",
+      "sections": [
+        {
+          "number": "B1",
+          "title": "Summary information of item collected in Questionnaire - CSQ",
+          "reference_period": null,
+          "question_text": null,
+          "items": []
+        },
+        {
+          "number": "B2",
+          "title": "Contact details of the household and time taken to canvass the questionnaire",
+          "reference_period": null,
+          "question_text": null,
+          "items": []
+        }
+      ]
+    },
+    {
+      "name": "DGQ",
+      "full_title": "DURABLE ITEMS",
+      "sections": [
+        {
+          "number": "C1",
+          "title": "Summary information of item collected in Questionnaire - DGQ",
+          "reference_period": null,
+          "question_text": null,
+          "items": []
+        },
+        {
+          "number": "C2",
+          "title": "Contact details of the household and time taken to canvass the questionnaire",
+          "reference_period": null,
+          "question_text": null,
+          "items": []
+        }
+      ]
+    }
+  ],
+  "identification_codes": [
+    {
+      "question_ref": "Q1.1",
+      "section_ref": "1",
+      "question_text": "sector",
+      "data_column_hint": null,
+      "codes": {
+        "1": "rural",
+        "2": "urban"
+      },
+      "codes_note": null
+    },
+    {
+      "question_ref": "Q1.13",
+      "section_ref": "1",
+      "question_text": "survey code",
+      "data_column_hint": null,
+      "codes": {
+        "1": "original",
+        "2": "substitute",
+        "3": "casualty"
+      },
+      "codes_note": null
+    },
+    {
+      "question_ref": "Q1.14",
+      "section_ref": "1",
+      "question_text": "reason code for substitution/ casualty of the original household",
+      "data_column_hint": null,
+      "codes": {
+        "1": "informant busy",
+        "2": "members away from home",
+        "3": "informant non-cooperative",
+        "9": "others"
+      },
+      "codes_note": null
+    },
+    {
+      "question_ref": "Q4.11",
+      "section_ref": "4",
+      "question_text": "What is the Religion of the head of the household?",
+      "data_column_hint": "Religion_of_HH_Head",
+      "codes": {
+        "0": "Not reported",
+        "1": "Hinduism",
+        "2": "Islam",
+        "3": "Christianity",
+        "4": "Sikhism",
+        "5": "Jainism",
+        "6": "Buddhism",
+        "7": "Zoroastrianism",
+        "9": "Others"
+      },
+      "codes_note": null
+    },
+    {
+      "question_ref": "Q4.12",
+      "section_ref": "4",
+      "question_text": "What is the Social group of the head of the household?",
+      "data_column_hint": "Social_group_of_HH_Head",
+      "codes": {
+        "0": "Not reported",
+        "1": "scheduled tribe (ST)",
+        "2": "scheduled caste (SC)",
+        "3": "other backward class (OBC)",
+        "9": "others"
+      },
+      "codes_note": null
+    },
+    {
+      "question_ref": "Q4.21",
+      "section_ref": "4",
+      "question_text": "What is the primary source of energy of the household for cooking?",
+      "data_column_hint": null,
+      "codes": {
+        "10": "charcoal",
+        "11": "electricity (incl. generated by solar or wind power generators)",
+        "12": "no cooking arrangement",
+        "01": "firewood and chips",
+        "02": "LPG",
+        "03": "other natural gas",
+        "04": "dung cake",
+        "05": "kerosene",
+        "06": "coke, coal",
+        "07": "gobar gas",
+        "08": "other biogas",
+        "09": "others"
+      },
+      "codes_note": null
+    },
+    {
+      "question_ref": "Q4.22",
+      "section_ref": "4",
+      "question_text": "What is the primary source of energy of the household for lighting?",
+      "data_column_hint": null,
+      "codes": {
+        "1": "electricity (incl. generated by solar or wind power generators)",
+        "2": "kerosene",
+        "3": "other oil",
+        "4": "gas",
+        "5": "candle",
+        "6": "no lighting arrangement",
+        "9": "others"
+      },
+      "codes_note": null
+    },
+    {
+      "question_ref": "Q4.29",
+      "section_ref": "4",
+      "question_text": "What is the type of ration card possessed by the household as on the date of survey?",
+      "data_column_hint": null,
+      "codes": {
+        "0": "No ration card",
+        "1": "Antyodaya Anna Yojana (AAY)",
+        "2": "Below Poverty Line (BPL)",
+        "3": "Above Poverty Line (APL)",
+        "4": "Priority House Holds (PHH)",
+        "5": "State Food Security Scheme (SFSS)",
+        "9": "Others"
+      },
+      "codes_note": null
+    },
+    {
+      "question_ref": "Q4.30",
+      "section_ref": "4",
+      "question_text": "Whether any prevailing rate of rent in the locality is available?",
+      "data_column_hint": null,
+      "codes": {
+        "1": "yes",
+        "2": "no"
+      },
+      "codes_note": null
+    },
+    {
+      "question_ref": "Q4.31",
+      "section_ref": "4",
+      "question_text": "Whether the household benefitted from PradhanMantriGaribKalyanYojana (PMGKY) as on the date of the survey?",
+      "data_column_hint": null,
+      "codes": {
+        "1": "yes",
+        "2": "no"
+      },
+      "codes_note": null
+    },
+    {
+      "question_ref": "Q1.1A",
+      "section_ref": "1A",
+      "question_text": "sector",
+      "data_column_hint": null,
+      "codes": {
+        "1": "rural",
+        "2": "urban"
+      },
+      "codes_note": null
+    },
+    {
+      "question_ref": "Q1.13A",
+      "section_ref": "1A",
+      "question_text": "survey code",
+      "data_column_hint": null,
+      "codes": {
+        "1": "original",
+        "2": "substitute",
+        "3": "casualty"
+      },
+      "codes_note": null
+    },
+    {
+      "question_ref": "Q1.14A",
+      "section_ref": "1A",
+      "question_text": "Is household available for survey?",
+      "data_column_hint": null,
+      "codes": {
+        "1": "yes",
+        "2": "no"
+      },
+      "codes_note": null
+    },
+    {
+      "question_ref": "QA2.8",
+      "section_ref": "A2",
+      "question_text": "Response code of the informant as assessed by SE/JSO",
+      "data_column_hint": null,
+      "codes": {
+        "1": "informant co-operative and capable",
+        "2": "informant co-operative but not capable",
+        "3": "informant busy",
+        "4": "informant reluctant",
+        "9": "others"
+      },
+      "codes_note": null
+    },
+    {
+      "question_ref": "QB2.8",
+      "section_ref": "B2",
+      "question_text": "Response code of the informant as assessed by SE/JSO",
+      "data_column_hint": null,
+      "codes": {
+        "1": "informant co-operative and capable",
+        "2": "informant co-operative but not capable",
+        "3": "informant busy",
+        "4": "informant reluctant",
+        "9": "others"
+      },
+      "codes_note": null
+    },
+    {
+      "question_ref": "QC2.8",
+      "section_ref": "C2",
+      "question_text": "Response code of the informant as assessed by SE/JSO",
+      "data_column_hint": null,
+      "codes": {
+        "1": "informant co-operative and capable",
+        "2": "informant co-operative but not capable",
+        "3": "informant busy",
+        "4": "informant reluctant",
+        "9": "others"
+      },
+      "codes_note": null
+    }
+  ]
+}

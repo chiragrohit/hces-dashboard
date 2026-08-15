@@ -1,0 +1,57 @@
+{
+  "index": 57,
+  "dimensions": {
+    "dpi": 87,
+    "height": 1018,
+    "width": 720
+  },
+  "confidenceScores": null,
+  "blocks": [
+    {
+      "topLeftX": 72,
+      "topLeftY": 43,
+      "bottomRightX": 185,
+      "bottomRightY": 57,
+      "content": "Questionnaire DGQ",
+      "confidenceScores": null,
+      "type": "header"
+    },
+    {
+      "topLeftX": 76,
+      "topLeftY": 88,
+      "bottomRightX": 641,
+      "bottomRightY": 121,
+      "content": "Section 14.5: Expenditure for purchase (including repair & maintenance) of cooking & other household appliances for domestic use during the last 365 days",
+      "confidenceScores": null,
+      "type": "caption"
+    },
+    {
+      "topLeftX": 72,
+      "topLeftY": 122,
+      "bottomRightX": 646,
+      "bottomRightY": 746,
+      "content": "|  Question no. | Question description and code structure  |   |   |   |   |   |   |   |   |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |\n|  Q14.5 | What is the quantity and value of the cooking and other household appliances procured by the household during last 365 days?  |   |   |   |   |   |   |   |   |\n|   |  item | item code | first-hand purchase |   |   | cost of repair &maintenance (Rs.) | second-hand purchase |   | total expenditure (Rs.) (5)+(6)+(8)  |\n|   |   |   |  no. of item purchased | whether purchased on hire yes-1, no-2 | value (Rs.) |   | no. of item purchased | value (Rs.)  |   |\n|   |  (1) | (2) | (3) | (4) | (5) | (6) | (7) | (8) | (9)  |\n|   |  electric fan | 580 |  |  |  |  |  |  |   |\n|   |  electric air heaters & blowers | 043 |  |  |  |  |  |  |   |\n|   |  air conditioner | 581 |  |  |  |  |  |  |   |\n|   |  air cooler | 044 |  |  |  |  |  |  |   |\n|   |  air purifier | 045 |  |  |  |  |  |  |   |\n|   |  refrigerator/freezers | 588 |  |  |  |  |  |  |   |\n|   |  washing machine | 585 |  |  |  |  |  |  |   |\n|   |  inverter, generators, stabilizers | 582 |  |  |  |  |  |  |   |\n|   |  geysers & hot water systems, sterilizers | 046 |  |  |  |  |  |  |   |\n|   |  stove, gas burner, induction | 586 |  |  |  |  |  |  |   |\n|   |  water purifier | 590 |  |  |  |  |  |  |   |\n|   |  ventilation system such as exhaust, chimney, etc. | 047 |  |  |  |  |  |  |   |\n|   |  mixer/grinder, juicer, food processor | 048 |  |  |  |  |  |  |   |\n|   |  pressure cooker/ pressure pan | 587 |  |  |  |  |  |  |   |\n|   |  electric iron, heater, toaster, micro-oven, electric kettle, vacuum cleaner, & other electric heating appliances | 591 |  |  |  |  |  |  |   |\n|   |  sewing machine | 584 |  |  |  |  |  |  |   |\n|   |  lantern, lamp, electric lampshade, emergency light | 583 |  |  |  |  |  |  |   |\n|   |  other cooking/ household appliances | 592 |  |  |  |  |  |  |   |\n|  cooking & other household appliances: sub-total | 599 |  |  |  |  |  |  |   |   |",
+      "confidenceScores": null,
+      "type": "table",
+      "tableId": null
+    },
+    {
+      "topLeftX": 62,
+      "topLeftY": 898,
+      "bottomRightX": 656,
+      "bottomRightY": 916,
+      "content": "Section 14.6: Expenditure for purchase (including repair & maintenance) of crockery &",
+      "confidenceScores": null,
+      "type": "text"
+    },
+    {
+      "topLeftX": 106,
+      "topLeftY": 946,
+      "bottomRightX": 399,
+      "bottomRightY": 962,
+      "content": "Household Consumption Expenditure Survey: 2023-24",
+      "confidenceScores": null,
+      "type": "footer"
+    }
+  ]
+}

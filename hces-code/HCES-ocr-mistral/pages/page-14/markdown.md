@@ -1,0 +1,14 @@
+Questionnaire HCQ
+
+|  Section4: Household characteristics  |   |   |
+| --- | --- | --- |
+|  Question no. | Question description and code structure | Recorded entry  |
+|  Q4.6 | From which of the followingbroadactivities maximum income was derived by the household during last 365 days preceding the date of survey?○ self-employment -1○ regular wage/salary earning -2○ casual labour -3[Instruction: for urban samples, go to Q4.10For rural samples,● if 1 in Q4.6, go to Q4.7● if 2 in Q4.6, go to Q4.8● if 3 in Q4.6, go to Q4.9](Note:self-employment: Persons who operate their own farm or non-farm enterprises or are engaged independently in a profession or trade on own-account or with one or a few partners are deemed to be self-employed in household enterprises.regular wage/salary earning: Persons working in other's farm or non-farm enterprises (both household and non-household) and getting in return salary or wages on a regular basis (and not on the basis of daily or periodic renewal of work contract) are the regular wage/salaried employees.casual labour: A person casually engaged in other's farm or non-farm enterprises (both household and non-household including in public works) and getting in return wage according to the terms of the daily or periodic work contract is a casual wage labour.) |   |
+|  Q4.7 | Whether the major income from self-employment was from agricultural sector or non-agricultural sector?○ self-employment in agriculture -1○ self-employment in non-agriculture-2 |   |
+|  Q4.8 | Whether the major income from regular wage/ salary earning was from agricultural sector or non-agricultural sector?○ regular wage/salary earning in agriculture-3○ regular wage/salary earning in non-agriculture-4 |   |
+|  Q4.9 | Whether the major incomefromcasual labour was from agricultural sector or non-agricultural sector?○ casual labour in agriculture -5○ casual labour in non-agriculture-6 |   |
+|  Q4.10 | Household type[Instruction:For rural samples:● code 9 if Q4.1 is 2● else make entry as the entry in Q4.7/Q4.8/Q4.9 as the case may beFor urban samples:● code 9 if Q4.1 is 2● else make as the entry in entry in Q4.6] |   |
+|  Q4.11 | What is the Religion of the head of the household?○ Hinduism-1○ Islam-2○ Christianity -3○ Sikhism-4○ Jainism-5○ Buddhism-6○ Zoroastrianism-7○ Others-9○ Not reported-0 |   |
+|  Q4.12 | What is the Social group of the head of the household?○ scheduled tribe (ST)-1 |   |
+
+Survey on Household Consumption Expenditure: 2023-24

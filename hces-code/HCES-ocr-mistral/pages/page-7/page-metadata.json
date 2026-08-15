@@ -1,0 +1,57 @@
+{
+  "index": 6,
+  "dimensions": {
+    "dpi": 93,
+    "height": 1023,
+    "width": 791
+  },
+  "confidenceScores": null,
+  "blocks": [
+    {
+      "topLeftX": 544,
+      "topLeftY": 45,
+      "bottomRightX": 667,
+      "bottomRightY": 61,
+      "content": "Questionnaire LCES",
+      "confidenceScores": null,
+      "type": "header"
+    },
+    {
+      "topLeftX": 211,
+      "topLeftY": 83,
+      "bottomRightX": 577,
+      "bottomRightY": 102,
+      "content": "## SECTION 5: List of households and structures",
+      "confidenceScores": null,
+      "type": "title"
+    },
+    {
+      "topLeftX": 87,
+      "topLeftY": 120,
+      "bottomRightX": 690,
+      "bottomRightY": 176,
+      "content": "Instructions for the JSO/FI: All the structures and households residing in a structure are to be listed. If the structure is used wholly for non-residential purposes or vacant, only fill-in questions 5.1 and 5.2 and proceed to the next structure. Only for households residing in the structure, fill-in all the questions.",
+      "confidenceScores": null,
+      "type": "text"
+    },
+    {
+      "topLeftX": 84,
+      "topLeftY": 190,
+      "bottomRightX": 705,
+      "bottomRightY": 919,
+      "content": "|  item no. | item | number/code  |\n| --- | --- | --- |\n|  5.1 | house number:[census/ municipality/ local body/ panchayat house number if available; running serial number within bracket otherwise] | ![img-0.jpeg](img-0.jpeg)  |\n|  5.2 | is the house used only for non-residential purposes?(Yes - 1, No - 2)If Yes, Go to item 5.1 of next row | ![img-1.jpeg](img-1.jpeg)  |\n|  5.3 | household serial number:[only for houses/ structures used for residential purposes (Starting serial no is 1. Then continuous numbering without omission and duplication for each household listed). | ![img-2.jpeg](img-2.jpeg)  |\n|  5.4 | name of head of the household | ![img-3.jpeg](img-3.jpeg)  |\n|  5.5 | household size |   |\n|  5.6 | area of land possessed (lp) in acre : (for rural only)[1 acre=0.405 hectare, 1 hectare=2.471 acre ] | ![img-4.jpeg](img-4.jpeg)  |\n|  5.7 | Whether the household owns one or more four wheeler cars for non-commercial use?(for urban only)(Yes=1, No=2) | ![img-5.jpeg](img-5.jpeg)  |\n|  5.8 | If 1 in item 5.7 then total purchase value of four wheeler cars (code)[value of car > 10 lakh=1 value of car ≤10 lakh=2] | ![img-6.jpeg](img-6.jpeg)  |\n|  5.9 | Compute: SSS number | ![img-7.jpeg](img-7.jpeg)  |\n|  5.10 | mobile number of head of the household | ![img-8.jpeg](img-8.jpeg)  |\n|  5.11 | mobile number of any other member of the household | ![img-9.jpeg](img-9.jpeg)  |\n|  5.12 | land line number of the household | ![img-10.jpeg](img-10.jpeg)  |\n|  GO TO NEXT ROW  |   |   |",
+      "confidenceScores": null,
+      "type": "table",
+      "tableId": null
+    },
+    {
+      "topLeftX": 390,
+      "topLeftY": 945,
+      "bottomRightX": 400,
+      "bottomRightY": 958,
+      "content": "7",
+      "confidenceScores": null,
+      "type": "footer"
+    }
+  ]
+}

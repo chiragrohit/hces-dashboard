@@ -1,0 +1,58 @@
+{
+  "index": 1,
+  "dimensions": {
+    "dpi": 93,
+    "height": 1023,
+    "width": 791
+  },
+  "confidenceScores": null,
+  "blocks": [
+    {
+      "topLeftX": 542,
+      "topLeftY": 44,
+      "bottomRightX": 668,
+      "bottomRightY": 61,
+      "content": "Questionnaire LCES",
+      "confidenceScores": null,
+      "type": "header"
+    },
+    {
+      "topLeftX": 82,
+      "topLeftY": 79,
+      "bottomRightX": 741,
+      "bottomRightY": 390,
+      "content": "|  1.18 | survey code: *if selected FSU surveyed:* inhabited – 1 uninhabited – 2 zero case – 3 *originally selected FSU not surveyed but substitute FSU surveyed:* inhabited – 4 uninhabited – 5 zero case – 6 *selected FSU casualty – 7* |   |\n| --- | --- | --- |\n|  1.19 | reason for substitution of original sample (code) (for codes 4-7 in item 1.18): not identifiable/traceable – 1 not accessible – 2 restricted area (not permitted to survey) – 3 others (specify) – 9 |   |",
+      "confidenceScores": null,
+      "type": "table",
+      "tableId": null
+    },
+    {
+      "topLeftX": 89,
+      "topLeftY": 439,
+      "bottomRightX": 368,
+      "bottomRightY": 458,
+      "content": "# **SECTION [2]: particulars of field operations**",
+      "confidenceScores": null,
+      "type": "title"
+    },
+    {
+      "topLeftX": 78,
+      "topLeftY": 470,
+      "bottomRightX": 707,
+      "bottomRightY": 918,
+      "content": "|  item no. | item | name/code  |\n| --- | --- | --- |\n|  2.1 | 2.1.1 name of Junior Statistical Officer (JSO)/ Survey enumerator (SE) (in block letters) |   |\n|   |  2.1.2 employee code of JSO/SE |   |\n|  2.2 | 2.2.1 name of Junior Statistical Officer (JSO)/ Survey Enumerator (SE) (in block letters) |   |\n|   |  2.2.2 employee code of JSO/SE |   |\n|  2.3 | 2.3.1 name of Senior Statistical Officer (SSO)/ Survey supervisor (SS) (in block letters) |   |\n|   |  2.3.2 employee code of SSO/SS |   |\n|  2.4 ( in the format DD MM YY) | 2.4.1 commencement of survey (to be filled by JSO/SE) |   |\n|   |  2.4.2 commencement of inspection (to be filled by SSO/SS) |   |\n|   |  2.4.3 completion of survey (to be filled by JSO/SE) |   |\n|   |  2.4.4 completion of inspection (to be filled by SSO/SS) |   |\n|   |  2.4.5 receipt (to be filled by SSO/SS) |   |\n|   |  2.4.6 scrutiny (to be filled by SSO/SS) |   |\n|   |  2.4.7 despatch (to be filled by SSO/SS) |   |\n|  2.5 | total time taken to canvass the questionnaire by the team of enumerators (to be filled by JSO/SE) |   |",
+      "confidenceScores": null,
+      "type": "table",
+      "tableId": null
+    },
+    {
+      "topLeftX": 388,
+      "topLeftY": 943,
+      "bottomRightX": 402,
+      "bottomRightY": 960,
+      "content": "2",
+      "confidenceScores": null,
+      "type": "footer"
+    }
+  ]
+}

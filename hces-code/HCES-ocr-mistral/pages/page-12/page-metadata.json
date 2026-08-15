@@ -1,0 +1,147 @@
+{
+  "index": 11,
+  "dimensions": {
+    "dpi": 87,
+    "height": 1018,
+    "width": 720
+  },
+  "confidenceScores": null,
+  "blocks": [
+    {
+      "topLeftX": 72,
+      "topLeftY": 43,
+      "bottomRightX": 183,
+      "bottomRightY": 57,
+      "content": "Questionnaire HCQ",
+      "confidenceScores": null,
+      "type": "header"
+    },
+    {
+      "topLeftX": 105,
+      "topLeftY": 89,
+      "bottomRightX": 423,
+      "bottomRightY": 106,
+      "content": "## Section3: Details of the household members",
+      "confidenceScores": null,
+      "type": "title"
+    },
+    {
+      "topLeftX": 105,
+      "topLeftY": 121,
+      "bottomRightX": 259,
+      "bottomRightY": 135,
+      "content": "### OBJECTIVES AND SCOPE",
+      "confidenceScores": null,
+      "type": "title"
+    },
+    {
+      "topLeftX": 127,
+      "topLeftY": 136,
+      "bottomRightX": 611,
+      "bottomRightY": 178,
+      "content": "- To record basic demographics on gender, age, relationship to head of household, marital status, education level, no. of days stayed away from home, no. of meals usually taken for each member of the household listed in Section 2.",
+      "confidenceScores": null,
+      "type": "text"
+    },
+    {
+      "topLeftX": 105,
+      "topLeftY": 196,
+      "bottomRightX": 269,
+      "bottomRightY": 209,
+      "content": "### IMPLEMENTATION NOTES",
+      "confidenceScores": null,
+      "type": "title"
+    },
+    {
+      "topLeftX": 127,
+      "topLeftY": 210,
+      "bottomRightX": 577,
+      "bottomRightY": 253,
+      "content": "- All the household members of the selected household will be listed and their related information will be recorded.\n• Total number of members listed in Section3 will be same as household size in Section2.",
+      "confidenceScores": null,
+      "type": "list"
+    },
+    {
+      "topLeftX": 68,
+      "topLeftY": 272,
+      "bottomRightX": 425,
+      "bottomRightY": 286,
+      "content": "Section 3: demographic and other particulars of household members",
+      "confidenceScores": null,
+      "type": "caption"
+    },
+    {
+      "topLeftX": 63,
+      "topLeftY": 297,
+      "bottomRightX": 657,
+      "bottomRightY": 574,
+      "content": "|  srl. no. | name of member | relation to head (code) | gender(male-1, female-2, transgender -3) | age (years) | marital status (code) | highest educational level attained (code) | if code 03 – 13 in col. (7), total year of education completed | whether used internet* from any location during last 30 days (yes-1, no - 2) | no. of days stayed away from home during last 30 days | no. of meals usually taken in a day | no. of meals taken during last 30 days  |   |   |   |   |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |\n|   |   |   |   |   |   |   |   |   |   |   |  away from home |   |   |   | at home  |\n|   |   |   |   |   |   |   |   |   |   |   |  free of cost |   |   | on payment  |   |\n|   |   |   |   |   |   |   |   |   |   |   |  from school,balwadi, etc. | from employer as perquisites or part of wage | others  |   |   |\n|  (1) | (2) | (3) | (4) | (5) | (6) | (7) | (8) | (9) | (10) | (11) | (12) | (13) | (14) | (15) | (16)  |\n|  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n|  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n|  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n|  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |",
+      "confidenceScores": null,
+      "type": "table",
+      "tableId": null
+    },
+    {
+      "topLeftX": 66,
+      "topLeftY": 575,
+      "bottomRightX": 229,
+      "bottomRightY": 588,
+      "content": "#### Instruction: Codes for Section 3",
+      "confidenceScores": null,
+      "type": "title"
+    },
+    {
+      "topLeftX": 87,
+      "topLeftY": 589,
+      "bottomRightX": 644,
+      "bottomRightY": 669,
+      "content": "- Col. (3): relation to head: self-1, spouse of head-2, married child-3, spouse of married child-4, unmarried child-5, grandchild-6, father/mother/father-in-law/mother-in-law-7, brother/sister/brother-in-law/sister-in-law/other relatives-8, servants/employees/other non-relatives-9\n• Col.(6) : marital status: never married – 1, currently married – 2, widowed – 3, divorced/separated – 4\n• Col. (7): highest educational level attained:",
+      "confidenceScores": null,
+      "type": "list"
+    },
+    {
+      "topLeftX": 110,
+      "topLeftY": 672,
+      "bottomRightX": 624,
+      "bottomRightY": 717,
+      "content": "- not literate (i.e. not able to read or write a simple message with understanding in any language) -01\n- literate with non-formal education (like NFEC, AEC, TLC, literate without any schooling, etc.)-02 literate with formal education",
+      "confidenceScores": null,
+      "type": "list"
+    },
+    {
+      "topLeftX": 111,
+      "topLeftY": 719,
+      "bottomRightX": 383,
+      "bottomRightY": 878,
+      "content": "○ below primary-03\n○ primary -04\n○ upper primary/middle -05\n○ secondary -06\n○ higher secondary -07\n○ diploma /certificate course (up to secondary)-08\n○ diploma/certificate course (higher secondary)-10\n○ diploma/certificate course(graduation & above)-11\n○ graduate -12\n○ post graduate and above -13",
+      "confidenceScores": null,
+      "type": "list"
+    },
+    {
+      "topLeftX": 66,
+      "topLeftY": 879,
+      "bottomRightX": 352,
+      "bottomRightY": 895,
+      "content": "*applicable for persons of age >=3 years (i.e., Col. 5>=3)",
+      "confidenceScores": null,
+      "type": "text"
+    },
+    {
+      "topLeftX": 66,
+      "topLeftY": 911,
+      "bottomRightX": 535,
+      "bottomRightY": 926,
+      "content": "Note: Information on Col. 10 – 16 is to be collected while canvassing the Questionnaire FDQ.",
+      "confidenceScores": null,
+      "type": "text"
+    },
+    {
+      "topLeftX": 71,
+      "topLeftY": 946,
+      "bottomRightX": 380,
+      "bottomRightY": 962,
+      "content": "Survey on Household Consumption Expenditure: 2023-24",
+      "confidenceScores": null,
+      "type": "footer"
+    }
+  ]
+}

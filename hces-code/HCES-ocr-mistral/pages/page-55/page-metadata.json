@@ -1,0 +1,84 @@
+{
+  "index": 54,
+  "dimensions": {
+    "dpi": 87,
+    "height": 1018,
+    "width": 720
+  },
+  "confidenceScores": null,
+  "blocks": [
+    {
+      "topLeftX": 72,
+      "topLeftY": 42,
+      "bottomRightX": 185,
+      "bottomRightY": 58,
+      "content": "Questionnaire DGQ",
+      "confidenceScores": null,
+      "type": "header"
+    },
+    {
+      "topLeftX": 105,
+      "topLeftY": 88,
+      "bottomRightX": 613,
+      "bottomRightY": 153,
+      "content": "## Section14: Expenditure for purchase and construction (including repair and maintenance) of durable goods for domestic use during the last 365 days",
+      "confidenceScores": null,
+      "type": "title"
+    },
+    {
+      "topLeftX": 105,
+      "topLeftY": 166,
+      "bottomRightX": 259,
+      "bottomRightY": 180,
+      "content": "### OBJECTIVES AND SCOPE",
+      "confidenceScores": null,
+      "type": "title"
+    },
+    {
+      "topLeftX": 126,
+      "topLeftY": 180,
+      "bottomRightX": 613,
+      "bottomRightY": 227,
+      "content": "- This section is for recording the expenditure incurred by the household on purchase (including repair and maintenance) and construction of durable goods for domestic use during the last 365 days.",
+      "confidenceScores": null,
+      "type": "text"
+    },
+    {
+      "topLeftX": 105,
+      "topLeftY": 240,
+      "bottomRightX": 270,
+      "bottomRightY": 253,
+      "content": "### IMPLEMENTATION NOTES",
+      "confidenceScores": null,
+      "type": "title"
+    },
+    {
+      "topLeftX": 127,
+      "topLeftY": 255,
+      "bottomRightX": 385,
+      "bottomRightY": 269,
+      "content": "• To be canvassed for all the selected households.",
+      "confidenceScores": null,
+      "type": "text"
+    },
+    {
+      "topLeftX": 77,
+      "topLeftY": 271,
+      "bottomRightX": 641,
+      "bottomRightY": 824,
+      "content": "|  Section 14.1: Expenditure for purchase (including repair & maintenance) of personal goods for domestic use during the last 365 days  |   |   |   |   |   |   |   |   |   |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |\n|  Question no. | Question description and code structure  |   |   |   |   |   |   |   |   |\n|  Q14.1 | What is the quantity and value of the items procured by the household for personal use during last 365 days?  |   |   |   |   |   |   |   |   |\n|   |  item | item code | first-hand purchase |   |   | cost of repair &mainten-ance (Rs.) | second-hand purchase |   | total expenditure (Rs.) (5)+(6)+(8)  |\n|   |   |   |  no. of item purch-ased | whether purchased on hire yes-1, no-2 | value (Rs.) |   | no. of item purch-ased | value (Rs.)  |   |\n|   |  (1) | (2) | (3) | (4) | (5) | (6) | (7) | (8) | (9)  |\n|   |  spectacles/goggles, contact lenses | 440 |  |  |  |  |  |  |   |\n|   |  umbrella, raincoat, helmet | 441 |  |  |  |  |  |  |   |\n|   |  other minor durable-type goods (like torch, lock, lighter,etc.) | 442 |  |  |  |  |  |  |   |\n|   |  mobile handset | 623 |  |  |  |  |  |  |   |\n|   |  telephone instrument (landline) | 624 |  |  |  |  |  |  |   |\n|   |  PC/ Laptop/ tablet, other peripherals incl. software | 622 |  |  |  |  |  |  |   |\n|   |  clock, watch, smartwatch, fitness tracker | 620 |  |  |  |  |  |  |   |\n|   |  back-pack, handbags, vanity bags, purse, clutch, etc. | 554 |  |  |  |  |  |  |   |\n|   |  headphone, earphone, ear pod,airpod, bluetooth devices/speakers etc. | 035 |  |  |  |  |  |  |   |\n|   |  other machines for household work | 621 |  |  |  |  |  |  |   |\n|   |  any other personal goods(power banks, hair dryers, straightener/curler,trimmer, groomer, epilator, etc.) | 625 |  |  |  |  |  |  |   |\n|  other personal goods: sub-total | 629 |  |  |  |  |  |  |   |   |",
+      "confidenceScores": null,
+      "type": "table",
+      "tableId": null
+    },
+    {
+      "topLeftX": 105,
+      "topLeftY": 946,
+      "bottomRightX": 399,
+      "bottomRightY": 962,
+      "content": "Household Consumption Expenditure Survey: 2023-24",
+      "confidenceScores": null,
+      "type": "footer"
+    }
+  ]
+}

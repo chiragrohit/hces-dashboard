@@ -1,0 +1,39 @@
+{
+  "index": 59,
+  "dimensions": {
+    "dpi": 87,
+    "height": 1018,
+    "width": 720
+  },
+  "confidenceScores": null,
+  "blocks": [
+    {
+      "topLeftX": 72,
+      "topLeftY": 43,
+      "bottomRightX": 185,
+      "bottomRightY": 58,
+      "content": "Questionnaire DGQ",
+      "confidenceScores": null,
+      "type": "header"
+    },
+    {
+      "topLeftX": 47,
+      "topLeftY": 86,
+      "bottomRightX": 672,
+      "bottomRightY": 886,
+      "content": "|  for domestic use during the last 365 days  |   |   |   |   |   |   |   |   |   |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |\n|  Question no. | Question description and code structure  |   |   |   |   |   |   |   |   |\n|  Q14.8 | What is the quantity and value of the items procured by the household forrecreation purposeduring last 365 days?  |   |   |   |   |   |   |   |   |\n|   |  item | item code | first-hand purchase |   |   | cost of repair &maintenance (Rs.) | second-hand purchase |   | total expenditure (Rs.) (5)+(6)+(8)  |\n|   |   |   |  no. of item purchased | whether purchased on hire yes-1, no-2 | value (Rs.) |   | no. of item purchased | value (Rs.)  |   |\n|   |  (1) | (2) | (3) | (4) | (5) | (6) | (7) | (8) | (9)  |\n|   |  television | 560 |  |  |  |  |  |  |   |\n|   |  camera & photographic equipment | 561 |  |  |  |  |  |  |   |\n|   |  CD, DVD, pen-drive, external hard disk | 562 |  |  |  |  |  |  |   |\n|   |  musical instruments | 563 |  |  |  |  |  |  |   |\n|   |  other goods for recreation(incl. radio, VCR/VCD/DVD player, home theatre system, play station, etc.) | 564 |  |  |  |  |  |  |   |\n|  goods for recreation: sub-total | 569 |  |  |  |  |  |  |  |   |\n|  Section 14.9: Expenditure for purchase and construction of residential building, land and other durables for domestic use during the last 365 days  |   |   |   |   |   |   |   |   |   |\n|  Question no. | Question description and code structure  |   |   |   |   |   |   |   |   |\n|  Q14.9 | What is the value of the items procured by the householdforresidentialpurpose during last 365 days?  |   |   |   |   |   |   |   |   |\n|   |  item | item code | first-hand purchase |   |   | cost of raw material and services for construction and repair (Rs.) | second-hand purchase |   | total expenditure (Rs.) (5)+(6)+(8)  |\n|   |   |   |  no. of item purchased | whether purchased on hire yes-1, no-2 | value (Rs.) |   | no. of item purchased | value (Rs.)  |   |\n|   |  (1) | (2) | (3) | (4) | (5) | (6) | (7) | (8) | (9)  |\n|   |  residential building & land (cost of minor repairs only) | 632 |  |  |  |  |  |  |   |\n|   |  bathroom and sanitary equipment | 630 |  |  |  |  |  |  |   |\n|   |  plugs, switches & other electrical fittings | 631 |  |  |  |  |  |  |   |\n|   |  other durables | 633 |  |  |  |  |  |  |   |\n|  residential building, land and other durables: sub-total | 639 |  |  |  |  |  |  |  |   |",
+      "confidenceScores": null,
+      "type": "table",
+      "tableId": null
+    },
+    {
+      "topLeftX": 106,
+      "topLeftY": 946,
+      "bottomRightX": 399,
+      "bottomRightY": 962,
+      "content": "Household Consumption Expenditure Survey: 2023-24",
+      "confidenceScores": null,
+      "type": "footer"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "index": 33,
+  "dimensions": {
+    "dpi": 87,
+    "height": 1018,
+    "width": 720
+  },
+  "confidenceScores": null,
+  "blocks": [
+    {
+      "topLeftX": 107,
+      "topLeftY": 43,
+      "bottomRightX": 218,
+      "bottomRightY": 57,
+      "content": "Questionnaire FDQ",
+      "confidenceScores": null,
+      "type": "header"
+    },
+    {
+      "topLeftX": 72,
+      "topLeftY": 86,
+      "bottomRightX": 647,
+      "bottomRightY": 555,
+      "content": "|  Section 6.7: Consumption of spices during the last 7 days  |   |   |   |   |   |   |   |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n|  Question no. | Question description and code structure  |   |   |   |   |   |   |\n|  Q 6.7 | What is the quantity and value of the spices consumed by the household during last 7 days?  |   |   |   |   |   |   |\n|   |  item | item code | quantity and value of the item consumed during last 7 days  |   |   |   |   |\n|   |   |   |  consumption out of home produce |   | total consumption (incl. consumption out of home produce) |   | source#  |\n|   |   |   |  quantity (0.000) | value (Rs.) | quantity (0.000) | value (Rs.)  |   |\n|   |  (1) | (2) | (3) | (4) | (5) | (6) | (7)  |\n|   |  dry chillies (gm) | 256 |  |  |  |  |   |\n|   |  turmeric (gm) | 254 |  |  |  |  |   |\n|   |  cumin (jeera (gm)) | 252 |  |  |  |  |   |\n|   |  coriander (dhania (gm)) | 253 |  |  |  |  |   |\n|   |  garlic (gm) | 251 |  |  |  |  |   |\n|   |  ginger (gm) | 250 |  |  |  |  |   |\n|   |  curry powder (gm) | 258 |  |  |  |  |   |\n|   |  black pepper (gm) | 255 |  |  |  |  |   |\n|   |  tamarind (gm) | 257 |  |  |  |  |   |\n|   |  oilseeds (gm) | 260 |  |  |  |  |   |\n|   |  poppy seeds (gm) | 263 |  |  |  |  |   |\n|   |  other spices (gm) | 261 |  |  |  |  |   |\n|   |  spices: sub-total | 269 |  |  |  |  |   |\n|  [Instruction to software: * Source codes are: only purchase-1, only home-grown stock-2, both purchase and home-grown stock-3, only free collection-4, only exchange of goods and services-5, only gifts/charities-6, others-9 and given in dropdown list in software package][Instruction to enumerator: Total consumption of the item includes consumption of home produce. Consumption from home produce means produce of cultivation or produce of livestock (e.g. milk) and not food obtained in the home by processing of other food items (e.g. curd from milk, or pickles from vegetables, spices, etc., or milk-based sweets from milk and sugar.]  |   |   |   |   |   |   |   |",
+      "confidenceScores": null,
+      "type": "table",
+      "tableId": null
+    },
+    {
+      "topLeftX": 107,
+      "topLeftY": 947,
+      "bottomRightX": 399,
+      "bottomRightY": 962,
+      "content": "Household Consumption Expenditure Survey: 2023-24",
+      "confidenceScores": null,
+      "type": "footer"
+    }
+  ]
+}

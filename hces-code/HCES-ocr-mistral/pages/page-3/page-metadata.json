@@ -1,0 +1,39 @@
+{
+  "index": 2,
+  "dimensions": {
+    "dpi": 93,
+    "height": 1023,
+    "width": 791
+  },
+  "confidenceScores": null,
+  "blocks": [
+    {
+      "topLeftX": 540,
+      "topLeftY": 46,
+      "bottomRightX": 671,
+      "bottomRightY": 65,
+      "content": "*Questionnaire LCES*",
+      "confidenceScores": null,
+      "type": "header"
+    },
+    {
+      "topLeftX": 82,
+      "topLeftY": 82,
+      "bottomRightX": 709,
+      "bottomRightY": 283,
+      "content": "|   | (in hours) [no decimal point] |  |   |\n| --- | --- | --- | --- |\n|  2.6 | whether any remark has been entered by JSO/SE (yes-1, no-2) | i. in section 7/8 |   |\n|   |   |  ii. elsewhere in the questionnaire |   |\n|  2.7 | whether any remark has been entered by supervisory officer (yes-1, no-2) | i. in section 7/8 |   |\n|   |   |  ii. elsewhere in the questionnaire |   |",
+      "confidenceScores": null,
+      "type": "table",
+      "tableId": null
+    },
+    {
+      "topLeftX": 387,
+      "topLeftY": 942,
+      "bottomRightX": 402,
+      "bottomRightY": 962,
+      "content": "3",
+      "confidenceScores": null,
+      "type": "footer"
+    }
+  ]
+}

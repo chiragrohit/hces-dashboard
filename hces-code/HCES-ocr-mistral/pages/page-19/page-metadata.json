@@ -1,0 +1,84 @@
+{
+  "index": 18,
+  "dimensions": {
+    "dpi": 87,
+    "height": 1018,
+    "width": 720
+  },
+  "confidenceScores": null,
+  "blocks": [
+    {
+      "topLeftX": 72,
+      "topLeftY": 43,
+      "bottomRightX": 184,
+      "bottomRightY": 57,
+      "content": "Questionnaire HCQ",
+      "confidenceScores": null,
+      "type": "header"
+    },
+    {
+      "topLeftX": 104,
+      "topLeftY": 143,
+      "bottomRightX": 610,
+      "bottomRightY": 184,
+      "content": "## Section 3A: Details of the household members(To be canvassed only in Visits -2 & 3)",
+      "confidenceScores": null,
+      "type": "title"
+    },
+    {
+      "topLeftX": 106,
+      "topLeftY": 199,
+      "bottomRightX": 259,
+      "bottomRightY": 213,
+      "content": "### OBJECTIVES AND SCOPE",
+      "confidenceScores": null,
+      "type": "title"
+    },
+    {
+      "topLeftX": 127,
+      "topLeftY": 214,
+      "bottomRightX": 610,
+      "bottomRightY": 256,
+      "content": "- To record basic demographics on gender, age, relationship to head of household, marital status, education level, no. of days stayed away from home, no. of meals usually taken for each member of the household listed in Section 2A.",
+      "confidenceScores": null,
+      "type": "text"
+    },
+    {
+      "topLeftX": 106,
+      "topLeftY": 273,
+      "bottomRightX": 269,
+      "bottomRightY": 286,
+      "content": "### IMPLEMENTATION NOTES",
+      "confidenceScores": null,
+      "type": "title"
+    },
+    {
+      "topLeftX": 127,
+      "topLeftY": 287,
+      "bottomRightX": 610,
+      "bottomRightY": 343,
+      "content": "- All the household members of the selected household will be listed and their related information will be recorded.\n- Total number of members listed in Sections 3A.1 & 3A.2 will be same as household size in Section2A.",
+      "confidenceScores": null,
+      "type": "list"
+    },
+    {
+      "topLeftX": 45,
+      "topLeftY": 361,
+      "bottomRightX": 674,
+      "bottomRightY": 920,
+      "content": "|  Section 3A.1: demographic and other particulars of the erstwhile household members  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |\n|  srl. no. | name of member | relation to head (code) | gender(male-1, female-2, transgender - 3) | age (years) | marital status (code) | highest educational level attained (code) | if code 03 – 13 in col. (7), total year of education completed | whether used internet from any location during last 30 days (yes - 1, no - 2) | no. of days stayed away from home during last 30 days | no. of meals usually taken in a day | no. of meals taken during last 30 days |   |   |   |   | status of member-ship as on the date of re-visit (to be auto generated)  |\n|   |   |   |   |   |   |   |   |   |   |   |  away from home |   |   |   | at home  |   |\n|   |   |   |   |   |   |   |   |   |   |   |  free of cost |   |   | on payment  |   |   |\n|   |   |   |   |   |   |   |   |   |   |   |  from school,balwadi, etc. | from employer as perquisites or part of wage | others  |   |   |   |\n|  (1) | (2) | (3) | (4) | (5) | (6) | (7) | (8) | (9) | (10) | (11) | (12) | (13) | (14) | (15) | (16) | (17)  |\n|  In part 3A.1 the serial number will be same as that of the last visit(this will be auto-populated from the information collected during the first visit) |   |   |   |   |   |   |   |   |   |   |   |   |   |   | Code 1 or 2  |   |\n|  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n|  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n|  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n|  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n|  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n|  Section 3A.2: demographic and other particulars of the new household members  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n|  In part 3A.2 the serial number will be continuous from Section 3A.1 |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n|   |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | 3  |\n|   |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | 3  |\n|   |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | 3  |\n|   |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | 3  |\n|   |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | 3  |\n|   |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | 3  |",
+      "confidenceScores": null,
+      "type": "table",
+      "tableId": null
+    },
+    {
+      "topLeftX": 72,
+      "topLeftY": 947,
+      "bottomRightX": 380,
+      "bottomRightY": 962,
+      "content": "Survey on Household Consumption Expenditure: 2023-24",
+      "confidenceScores": null,
+      "type": "footer"
+    }
+  ]
+}

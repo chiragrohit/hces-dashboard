@@ -1,0 +1,39 @@
+{
+  "index": 22,
+  "dimensions": {
+    "dpi": 87,
+    "height": 1018,
+    "width": 720
+  },
+  "confidenceScores": null,
+  "blocks": [
+    {
+      "topLeftX": 106,
+      "topLeftY": 43,
+      "bottomRightX": 218,
+      "bottomRightY": 59,
+      "content": "Questionnaire FDQ",
+      "confidenceScores": null,
+      "type": "header"
+    },
+    {
+      "topLeftX": 100,
+      "topLeftY": 86,
+      "bottomRightX": 668,
+      "bottomRightY": 512,
+      "content": "|  Section4.1: General information onpurchase/payment  |   |   |   |   |\n| --- | --- | --- | --- | --- |\n|  Question no. | Question description and code structure  |   |   |   |\n|  Q4.1.3 | Whether any online purchase/payment has been made to buy one or more of the following items during thereference period?  |   |   |   |\n|   |  S. No. | item category | reference period (in days) | please select the check box if purchased online during the reference period  |\n|   |  (1) | (2) | (3) | (4)  |\n|   |  1. | Groceries (cereals, pulses & its products, edible oil, sugar& salt, spices, beverages, etc.) | 30 | ![img-11.jpeg](img-11.jpeg)  |\n|   |  2. | Milk & its products | 7 | ![img-12.jpeg](img-12.jpeg)  |\n|   |  3. | Vegetables | 7 | ![img-13.jpeg](img-13.jpeg)  |\n|   |  4. | Fruits (fresh) | 7 | ![img-14.jpeg](img-14.jpeg)  |\n|   |  5. | Fruits (dry) | 7 | ![img-15.jpeg](img-15.jpeg)  |\n|   |  6. | Egg, fish & meat | 7 | ![img-16.jpeg](img-16.jpeg)  |\n|   |  7. | Served processed food (meals, snacks, drinks, etc.) | 7 | ![img-17.jpeg](img-17.jpeg)  |\n|   |  8. | Packed processed food | 7 | ![img-18.jpeg](img-18.jpeg)  |\n|   |  9. | Other food items | 7 | ![img-19.jpeg](img-19.jpeg)  |\n|  Q4.1.4 | Did the household perform any ceremony during the last 30 days?o yes-1o no-2 |   |   |   |\n|  Q4.1.5 | How many meals were served to non-household members during the last 30 days? |   |   | Text box  |\n|  • Go to Section 5  |   |   |   |   |",
+      "confidenceScores": null,
+      "type": "table",
+      "tableId": null
+    },
+    {
+      "topLeftX": 106,
+      "topLeftY": 947,
+      "bottomRightX": 399,
+      "bottomRightY": 963,
+      "content": "Household Consumption Expenditure Survey: 2023-24",
+      "confidenceScores": null,
+      "type": "footer"
+    }
+  ]
+}

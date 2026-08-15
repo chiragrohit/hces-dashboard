@@ -1,0 +1,39 @@
+{
+  "index": 28,
+  "dimensions": {
+    "dpi": 87,
+    "height": 1018,
+    "width": 720
+  },
+  "confidenceScores": null,
+  "blocks": [
+    {
+      "topLeftX": 107,
+      "topLeftY": 43,
+      "bottomRightX": 218,
+      "bottomRightY": 57,
+      "content": "Questionnaire FDQ",
+      "confidenceScores": null,
+      "type": "header"
+    },
+    {
+      "topLeftX": 72,
+      "topLeftY": 86,
+      "bottomRightX": 647,
+      "bottomRightY": 643,
+      "content": "|  Section 6.2: Consumption of vegetables during the last 7 days  |   |   |   |   |   |   |   |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n|  Question no. | Question description and code structure  |   |   |   |   |   |   |\n|  Q6.2 | What is the quantity and value of the vegetables consumed by the household during last 7 days?  |   |   |   |   |   |   |\n|   |  item | item code | quantity and value of the item consumed during last 7 days  |   |   |   |   |\n|   |   |   |  consumption out of home produce |   | total consumption (incl. consumption out of home produce) |   | source#  |\n|   |   |   |  quantity* (0.000) | value (Rs.) | quantity* (0.000) | value (Rs.)  |   |\n|   |  (1) | (2) | (3) | (4) | (5) | (6) | (7)  |\n|   |  onion | 201 |  |  |  |  |   |\n|   |  potato | 200 |  |  |  |  |   |\n|   |  tomato | 202 |  |  |  |  |   |\n|   |  palak/other leafy vegetables | 206 |  |  |  |  |   |\n|   |  brinjal | 203 |  |  |  |  |   |\n|   |  lady's finger | 208 |  |  |  |  |   |\n|   |  green chillies | 207 |  |  |  |  |   |\n|   |  cauliflower | 211 |  |  |  |  |   |\n|   |  gourd, pumpkin | 213 |  |  |  |  |   |\n|   |  cabbage | 212 |  |  |  |  |   |\n|   |  parwal/patal, kundru | 210 |  |  |  |  |   |\n|   |  beans, barbati | 215 |  |  |  |  |   |\n|   |  Peas | 214 |  |  |  |  |   |\n|   |  carrot | 205 |  |  |  |  |   |\n|   |  radish | 204 |  |  |  |  |   |\n|   |  lemon (no.) | 216 |  |  |  |  |   |\n|   |  other vegetables | 217 |  |  |  |  |   |\n|  vegetables: sub-total | 219 |  |  |  |  |   |   |\n|  [Instruction to software: 1. *Unit is Kg. Unless otherwise specified in col. (1).2. # Source codes are: only purchase-1, only home-grown stock-2, both purchase and home-grown stock-3, only free collection-4, only exchange of goods and services-5, only gifts/charities-6, others-9 and given in dropdown list in software package.][Instruction to enumerator: Total consumption of the item includes consumption of home produce.Consumption from home produce means produce of cultivation or produce of livestock (e.g. milk) and not food obtained in the home by processing of other food items.]  |   |   |   |   |   |   |   |",
+      "confidenceScores": null,
+      "type": "table",
+      "tableId": null
+    },
+    {
+      "topLeftX": 107,
+      "topLeftY": 947,
+      "bottomRightX": 399,
+      "bottomRightY": 962,
+      "content": "Household Consumption Expenditure Survey: 2023-24",
+      "confidenceScores": null,
+      "type": "footer"
+    }
+  ]
+}

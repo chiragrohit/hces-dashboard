@@ -1,0 +1,111 @@
+{
+  "index": 38,
+  "dimensions": {
+    "dpi": 87,
+    "height": 1018,
+    "width": 720
+  },
+  "confidenceScores": null,
+  "blocks": [
+    {
+      "topLeftX": 72,
+      "topLeftY": 42,
+      "bottomRightX": 182,
+      "bottomRightY": 57,
+      "content": "Questionnaire CSQ",
+      "confidenceScores": null,
+      "type": "header"
+    },
+    {
+      "topLeftX": 156,
+      "topLeftY": 86,
+      "bottomRightX": 562,
+      "bottomRightY": 176,
+      "content": "# **GOVERNMENT OF INDIA  \nNATIONAL STATISTICAL OFFICE  \nHOUSEHOLD CONSUMPTION EXPENDITURE SURVEY: 2023-24  \nAUGUST, 2023 – JULY, 2024  \nQUESTIONNAIRE - CSQ: CONSUMABLES& SERVICES**",
+      "confidenceScores": null,
+      "type": "title"
+    },
+    {
+      "topLeftX": 105,
+      "topLeftY": 204,
+      "bottomRightX": 613,
+      "bottomRightY": 257,
+      "content": "*Note:(a) In order to record the present status of the surveyed household, information on survey code along with reason for substitution/casualty will be recorded in Section 1A, Questionnaire HCQ during Visits- 2 & 3.*",
+      "confidenceScores": null,
+      "type": "text"
+    },
+    {
+      "topLeftX": 105,
+      "topLeftY": 257,
+      "bottomRightX": 613,
+      "bottomRightY": 309,
+      "content": "*(b) To record the change in composition of the household, information on demographic particulars will also be collected in the Sections 2A & 3A, Questionnaire HCQ during Visits- 2 & 3.*",
+      "confidenceScores": null,
+      "type": "text"
+    },
+    {
+      "topLeftX": 105,
+      "topLeftY": 322,
+      "bottomRightX": 507,
+      "bottomRightY": 343,
+      "content": "# **Section 4.2: General information on purchase/payment**",
+      "confidenceScores": null,
+      "type": "title"
+    },
+    {
+      "topLeftX": 105,
+      "topLeftY": 353,
+      "bottomRightX": 260,
+      "bottomRightY": 368,
+      "content": "# **OBJECTIVES AND SCOPE**",
+      "confidenceScores": null,
+      "type": "title"
+    },
+    {
+      "topLeftX": 132,
+      "topLeftY": 381,
+      "bottomRightX": 613,
+      "bottomRightY": 410,
+      "content": "- This section is for recording some basic information on purchase/payments made by the household.",
+      "confidenceScores": null,
+      "type": "list"
+    },
+    {
+      "topLeftX": 105,
+      "topLeftY": 423,
+      "bottomRightX": 270,
+      "bottomRightY": 438,
+      "content": "# **IMPLEMENTATION NOTES**",
+      "confidenceScores": null,
+      "type": "title"
+    },
+    {
+      "topLeftX": 128,
+      "topLeftY": 451,
+      "bottomRightX": 386,
+      "bottomRightY": 467,
+      "content": "- To be canvassed for all the selected households.",
+      "confidenceScores": null,
+      "type": "list"
+    },
+    {
+      "topLeftX": 75,
+      "topLeftY": 483,
+      "bottomRightX": 637,
+      "bottomRightY": 783,
+      "content": "|  **Section 4.2: General information on purchase/payment**  |   |   |\n| --- | --- | --- |\n|  **Question no.** | **Question description and code structure** | **Recorded entry**  |\n|  Q4.2.0 | Whether the household procured kerosene using ration card during the last 30 days? *o yes-1* *o no-2* |   |\n|  Q4.2.1 | Whether the household received subsidy on LPG cylinder during the last 3 months? *o yes-1, if yes, no. of subsidized LPG cylinder received during the last 3 months preceding the date of survey (number)* ☐ *o no-2* |   |\n|  Q4.2.2 | Whether the household received free electricity during the last 30 days? *o yes-1* *o no-2* |   |\n|  Q4.2.3 | Whether any member of the household is attending/attended educational institution during last 365 days? *o yes-1; if yes, number of members attending/attended Govt. institution* ☐ *number of members attending/attended Private institution* ☐ *o no-2* |   |",
+      "confidenceScores": null,
+      "type": "table",
+      "tableId": null
+    },
+    {
+      "topLeftX": 105,
+      "topLeftY": 944,
+      "bottomRightX": 399,
+      "bottomRightY": 961,
+      "content": "Household Consumption Expenditure Survey: 2023-24",
+      "confidenceScores": null,
+      "type": "footer"
+    }
+  ]
+}

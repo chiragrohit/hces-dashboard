@@ -1,0 +1,84 @@
+{
+  "index": 35,
+  "dimensions": {
+    "dpi": 87,
+    "height": 1018,
+    "width": 720
+  },
+  "confidenceScores": null,
+  "blocks": [
+    {
+      "topLeftX": 106,
+      "topLeftY": 43,
+      "bottomRightX": 218,
+      "bottomRightY": 59,
+      "content": "Questionnaire FDQ",
+      "confidenceScores": null,
+      "type": "header"
+    },
+    {
+      "topLeftX": 105,
+      "topLeftY": 89,
+      "bottomRightX": 572,
+      "bottomRightY": 109,
+      "content": "## Section 7: Consumption of processed food during the last 7 days",
+      "confidenceScores": null,
+      "type": "title"
+    },
+    {
+      "topLeftX": 106,
+      "topLeftY": 121,
+      "bottomRightX": 259,
+      "bottomRightY": 135,
+      "content": "### OBJECTIVES AND SCOPE",
+      "confidenceScores": null,
+      "type": "title"
+    },
+    {
+      "topLeftX": 126,
+      "topLeftY": 135,
+      "bottomRightX": 613,
+      "bottomRightY": 182,
+      "content": "This section is for recording the quantity and value of consumption of served processed food and packaged processed food by the household during the last 7 days preceding the date of the survey.",
+      "confidenceScores": null,
+      "type": "text"
+    },
+    {
+      "topLeftX": 106,
+      "topLeftY": 196,
+      "bottomRightX": 270,
+      "bottomRightY": 209,
+      "content": "### IMPLEMENTATION NOTES",
+      "confidenceScores": null,
+      "type": "title"
+    },
+    {
+      "topLeftX": 128,
+      "topLeftY": 211,
+      "bottomRightX": 385,
+      "bottomRightY": 224,
+      "content": "• To be canvassed for all the selected households.",
+      "confidenceScores": null,
+      "type": "text"
+    },
+    {
+      "topLeftX": 75,
+      "topLeftY": 226,
+      "bottomRightX": 643,
+      "bottomRightY": 677,
+      "content": "|  Section 7.1: Consumption of served processed food during the last 7 days  |   |   |   |   |\n| --- | --- | --- | --- | --- |\n|  Question no. | Question description and code structure  |   |   |   |\n|  Q7.1 | What is the quantity and value of the served processed foodpurchased and/or consumed by the household during last 7 days?  |   |   |   |\n|   |  Item | item code | quantity and value of the item purchased and/or consumed during last 7 days  |   |\n|   |   |   |  total consumption | source#  |\n|   |   |   |  quantity (0.000)  |   |\n|   |  (1) | (2) | (3) | (4)  |\n|   |  cooked meals purchased at subsidized rate (no.) | 076 |  |   |\n|   |  cooked meals purchased (no.) | 280 |  |   |\n|   |  cooked meals received free in workplace$ (no.) | 281 |  |   |\n|   |  cooked meals received as assistance$(no.) | 282 |  |   |\n|   |  cooked snacks purchased [samosa, puri, paratha, momo, roll, chowmein, idli, dosa, vada, chops, pakoras, pav-bhaji, vada-pao, etc.] | 283 |  |   |\n|   |  other served processed food** | 284 |  |   |\n|   |  served processed food: sub-total | 289 |  |   |\n|  [Instruction to software: 1. * Source codes are: only purchase-1, only exchange of goods and services-5, only gifts/charities-6, others- 9 and given in dropdown list in software package.2. ** includes chaat, golgappa (puchka/panipuri), bhelpuri, etc.3. $ Do not include cooked meals received from other households.4. Cooked meals purchased at subsidised rates available under different Government social welfare schemes like, Amma Canteen, Kalaignar, Maa Canteen, Shivbhojan scheme etc., or from Charitable organization are to be recorded against item 076.]  |   |   |   |   |",
+      "confidenceScores": null,
+      "type": "table",
+      "tableId": null
+    },
+    {
+      "topLeftX": 106,
+      "topLeftY": 946,
+      "bottomRightX": 399,
+      "bottomRightY": 962,
+      "content": "Household Consumption Expenditure Survey: 2023-24",
+      "confidenceScores": null,
+      "type": "footer"
+    }
+  ]
+}

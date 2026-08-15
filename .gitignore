@@ -17,3 +17,4 @@ Thumbs.db
 
 # secrets (LLM API key)
 .env
+hces-code/HCES-ocr-playground-*.zip

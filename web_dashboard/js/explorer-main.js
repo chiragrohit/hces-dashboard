@@ -5,6 +5,7 @@ import { X } from './explorer-state.js';
 import { $ } from './explorer-util.js';
 import { run } from './explorer-query.js';
 import { downloadCsv } from './explorer-chart.js';
+import { loadCodeMaps } from './codes.js';
 import { onTableChange, ask } from './explorer-ask.js';
 
 async function init() {
@@ -20,6 +21,7 @@ async function init() {
     $('xNote').textContent = 'The server returned no tables. Run aggregate_for_web.py and restart serve.py.';
     return;
   }
+  await loadCodeMaps(); // decode codes -> labels in charts and tables
 
   const sel = $('xTable');
   X.cat.tables.forEach(t => {

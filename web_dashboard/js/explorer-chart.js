@@ -2,22 +2,24 @@
 
 import { X } from './explorer-state.js';
 import { PALETTE, baseScales, $, fmt, inr, moneyCol } from './explorer-util.js';
+import { decode } from './codes.js';
 
 export function drawChart(rows, dim, dim2, meas) {
   if (X.chartInst) X.chartInst.destroy();
   const money = moneyCol(meas);
   const tick = v => money ? inr(v) : fmt(v);
+  const T = X.current.table || '';
   let labels, datasets, type = 'bar';
   if (dim2) {
     const d1 = [...new Set(rows.map(r => r.d1))];
     const d2 = [...new Set(rows.map(r => r.d2))];
-    labels = d1;
+    labels = d1.map(x => decode(T, dim, x));
     datasets = d2.map((k, i) => ({
-      label: String(k), data: d1.map(x => (rows.find(r => r.d1 === x && r.d2 === k) || { v: 0 }).v),
+      label: String(decode(T, dim2, k)), data: d1.map(x => (rows.find(r => r.d1 === x && r.d2 === k) || { v: 0 }).v),
       backgroundColor: PALETTE[i % PALETTE.length], borderRadius: 3, maxBarThickness: 24,
     }));
   } else {
-    labels = rows.map(r => String(r.d1));
+    labels = rows.map(r => decode(T, dim, r.d1));
     if (labels.length <= 6 && !money) type = 'doughnut';
     datasets = [{
       label: meas, data: rows.map(r => r.v),
@@ -46,6 +48,7 @@ export function drawChart(rows, dim, dim2, meas) {
 
 export function drawTable(rows, dim, dim2, meas) {
   const headers = [dim, dim2, meas].filter(Boolean);
+  const T = X.current.table || '';
   const tbl = $('xResult');
   tbl.innerHTML = '';
   const thead = document.createElement('thead');
@@ -58,7 +61,10 @@ export function drawTable(rows, dim, dim2, meas) {
     [r.d1, r.d2, r.v].forEach((v, i) => {
       const td = document.createElement('td');
       if (typeof v === 'number') { td.classList.add('num'); td.textContent = moneyCol(headers[i]) ? inr(v) : fmt(v); }
-      else td.textContent = v == null ? '' : String(v);
+      else {
+        const label = i < headers.length - 1 ? decode(T, headers[i], v) : v;
+        td.textContent = label == null ? '' : String(label);
+      }
       tr.appendChild(td);
     });
     tbody.appendChild(tr);

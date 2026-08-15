@@ -15,16 +15,18 @@ os.makedirs(WEB, exist_ok=True)
 
 con = duckdb.connect()
 
-# Known code meanings (from HCES questionnaire structure)
-CODE_MAP = {
-    "Sector": {"1": "Rural", "2": "Urban"},
-    "Gender": {"1": "Male", "2": "Female"},
-    "Panel": {"1": "Panel 1", "2": "Panel 2"},
-    "Sub_sample": {"1": "Sub-sample 1", "2": "Sub-sample 2"},
-    "Used_Internet_Last_30_Days": {"1": "Yes", "2": "No"},
-    "Marital_Status": {"1": "Never married", "2": "Currently married", "3": "Widowed", "4": "Divorced/separated"},
-    "Questionnaire_No": {"A": "Type A (land owning)", "B": "Type B (landless)", "C": "Type C (urban)", "F": "Type F", "H": "Type H"},
-}
+# Holistic code map extracted from the official HCES 2023-24 questionnaire
+# (see extract_code_map.py): column meanings, per-table consumption item
+# codes, state codes, and notes for identifiers/quantities.
+CODE_MAP_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                             "hces-code", "code_map.json")
+with open(CODE_MAP_PATH, encoding="utf-8") as _f:
+    _code_map = json.load(_f)
+CODE_MAP = {k: v["map"] for k, v in _code_map["columns"].items()}
+COLUMN_NOTES = _code_map["column_notes"]
+STATE_CODES = _code_map["state_codes"]
+TABLE_ITEMS = {t: v["items"] for t, v in _code_map["tables"].items()}
+TABLE_ITEM_COL = {t: v["item_column"] for t, v in _code_map["tables"].items()}
 
 catalog = []
 for table, description in TABLE_MAP.items():
@@ -73,6 +75,10 @@ for table, description in TABLE_MAP.items():
             "distinct": int(n_distinct),
             "values": values,
             "meaning": CODE_MAP.get(col),
+            "item_meaning": TABLE_ITEMS.get(table)
+                if col == TABLE_ITEM_COL.get(table) else None,
+            "note": COLUMN_NOTES.get(col),
+            "state_meaning": STATE_CODES if col == "State" else None,
         })
 
     size_mb = os.path.getsize(pq_path) / (1024**2)

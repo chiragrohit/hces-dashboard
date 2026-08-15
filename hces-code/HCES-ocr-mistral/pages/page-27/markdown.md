@@ -1,0 +1,24 @@
+Questionnaire FDQ
+
+|  Section 5.3: Consumption of sugar & salt during the last 30 days  |   |   |   |   |   |   |   |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+|  Question no. | Question description and code structure  |   |   |   |   |   |   |
+|  Q5.3 | What is the quantity and value of the salt &sugar consumed by the household during last 30 days?  |   |   |   |   |   |   |
+|   |  Item | item code | quantity and value of the item consumed during last 30 days  |   |   |   |   |
+|   |   |   |  consumption out of home produce |   | total consumption (incl. consumption out of home produce) |   | source†  |
+|   |   |   |  quantity* (0.000) | value (Rs.) | quantity* (0.000) | value (Rs.)  |   |
+|   |  (1) | (2) | (3) | (4) | (5) | (6) | (7)  |
+|   |  salt -free$ | 073 |  |  |  |  | 1  |
+|   |  sugar- free$ | 074 |  |  |  |  | 1  |
+|   |  salt - PDS | 178 |  |  |  |  | 1  |
+|   |  salt - other sources | 170 |  |  |  |  |   |
+|   |  sugar -PDS | 171 |  |  |  |  | 1  |
+|   |  sugar - other sources | 172 |  |  |  |  | @  |
+|   |  jaggery (gur) | 173 |  |  |  |  |   |
+|   |  candy, misri | 174 |  |  |  |  | @  |
+|   |  honey | 175 |  |  |  |  |   |
+|   |  salt & sugar: sub-total | 179 |  |  |  |  |   |
+|  [Instruction to software: 1. ‘*’Unit is Kg. Unless otherwise specified in col. (1).2. ‘*’ Source codes are: only purchase-1, only home-grown stock-2, both purchase and home-grown stock-3, only free collection-4, only exchange of goods and services-5, only gifts/charities-6, received free through PDS -7, others-9 and given in dropdown list in software package. Source code 7 will be applicable only for items 178, 171.3. ‘@’ Source code cannot be 2, 3 or 4 for these items. For home-produced, consumption should be recorded against ingredients.4. ‘*’ Consumption of salt (073)&sugar (074) received free of cost from PDS shop/FPS or Point of Sale (POS) under Pradhan Mantri Garib Kalyan Ann Yojana (PMGKAY) or from any other state specific schemes are to be recorded under these item categories respectively.5. Consumption of salt & sugar received at subsidized rate from PDS shops are to be recorded against salt-PDS, sugar-PDS.][Instruction to enumerator: Total consumption of the item includes consumption of home produce. Consumption from home produce means produce of cultivation or produce of livestock (e.g. milk) and not food obtained in the home by processing of other food items (e.g. curd from milk, or pickles from vegetables, spices, etc., or milk-based sweets from milk and sugar.]  |   |   |   |   |   |   |   |
+|  Go to Section 6  |   |   |   |   |   |   |   |
+
+Household Consumption Expenditure Survey: 2023-24

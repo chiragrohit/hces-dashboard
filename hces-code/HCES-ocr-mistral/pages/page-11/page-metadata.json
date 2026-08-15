@@ -1,0 +1,84 @@
+{
+  "index": 10,
+  "dimensions": {
+    "dpi": 87,
+    "height": 1018,
+    "width": 720
+  },
+  "confidenceScores": null,
+  "blocks": [
+    {
+      "topLeftX": 72,
+      "topLeftY": 43,
+      "bottomRightX": 183,
+      "bottomRightY": 57,
+      "content": "Questionnaire HCQ",
+      "confidenceScores": null,
+      "type": "header"
+    },
+    {
+      "topLeftX": 105,
+      "topLeftY": 89,
+      "bottomRightX": 293,
+      "bottomRightY": 106,
+      "content": "## Section 2: Household size",
+      "confidenceScores": null,
+      "type": "title"
+    },
+    {
+      "topLeftX": 105,
+      "topLeftY": 121,
+      "bottomRightX": 259,
+      "bottomRightY": 135,
+      "content": "### OBJECTIVES AND SCOPE",
+      "confidenceScores": null,
+      "type": "title"
+    },
+    {
+      "topLeftX": 127,
+      "topLeftY": 136,
+      "bottomRightX": 434,
+      "bottomRightY": 151,
+      "content": "• To determine the household size of the sample household.",
+      "confidenceScores": null,
+      "type": "text"
+    },
+    {
+      "topLeftX": 105,
+      "topLeftY": 163,
+      "bottomRightX": 270,
+      "bottomRightY": 176,
+      "content": "### IMPLEMENTATION NOTES",
+      "confidenceScores": null,
+      "type": "title"
+    },
+    {
+      "topLeftX": 127,
+      "topLeftY": 178,
+      "bottomRightX": 581,
+      "bottomRightY": 192,
+      "content": "- For each of the selected household total household size will be ascertained and recorded.",
+      "confidenceScores": null,
+      "type": "text"
+    },
+    {
+      "topLeftX": 101,
+      "topLeftY": 209,
+      "bottomRightX": 619,
+      "bottomRightY": 871,
+      "content": "|  Q2.1. How many persons are in the household, who are normally living together for six months or more or are expected to stay for six months or more and taking food from a common kitchen?[Instruction: this number will be auto generated based on the household members listed below] |   |   |\n| --- | --- | --- |\n|  List the names of the household members  |   |   |\n|  serial number | name of the household member  |   |\n|  |   |   |\n|  |   |   |\n|  |   |   |\n|  |   |   |\n|  |   |   |\n|  |   |   |\n|  |   |   |\n|  |   |   |\n|  |   |   |\n|  |   |   |\n|  |   |   |\n|  |   |   |\n|  |   |   |\n|  |   |   |\n|  |   |   |\n|  |   |   |\n|  |   |   |\n|  |   |   |\n|  |   |   |\n|  |   |   |",
+      "confidenceScores": null,
+      "type": "table",
+      "tableId": null
+    },
+    {
+      "topLeftX": 72,
+      "topLeftY": 946,
+      "bottomRightX": 380,
+      "bottomRightY": 962,
+      "content": "Survey on Household Consumption Expenditure: 2023-24",
+      "confidenceScores": null,
+      "type": "footer"
+    }
+  ]
+}

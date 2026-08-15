@@ -1,0 +1,39 @@
+{
+  "index": 39,
+  "dimensions": {
+    "dpi": 87,
+    "height": 1018,
+    "width": 720
+  },
+  "confidenceScores": null,
+  "blocks": [
+    {
+      "topLeftX": 73,
+      "topLeftY": 43,
+      "bottomRightX": 181,
+      "bottomRightY": 57,
+      "content": "Questionnaire CSQ",
+      "confidenceScores": null,
+      "type": "header"
+    },
+    {
+      "topLeftX": 75,
+      "topLeftY": 86,
+      "bottomRightX": 644,
+      "bottomRightY": 920,
+      "content": "|  Section 4.2: General information on purchase/payment  |   |   |   |   |\n| --- | --- | --- | --- | --- |\n|  Question no. | Question description and code structure |   |   | Recorded entry  |\n|  Q4.2.4 | If code 1 in item Q4.2.3Whether any member of the household received following items free of cost during last 365 days? |   |   |   |\n|   |  S. No. | item category | please select the check box if received free of cost during last 365 days  |   |\n|   |  (1) | (2) | (3)  |   |\n|   |  1. | Textbooks | □  |   |\n|   |  2. | Stationary (geometry box, pen, notepad, etc.) | □  |   |\n|   |  3. | School bag | □  |   |\n|   |  4. | Other, if any | □  |   |\n|  Q4.2.6 | If code 1 in item Q4.2.3Whether any member of the household received reimbursement/waiver of school/college fee during last 365 days?o yes-1, if yes, no. of members received reimbursement/waiver of school/college fee during last 365 days (number) ![img-20.jpeg](img-20.jpeg)o no-2 |   |   |   |\n|  Q4.2.7 | Is one or more member of the household is a beneficiary of PradhanMantri Jan AarogyaYojana (Ayushman Bharat) or any other state specific public health scheme as on the date of survey?o yes-1, if yes, no. of beneficiaries (number) ![img-21.jpeg](img-21.jpeg)o no-2 |   |   |   |\n|  Q4.2.8 | Whether any member of the household (including deceased former member of the household) has taken hospitalized treatment during last 365 days?o yes, in Government/Public hospital-1o yes, in Private (including Charitable/trust run) hospital-2o yes, in both Government & Private hospital-3o no-4 |   |   |   |\n|  Q4.2.9 | Whether one or more member of the household has received benefits of medical treatment (medical – hospitalisation)under PradhanMantri Jan AarogyaYojana Card (Ayushman Bharat) or any other state specific public health scheme during the last 365 days?o yes-1, if yes, no. of members received benefits (number) ![img-22.jpeg](img-22.jpeg)and amount of expenditure incurred by the household (Rs.)o no-2 |   |   |   |\n|  Q4.2.10 | Whether any online purchase/payment has been made to buy one or more of the following items (goods & services) during last 30 days? |   |   |   |\n|   |  S. No. | item category | please select the check box if online purchase/payment done during last 30 days  |   |\n|   |  (1) | (2) | (3)  |   |\n|   |  1. | Fuel & light | □  |   |\n|   |  2. | Toilet articles& other household consumables | □  |   |\n|   |  3. | Education | □  |   |\n|   |  4. | Medicine&other medical services | □  |   |\n|   | 5. | Services (Travel, Recharges, Bill payment, Cinema/Theatre, internet, etc.) | □ |   |\n|  • Go to Section 8  |   |   |   |   |",
+      "confidenceScores": null,
+      "type": "table",
+      "tableId": null
+    },
+    {
+      "topLeftX": 106,
+      "topLeftY": 947,
+      "bottomRightX": 398,
+      "bottomRightY": 962,
+      "content": "Household Consumption Expenditure Survey: 2023-24",
+      "confidenceScores": null,
+      "type": "footer"
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "index": 23,
+  "dimensions": {
+    "dpi": 87,
+    "height": 1018,
+    "width": 720
+  },
+  "confidenceScores": null,
+  "blocks": [
+    {
+      "topLeftX": 106,
+      "topLeftY": 43,
+      "bottomRightX": 218,
+      "bottomRightY": 57,
+      "content": "Questionnaire FDQ",
+      "confidenceScores": null,
+      "type": "header"
+    },
+    {
+      "topLeftX": 105,
+      "topLeftY": 88,
+      "bottomRightX": 633,
+      "bottomRightY": 130,
+      "content": "## Section5: Consumption of cereals, pulses, sugar and salt during the last 30 days",
+      "confidenceScores": null,
+      "type": "title"
+    },
+    {
+      "topLeftX": 106,
+      "topLeftY": 144,
+      "bottomRightX": 259,
+      "bottomRightY": 157,
+      "content": "### OBJECTIVES AND SCOPE",
+      "confidenceScores": null,
+      "type": "title"
+    },
+    {
+      "topLeftX": 126,
+      "topLeftY": 158,
+      "bottomRightX": 613,
+      "bottomRightY": 191,
+      "content": "- This section is for recording the quantity and value of consumption of cereals, pulses, sugar and salt by the household during the last 30 days preceding the date of the survey.",
+      "confidenceScores": null,
+      "type": "text"
+    },
+    {
+      "topLeftX": 106,
+      "topLeftY": 202,
+      "bottomRightX": 270,
+      "bottomRightY": 215,
+      "content": "### IMPLEMENTATION NOTES",
+      "confidenceScores": null,
+      "type": "title"
+    },
+    {
+      "topLeftX": 128,
+      "topLeftY": 217,
+      "bottomRightX": 385,
+      "bottomRightY": 230,
+      "content": "• To be canvassed for all the selected households.",
+      "confidenceScores": null,
+      "type": "text"
+    },
+    {
+      "topLeftX": 75,
+      "topLeftY": 247,
+      "bottomRightX": 641,
+      "bottomRightY": 918,
+      "content": "|  Section5.1:Consumption of cereals during the last 30 days  |   |   |   |   |   |   |   |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n|  Question no. | Question description and code structure  |   |   |   |   |   |   |\n|  Q5.1 | What is the quantity and value of thecereals and cereal substitutesconsumed by the household during last 30 days?  |   |   |   |   |   |   |\n|   |  Item | item code | quantity and value of the item consumed during last 30 days  |   |   |   |   |\n|   |   |   |  consumption out of home produce |   | total consumption (incl. consumption out of home produce) |   | source#  |\n|   |   |   |  quantity* (0.000) | value (Rs.) | quantity* (0.000) | value (Rs.)  |   |\n|   |  (1) | (2) | (3) | (4) | (5) | (6) | (7)  |\n|   |  rice-free$ | 061 |  |  |  |  | 1  |\n|   |  wheat/atta- free$ | 062 |  |  |  |  | 1  |\n|   |  coarse grains&- free$(jowar, bajra, maize, barley, ragi, small millets) | 070 |  |  |  |  | 1  |\n|   |  rice – PDS | 101 |  |  |  |  | 1  |\n|   |  rice – other sources | 102 |  |  |  |  |   |\n|   |  chira | 103 |  |  |  |  |   |\n|   |  muri | 105 |  |  |  |  | @  |\n|   |  other rice products (khoi/lawa,etc.) | 106 |  |  |  |  | @  |\n|   |  wheat/ atta – PDS | 107 |  |  |  |  | 1  |\n|   |  wheat/ atta – other sources | 108 |  |  |  |  |   |\n|   |  maida | 110 |  |  |  |  | @  |\n|   |  suji, rawa | 111 |  |  |  |  | @  |\n|   |  vermicelli (sewai) | 112 |  |  |  |  | @  |\n|   |  other wheat products | 114 |  |  |  |  | @  |\n|   |  coarse grains-PDS& (jowar, bajra, maize, barley, ragi, small millets) | 001 |  |  |  |  | 1  |\n|   |  coarse grains-other sources&(jowar, bajra, maize, barley, ragi, small millets & its products) | 002 |  |  |  |  |   |\n|   |  other cereals& products | 122 |  |  |  |  |   |\n|   |  cereal: sub-total | 129 |  |  |  |  |   |\n|  cereal substitutes: tapioca, etc. | 139 |  |  |  |  |   |   |\n|  [Instruction to software: 1. *Unit is Kg. Unless otherwise specified in col. (1).2. #Source codes are: only purchase-1, only home-grown stock-2, both purchase and home-grown stock-3, only free collection-4, only exchange of goods and services-5, only gifts/charities-6, received free through PDS – 7, others-9 and given in dropdown list in software package.3. '@' Source code cannot be 2, 3 or 4 for these items.Source code 7 will be applicable only for items 101, 107, 001, 055, 056, 057, 058, 059, 060.For home-produced, consumption should be recorded against ingredients.4. $Consumption of rice-free (061), wheat/atta-free (062)& coarse  |   |   |   |   |   |   |   |",
+      "confidenceScores": null,
+      "type": "table",
+      "tableId": null
+    },
+    {
+      "topLeftX": 106,
+      "topLeftY": 946,
+      "bottomRightX": 399,
+      "bottomRightY": 962,
+      "content": "Household Consumption Expenditure Survey: 2023-24",
+      "confidenceScores": null,
+      "type": "footer"
+    }
+  ]
+}

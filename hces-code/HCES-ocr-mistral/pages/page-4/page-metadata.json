@@ -1,0 +1,56 @@
+{
+  "index": 3,
+  "dimensions": {
+    "dpi": 93,
+    "height": 1023,
+    "width": 791
+  },
+  "confidenceScores": null,
+  "blocks": [
+    {
+      "topLeftX": 540,
+      "topLeftY": 46,
+      "bottomRightX": 670,
+      "bottomRightY": 63,
+      "content": "*Questionnaire LCES*",
+      "confidenceScores": null,
+      "type": "header"
+    },
+    {
+      "topLeftX": 89,
+      "topLeftY": 84,
+      "bottomRightX": 458,
+      "bottomRightY": 104,
+      "content": "# **SECTION [3]: sketch map of sub-units (SU) formation**",
+      "confidenceScores": null,
+      "type": "title"
+    },
+    {
+      "topLeftX": 304,
+      "topLeftY": 118,
+      "bottomRightX": 485,
+      "bottomRightY": 135,
+      "content": "# **Instructions for the JSO/FI :**",
+      "confidenceScores": null,
+      "type": "title"
+    },
+    {
+      "topLeftX": 89,
+      "topLeftY": 134,
+      "bottomRightX": 706,
+      "bottomRightY": 263,
+      "content": "For villages/UFS blocks requiring SU formation, draw a free hand sketch-map of the village/UFS block showing the boundaries of the hamlets and SUs formed for identification at the later stage. For villages, the serial numbers of the hamlets as given in col.1 of Section 4.1 will be written down on the map against each hamlet. The SU number given in col.1 of Section 4.2 to which the hamlet belongs will also be shown against each hamlet within brackets on the right side of the hamlet number. For urban areas also, the SUs will be numbered in the map. The area for the selected SU shall be shaded in the map after identification of selected sub-unit in section 4.2.",
+      "confidenceScores": null,
+      "type": "text"
+    },
+    {
+      "topLeftX": 387,
+      "topLeftY": 942,
+      "bottomRightX": 402,
+      "bottomRightY": 961,
+      "content": "4",
+      "confidenceScores": null,
+      "type": "footer"
+    }
+  ]
+}

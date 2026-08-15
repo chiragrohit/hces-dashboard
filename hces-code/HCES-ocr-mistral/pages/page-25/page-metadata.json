@@ -1,0 +1,39 @@
+{
+  "index": 24,
+  "dimensions": {
+    "dpi": 87,
+    "height": 1018,
+    "width": 720
+  },
+  "confidenceScores": null,
+  "blocks": [
+    {
+      "topLeftX": 106,
+      "topLeftY": 41,
+      "bottomRightX": 217,
+      "bottomRightY": 57,
+      "content": "Questionnaire FDQ",
+      "confidenceScores": null,
+      "type": "header"
+    },
+    {
+      "topLeftX": 75,
+      "topLeftY": 84,
+      "bottomRightX": 639,
+      "bottomRightY": 537,
+      "content": "|   | grains-free (070) received free of cost from PDS shop/FPS or Point of Sale (POS) under Pradhan Mantri Garib Kalyan Ann Yojana (PMGKAY) or from any other state specific schemes are to be recorded under these item categories respectively. 5. Consumption of rice, wheat/atta, coarse grains received at subsidized rate from PDS shops are to be recorded against rice-PDS, wheat/atta-PDS & coarse grains-PDS. 6^{&} To collect quantity and value of coarse grains for the States: Rajasthan, Punjab, Haryana, Gujarat, Andhra Pradesh, Tamil Nadu, Kerala, Karnataka, Telangana & Uttar Pradesh, Drop Down Menu (DDM), will be provided; - For coarse grains (PDS), quantity and value is to be recorded under (i) jowar & its products (055), (ii) bajra & its products (056), (iii) maize & its products (057), (iv) barley & its products (058), (v) ragi & its products(059), and (vi) small millets & its products (060); - For coarse grains (other sources), quantity and value is to be recorded under (i) jowar& its products (115), (ii) bajra& its products (116), (iii) maize & its products (117), (iv) barley & its products (118), (v) ragi& its products(121), and (vi) small millets & its products (120); - For coarse grains received free of cost from PDS shop/FPS or Point of Sale (POS)under PMGKAY or any other state specific scheme, quantity and value is to be recorded under (i) jowar & its products (063), (ii) bajra & its products (064), (iii) maize & its products (065), (iv) barley & its products (066), (v) ragi & its products (067), and (vi) small millets & its products (068)] [Instruction to enumerator: Total consumption of the item includes consumption of home produce. Consumption from home produce means produce of cultivation or produce of livestock (e.g. milk) and not food obtained in the home by processing of other food items (e.g. curd from milk, or pickles from vegetables, spices, etc., or milk-based sweets from milk and sugar.]  |\n| --- | --- |",
+      "confidenceScores": null,
+      "type": "table",
+      "tableId": null
+    },
+    {
+      "topLeftX": 106,
+      "topLeftY": 944,
+      "bottomRightX": 399,
+      "bottomRightY": 961,
+      "content": "Household Consumption Expenditure Survey: 2023-24",
+      "confidenceScores": null,
+      "type": "footer"
+    }
+  ]
+}

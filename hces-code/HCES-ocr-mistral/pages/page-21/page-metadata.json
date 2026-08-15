@@ -1,0 +1,39 @@
+{
+  "index": 20,
+  "dimensions": {
+    "dpi": 87,
+    "height": 1018,
+    "width": 720
+  },
+  "confidenceScores": null,
+  "blocks": [
+    {
+      "topLeftX": 71,
+      "topLeftY": 41,
+      "bottomRightX": 187,
+      "bottomRightY": 59,
+      "content": "# *Questionnaire HCQ*",
+      "confidenceScores": null,
+      "type": "title"
+    },
+    {
+      "topLeftX": 66,
+      "topLeftY": 86,
+      "bottomRightX": 600,
+      "bottomRightY": 103,
+      "content": "|   | ○ *others-9*  |\n| --- | --- |",
+      "confidenceScores": null,
+      "type": "table",
+      "tableId": null
+    },
+    {
+      "topLeftX": 71,
+      "topLeftY": 944,
+      "bottomRightX": 383,
+      "bottomRightY": 964,
+      "content": "*Survey on Household Consumption Expenditure: 2023-24*",
+      "confidenceScores": null,
+      "type": "footer"
+    }
+  ]
+}

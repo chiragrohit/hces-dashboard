@@ -1,0 +1,47 @@
+{
+  "index": 8,
+  "dimensions": {
+    "dpi": 93,
+    "height": 1023,
+    "width": 791
+  },
+  "confidenceScores": null,
+  "blocks": [
+    {
+      "topLeftX": 540,
+      "topLeftY": 45,
+      "bottomRightX": 671,
+      "bottomRightY": 66,
+      "content": "Questionnaire LCES",
+      "confidenceScores": null,
+      "type": "header"
+    },
+    {
+      "topLeftX": 78,
+      "topLeftY": 84,
+      "bottomRightX": 321,
+      "bottomRightY": 106,
+      "content": "SECTION [7]: remarks by JSO/SE",
+      "confidenceScores": null,
+      "type": "text"
+    },
+    {
+      "topLeftX": 78,
+      "topLeftY": 415,
+      "bottomRightX": 419,
+      "bottomRightY": 438,
+      "content": "SECTION [8]: comments by supervisory officer(s)",
+      "confidenceScores": null,
+      "type": "text"
+    },
+    {
+      "topLeftX": 387,
+      "topLeftY": 940,
+      "bottomRightX": 403,
+      "bottomRightY": 961,
+      "content": "9",
+      "confidenceScores": null,
+      "type": "footer"
+    }
+  ]
+}
