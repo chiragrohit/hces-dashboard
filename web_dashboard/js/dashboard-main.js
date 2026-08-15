@@ -3,6 +3,7 @@
 
 import { DATA, loadAll } from './data.js';
 import { RENDERERS } from './charts-sections.js';
+import { wireModal } from './modal.js';
 import { fmt } from './util.js';
 
 const ROUTES = ['overview', 'people', 'households', 'spending', 'schemes'];
@@ -21,6 +22,8 @@ function showSection(name) {
   tab.classList.add('active'); tab.setAttribute('aria-current', 'page');
   RENDERERS[name]();
 }
+
+wireModal();
 
 document.querySelectorAll('.seg a').forEach(a => a.addEventListener('click', e => {
   e.preventDefault();
