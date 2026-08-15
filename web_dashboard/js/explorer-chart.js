@@ -4,6 +4,7 @@ import { X } from './explorer-state.js';
 import { PALETTE, baseScales, $, fmt, inr, moneyCol } from './explorer-util.js';
 import { decode } from './codes.js';
 import { clip } from './util.js';
+import { wireTapToggle } from './charts-core.js';
 
 export function drawChart(rows, dim, dim2, meas) {
   if (X.chartInst) X.chartInst.destroy();
@@ -46,6 +47,7 @@ export function drawChart(rows, dim, dim2, meas) {
     options.plugins = { legend: { position: 'bottom' }, tooltip: { callbacks: { title: items => items.length ? full[items[0].dataIndex] : '', label: c => c.label + ': ' + fmt(c.parsed) } } };
   }
   X.chartInst = new Chart($('xChart'), { type, data: { labels, datasets }, options });
+  wireTapToggle(X.chartInst);
 }
 
 export function drawTable(rows, dim, dim2, meas) {

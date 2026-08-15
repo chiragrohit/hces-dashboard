@@ -16,6 +16,30 @@ export const baseScales = {
 const charts = {};
 let focusChart = null; // when set, only that chart id renders (detail page)
 
+/* Tap-toggle: on touch screens, tapping the same slice/bar again dismisses
+ * its tooltip (Chart.js only shows it, never hides on re-tap). Tapping empty
+ * chart space also dismisses. Desktop hover behaviour is unchanged. */
+export function wireTapToggle(chart) {
+  let last = null;
+  chart.options.onClick = (evt, els) => {
+    if (!els[0]) { // tap on empty chart space -> dismiss
+      chart.tooltip.setActiveElements([], { x: 0, y: 0 });
+      chart.update('none');
+      last = null;
+      return;
+    }
+    const key = els[0].datasetIndex + ':' + els[0].index;
+    const now = Date.now();
+    if (last && last.key === key && now - last.t < 1200) { // same slice re-tapped -> toggle off
+      chart.tooltip.setActiveElements([], { x: 0, y: 0 });
+      chart.update('none');
+      last = null;
+    } else {
+      last = { key, t: now };
+    }
+  };
+}
+
 /* Called by the detail page before rendering so only its chart mounts. */
 export function setFocusChart(id) { focusChart = id; }
 
@@ -44,4 +68,5 @@ export function makeChart(id, cfg) {
       },
     },
   });
+  wireTapToggle(charts[id]);
 }
