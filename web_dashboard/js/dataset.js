@@ -107,9 +107,12 @@ function renderPageHead() {
 
 function buildFilters() {
   const panel = $('filters');
-  // categorical columns only (dropdowns need finite values); pick low-cardinality
+  // only categorical columns with a label map get dropdowns; sampling
+  // identifiers (Stratum, Sample_Household_No, ...) and plain counts have
+  // no survey labels and are left as table columns, not filters
   FILTER_COLS = ENTRY.columns
     .filter(c => c.values && c.values.length && c.distinct > 1 && c.distinct <= 60)
+    .filter(c => c.meaning || c.state_meaning || c.item_meaning)
     .sort((a, b) => a.distinct - b.distinct);
 
   panel.innerHTML = FILTER_COLS.map(c => `

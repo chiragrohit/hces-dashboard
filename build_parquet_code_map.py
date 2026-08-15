@@ -34,6 +34,13 @@ STATE_CSV = os.path.join(BASE, "hces-code", "tabulation_state_code.csv")
 # Answer-code meanings, transcribed from the questionnaire (verified against
 # the actual distinct values in the parquet files by validate_column_maps).
 # --------------------------------------------------------------------------
+SOURCE_CODES = {
+    "1": "Only purchase", "2": "Only home-grown stock",
+    "3": "Both purchase and home-grown stock", "4": "Only free collection",
+    "5": "Only exchange of goods and services", "6": "Only gifts/charities",
+    "7": "Received free through PDS", "9": "Others",
+}
+
 COLUMN_MAPS = {
     "Sector": {"1": "Rural", "2": "Urban"},
     "Gender": {"1": "Male", "2": "Female", "3": "Transgender"},
@@ -132,12 +139,12 @@ COLUMN_MAPS = {
         "2": "Yes, in Private (incl. charitable/trust run) hospital",
         "3": "Yes, in both Government and Private hospital", "4": "No",
     },
-    "Source": {
-        "1": "Only purchase", "2": "Only home-grown stock",
-        "3": "Both purchase and home-grown stock", "4": "Only free collection",
-        "5": "Only exchange of goods and services", "6": "Only gifts/charities",
-        "7": "Received free through PDS", "9": "Others",
-    },
+    "Source": SOURCE_CODES,
+    "Source_8_1": SOURCE_CODES,
+    "Source_12_series": SOURCE_CODES,
+    "VISIT": {"1": "Visit 1", "2": "Visit 2", "3": "Visit 3"},
+    "PURCHASED_ON_HIRE": {"1": "Yes", "2": "No"},
+    "Medical_benefit_received": {"1": "Yes", "2": "No"},
     "RESPONSE_CODE": {
         "1": "Informant co-operative and capable",
         "2": "Informant co-operative but not capable",

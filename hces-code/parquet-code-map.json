@@ -302,6 +302,49 @@
     "9": "Others"
    }
   },
+  "Source_8_1": {
+   "map": {
+    "1": "Only purchase",
+    "2": "Only home-grown stock",
+    "3": "Both purchase and home-grown stock",
+    "4": "Only free collection",
+    "5": "Only exchange of goods and services",
+    "6": "Only gifts/charities",
+    "7": "Received free through PDS",
+    "9": "Others"
+   }
+  },
+  "Source_12_series": {
+   "map": {
+    "1": "Only purchase",
+    "2": "Only home-grown stock",
+    "3": "Both purchase and home-grown stock",
+    "4": "Only free collection",
+    "5": "Only exchange of goods and services",
+    "6": "Only gifts/charities",
+    "7": "Received free through PDS",
+    "9": "Others"
+   }
+  },
+  "VISIT": {
+   "map": {
+    "1": "Visit 1",
+    "2": "Visit 2",
+    "3": "Visit 3"
+   }
+  },
+  "PURCHASED_ON_HIRE": {
+   "map": {
+    "1": "Yes",
+    "2": "No"
+   }
+  },
+  "Medical_benefit_received": {
+   "map": {
+    "1": "Yes",
+    "2": "No"
+   }
+  },
   "RESPONSE_CODE": {
    "map": {
     "1": "Informant co-operative and capable",
