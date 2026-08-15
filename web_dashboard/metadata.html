@@ -36,12 +36,6 @@
   .header { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 20; }
   .header-inner { max-width: 1400px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; gap: 16px; }
   .brand { display: flex; align-items: center; gap: 12px; }
-  .brand-mark { width: 30px; height: 30px; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow-sm); border: 1px solid var(--border); flex-shrink: 0; }
-  .brand-mark i { display: block; flex: 1; }
-  .brand-mark .s { background: var(--saffron); }
-  .brand-mark .w { background: #ffffff; position: relative; }
-  .brand-mark .w::after { content: ""; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
-  .brand-mark .g { background: var(--green); }
   .brand h1 { font-size: 1.05rem; font-weight: 650; letter-spacing: -0.01em; }
   .brand .sub { font-size: 0.78rem; color: var(--muted); }
   .nav { margin-left: auto; display: flex; gap: 8px; align-items: center; }
@@ -120,7 +114,6 @@
 <header class="header">
   <div class="header-inner">
     <div class="brand">
-      <div class="brand-mark" aria-hidden="true"><i class="s"></i><i class="w"></i><i class="g"></i></div>
       <div>
         <h1>HCES 2023-24 · Data Catalog</h1>
         <div class="sub">Every table, column &amp; category value available for analysis</div>
