@@ -203,6 +203,14 @@
 .ask-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
 .chip { border: 1px solid var(--border-strong); background: var(--surface-2); color: var(--ink-2); border-radius: 999px; padding: 6px 13px; font-size: 0.8rem; font-weight: 550; cursor: pointer; font-family: var(--font); transition: all 0.15s ease; }
 .chip:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+.steps { list-style: none; margin: 12px 0 4px; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+.steps li { font-size: 0.83rem; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+.steps li::before { content: "○"; width: 16px; text-align: center; color: var(--border-strong); }
+.steps li.on { color: var(--accent); font-weight: 600; }
+.steps li.on::before { content: "…"; color: var(--accent); animation: pulse 1s ease-in-out infinite; }
+.steps li.done { color: var(--ink-2); }
+.steps li.done::before { content: "✓"; color: #0e9f8a; font-weight: 700; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
 .adv { border-top: 1px solid var(--border); margin-top: 16px; padding-top: 12px; }
 .adv summary { cursor: pointer; font-size: 0.82rem; font-weight: 600; color: var(--muted); user-select: none; }
 .adv summary:hover { color: var(--accent); }

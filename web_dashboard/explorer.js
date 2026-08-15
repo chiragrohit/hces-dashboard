@@ -53,7 +53,7 @@ async function init() {
   $('xAsk').addEventListener('keydown', e => { if (e.key === 'Enter') ask($('xAsk').value); });
   document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => {
     $('xAsk').value = c.textContent.trim();
-    ask(c.textContent.trim());
+    $('xAsk').focus();
   }));
   onTableChange();  // populate the pickers; wait for the user to ask
 }
@@ -116,24 +116,32 @@ function onTableChange() {
 }
 
 /* ---------- "Ask in English" via /api/ask ---------- */
+function stepsShow() { const el = $('xSteps'); el.hidden = false; [1, 2, 3, 4].forEach(i => $('st' + i).className = ''); }
+function setStep(n, cls) { $('st' + n).className = cls; }
+
 async function ask(q) {
   q = (q || '').trim();
   if (!q) return;
   const note = $('xNote');
   const btn = $('xAskGo');
   btn.disabled = true;
-  note.textContent = 'Thinking…';
+  note.textContent = '';
+  stepsShow();
+  setStep(1, 'on');
   try {
     const res = await fetch('/api/ask', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ question: q }),
     }).then(r => r.json());
-    if (res.error) { note.textContent = 'Could not answer: ' + res.error; return; }
+    if (res.error) { note.textContent = 'Could not answer: ' + res.error; $('xSteps').hidden = true; return; }
+    setStep(1, 'done');
+    setStep(2, 'done');
     setConfig(res.config);
     $('xTitle').textContent = res.config.title || 'Result';
   } catch (e) {
     note.textContent = 'Could not answer: ' + (e.message || e);
+    $('xSteps').hidden = true;
   } finally {
     btn.disabled = false;
   }
@@ -183,6 +191,8 @@ function buildSql() {
 }
 
 async function run() {
+  const stepsOn = !$('xSteps').hidden;
+  if (stepsOn) setStep(3, 'on');
   const sql = buildSql();
   const res = await fetch('/api/query', {
     method: 'POST',
@@ -192,6 +202,7 @@ async function run() {
   const note = $('xNote');
   if (res.error) {
     note.textContent = 'Query error: ' + res.error;
+    if (stepsOn) $('xSteps').hidden = true;
     $('xChartCard').hidden = true;
     $('xTableCard').hidden = true;
     return;
@@ -207,6 +218,7 @@ async function run() {
   drawChart(rows, dim, dim2, meas);
   drawTable(rows, dim, dim2, meas);
   drawProv(sql, table, dim, dim2, meas, scale);
+  if (stepsOn) { setStep(3, 'done'); setStep(4, 'done'); }
   $('xChartCard').hidden = false;
   $('xTableCard').hidden = false;
   $('xCsv').disabled = false;
