@@ -117,17 +117,7 @@ let filters = {};   // active sector/state filters on this page
 let csvData = null; // last rendered table, for CSV export
 
 function getRows(spec) {
-  if (spec.curve) {
-    // Flatten percentile curves: one row per (filter, group) with summary points.
-    const curves = D('income', 'curves');
-    const out = [];
-    for (const [filter, groups] of Object.entries(curves)) {
-      for (const [group, pts] of Object.entries(groups)) {
-        out.push({ filter, group, p10: pts[9], p25: pts[24], p50: pts[49], p75: pts[74], p90: pts[89] });
-      }
-    }
-    return out;
-  }
+  if (spec.curve) return D('income', 'curves'); // {filter: {group: [p1..p99]}}
   const parts = spec.key.split('.');
   let rows = D(parts[0], parts[1]);
   if (rows && !Array.isArray(rows)) rows = [rows]; // single-object aggregates (income.dist / income.budget)
@@ -138,6 +128,23 @@ function buildFilters() {
   const el = document.getElementById('dFilters');
   el.innerHTML = '';
   el.hidden = false;
+  const spec = TBL[chartId];
+  if (spec && spec.curve) {
+    // Compare-by dropdown mirroring the dashboard's Spending-power-by-group filter
+    const wrap = document.createElement('div');
+    wrap.className = 'field';
+    const lab = document.createElement('label');
+    lab.htmlFor = 'f-curve'; lab.textContent = 'Compare by';
+    const sel = document.createElement('select');
+    sel.id = 'f-curve';
+    [['sector', 'Rural / Urban'], ['state', 'State'], ['hhtype', 'Household type'], ['social', 'Social group'], ['religion', 'Religion'], ['land', 'Land ownership'], ['cooking', 'Cooking fuel'], ['ration', 'Ration card'], ['dwelling', 'House type'], ['month', 'Survey month']]
+      .forEach(([v, t]) => { const o = document.createElement('option'); o.value = v; o.textContent = t; sel.appendChild(o); });
+    sel.value = filters.curve || 'sector';
+    sel.addEventListener('change', () => { filters.curve = sel.value; rerender(); });
+    wrap.appendChild(lab); wrap.appendChild(sel);
+    el.appendChild(wrap);
+    return;
+  }
   const rows = getRows(TBL[chartId]) || [];
   const first = rows[0];
   if (!first || typeof first !== 'object') { el.hidden = true; return; }
@@ -170,9 +177,23 @@ function addFilter(k, label, values) {
 
 function renderTable() {
   const spec = TBL[chartId];
+  const isCurve = !!(spec && spec.curve);
   const rows = getRows(spec) || [];
   let headers, data;
-  if (spec.group) {
+  if (spec.curve) {
+    // Transpose: rows = percentile p1..p99, columns = each group of the selected filter.
+    const curves = rows; // already the curves object from getRows
+    const f = filters.curve || 'sector';
+    const groups = curves[f] || {};
+    const entries = Object.entries(groups).sort((a, b) => b[1][49] - a[1][49]);
+    const labelOf = (g) => {
+      const m = spec.curveMap[f];
+      if (m) return (C[m] || {})[String(g)] || 'Code ' + g;
+      return g; // sector / state / month carry readable labels already
+    };
+    headers = ['Percentile', ...entries.map(e => labelOf(e[0]))];
+    data = Array.from({ length: 99 }, (_, p) => ['p' + (p + 1), ...entries.map(e => e[1][p])]);
+  } else if (spec.group) {
     const m = {};
     rows.forEach(r => { const k = r[spec.group.by] || 'Not reported'; m[k] = (m[k] || 0) + (r[spec.group.sum] || 0); });
     const entries = Object.entries(m).sort((a, b) => b[1] - a[1]).slice(0, spec.group.top || 8);
@@ -184,8 +205,6 @@ function renderTable() {
     const map = spec.map ? C[spec.map] : null;
     data = rows.map(r => headers.map(h => {
       const v = r[h];
-      if (spec.curve && h === 'filter') return ({ sector: 'Rural / Urban', state: 'State', hhtype: 'Household type', social: 'Social group', religion: 'Religion', land: 'Land ownership', cooking: 'Cooking fuel', ration: 'Ration card', dwelling: 'House type', month: 'Survey month' })[v] || v;
-      if (spec.curve && h === 'group') return (C[spec.curveMap[r.filter]] || {})[String(v)] || (spec.curveMap[r.filter] ? 'Code ' + v : v);
       return map && (h === 'code') ? (map[String(v)] || v) : v;
     }));
   }
@@ -203,7 +222,11 @@ function renderTable() {
       const h = headers[i];
       if (typeof v === 'number') {
         td.classList.add('num');
-        td.textContent = MONEY.has(h) ? v.toLocaleString('en-IN', { maximumFractionDigits: 2 }) : COUNT.has(h) ? fmt(v) : String(v);
+        if (isCurve) {
+          td.textContent = '₹' + v.toLocaleString('en-IN');
+        } else {
+          td.textContent = MONEY.has(h) ? v.toLocaleString('en-IN', { maximumFractionDigits: 2 }) : COUNT.has(h) ? fmt(v) : String(v);
+        }
         if (spec.moneyCr && h === 'w') td.textContent = '₹' + v.toLocaleString('en-IN', { maximumFractionDigits: 1 }) + ' Cr/month';
       } else td.textContent = v == null ? '' : String(v);
       trr.appendChild(td);
