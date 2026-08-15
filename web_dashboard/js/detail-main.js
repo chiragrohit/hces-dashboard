@@ -4,7 +4,7 @@
 
 import { D, loadAll, setFocus, focusFilters } from './data.js';
 import { RENDERERS } from './charts-sections.js';
-import { setFocusChart } from './charts-core.js';
+import { setFocusChart, setShowValues } from './charts-core.js';
 import { INFO, PROV, C } from './content.js';
 import { fmt } from './util.js';
 
@@ -216,6 +216,11 @@ function rerender() {
   renderTable();
   updateFilterNote();
 }
+
+document.getElementById('valToggle').addEventListener('change', e => {
+  setShowValues(e.target.checked);
+  rerender();
+});
 
 function downloadCsv() {
   if (!csvData) return;

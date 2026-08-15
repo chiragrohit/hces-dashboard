@@ -4,7 +4,8 @@
 import { X } from './explorer-state.js';
 import { $ } from './explorer-util.js';
 import { run } from './explorer-query.js';
-import { downloadCsv } from './explorer-chart.js';
+import { downloadCsv, drawChart } from './explorer-chart.js';
+import { setShowValues } from './charts-core.js';
 import { loadCodeMaps } from './codes.js';
 import { onTableChange, ask } from './explorer-ask.js';
 
@@ -36,6 +37,11 @@ async function init() {
   $('xCsv').addEventListener('click', downloadCsv);
   $('xState').addEventListener('change', run);
   $('xSector').addEventListener('change', run);
+  document.getElementById('valToggle').addEventListener('change', e => {
+    setShowValues(e.target.checked);
+    const cur = X.current;
+    if (cur && cur.rows && cur.rows.length) drawChart(cur.rows, cur.headers[0], cur.headers[1] || null, cur.headers[2]);
+  });
   $('xAskGo').addEventListener('click', () => ask($('xAsk').value));
   $('xAsk').addEventListener('keydown', e => { if (e.key === 'Enter') ask($('xAsk').value); });
   document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => {

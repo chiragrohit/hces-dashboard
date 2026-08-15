@@ -15,6 +15,63 @@ export const baseScales = {
 
 const charts = {};
 let focusChart = null; // when set, only that chart id renders (detail page)
+let SHOW_VALUES = false;
+
+export function setShowValues(v) { SHOW_VALUES = !!v; }
+export function showValues() { return SHOW_VALUES; }
+
+/* Draws the value of each bar / pie slice on the chart itself. A tiny
+ * dependency-free stand-in for chartjs-plugin-datalabels: enabled via the
+ * global "Show values" toggle, driven by the chart's own tooltip label
+ * callback so money formatting matches the tooltip exactly. */
+const valueLabels = {
+  id: 'valueLabels',
+  afterDatasetsDraw(chart, args, opts) {
+    if (!opts || !opts.enabled) return;
+    const { ctx } = chart;
+    const horiz = chart.options.indexAxis === 'y';
+    const isPie = chart.config.type === 'doughnut' || chart.config.type === 'pie';
+    const fmtFn = opts.fmt || (c => ' ' + fmt(getVal(c)));
+    ctx.save();
+    ctx.font = '600 10px Segoe UI, system-ui, sans-serif';
+    ctx.fillStyle = THEME.ink;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    chart.data.datasets.forEach((ds, di) => {
+      const meta = chart.getDatasetMeta(di);
+      const useAbs = ds.data.some(x => x < 0); // mirrored bars (pyramid)
+      ds.data.forEach((v, i) => {
+        if (v == null) return;
+        const el = meta.data[i];
+        if (!el || el.hidden) return;
+        if (isPie) {
+          const total = ds.data.reduce((s, x) => s + x, 0);
+          if (total && Math.abs(v) / total < 0.04) return; // skip tiny slices
+          const a = (el.startAngle + el.endAngle) / 2;
+          const r = (el.innerRadius + el.outerRadius) / 2;
+          const val = useAbs ? Math.abs(v) : v;
+          const txt = String(fmtFn({ chart, dataIndex: i, dataset: ds, parsed: val, raw: v })).trim();
+          if (!txt) return;
+          ctx.fillText(txt, el.x + Math.cos(a) * r, el.y + Math.sin(a) * r);
+        } else {
+          const val = useAbs ? Math.abs(v) : v;
+          const txt = String(fmtFn({ chart, dataIndex: i, dataset: ds, parsed: horiz ? { x: val, y: i } : { x: i, y: val }, raw: v })).trim();
+          if (!txt) return;
+          if (horiz) {
+            ctx.textAlign = 'left';
+            ctx.fillText(txt, Math.min(el.x, chart.chartArea.right) + 4, el.y);
+            ctx.textAlign = 'center';
+          } else {
+            ctx.fillText(txt, el.x, Math.max(el.y - 5, chart.chartArea.top + 6));
+          }
+        }
+      });
+    });
+    ctx.restore();
+  },
+};
+
+if (globalThis.Chart) Chart.register(valueLabels);
 
 /* Called by the detail page before rendering so only its chart mounts. */
 export function setFocusChart(id) { focusChart = id; }
@@ -41,6 +98,7 @@ export function makeChart(id, cfg) {
           callbacks: { label: ctx => ' ' + fmt(getVal(ctx)) },
           ...(cfg.options?.plugins?.tooltip || {}),
         },
+        valueLabels: { enabled: SHOW_VALUES, fmt: cfg.options?.plugins?.tooltip?.callbacks?.label || null },
       },
     },
   });

@@ -3,6 +3,7 @@
 
 import { DATA, loadAll } from './data.js';
 import { RENDERERS } from './charts-sections.js';
+import { setShowValues } from './charts-core.js';
 import { wireModal } from './modal.js';
 import { fmt } from './util.js';
 
@@ -35,6 +36,11 @@ window.addEventListener('popstate', () => showSection(routeName()));
 
 document.getElementById('sectorFilter').addEventListener('change', () => RENDERERS.overview());
 document.getElementById('stateFilter').addEventListener('change', () => RENDERERS.overview());
+
+document.getElementById('valToggle').addEventListener('change', e => {
+  setShowValues(e.target.checked);
+  showSection(routeName()); // rebuild charts so values appear/disappear
+});
 
 (async () => {
   try {

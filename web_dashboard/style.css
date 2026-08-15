@@ -56,6 +56,9 @@
   .seg a:hover { color: var(--ink); }
   .seg a.active { background: var(--surface); color: var(--accent); box-shadow: var(--shadow-sm); }
   .nav-sep { width: 1px; height: 24px; background: var(--border-strong); }
+  .val-toggle { display: inline-flex; align-items: center; gap: 6px; color: var(--ink-2); font-size: 0.84rem; font-weight: 550; padding: 6px 12px; border-radius: 8px; cursor: pointer; user-select: none; white-space: nowrap; }
+  .val-toggle:hover { color: var(--ink); }
+  .val-toggle input { width: 15px; height: 15px; accent-color: var(--accent); cursor: pointer; }
   .nav-link { display: inline-flex; align-items: center; gap: 6px; color: var(--accent); font-size: 0.86rem; font-weight: 550; text-decoration: none; padding: 7px 12px; border-radius: 8px; transition: background 0.15s ease; }
   .nav-link:hover { background: var(--accent-soft); }
   .nav-link .ic { font-size: 0.95rem; line-height: 1; }
@@ -147,6 +150,7 @@
     .seg a { flex: 1; padding: 8px 10px; font-size: 0.8rem; }
     .nav-sep { display: none; }
     .nav-link { justify-content: center; padding: 9px 12px; border: 1px solid var(--border); }
+    .val-toggle { padding: 8px 12px; border: 1px solid var(--border); }
     .wrap { padding: 14px 14px 32px; }
     .toolbar { flex-direction: column; align-items: stretch; }
     .field { width: 100%; }

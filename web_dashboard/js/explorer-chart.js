@@ -3,7 +3,8 @@
 import { X } from './explorer-state.js';
 import { PALETTE, baseScales, $, fmt, inr, moneyCol } from './explorer-util.js';
 import { decode } from './codes.js';
-import { clip } from './util.js';
+import { clip, getVal } from './util.js';
+import { showValues } from './charts-core.js';
 
 export function drawChart(rows, dim, dim2, meas) {
   if (X.chartInst) X.chartInst.destroy();
@@ -40,10 +41,17 @@ export function drawChart(rows, dim, dim2, meas) {
       options.scales.x = { ...baseScales.x, ticks: { ...baseScales.x.ticks, maxRotation: 45, font: { size: 10 } } };
       options.scales.y = { ...baseScales.y, ticks: { ...baseScales.y.ticks, callback: tick } };
     }
-    options.plugins = { tooltip: { callbacks: { title: items => items.length ? full[items[0].dataIndex] : '', label: c => (money ? inr(c.parsed[options.indexAxis === 'y' ? 'x' : 'y']) : fmt(c.parsed[options.indexAxis === 'y' ? 'x' : 'y'])) } } };
+    options.plugins = {
+      tooltip: { callbacks: { title: items => items.length ? full[items[0].dataIndex] : '', label: c => (money ? inr(c.parsed[options.indexAxis === 'y' ? 'x' : 'y']) : fmt(c.parsed[options.indexAxis === 'y' ? 'x' : 'y'])) } },
+      valueLabels: { enabled: showValues(), fmt: c => (money ? inr(getVal(c)) : fmt(getVal(c))) },
+    };
   } else {
     options.cutout = '60%';
-    options.plugins = { legend: { position: 'bottom' }, tooltip: { callbacks: { title: items => items.length ? full[items[0].dataIndex] : '', label: c => c.label + ': ' + fmt(c.parsed) } } };
+    options.plugins = {
+      legend: { position: 'bottom' },
+      tooltip: { callbacks: { title: items => items.length ? full[items[0].dataIndex] : '', label: c => c.label + ': ' + fmt(c.parsed) } },
+      valueLabels: { enabled: showValues(), fmt: c => fmt(getVal(c)) },
+    };
   }
   X.chartInst = new Chart($('xChart'), { type, data: { labels, datasets }, options });
 }
