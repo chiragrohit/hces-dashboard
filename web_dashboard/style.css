@@ -185,9 +185,9 @@
 .table-wrap { overflow: auto; max-height: 540px; border: 1px solid var(--border); border-radius: 10px; }
 .tbl { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
 .tbl th { position: sticky; top: 0; background: var(--surface-2); text-align: left; padding: 9px 12px; font-weight: 650; color: var(--ink-2); border-bottom: 1px solid var(--border-strong); white-space: nowrap; z-index: 1; }
-.tbl td { padding: 7px 12px; border-bottom: 1px solid var(--border); color: var(--ink-2); white-space: nowrap; }
+.tbl td { padding: 7px 12px; border-bottom: 1px solid var(--border); color: var(--ink-2); white-space: normal; overflow-wrap: anywhere; }
 .tbl tbody tr:nth-child(even) td { background: var(--bg); }
-.tbl td.num { text-align: right; font-variant-numeric: tabular-nums; }
+.tbl td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .tbl tbody tr:hover td { background: var(--accent-soft); }
 
 .data-link { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 7px; color: var(--muted); border: 1px solid var(--border); background: var(--surface); font-size: 12px; text-decoration: none; margin-left: 6px; flex-shrink: 0; }

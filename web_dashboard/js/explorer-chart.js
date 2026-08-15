@@ -3,6 +3,7 @@
 import { X } from './explorer-state.js';
 import { PALETTE, baseScales, $, fmt, inr, moneyCol } from './explorer-util.js';
 import { decode } from './codes.js';
+import { clip } from './util.js';
 
 export function drawChart(rows, dim, dim2, meas) {
   if (X.chartInst) X.chartInst.destroy();
@@ -10,6 +11,7 @@ export function drawChart(rows, dim, dim2, meas) {
   const tick = v => money ? inr(v) : fmt(v);
   const T = X.current.table || '';
   let labels, datasets, type = 'bar';
+  const full = []; // full decoded names for tooltips; labels are clipped for display
   if (dim2) {
     const d1 = [...new Set(rows.map(r => r.d1))];
     const d2 = [...new Set(rows.map(r => r.d2))];
@@ -19,7 +21,7 @@ export function drawChart(rows, dim, dim2, meas) {
       backgroundColor: PALETTE[i % PALETTE.length], borderRadius: 3, maxBarThickness: 24,
     }));
   } else {
-    labels = rows.map(r => decode(T, dim, r.d1));
+    labels = rows.map(r => { const n = decode(T, dim, r.d1); full.push(n); return clip(n, 26); });
     if (labels.length <= 6 && !money) type = 'doughnut';
     datasets = [{
       label: meas, data: rows.map(r => r.v),
@@ -38,10 +40,10 @@ export function drawChart(rows, dim, dim2, meas) {
       options.scales.x = { ...baseScales.x, ticks: { ...baseScales.x.ticks, maxRotation: 45, font: { size: 10 } } };
       options.scales.y = { ...baseScales.y, ticks: { ...baseScales.y.ticks, callback: tick } };
     }
-    options.plugins = { tooltip: { callbacks: { label: c => (money ? inr(c.parsed[options.indexAxis === 'y' ? 'x' : 'y']) : fmt(c.parsed[options.indexAxis === 'y' ? 'x' : 'y'])) } } };
+    options.plugins = { tooltip: { callbacks: { title: items => items.length ? full[items[0].dataIndex] : '', label: c => (money ? inr(c.parsed[options.indexAxis === 'y' ? 'x' : 'y']) : fmt(c.parsed[options.indexAxis === 'y' ? 'x' : 'y'])) } } };
   } else {
     options.cutout = '60%';
-    options.plugins = { legend: { position: 'bottom' }, tooltip: { callbacks: { label: c => c.label + ': ' + fmt(c.parsed) } } };
+    options.plugins = { legend: { position: 'bottom' }, tooltip: { callbacks: { title: items => items.length ? full[items[0].dataIndex] : '', label: c => c.label + ': ' + fmt(c.parsed) } } };
   }
   X.chartInst = new Chart($('xChart'), { type, data: { labels, datasets }, options });
 }
