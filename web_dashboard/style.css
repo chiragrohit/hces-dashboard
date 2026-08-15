@@ -110,6 +110,8 @@
   .prov-row code { background: var(--surface); border: 1px solid var(--border); border-radius: 5px; padding: 1px 7px; font-family: Consolas, "Cascadia Mono", monospace; font-size: 0.78rem; color: var(--purple); }
   .prov-note { font-size: 0.78rem; color: var(--muted); margin-top: 2px; line-height: 1.5; }
   .prov-note a { color: var(--accent); }
+  .modal-prov h4 { font-size: 0.85rem; color: var(--ink-2); margin: 4px 0 0; }
+  .sql-block { max-height: 240px; overflow: auto; background: #0f172a; color: #dbeafe; padding: 12px 14px; border-radius: 8px; font-family: Consolas, "Cascadia Mono", monospace; font-size: 0.75rem; line-height: 1.55; white-space: pre; margin: 0; border: 1px solid var(--border); }
   .modal-source { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border); font-size: 0.78rem; color: var(--muted); }
 
   .loading { display: flex; align-items: center; gap: 12px; color: var(--muted); padding: 8px 2px; font-size: 0.9rem; }
