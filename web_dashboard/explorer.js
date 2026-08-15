@@ -207,7 +207,7 @@ function drawChart(rows, dim, dim2, meas) {
 
 function drawTable(rows, dim, dim2, meas) {
   const headers = [dim, dim2, meas].filter(Boolean);
-  const tbl = $('xTable');
+  const tbl = $('xResult');
   tbl.innerHTML = '';
   const thead = document.createElement('thead');
   const hr = document.createElement('tr');
