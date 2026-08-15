@@ -24,8 +24,8 @@ from pipeline_common import STATE_NAMES
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 PDF = os.path.join(BASE, "hces-code", "HCES_2023-24_Questionnaire.pdf")
-OCR_MD = os.path.join(BASE, "hces-code", "HCES-ocr-mistral", "markdown.md")
-OCR_JSON = os.path.join(BASE, "hces-code", "HCES-ocr-mistral", "ocr-questionnaire-annotation.json")
+OCR_MD = os.path.join(BASE, "hces-code", "HCES-ocr-mistral", "markdown.md")  # optional, was moved/deleted
+OCR_JSON = os.path.join(BASE, "hces-code", "ocr-questionnaire-annotation.json")
 OUT = os.path.join(BASE, "hces-code", "parquet-code-map.json")
 PARQUET = os.path.join(BASE, "hces_parquet")
 STATE_CSV = os.path.join(BASE, "hces-code", "tabulation_state_code.csv")
@@ -478,7 +478,7 @@ def main():
     section_units = {}
     answer_codes = []
     if os.path.exists(OCR_JSON):
-        src = "Mistral-OCR annotation (hces-code/HCES-ocr-mistral/ocr-questionnaire-annotation.json)"
+        src = "Mistral-OCR annotation (hces-code/ocr-questionnaire-annotation.json)"
         print(f"Source: {src}")
         section_items, section_units, answer_codes = parse_annotation()
     elif os.path.exists(OCR_MD):
