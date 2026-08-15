@@ -73,6 +73,76 @@ const valueLabels = {
 
 if (globalThis.Chart) Chart.register(valueLabels);
 
+/* Always-visible vertical cut line for line charts. Shows where the line
+ * crosses each dataset (label + value) at that percentile — no hover needed.
+ * The line follows the mouse/touch x-position to any percentile.
+ * Enabled per chart via options.plugins.cutline = { enabled: true, fmt }.
+ * Only used by the Spending-power-by-group curve chart. Dependency-free. */
+const cutline = {
+  id: 'cutline',
+  afterInit(chart, args, opts) {
+    if (!opts || !opts.enabled) return;
+    chart.$cutIdx = (opts.index != null && opts.index >= 0) ? opts.index : 49; // default: median
+    const el = chart.canvas;
+    const sync = (e) => {
+      const rect = el.getBoundingClientRect();
+      const cx = (e.clientX != null ? e.clientX : (e.touches && e.touches[0] ? e.touches[0].clientX : null));
+      if (cx == null) return;
+      const px = cx - rect.left;
+      let idx = Math.round(chart.scales.x.getValueForPixel(px));
+      idx = Math.max(0, Math.min(chart.data.labels.length - 1, idx));
+      if (idx !== chart.$cutIdx) { chart.$cutIdx = idx; chart.update('none'); }
+    };
+    el.addEventListener('mousemove', sync);
+    el.addEventListener('touchstart', sync, { passive: true });
+  },
+  afterDatasetsDraw(chart, args, opts) {
+    if (!opts || !opts.enabled) return;
+    const idx = chart.$cutIdx == null ? 49 : chart.$cutIdx;
+    const { ctx, chartArea: a, scales } = chart;
+    if (!a) return;
+    ctx.save();
+    const x = scales.x.getPixelForValue(idx);
+    // vertical cut line
+    ctx.setLineDash([5, 4]);
+    ctx.strokeStyle = 'rgba(16,24,40,0.55)';
+    ctx.lineWidth = 1.4;
+    ctx.beginPath(); ctx.moveTo(x, a.top); ctx.lineTo(x, a.bottom); ctx.stroke();
+    ctx.setLineDash([]);
+    // percentile chip at the top of the line
+    const pctTxt = 'p' + scales.x.getLabelForValue(idx) + '%';
+    ctx.font = '600 10px Segoe UI, system-ui, sans-serif';
+    const pw = ctx.measureText(pctTxt).width + 12;
+    ctx.fillStyle = '#101828';
+    ctx.beginPath(); ctx.roundRect(x - pw / 2, a.top + 4, pw, 18, 5); ctx.fill();
+    ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(pctTxt, x, a.top + 14.5);
+    // value chip where the line cuts each dataset (skip chips too close together)
+    const fmtFn = opts.fmt || (v => ' ₹' + Math.round(v).toLocaleString('en-IN'));
+    let prevY = null;
+    chart.data.datasets.forEach(ds => {
+      const val = ds.data[idx];
+      const y = scales.y.getPixelForValue(val);
+      if (val == null || y < a.top || y > a.bottom) return;
+      if (prevY != null && Math.abs(y - prevY) < 16) return;
+      prevY = y;
+      const label = ds.label + fmtFn(val);
+      ctx.font = '600 10px Segoe UI, system-ui, sans-serif';
+      const w = ctx.measureText(label).width + 14;
+      const h = 18;
+      const bx = Math.min(a.right - w - 4, x + 6);
+      const by = Math.max(a.top + 2, y - h / 2);
+      ctx.fillStyle = ds.borderColor || '#101828';
+      ctx.beginPath(); ctx.roundRect(bx, by, w, h, 5); ctx.fill();
+      ctx.fillStyle = '#fff'; ctx.textAlign = 'left';
+      ctx.fillText(label, bx + 7, by + h / 2 + 0.5);
+    });
+    ctx.restore();
+  },
+};
+
+if (globalThis.Chart) Chart.register(cutline);
+
 /* Called by the detail page before rendering so only its chart mounts. */
 export function setFocusChart(id) { focusChart = id; }
 
@@ -99,6 +169,7 @@ export function makeChart(id, cfg) {
           ...(cfg.options?.plugins?.tooltip || {}),
         },
         valueLabels: { enabled: SHOW_VALUES, fmt: cfg.options?.plugins?.tooltip?.callbacks?.label || null },
+        ...(cfg.options?.plugins?.cutline ? { cutline: cfg.options.plugins.cutline } : {}),
       },
     },
   });
