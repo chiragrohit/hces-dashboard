@@ -4,6 +4,7 @@ const PALETTE = ['#1d4ed8', '#0e9f8a', '#e9820c', '#be185d', '#6d28d9', '#0891b2
 const $ = id => document.getElementById(id);
 let CAT = null;              // /api/tables payload
 let current = { cols: [], rows: [], headers: [], note: '' };
+let askFilter = null;        // optional value filter set by /api/ask
 
 function fmt(n) {
   const a = Math.abs(n);
@@ -42,7 +43,7 @@ async function init() {
     o.value = t.table; o.textContent = t.table + '  (' + t.rows.toLocaleString('en-IN') + ' rows)';
     sel.appendChild(o);
   });
-  sel.addEventListener('change', () => { onTableChange(); run(); });
+  sel.addEventListener('change', () => { askFilter = null; onTableChange(); run(); });
   $('xDim2').addEventListener('change', () => { if ($('xDim2').value === $('xDim').value) $('xDim2').value = ''; });
   $('xRun').addEventListener('click', run);
   $('xCsv').addEventListener('click', downloadCsv);
@@ -147,6 +148,7 @@ function setConfig(cfg) {
   $('xAgg').value = cfg.agg;
   $('xSector').value = cfg.sector || '';
   $('xState').value = cfg.state || '';
+  askFilter = cfg.filter || null;
   run();
 }
 
@@ -163,6 +165,7 @@ function buildSql() {
   if (sv) where.push(quote('Sector') + " = '" + sv.replace(/'/g, "''") + "'");
   const st = $('xState').value;
   if (st) where.push(quote('State') + " = '" + st.replace(/'/g, "''") + "'");
+  if (askFilter) where.push(quote(askFilter.col) + " = '" + String(askFilter.value).replace(/'/g, "''") + "'");
 
   let expr;
   if (meas === 'Multiplier') expr = 'SUM(Multiplier)';

@@ -51,7 +51,7 @@ for view in _TABLE_VIEWS:
     except Exception:
         pass
 
-# ---- optional "ask in English" via OpenCode Zen -------
+# ---- optional "ask in English" via OpenCode Go (subscription) -------
 def _load_env():
     env = {}
     p = os.path.join(BASE, ".env")
@@ -67,7 +67,7 @@ def _load_env():
 _ENV = _load_env()
 ZEN_KEY = os.environ.get("OPENCODE_API_KEY", _ENV.get("OPENCODE_API_KEY", "")).strip()
 ZEN_MODEL = os.environ.get("ZEN_MODEL", _ENV.get("ZEN_MODEL", "deepseek-v4-flash")).strip()
-ZEN_URL = "https://opencode.ai/zen/v1/chat/completions"
+LLM_URL = "https://opencode.ai/zen/go/v1/chat/completions"
 _NUM_TYPES = {"BIGINT", "INTEGER", "DOUBLE", "FLOAT", "DECIMAL", "HUGEINT", "UBIGINT", "SMALLINT"}
 
 
@@ -94,7 +94,7 @@ def _catalog_context(tables):
 
 _SYS = """You turn a plain-English question into a chart config for a household survey dashboard.
 Return ONLY a JSON object, no markdown, no prose. Shape:
-{"table":"...","dim":"...","dim2":"","measure":"...","agg":"sum|avg|count|count_distinct","sector":"","state":"","title":"..."}
+{"table":"...","dim":"...","dim2":"","measure":"...","agg":"sum|avg|count|count_distinct","sector":"","state":"","filter":{},"title":"..."}
 
 Rules:
 - table: one of the table names below.
@@ -104,6 +104,7 @@ Rules:
 - agg: "sum" for totals (always "sum" with Multiplier), "avg" for averages, "count" for row counts, "count_distinct" for distinct counts.
 - sector: "Rural" or "Urban" (or the exact code 1/2 as listed) only when the question is about one sector, else "".
 - state: the exact state/UT value only when the question names one, else "".
+- filter: OPTIONAL. When the question is about a specific group (for example "people who have internet", "households using LPG", "women"), set filter.col to that column and filter.value to its code from the catalog (for example {"col":"Used_Internet_Last_30_Days","value":"1"}). Otherwise set {} .
 - title: a short plain-English title, max 8 words.
 Never invent a column name. Survey codes often mean words (for example Sector 1=Rural, 2=Urban).
 
@@ -175,9 +176,19 @@ def _validate_cfg(cfg, tables):
         if sv in [str(v["value"]) for v in cols["State"].get("values", [])]:
             state = sv
 
+    flt = {}
+    if cfg.get("filter"):
+        fc = cfg.get("filter") or {}
+        colname = fc.get("col")
+        val = str(fc.get("value") or "").strip()
+        if colname and colname in cols and val:
+            allowed = [str(v["value"]) for v in cols[colname].get("values", [])]
+            if allowed and val in allowed:
+                flt = {"col": colname, "value": val}
+
     title = str(cfg.get("title") or "").strip()[:80] or f"{dim} by {meas}"
     return {"table": tbl["table"], "dim": dim, "dim2": dim2, "measure": meas, "agg": agg,
-            "sector": sector, "state": state, "title": title}
+            "sector": sector, "state": state, "filter": flt, "title": title}
 
 
 def ask_llm(question):
@@ -192,7 +203,7 @@ def ask_llm(question):
         ],
         "temperature": 0,
     }
-    req = urllib.request.Request(ZEN_URL, data=json.dumps(body).encode("utf-8"),
+    req = urllib.request.Request(LLM_URL, data=json.dumps(body).encode("utf-8"),
                                  headers={"Content-Type": "application/json",
                                           "Authorization": "Bearer " + ZEN_KEY,
                                           "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36",
