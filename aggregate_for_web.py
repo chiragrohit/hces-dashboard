@@ -429,8 +429,217 @@ schemes["school_govt_private"] = weighted_rows("""
     FROM consumption_4_2
     GROUP BY 1
 """, HH_SCALE)
+schemes["school_benefits"] = weighted_rows("""
+    SELECT CASE WHEN Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
+           SUM(CASE WHEN Free_textbooks_received='1' THEN Multiplier ELSE 0 END) textbooks,
+           SUM(CASE WHEN Free_stationery_received='1' THEN Multiplier ELSE 0 END) stationery,
+           SUM(CASE WHEN Free_school_bag_received='1' THEN Multiplier ELSE 0 END) school_bag,
+           SUM(CASE WHEN Fee_waiver_received='1' THEN Multiplier ELSE 0 END) fee_waiver
+    FROM consumption_4_2
+    GROUP BY 1
+""", HH_SCALE)
+schemes["school_meals"] = weighted_rows("""
+    SELECT CASE WHEN Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
+           CASE WHEN Meals_From_School IS NOT NULL AND TRY_CAST(Meals_From_School AS INT) > 0
+                THEN 'Yes' ELSE 'No' END got,
+           SUM(Multiplier) w
+    FROM individual_characteristics
+    WHERE Age IS NOT NULL AND TRY_CAST(Age AS INT) BETWEEN 5 AND 17
+    GROUP BY 1,2
+""", POP_SCALE)
+schemes["ayushman_detail"] = weighted_rows("""
+    SELECT CASE WHEN Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
+           SUM(CASE WHEN Ayushman_beneficiary='1' THEN Multiplier ELSE 0 END) card,
+           SUM(CASE WHEN Hospitalization_case='1' THEN Multiplier ELSE 0 END) hospitalised,
+           SUM(CASE WHEN Medical_benefit_received='1' THEN Multiplier ELSE 0 END) got_benefit
+    FROM consumption_4_2
+    GROUP BY 1
+""", HH_SCALE)
 write_json("schemes.json", schemes)
 print(f"    OK schemes.json")
+
+# ----------------------------------------------------------------
+# 11. Income & spending power (MPCE from monthly expenditure records)
+# ----------------------------------------------------------------
+print("  11. Income & spending power ...")
+# Monthly per-capita consumption expenditure: visit-1 records only (one per household)
+MPCE = "MONTHLY_CONSUMPTION_EXP / NULLIF(HOUSEHOLD_SIZE, 0)"
+income = {}
+income["dist"] = con.execute(f"""
+    SELECT round(quantile_cont({MPCE}, .1))::BIGINT p10,
+           round(quantile_cont({MPCE}, .2))::BIGINT p20,
+           round(quantile_cont({MPCE}, .3))::BIGINT p30,
+           round(quantile_cont({MPCE}, .4))::BIGINT p40,
+           round(quantile_cont({MPCE}, .5))::BIGINT p50,
+           round(quantile_cont({MPCE}, .6))::BIGINT p60,
+           round(quantile_cont({MPCE}, .7))::BIGINT p70,
+           round(quantile_cont({MPCE}, .8))::BIGINT p80,
+           round(quantile_cont({MPCE}, .9))::BIGINT p90,
+           round(avg({MPCE}))::BIGINT mean
+    FROM supplementary_consumption
+    WHERE VISIT='1' AND MONTHLY_CONSUMPTION_EXP>0 AND HOUSEHOLD_SIZE>0
+""").fetchone()
+
+income["state"] = con.execute(f"""
+    SELECT sm.name state_name,
+           CASE WHEN s.Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
+           round(median({MPCE}))::BIGINT median_mpce
+    FROM supplementary_consumption s
+    LEFT JOIN state_master sm ON s.State = sm.code
+    WHERE VISIT='1' AND MONTHLY_CONSUMPTION_EXP>0 AND HOUSEHOLD_SIZE>0
+    GROUP BY 1,2
+""").fetchall()
+income["state"] = [
+    {"state_name": r[0], "sector": r[1], "median_mpce": int(r[2])} for r in income["state"]
+]
+
+income["hhtype"] = con.execute(f"""
+    WITH mp AS (
+      SELECT {HH_KEY} hid, {MPCE} mpce
+      FROM supplementary_consumption
+      WHERE VISIT='1' AND MONTHLY_CONSUMPTION_EXP>0 AND HOUSEHOLD_SIZE>0
+    ), h AS (SELECT {HH_KEY} hid, Household_Type code FROM household_economic)
+    SELECT h.code, round(median(mp.mpce))::BIGINT median_mpce, round(avg(mp.mpce))::BIGINT mean_mpce
+    FROM mp JOIN h USING(hid) WHERE h.code IS NOT NULL GROUP BY 1
+""").fetchall()
+income["hhtype"] = [
+    {"code": r[0], "median_mpce": int(r[1]), "mean_mpce": int(r[2])} for r in income["hhtype"]
+]
+
+income["religion"] = con.execute(f"""
+    WITH mp AS (
+      SELECT {HH_KEY} hid, {MPCE} mpce
+      FROM supplementary_consumption
+      WHERE VISIT='1' AND MONTHLY_CONSUMPTION_EXP>0 AND HOUSEHOLD_SIZE>0
+    ), h AS (SELECT {HH_KEY} hid, Religion_of_HH_Head code FROM household_economic)
+    SELECT h.code, round(median(mp.mpce))::BIGINT median_mpce
+    FROM mp JOIN h USING(hid) WHERE h.code IS NOT NULL GROUP BY 1
+""").fetchall()
+income["religion"] = [
+    {"code": r[0], "median_mpce": int(r[1])} for r in income["religion"]
+]
+
+income["land"] = con.execute(f"""
+    WITH mp AS (
+      SELECT {HH_KEY} hid, {MPCE} mpce
+      FROM supplementary_consumption
+      WHERE VISIT='1' AND MONTHLY_CONSUMPTION_EXP>0 AND HOUSEHOLD_SIZE>0
+    ), h AS (SELECT {HH_KEY} hid, Land_Ownership code FROM household_economic)
+    SELECT h.code, round(median(mp.mpce))::BIGINT median_mpce
+    FROM mp JOIN h USING(hid) WHERE h.code IS NOT NULL GROUP BY 1
+""").fetchall()
+income["land"] = [
+    {"code": r[0], "median_mpce": int(r[1])} for r in income["land"]
+]
+
+# Food vs non-food share of the total monthly budget (visit-1 weights)
+food_cr = con.execute("SELECT SUM(Total_Consumption_Value * Multiplier)/1e7 FROM food_consumption").fetchone()[0]
+total_cr = con.execute("""
+    SELECT SUM(MONTHLY_CONSUMPTION_EXP * MULTIPLIER)/1e7
+    FROM supplementary_consumption WHERE VISIT='1'
+""").fetchone()[0]
+income["budget"] = {
+    "food_cr": round(float(food_cr) * HH_SCALE, 0),
+    "total_cr": round(float(total_cr) * HH_SCALE, 0),
+    "food_share_pct": round(100.0 * food_cr / total_cr, 1),
+}
+write_json("income.json", income)
+print(f"    OK income.json")
+
+# ----------------------------------------------------------------
+# 12. Non-food spending (clothing, services, durables, fuel, tobacco)
+# ----------------------------------------------------------------
+print("  12. Non-food spending ...")
+spend_extra["clothing"] = weighted_rows("""
+    SELECT CASE WHEN Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
+           ITEM_CODE code,
+           SUM(MULTIPLIER * VALUE) w
+    FROM consumption_13
+    WHERE ITEM_CODE IN ('379','389','399')
+    GROUP BY 1,2
+""", HH_SCALE)
+spend_extra["services"] = weighted_rows("""
+    SELECT CASE WHEN Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
+           Item_Code_9_1_to_11_4 code,
+           SUM(MULTIPLIER * Value_Rs_9_1_to_11_4) w
+    FROM consumption_9_10_11
+    WHERE Item_Code_9_1_to_11_4 IN ('409','419','429','499','519','539')
+    GROUP BY 1,2
+""", HH_SCALE)
+spend_extra["fuel"] = weighted_rows("""
+    SELECT CASE WHEN Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
+           Item_Code_8_1 code,
+           SUM(MULTIPLIER * Total_consumption_value_rs) w
+    FROM consumption_8_1
+    WHERE Item_Code_8_1 IN ('333','336','337','340','341','342','343','344','345','346')
+    GROUP BY 1,2
+""", HH_SCALE)
+spend_extra["tobacco"] = weighted_rows("""
+    SELECT CASE WHEN Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
+           Item_Code_12_series code,
+           SUM(MULTIPLIER * Total_Consumption_Value_12_serie) w
+    FROM consumption_12
+    WHERE Item_Code_12_series IN ('319','329')
+    GROUP BY 1,2
+""", HH_SCALE)
+spend_extra["durables"] = weighted_rows("""
+    SELECT ITEM_CODE code,
+           SUM(CASE WHEN FIRST_PURCHASE_NUMBER > 0 THEN MULTIPLIER ELSE 0 END) w
+    FROM consumption_14
+    WHERE ITEM_CODE IN ('580','623','560','590','588','585','601','581','602')
+    GROUP BY 1
+""", HH_SCALE)
+spend_extra["online_channels"] = weighted_rows("""
+    SELECT CASE WHEN Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
+           CASE
+             WHEN COALESCE(Online_purchase_medicine,0) > 0 THEN 'Medicine'
+             WHEN COALESCE(Online_purchase_services,0) > 0 THEN 'Services'
+             WHEN COALESCE(Online_purchase_education,0) > 0 THEN 'Education'
+             WHEN COALESCE(Online_purchase_fuel_light,0) > 0 THEN 'Fuel & light'
+             WHEN COALESCE(Online_purchase_toilet_articles,0) > 0 THEN 'Toilet articles'
+           END channel,
+           SUM(Multiplier) w
+    FROM consumption_4_2
+    WHERE Online_purchase_medicine>0 OR Online_purchase_services>0 OR Online_purchase_education>0
+       OR Online_purchase_fuel_light>0 OR Online_purchase_toilet_articles>0
+    GROUP BY 1,2
+""", HH_SCALE)
+write_json("spending_extras.json", spend_extra)
+print(f"    OK spending_extras.json")
+
+# ----------------------------------------------------------------
+# 13. Literacy + employment + ceremonies
+# ----------------------------------------------------------------
+print("  13. Literacy, employment, ceremonies ...")
+people["literacy"] = weighted_rows("""
+    SELECT CASE WHEN Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
+           CASE WHEN Gender='1' THEN 'Male' ELSE 'Female' END gender,
+           CASE WHEN Years_of_Education IS NOT NULL AND TRY_CAST(Years_of_Education AS INT) > 0
+                THEN 'Literate' ELSE 'Not literate' END lit,
+           SUM(Multiplier) w
+    FROM individual_characteristics
+    WHERE Years_of_Education IS NOT NULL
+    GROUP BY 1,2,3
+""")
+write_json("people.json", people)
+hh_extra["employment"] = weighted_rows("""
+    SELECT CASE WHEN Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
+           CASE WHEN Engaged_in_Economic_Activity_Las='1' THEN 'Working' ELSE 'Not working' END status,
+           SUM(Multiplier) w
+    FROM household_economic
+    WHERE Engaged_in_Economic_Activity_Las IN ('1','2')
+    GROUP BY 1,2
+""", HH_SCALE)
+hh_extra["ceremony"] = weighted_rows("""
+    SELECT CASE WHEN Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
+           CASE WHEN Ceremony_Performed_Last_30_Days='1' THEN 'Yes' ELSE 'No' END got,
+           SUM(Multiplier) w
+    FROM consumption_4_1
+    WHERE Ceremony_Performed_Last_30_Days IN ('1','2')
+    GROUP BY 1,2
+""", HH_SCALE)
+write_json("household_extras.json", hh_extra)
+print(f"    OK household_extras.json")
 
 con.close()
 

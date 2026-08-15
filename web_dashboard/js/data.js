@@ -18,14 +18,14 @@ async function loadJSON(name) {
 }
 
 export async function loadAll() {
-  const [summary, stateC, demo, edu, hhChars, foodRank, people, hhExtra, spendExtra, schemes] = await Promise.all([
+  const [summary, stateC, demo, edu, hhChars, foodRank, people, hhExtra, spendExtra, schemes, income] = await Promise.all([
     loadJSON('national_summary'), loadJSON('state_consumption'), loadJSON('demographics'), loadJSON('education'),
     loadJSON('household_characteristics'), loadJSON('food_rankings'), loadJSON('people'),
-    loadJSON('household_extras'), loadJSON('spending_extras'), loadJSON('schemes'),
+    loadJSON('household_extras'), loadJSON('spending_extras'), loadJSON('schemes'), loadJSON('income'),
   ]);
   Object.assign(DATA, {
     summary, stateConsumption: stateC, demographics: demo, education: edu, householdChars: hhChars,
-    foodRankings: foodRank, people, householdExtras: hhExtra, spendingExtras: spendExtra, schemes,
+    foodRankings: foodRank, people, householdExtras: hhExtra, spendingExtras: spendExtra, schemes, income,
   });
 }
 

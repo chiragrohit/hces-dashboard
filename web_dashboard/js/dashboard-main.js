@@ -6,7 +6,7 @@ import { RENDERERS } from './charts-sections.js';
 import { wireModal } from './modal.js';
 import { fmt } from './util.js';
 
-const ROUTES = ['overview', 'people', 'households', 'spending', 'schemes'];
+const ROUTES = ['overview', 'people', 'households', 'spending', 'income', 'schemes'];
 const ALIASES = { consumption: 'spending', demographics: 'people' };
 
 function routeName() {

@@ -5,7 +5,7 @@
 import { DATA, D, focusFilters } from './data.js';
 import { THEME, baseScales, makeChart } from './charts-core.js';
 import { C } from './content.js';
-import { fmt, sumBy, inrTicks, moneyLabel, rupLabel, clip } from './util.js';
+import { fmt, sumBy, inrTicks, moneyLabel, rupLabel, clip, getVal } from './util.js';
 
 /* ---------- Overview ---------- */
 function updateOverview() {
@@ -83,6 +83,17 @@ function updatePeople() {
     backgroundColor: THEME.palette[i % THEME.palette.length], borderRadius: 3, borderSkipped: false, maxBarThickness: 20 })) },
     options: { scales: { ...baseScales, y: { ...baseScales.y, ticks: { ...baseScales.y.ticks, callback: v => fmt(v) } } },
       plugins: { legend: { labels: { color: THEME.legend, font: { size: 10 } } } } } });
+
+  const lit = D('people', 'literacy');
+  const litRate = (s, g) => {
+    const rows = lit.filter(d => d.sector === s && d.gender === g);
+    const t = sumBy(rows, 'w') || 1;
+    return +(100 * sumBy(rows.filter(d => d.lit === 'Literate'), 'w') / t).toFixed(1);
+  };
+  makeChart('chartLiteracy', { type: 'bar', data: { labels: ['Rural', 'Urban'], datasets: ['Male', 'Female'].map((g, i) => ({
+    label: g, data: ['Rural', 'Urban'].map(s => litRate(s, g)),
+    backgroundColor: i ? '#be185d' : '#1d4ed8', borderRadius: 4, borderSkipped: false, maxBarThickness: 40 })) },
+    options: { scales: { ...baseScales, y: { ...baseScales.y, suggestedMax: 100, ticks: { ...baseScales.y.ticks, callback: v => v + '%' } } } } });
 }
 
 /* ---------- Households ---------- */
@@ -132,6 +143,18 @@ function updateHouseholds() {
   const ujjYes = sumBy(ujj.filter(d => d.got === 'Yes'), 'w');
   const ujjNo = sumBy(ujj.filter(d => d.got === 'No'), 'w');
   makeChart('chartUjjwala', { type: 'doughnut', data: { labels: ['Got free connection', 'Did not get'], datasets: [{ data: [ujjYes, ujjNo], backgroundColor: ['#0e9f8a', '#c8cfd9'], borderWidth: 0, hoverOffset: 6 }] }, options: { cutout: '62%', plugins: { legend: { position: 'bottom' } } } });
+
+  const emp = D('householdExtras', 'employment');
+  const empKeys = [...new Set(emp.map(d => d.status))];
+  makeChart('chartEmployment', { type: 'bar', data: { labels: ['Rural', 'Urban'], datasets: empKeys.map((st, i) => ({
+    label: st, data: ['Rural', 'Urban'].map(s => sumBy(emp.filter(d => d.sector === s && d.status === st), 'w')),
+    backgroundColor: i ? '#c8cfd9' : '#1d4ed8', borderRadius: 4, borderSkipped: false, maxBarThickness: 40 })) },
+    options: { scales: { ...baseScales, y: { ...baseScales.y, ticks: { ...baseScales.y.ticks, callback: v => fmt(v) } } } } });
+
+  const cer = D('householdExtras', 'ceremony');
+  const cerYes = sumBy(cer.filter(d => d.got === 'Yes'), 'w');
+  const cerNo = sumBy(cer.filter(d => d.got === 'No'), 'w');
+  makeChart('chartCeremony', { type: 'doughnut', data: { labels: ['Held a ceremony', 'No ceremony'], datasets: [{ data: [cerYes, cerNo], backgroundColor: ['#b45309', '#c8cfd9'], borderWidth: 0, hoverOffset: 6 }] }, options: { cutout: '62%', plugins: { legend: { position: 'bottom' } } } });
 }
 
 /* ---------- Spending ---------- */
@@ -156,6 +179,38 @@ function updateSpending() {
     { label: 'Rural %', data: pct(fsRural), backgroundColor: '#1d4ed8', borderRadius: 4, borderSkipped: false, maxBarThickness: 26 },
     { label: 'Urban %', data: pct(fsUrban), backgroundColor: '#0e9f8a', borderRadius: 4, borderSkipped: false, maxBarThickness: 26 }] },
     options: { scales: { ...baseScales, y: { ...baseScales.y, suggestedMax: 100, ticks: { ...baseScales.y.ticks, callback: v => v + '%' } } } } });
+
+  const byCat = (key, map, fmtFn) => {
+    const rows = D('spendingExtras', key);
+    const codes = Object.keys(map);
+    const datasets = ['Rural', 'Urban'].map((s, i) => ({
+      label: s,
+      data: codes.map(c => sumBy(rows.filter(d => d.sector === s && d.code === c), 'w')),
+      backgroundColor: i ? '#0e9f8a' : '#1d4ed8', borderRadius: 4, borderSkipped: false, maxBarThickness: 26 }));
+    return { labels: codes.map(c => map[c]), datasets, fmtFn };
+  };
+  const catChart = (id, { labels, datasets, fmtFn }) => makeChart(id, { type: 'bar', data: { labels, datasets },
+    options: { scales: { ...baseScales, x: { ...baseScales.x, ticks: { ...baseScales.x.ticks, maxRotation: 40, font: { size: 11 } } }, y: { ...baseScales.y, ticks: { ...baseScales.y.ticks, callback: fmtFn || (v => fmt(v)) } } }, plugins: { tooltip: { callbacks: { label: moneyLabel } } } } });
+
+  catChart('chartClothing', byCat('clothing', C.clothing));
+  catChart('chartServices', byCat('services', C.services));
+  catChart('chartFuel', byCat('fuel', C.fuel));
+  catChart('chartTobacco', byCat('tobacco', C.tobacco));
+
+  const dur = D('spendingExtras', 'durables');
+  const durLabels = Object.keys(C.durables).map(c => C.durables[c]);
+  makeChart('chartDurables', { type: 'bar', data: { labels: durLabels, datasets: [{
+    label: 'Households that bought (last year)',
+    data: Object.keys(C.durables).map(c => sumBy(dur.filter(d => d.code === c), 'w')),
+    backgroundColor: '#4f46e5', borderRadius: 4, borderSkipped: false, maxBarThickness: 26 }] },
+    options: { indexAxis: 'y', scales: { ...baseScales, x: { ...baseScales.x, ticks: { ...baseScales.x.ticks, callback: v => fmt(v) } }, y: { ...baseScales.y, ticks: { ...baseScales.y.ticks, autoSkip: false, font: { size: 11 } } } }, plugins: { legend: { display: false } } } });
+
+  const oc = D('spendingExtras', 'online_channels');
+  const ocLabels = ['Medicine', 'Services', 'Education', 'Fuel & light', 'Toilet articles'];
+  makeChart('chartOnlineChannels', { type: 'bar', data: { labels: ocLabels, datasets: ['Rural', 'Urban'].map((s, i) => ({
+    label: s, data: ocLabels.map(c => sumBy(oc.filter(d => d.sector === s && d.channel === c), 'w')),
+    backgroundColor: i ? '#0e9f8a' : '#1d4ed8', borderRadius: 4, borderSkipped: false, maxBarThickness: 26 })) },
+    options: { scales: { ...baseScales, x: { ...baseScales.x, ticks: { ...baseScales.x.ticks, maxRotation: 40, font: { size: 11 } } }, y: { ...baseScales.y, ticks: { ...baseScales.y.ticks, callback: v => fmt(v) } } } } });
 }
 
 /* ---------- Schemes ---------- */
@@ -177,9 +232,68 @@ function updateSchemes() {
     { label: 'Government school', data: gLabels.map(x => gv.find(d => d.sector === x)?.govt || 0), backgroundColor: '#1d4ed8', borderRadius: 4, borderSkipped: false, maxBarThickness: 40 },
     { label: 'Private school', data: gLabels.map(x => gv.find(d => d.sector === x)?.private || 0), backgroundColor: '#0e9f8a', borderRadius: 4, borderSkipped: false, maxBarThickness: 40 }] },
     options: { scales: { ...baseScales, y: { ...baseScales.y, ticks: { ...baseScales.y.ticks, callback: v => fmt(v) } } } } });
+
+  const sb = D('schemes', 'school_benefits');
+  const sbLabels = ['Free textbooks', 'Free stationery', 'Free school bag', 'Fee waiver'];
+  const sbKey = { 'Free textbooks': 'textbooks', 'Free stationery': 'stationery', 'Free school bag': 'school_bag', 'Fee waiver': 'fee_waiver' };
+  makeChart('chartSchoolBenefits', { type: 'bar', data: { labels: ['Rural', 'Urban'], datasets: sbLabels.map((l, i) => ({
+    label: l, data: ['Rural', 'Urban'].map(s => sb.find(d => d.sector === s)?.[sbKey[l]] || 0),
+    backgroundColor: THEME.palette[i % THEME.palette.length], borderRadius: 4, borderSkipped: false, maxBarThickness: 26 })) },
+    options: { scales: { ...baseScales, y: { ...baseScales.y, ticks: { ...baseScales.y.ticks, callback: v => fmt(v) } } } } });
+
+  const sm = D('schemes', 'school_meals');
+  const smYes = sumBy(sm.filter(d => d.got === 'Yes'), 'w');
+  const smNo = sumBy(sm.filter(d => d.got === 'No'), 'w');
+  makeChart('chartSchoolMeals', { type: 'doughnut', data: { labels: ['Get school meal', 'No school meal'], datasets: [{ data: [smYes, smNo], backgroundColor: ['#0e9f8a', '#c8cfd9'], borderWidth: 0, hoverOffset: 6 }] }, options: { cutout: '62%', plugins: { legend: { position: 'bottom' } } } });
+
+  const ad = D('schemes', 'ayushman_detail');
+  const adLabels = ['Has Ayushman card', 'Hospital case last year', 'Got medical benefit'];
+  const adKey = { 'Has Ayushman card': 'card', 'Hospital case last year': 'hospitalised', 'Got medical benefit': 'got_benefit' };
+  makeChart('chartAyushmanDetail', { type: 'bar', data: { labels: ['Rural', 'Urban'], datasets: adLabels.map((l, i) => ({
+    label: l, data: ['Rural', 'Urban'].map(s => ad.find(d => d.sector === s)?.[adKey[l]] || 0),
+    backgroundColor: THEME.palette[i % THEME.palette.length], borderRadius: 4, borderSkipped: false, maxBarThickness: 26 })) },
+    options: { scales: { ...baseScales, y: { ...baseScales.y, ticks: { ...baseScales.y.ticks, callback: v => fmt(v) } } } } });
+}
+
+/* ---------- Income & spending power ---------- */
+function updateIncome() {
+  const inc = D('income');
+  const d = inc.dist;
+  const distLabels = ['Poorest 10%', 'Next 10%', '20%', '30%', '40%', '50%', '60%', '70%', 'Richest 10%', 'National avg'];
+  const distVals = [d.p10, d.p20, d.p30, d.p40, d.p50, d.p60, d.p70, d.p80, d.p90, d.mean];
+  makeChart('chartMpceDist', { type: 'bar', data: { labels: distLabels, datasets: [{
+    label: 'Monthly spending per person (₹)', data: distVals,
+    backgroundColor: distVals.map((v, i) => i === 9 ? '#b45309' : (i >= 6 ? '#be123c' : '#1d4ed8')),
+    borderRadius: 4, borderSkipped: false, maxBarThickness: 30 }] },
+    options: { scales: { ...baseScales, x: { ...baseScales.x, ticks: { ...baseScales.x.ticks, maxRotation: 40, font: { size: 11 } } }, y: { ...baseScales.y, ticks: { ...baseScales.y.ticks, callback: v => '₹' + Math.round(v).toLocaleString('en-IN') } } }, plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => ' ₹' + Math.round(getVal(c)).toLocaleString('en-IN') + ' / month' } } } } });
+
+  const st = D('income', 'state');
+  const stStates = [...new Set(st.map(d => d.state_name))]
+    .sort((a, b) => (st.find(d => d.state_name === b && d.sector === 'Rural')?.median_mpce || 0) - (st.find(d => d.state_name === a && d.sector === 'Rural')?.median_mpce || 0))
+    .slice(0, 15);
+  makeChart('chartMpceState', { type: 'bar', data: { labels: stStates, datasets: [
+    { label: 'Rural', data: stStates.map(s => st.find(d => d.state_name === s && d.sector === 'Rural')?.median_mpce || 0), backgroundColor: '#1d4ed8', borderRadius: 4, borderSkipped: false, maxBarThickness: 20 },
+    { label: 'Urban', data: stStates.map(s => st.find(d => d.state_name === s && d.sector === 'Urban')?.median_mpce || 0), backgroundColor: '#0e9f8a', borderRadius: 4, borderSkipped: false, maxBarThickness: 20 }] },
+    options: { scales: { ...baseScales, x: { ...baseScales.x, ticks: { ...baseScales.x.ticks, maxRotation: 45, font: { size: 11 } } }, y: { ...baseScales.y, ticks: { ...baseScales.y.ticks, callback: v => '₹' + Math.round(v).toLocaleString('en-IN') } } } } });
+
+  const byCode = (key, map, valKey = 'median_mpce') => {
+    const rows = D('income', key);
+    return Object.keys(map).map(c => [map[c], sumBy(rows.filter(d => d.code === c), valKey)]).filter(e => e[1] > 0).sort((a, b) => b[1] - a[1]);
+  };
+  const hhChart = (id, entries) => makeChart(id, { type: 'bar', data: { labels: entries.map(e => e[0]), datasets: [{
+    label: 'Median monthly spending per person (₹)', data: entries.map(e => e[1]),
+    backgroundColor: '#4f46e5', borderRadius: 4, borderSkipped: false, maxBarThickness: 30 }] },
+    options: { scales: { ...baseScales, x: { ...baseScales.x, ticks: { ...baseScales.x.ticks, maxRotation: 30, font: { size: 11 } } }, y: { ...baseScales.y, ticks: { ...baseScales.y.ticks, callback: v => '₹' + Math.round(v).toLocaleString('en-IN') } } }, plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => ' ₹' + Math.round(getVal(c)).toLocaleString('en-IN') + ' / month' } } } } });
+
+  hhChart('chartMpceHHType', byCode('hhtype', C.hhtype));
+  hhChart('chartMpceReligion', byCode('religion', C.religion));
+  hhChart('chartMpceLand', byCode('land', C.land));
+
+  const b = inc.budget;
+  makeChart('chartBudgetSplit', { type: 'doughnut', data: { labels: ['Food', 'Everything else'], datasets: [{ data: [b.food_share_pct, +(100 - b.food_share_pct).toFixed(1)], backgroundColor: ['#b45309', '#1d4ed8'], borderWidth: 0, hoverOffset: 6 }] }, options: { cutout: '62%', plugins: { legend: { position: 'bottom' }, tooltip: { callbacks: { label: c => ' ' + getVal(c) + '% of budget' } } } } });
 }
 
 export const RENDERERS = {
   overview: updateOverview, people: updatePeople, households: updateHouseholds,
-  spending: updateSpending, schemes: updateSchemes,
+  spending: updateSpending, schemes: updateSchemes, income: updateIncome,
 };

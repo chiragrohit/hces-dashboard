@@ -94,5 +94,45 @@ export const C = {
     "6": "Only gifts/charities",
     "7": "Received free through PDS",
     "9": "Others"
+  },
+  "clothing": {
+    "379": "clothing: sub-total",
+    "389": "bedding, etc.: sub-total",
+    "399": "footwear: sub-total"
+  },
+  "services": {
+    "409": "education: sub-total",
+    "419": "medical - hospitalisation: sub-total",
+    "429": "medical - non- hospitalisation: sub-total",
+    "499": "consumer services excluding conveyance: sub-total",
+    "519": "conveyance: sub-total",
+    "539": "house rent, garage rent (imputed)"
+  },
+  "fuel": {
+    "333": "dung cake",
+    "336": "matches (box)",
+    "337": "coal",
+    "340": "other natural gas (CNG, etc.)",
+    "341": "charcoal",
+    "342": "candle (no.)",
+    "343": "biogas/gobar gas",
+    "344": "petrol (litre)",
+    "345": "diesel (litre)",
+    "346": "others (other fuel)"
+  },
+  "tobacco": {
+    "319": "tobacco: sub-total",
+    "329": "intoxicants: sub-total"
+  },
+  "durables": {
+    "580": "electric fan",
+    "623": "mobile handset",
+    "560": "television",
+    "590": "water purifier",
+    "588": "refrigerator/freezers",
+    "585": "washing machine",
+    "601": "motor cycle, scooter",
+    "581": "air conditioner",
+    "602": "motor car, jeep"
   }
 };

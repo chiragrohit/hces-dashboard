@@ -19,6 +19,12 @@ const CANVAS = {
   ration: 'chartRation', ujjwala: 'chartUjjwala',
   foodItems: 'chartFoodItems', perHH: 'chartPerHH', foodSource: 'chartFoodSource',
   pds: 'chartPDS', lpg: 'chartLPG', electricity: 'chartElectricity', ayushman: 'chartAyushman', school: 'chartSchool', schoolSplit: 'chartSchoolSplit',
+  literacy: 'chartLiteracy', employment: 'chartEmployment', ceremony: 'chartCeremony',
+  clothing: 'chartClothing', services: 'chartServices', fuel: 'chartFuel', tobacco: 'chartTobacco',
+  durables: 'chartDurables', onlineChannels: 'chartOnlineChannels',
+  mpceDist: 'chartMpceDist', mpceState: 'chartMpceState', mpceHHType: 'chartMpceHHType',
+  mpceReligion: 'chartMpceReligion', mpceLand: 'chartMpceLand', budgetSplit: 'chartBudgetSplit',
+  schoolBenefits: 'chartSchoolBenefits', schoolMeals: 'chartSchoolMeals', ayushmanDetail: 'chartAyushmanDetail',
 };
 const chartId = CANVAS[key] || key;
 
@@ -31,6 +37,12 @@ const SECTION = {
   chartRation: 'households', chartUjjwala: 'households',
   chartFoodItems: 'spending', chartPerHH: 'spending', chartFoodSource: 'spending',
   chartPDS: 'schemes', chartLPG: 'schemes', chartElectricity: 'schemes', chartAyushman: 'schemes', chartSchool: 'schemes', chartSchoolSplit: 'schemes',
+  chartLiteracy: 'people', chartEmployment: 'households', chartCeremony: 'households',
+  chartClothing: 'spending', chartServices: 'spending', chartFuel: 'spending', chartTobacco: 'spending',
+  chartDurables: 'spending', chartOnlineChannels: 'spending',
+  chartMpceDist: 'income', chartMpceState: 'income', chartMpceHHType: 'income',
+  chartMpceReligion: 'income', chartMpceLand: 'income', chartBudgetSplit: 'income',
+  chartSchoolBenefits: 'schemes', chartSchoolMeals: 'schemes', chartAyushmanDetail: 'schemes',
 };
 
 const TBL = {
@@ -63,6 +75,24 @@ const TBL = {
   chartAyushman: { key: 'schemes.ayushman' },
   chartSchool: { key: 'schemes.school' },
   chartSchoolSplit: { key: 'schemes.school_govt_private' },
+  chartLiteracy: { key: 'people.literacy' },
+  chartEmployment: { key: 'householdExtras.employment' },
+  chartCeremony: { key: 'householdExtras.ceremony' },
+  chartClothing: { key: 'spendingExtras.clothing', map: 'clothing' },
+  chartServices: { key: 'spendingExtras.services', map: 'services' },
+  chartFuel: { key: 'spendingExtras.fuel', map: 'fuel' },
+  chartTobacco: { key: 'spendingExtras.tobacco', map: 'tobacco' },
+  chartDurables: { key: 'spendingExtras.durables', map: 'durables' },
+  chartOnlineChannels: { key: 'spendingExtras.online_channels' },
+  chartMpceDist: { key: 'income.dist' },
+  chartMpceState: { key: 'income.state' },
+  chartMpceHHType: { key: 'income.hhtype', map: 'hhtype' },
+  chartMpceReligion: { key: 'income.religion', map: 'religion' },
+  chartMpceLand: { key: 'income.land', map: 'land' },
+  chartBudgetSplit: { key: 'income.budget' },
+  chartSchoolBenefits: { key: 'schemes.school_benefits' },
+  chartSchoolMeals: { key: 'schemes.school_meals' },
+  chartAyushmanDetail: { key: 'schemes.ayushman_detail' },
 };
 
 const COLS = {
@@ -75,16 +105,25 @@ const COLS = {
   households_consuming: 'Households consuming (est.)', attended: 'Attended school',
   household_type: 'Main income source', religion: 'Religion', dwelling_type: 'House type',
   cooking_energy: 'Cooking fuel', land_ownership: 'Land', ration_card: 'Ration card',
+  status: 'Employment', lit: 'Literacy', median_mpce: 'Median ₹/person/month', mean_mpce: 'Average ₹/person/month',
+  channel: 'Online category', textbooks: 'Free textbooks (est.)', stationery: 'Free stationery (est.)',
+  school_bag: 'Free bags (est.)', fee_waiver: 'Fee waiver (est.)', card: 'Ayushman card (est.)',
+  hospitalised: 'Hospital cases (est.)', got_benefit: 'Medical benefit (est.)',
+  p10: '10th pct', p20: '20th pct', p30: '30th pct', p40: '40th pct', p50: 'Median',
+  p60: '60th pct', p70: '70th pct', p80: '80th pct', p90: '90th pct', mean: 'Average',
+  food_cr: 'Food (Cr Rs)', total_cr: 'Total (Cr Rs)', food_share_pct: 'Food share (%)',
 };
-const MONEY = new Set(['total_value_cr', 'ooh_consumption_cr', 'avg_consumption_per_item']);
-const COUNT = new Set(['w', 'estimated_population', 'estimated_count', 'estimated_households', 'govt', 'private', 'total_quantity', 'households_consuming']);
+const MONEY = new Set(['total_value_cr', 'ooh_consumption_cr', 'avg_consumption_per_item', 'median_mpce', 'mean_mpce', 'food_cr', 'total_cr']);
+const COUNT = new Set(['w', 'estimated_population', 'estimated_count', 'estimated_households', 'govt', 'private', 'total_quantity', 'households_consuming', 'textbooks', 'stationery', 'school_bag', 'fee_waiver', 'card', 'hospitalised', 'got_benefit']);
 
 let filters = {};   // active sector/state filters on this page
 let csvData = null; // last rendered table, for CSV export
 
 function getRows(spec) {
   const parts = spec.key.split('.');
-  return D(parts[0], parts[1]);
+  let rows = D(parts[0], parts[1]);
+  if (rows && !Array.isArray(rows)) rows = [rows]; // single-object aggregates (income.dist / income.budget)
+  return rows;
 }
 
 function buildFilters() {
@@ -92,7 +131,8 @@ function buildFilters() {
   el.innerHTML = '';
   el.hidden = false;
   const rows = getRows(TBL[chartId]) || [];
-  const first = rows[0] || {};
+  const first = rows[0];
+  if (!first || typeof first !== 'object') { el.hidden = true; return; }
   let any = false;
   if ('sector' in first) { addFilter('sector', 'Sector', [...new Set(rows.map(r => r.sector))]); any = true; }
   if ('state_name' in first) { addFilter('state', 'State / UT', [...new Set(rows.map(r => r.state_name))].sort()); any = true; }
@@ -133,7 +173,11 @@ function renderTable() {
     data = entries.map(([k, v]) => [map[k] || (spec.group.map ? 'Code ' + k : k), v]);
   } else {
     headers = Object.keys(rows[0] || {});
-    data = rows.map(r => headers.map(h => r[h]));
+    const map = spec.map ? C[spec.map] : null;
+    data = rows.map(r => headers.map(h => {
+      const v = r[h];
+      return map && (h === 'code') ? (map[String(v)] || v) : v;
+    }));
   }
   const tbl = document.getElementById('dTable');
   tbl.innerHTML = '';
