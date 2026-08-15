@@ -19,10 +19,16 @@ const charts = {};
 let focusChart = null; // when set, only that chart id renders (detail page)
 
 /* Zoom/pan config shared by all cartesian charts.
- * chartjs-plugin-zoom expects wheel/pinch/drag under `zoom`, pan at top. */
+ * chartjs-plugin-zoom expects wheel/pinch/drag under `zoom`, pan at top,
+ * and limits at the TOP level (options.limits, not zoom.limits).
+ * limits 'original' keeps pan/zoom inside the data range. */
 export const ZOOM = {
   zoom: { wheel: { enabled: true, speed: 0.05 }, mode: 'xy' },
   pan: { enabled: true, mode: 'xy' },
+  limits: {
+    x: { min: 'original', max: 'original' },
+    y: { min: 'original', max: 'original' },
+  },
 };
 
 function onReady(chart) {

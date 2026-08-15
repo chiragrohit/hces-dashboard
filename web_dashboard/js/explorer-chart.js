@@ -34,7 +34,14 @@ export function drawChart(rows, dim, dim2, meas) {
     options.indexAxis = labels.length > 10 ? 'y' : 'x';
     options.scales = { ...baseScales };
     options.plugins = {
-      zoom: { zoom: { wheel: { enabled: true, speed: 0.05 }, mode: 'xy' }, pan: { enabled: true, mode: 'xy' } },
+      zoom: {
+        zoom: { wheel: { enabled: true, speed: 0.05 }, mode: 'xy' },
+        pan: { enabled: true, mode: 'xy' },
+        limits: {
+          x: { min: 'original', max: 'original' },
+          y: { min: 'original', max: 'original' },
+        },
+      },
       tooltip: { callbacks: { title: items => items.length ? full[items[0].dataIndex] : '', label: c => (money ? inr(c.parsed[options.indexAxis === 'y' ? 'x' : 'y']) : fmt(c.parsed[options.indexAxis === 'y' ? 'x' : 'y'])) } },
     };
     if (options.indexAxis === 'y') {
