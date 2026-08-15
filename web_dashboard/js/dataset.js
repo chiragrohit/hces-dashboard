@@ -107,22 +107,23 @@ function renderPageHead() {
 
 function buildFilters() {
   const panel = $('filters');
-  // only categorical columns with a label map get dropdowns; sampling
-  // identifiers (Stratum, Sample_Household_No, ...) and plain counts have
-  // no survey labels and are left as table columns, not filters
+  // all low-cardinality columns get a dropdown. Columns with a label map
+  // (Sector, State, ...) show words; sampling identifiers and plain counts
+  // (Stratum, Panel, Sample_Household_No, ...) show raw codes, marked (code).
+  const hasMap = c => !!(c.meaning || c.state_meaning || c.item_meaning);
   FILTER_COLS = ENTRY.columns
     .filter(c => c.values && c.values.length && c.distinct > 1 && c.distinct <= 60)
-    .filter(c => c.meaning || c.state_meaning || c.item_meaning)
-    .sort((a, b) => a.distinct - b.distinct);
+    .sort((a, b) => (hasMap(b) - hasMap(a)) || (a.distinct - b.distinct));
 
   panel.innerHTML = FILTER_COLS.map(c => `
     <div class="field">
-      <label for="f-${c.name}">${c.name}</label>
+      <label for="f-${c.name}">${c.name}${hasMap(c) ? '' : ' <span class="rawtag">code</span>'}</label>
       <select id="f-${c.name}" data-col="${c.name}" onchange="onFilterChange('${c.name}')">
         <option value="">All</option>
         ${c.values.map(v => `<option value="${String(v.value).replace(/"/g, '&quot;')}">${decode(c, v.value)}</option>`).join('')}
       </select>
-    </div>`).join('');
+    </div>`).join('') +
+    '<span class="raw-note">Columns marked “code” show raw survey values (sampling identifiers / plain numbers) without human labels.</span>';
 
   // set select values from URL params
   const { filters } = readParams();
