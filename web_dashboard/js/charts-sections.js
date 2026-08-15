@@ -266,8 +266,8 @@ function drawMpceCurve() {
   const entries = Object.entries(groups).sort((a, b) => b[1][49] - a[1][49]);
   makeChart('chartMpceCurve', { type: 'line', data: { labels, datasets: entries.map(([g, pts], i) => ({
     label: g, data: pts, borderColor: palette[i % palette.length], backgroundColor: palette[i % palette.length],
-    borderWidth: 2, pointRadius: 0, pointHitRadius: 12, tension: 0.25, fill: false })) },
-    options: { scales: { ...baseScales, x: { ...baseScales.x, title: { display: true, text: 'Percentile of households (poorest → richest)', font: { size: 11 } }, ticks: { ...baseScales.x.ticks, maxRotation: 0, autoSkip: true, maxTicksLimit: 10, callback: v => v + '%' } }, y: { ...baseScales.y, ticks: { ...baseScales.y.ticks, callback: v => '₹' + Math.round(v).toLocaleString('en-IN') } } }, plugins: { legend: { position: 'bottom' }, tooltip: { callbacks: { label: c => ' ' + c.dataset.label + ': ₹' + Math.round(getVal(c)).toLocaleString('en-IN') + ' / month' } }, cutline: { enabled: true, fmt: v => ' ₹' + Math.round(v).toLocaleString('en-IN') } } } });
+    borderWidth: 2, pointRadius: 0, tension: 0.25, fill: false })) },
+    options: { scales: { ...baseScales, x: { ...baseScales.x, title: { display: true, text: 'Percentile of households (poorest → richest)', font: { size: 11 } }, ticks: { ...baseScales.x.ticks, maxRotation: 0, autoSkip: true, maxTicksLimit: 10, callback: v => v + '%' } }, y: { ...baseScales.y, ticks: { ...baseScales.y.ticks, callback: v => '₹' + Math.round(v).toLocaleString('en-IN') } } }, plugins: { legend: { position: 'bottom' }, tooltip: { enabled: false }, cutline: { enabled: true, fmt: v => ' ₹' + Math.round(v).toLocaleString('en-IN') } } } });
 }
 
 function updateIncome() {  // spending-power cluster inside the Spending section
