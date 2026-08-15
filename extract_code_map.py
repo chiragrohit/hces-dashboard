@@ -20,6 +20,8 @@ import re
 import duckdb
 import pypdf
 
+from pipeline_common import STATE_NAMES
+
 BASE = os.path.dirname(os.path.abspath(__file__))
 PDF = os.path.join(BASE, "hces-code", "HCES_2023-24_Questionnaire.pdf")
 OCR_MD = os.path.join(BASE, "hces-code", "HCES-ocr-mistral", "markdown.md")
@@ -518,12 +520,17 @@ def main():
             if miss:
                 errors.append(f"{t}.{name}: unmapped values {miss}")
 
-    # 3. State codes from the official table (census codes == data codes here)
+    # 3. State codes from the official table (census codes == data codes here);
+    #    falls back to the state names shared with the aggregation pipeline
     state_codes = {}
-    with open(STATE_CSV, encoding="utf-8-sig") as f:
-        for row in csv.reader(f):
-            if len(row) >= 2 and row[0].isdigit() and row[1].strip():
-                state_codes[row[0].zfill(2)] = STATE_NAME_FIX.get(row[1].strip(), row[1].strip())
+    try:
+        with open(STATE_CSV, encoding="utf-8-sig") as f:
+            for row in csv.reader(f):
+                if len(row) >= 2 and row[0].isdigit() and row[1].strip():
+                    state_codes[row[0].zfill(2)] = STATE_NAME_FIX.get(row[1].strip(), row[1].strip())
+    except FileNotFoundError:
+        print("WARNING: tabulation_state_code.csv missing - using pipeline state names")
+        state_codes = dict(STATE_NAMES)
     # sanity: data State values must be covered
     state_miss = set()
     for t in ["household_demographics"]:
