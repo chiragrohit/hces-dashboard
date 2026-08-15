@@ -259,11 +259,13 @@ function updateSchemes() {
 /* ---------- Income & spending power ---------- */
 function drawMpceCurve() {
   const curves = D('income', 'curves');
-  const f = (document.getElementById('mpceFilter') || {}).value || 'sector';
+  const f = (document.getElementById('mpceFilter') || {}).value || window.CURVE_FILTER || 'sector';
   const groups = curves[f] || {};
   const labels = Array.from({ length: 99 }, (_, i) => i + 1);
   const palette = ['#1d4ed8', '#0e9f8a', '#b45309', '#be123c', '#4f46e5', '#0891b2', '#65a30d', '#7c3aed', '#dc2626', '#2563eb', '#d97706', '#db2777'];
-  const entries = Object.entries(groups).sort((a, b) => b[1][49] - a[1][49]);
+  const MAP = { hhtype: C.hhtype, social: C.social, religion: C.religion, land: C.land, cooking: C.cooking, ration: C.ration, dwelling: C.dwelling };
+  const labelOf = g => (MAP[f] || {})[String(g)] || g;
+  const entries = Object.entries(groups).map(([g, pts]) => [labelOf(g), pts]).sort((a, b) => b[1][49] - a[1][49]);
   makeChart('chartMpceCurve', { type: 'line', data: { labels, datasets: entries.map(([g, pts], i) => ({
     label: g, data: pts, borderColor: palette[i % palette.length], backgroundColor: palette[i % palette.length],
     borderWidth: 2, pointRadius: 0, tension: 0.25, fill: false })) },

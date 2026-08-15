@@ -140,7 +140,8 @@ function buildFilters() {
     [['sector', 'Rural / Urban'], ['state', 'State'], ['hhtype', 'Household type'], ['social', 'Social group'], ['religion', 'Religion'], ['land', 'Land ownership'], ['cooking', 'Cooking fuel'], ['ration', 'Ration card'], ['dwelling', 'House type'], ['month', 'Survey month']]
       .forEach(([v, t]) => { const o = document.createElement('option'); o.value = v; o.textContent = t; sel.appendChild(o); });
     sel.value = filters.curve || 'sector';
-    sel.addEventListener('change', () => { filters.curve = sel.value; rerender(); });
+    window.CURVE_FILTER = filters.curve || 'sector';
+    sel.addEventListener('change', () => { filters.curve = sel.value; window.CURVE_FILTER = sel.value; rerender(); });
     wrap.appendChild(lab); wrap.appendChild(sel);
     el.appendChild(wrap);
     return;
