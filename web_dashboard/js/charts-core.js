@@ -1,5 +1,7 @@
 /* Chart.js scaffolding: theme, shared scales, and the makeChart wrapper.
- * Requires the Chart.js global (loaded via CDN before this module). */
+ * Requires the Chart.js global (loaded via CDN before this module).
+ * Zoom/pan (chartjs-plugin-zoom, loaded via CDN) applies to cartesian
+ * charts: scroll-wheel zooms, drag pans, double-click resets. */
 
 import { fmt, getVal } from './util.js';
 
@@ -15,6 +17,21 @@ export const baseScales = {
 
 const charts = {};
 let focusChart = null; // when set, only that chart id renders (detail page)
+
+/* Zoom/pan config shared by all cartesian charts.
+ * chartjs-plugin-zoom expects wheel/pinch/drag under `zoom`, pan at top. */
+export const ZOOM = {
+  zoom: { wheel: { enabled: true, speed: 0.05 }, mode: 'xy' },
+  pan: { enabled: true, mode: 'xy' },
+};
+
+function onReady(chart) {
+  /* double-click resets zoom */
+  const el = chart.canvas;
+  if (el && el._zoomReset) return;
+  el._zoomReset = () => { if (chart.zoom) chart.resetZoom(); };
+  el.addEventListener('dblclick', el._zoomReset);
+}
 
 /* Called by the detail page before rendering so only its chart mounts. */
 export function setFocusChart(id) { focusChart = id; }
@@ -41,7 +58,9 @@ export function makeChart(id, cfg) {
           callbacks: { label: ctx => ' ' + fmt(getVal(ctx)) },
           ...(cfg.options?.plugins?.tooltip || {}),
         },
+        ...(cfg.options?.scales ? { zoom: { ...ZOOM, ...(cfg.options?.plugins?.zoom || {}) } } : {}),
       },
     },
   });
+  onReady(charts[id]);
 }
