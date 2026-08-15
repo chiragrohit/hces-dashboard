@@ -289,7 +289,7 @@ function downloadCsv() {
       <div class="prov-row"><span class="prov-k">File</span><code>${prov.file}</code></div>
       <div class="prov-row"><span class="prov-k">Columns</span>${prov.cols.map(c => `<code>${c}</code>`).join(' ')}</div>
       <div class="prov-row"><span class="prov-k">Aggregate</span><code>data/${prov.agg}</code></div>
-      <p class="prov-note">Weights use the survey <code>Multiplier</code>, normalized to national estimates for display. Open the <a href="/metadata">data catalog</a> for the full schema and value counts.</p>`;
+      ${TBL[chartId] && TBL[chartId].curve ? `<p class="prov-note">Each p1–p99 value is the monthly per-capita expenditure (MONTHLY_CONSUMPTION_EXP ÷ HOUSEHOLD_SIZE) at that weighted percentile: households are sorted by value and the survey <code>Multiplier</code> is accumulated, so each step covers exactly 1% of all households. Only visit-1 records are used; groups with fewer than 2,000 sampled households are omitted as noise. Open the <a href="/metadata">data catalog</a> for the full schema.</p>` : `<p class="prov-note">Weights use the survey <code>Multiplier</code>, normalized to national estimates for display. Open the <a href="/metadata">data catalog</a> for the full schema and value counts.</p>`}`;
     document.getElementById('dProvCard').hidden = false;
   }
   document.getElementById('dCsv').addEventListener('click', downloadCsv);

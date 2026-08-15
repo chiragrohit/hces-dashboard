@@ -82,7 +82,7 @@ export const PROV = {
   schoolMeals: { file: 'individual_characteristics.parquet', cols: ['Meals_From_School', 'Age', 'Multiplier'], agg: 'schemes.json' },
   ayushmanDetail: { file: 'consumption_4_2.parquet', cols: ['Ayushman_beneficiary', 'Hospitalization_case', 'Medical_benefit_received', 'Multiplier'], agg: 'schemes.json' },
   mpceDist: { file: 'supplementary_consumption.parquet', cols: ['MONTHLY_CONSUMPTION_EXP', 'HOUSEHOLD_SIZE'], agg: 'income.json' },
-  mpceCurve: { file: 'supplementary_consumption.parquet + household_economic.parquet', cols: ['MONTHLY_CONSUMPTION_EXP', 'HOUSEHOLD_SIZE', 'Household_Type', 'Social_Group_of_HH_Head', 'Religion_of_HH_Head', 'Land_Ownership', 'Energy_Source_Cooking', 'Ration_Card_Type', 'Type_of_Dwelling_Unit', 'VISIT_MONTH'], agg: 'income.json (curves)' },
+  mpceCurve: { file: 'supplementary_consumption.parquet + household_economic.parquet', cols: ['MONTHLY_CONSUMPTION_EXP', 'HOUSEHOLD_SIZE', 'Household_Type', 'Social_Group_of_HH_Head', 'Religion_of_HH_Head', 'Land_Ownership', 'Energy_Source_Cooking', 'Ration_Card_Type', 'Type_of_Dwelling_Unit', 'VISIT_MONTH'], agg: 'income.json (curves · p1–p99, weighted by Multiplier)' },
   mpceState: { file: 'supplementary_consumption.parquet', cols: ['State', 'MONTHLY_CONSUMPTION_EXP', 'HOUSEHOLD_SIZE'], agg: 'income.json' },
   budgetSplit: { file: 'food_consumption + supplementary_consumption', cols: ['Total_Consumption_Value', 'MONTHLY_CONSUMPTION_EXP'], agg: 'income.json' },
   clothing: { file: 'consumption_13.parquet', cols: ['ITEM_CODE', 'VALUE', 'Multiplier'], agg: 'spending_extras.json' },
