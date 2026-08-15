@@ -33,7 +33,7 @@ POP_SCALE = 1_428_000_000 / raw_pop
 print("  1. State-wise consumption ...")
 # Household-interview key: same HH can appear in multiple panels/sub-samples,
 # and Sample_Household_No alone repeats within an FSU. Count full interviews.
-HH_KEY = "FSU_Serial_No || '|' || State || '|' || District || '|' || Sample_Household_No || '|' || Panel || '|' || Sub_sample"
+HH_KEY = "FSU_Serial_No || '|' || State || '|' || District || '|' || Sample_Household_No || '|' || Panel || '|' || Sub_sample || '|' || Second_Stage_Stratum_No"
 state_consumption = con.execute(f"""
     SELECT 
         f.State,
@@ -508,13 +508,17 @@ def weighted_curves(rows, min_rows=1):
 def mp_rows(filter_col, from_hec=False):
     """Fetch (group, mpce, multiplier) for one filter column."""
     if from_hec:
+        # 1:1 join on the 7-part household key (Second_Stage_Stratum_No included).
         return con.execute(f"""
             WITH mp AS (
               SELECT {HH_KEY} hid, {MPCE} mpce, MULTIPLIER w
               FROM supplementary_consumption
               WHERE VISIT='1' AND MONTHLY_CONSUMPTION_EXP>0 AND HOUSEHOLD_SIZE>0
-            ), h AS (SELECT {HH_KEY} hid, {filter_col} g FROM household_economic)
-            SELECT h.g, mp.mpce, mp.w FROM mp JOIN h USING(hid) WHERE h.g IS NOT NULL
+            ), h AS (
+              SELECT {HH_KEY} hid, {filter_col} g FROM household_economic
+              WHERE {filter_col} IS NOT NULL
+            )
+            SELECT h.g, mp.mpce, mp.w FROM mp JOIN h USING(hid)
         """).fetchall()
     # direct column on supplementary (sector / state / visit month)
     return con.execute(f"""
