@@ -229,13 +229,21 @@ function applyCols() {
 /* ---- boot ------------------------------------------------------------ */
 
 async function load({ filters, page, per }) {
-  $('body').innerHTML = '<div class="loading">Loading rows…</div>';
+  const hasTable = !!$('body').querySelector('table');
+  if (hasTable) {
+    $('body').classList.add('loading-blur');   // keep the old table on screen
+    $('summary').classList.add('busy');
+  } else {
+    $('body').innerHTML = '<div class="loading">Loading rows…</div>';
+  }
   try {
     const data = await fetchPage(filters, page, per);
-    // keep filters consistent: if the server row set changed, selects are already synced
     renderTable(data);
   } catch (e) {
     $('body').innerHTML = `<div class="error">Could not load data: ${e.message}</div>`;
+  } finally {
+    $('body').classList.remove('loading-blur');
+    $('summary').classList.remove('busy');
   }
 }
 

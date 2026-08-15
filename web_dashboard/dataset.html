@@ -88,6 +88,8 @@
 
   .error { color: var(--rose); background: #fef2f2; border: 1px solid #fecaca; border-radius: 10px; padding: 14px 18px; font-size: 0.88rem; }
   .loading { color: var(--muted); padding: 40px; text-align: center; }
+  #body.loading-blur .table-scroll { opacity: 0.55; transition: opacity 0.15s ease; }
+  .summary.busy::after { content: " · loading…"; color: var(--accent); font-style: italic; }
 
   @keyframes rise { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: none; } }
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
