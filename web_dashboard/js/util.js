@@ -34,6 +34,7 @@ export const getVal = ctx => {
 export const moneyLabel = ctx => ' ' + fmtCr(getVal(ctx));
 export const rupLabel = ctx => ' ₹' + Math.round(getVal(ctx)).toLocaleString('en-IN');
 export const inrTicks = v => Math.round(v).toLocaleString('en-IN');
+export const crTicks = v => fmtCr(v);
 export const sumBy = (arr, k) => arr.reduce((s, d) => s + (d[k] || 0), 0);
 
 // Truncate long labels for chart axes/legends; full text stays in tooltips.

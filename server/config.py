@@ -10,7 +10,7 @@ PORT = 8080
 MEMORY_LIMIT = "2GB"
 QUERY_ROW_LIMIT = 5000
 
-DASHBOARD_PATHS = {"/", "/people", "/households", "/spending", "/income", "/schemes", "/consumption", "/demographics"}
+DASHBOARD_PATHS = {"/", "/people", "/households", "/spending", "/schemes", "/consumption", "/demographics", "/income"}
 PAGES = {"/metadata": "metadata.html", "/details": "detail.html", "/explore": "explorer.html"}
 
 # OpenCode Go (subscription) endpoint for the "ask in English" feature

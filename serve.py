@@ -10,7 +10,7 @@ def main():
     httpd = create_httpd()
     print(f"HCES Dashboard running at http://localhost:{config.PORT}", flush=True)
     print("  /              Overview", flush=True)
-    print("  /people|/households|/spending|/income|/schemes   Tabs", flush=True)
+    print("  /people|/households|/spending|/schemes   Tabs", flush=True)
     print("  /details?id=   Chart detail page", flush=True)
     print("  /explore       Query explorer", flush=True)
     print("  /metadata      Data catalog", flush=True)

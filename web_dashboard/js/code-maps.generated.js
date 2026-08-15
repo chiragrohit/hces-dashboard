@@ -109,16 +109,20 @@ export const C = {
     "539": "house rent, garage rent (imputed)"
   },
   "fuel": {
+    "331": "firewood and chips",
+    "332": "electricity",
     "333": "dung cake",
+    "334": "kerosene - PDS",
+    "335": "kerosene - other sources",
     "336": "matches (box)",
     "337": "coal",
+    "338": "LPG",
     "340": "other natural gas (CNG, etc.)",
     "341": "charcoal",
     "342": "candle (no.)",
     "343": "biogas/gobar gas",
-    "344": "petrol (litre)",
-    "345": "diesel (litre)",
-    "346": "others (other fuel)"
+    "346": "others (other fuel)",
+    "096": "other fuel"
   },
   "tobacco": {
     "319": "tobacco: sub-total",

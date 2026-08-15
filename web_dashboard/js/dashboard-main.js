@@ -7,8 +7,8 @@ import { setShowValues } from './charts-core.js';
 import { wireModal } from './modal.js';
 import { fmt } from './util.js';
 
-const ROUTES = ['overview', 'people', 'households', 'spending', 'income', 'schemes'];
-const ALIASES = { consumption: 'spending', demographics: 'people' };
+const ROUTES = ['overview', 'people', 'households', 'spending', 'schemes'];
+const ALIASES = { consumption: 'spending', demographics: 'people', income: 'spending' };
 
 function routeName() {
   const seg = location.pathname.replace(/\/+$/, '').split('/').pop() || 'overview';

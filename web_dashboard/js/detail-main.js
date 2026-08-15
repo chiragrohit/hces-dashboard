@@ -22,8 +22,7 @@ const CANVAS = {
   literacy: 'chartLiteracy', employment: 'chartEmployment',
   clothing: 'chartClothing', services: 'chartServices', fuel: 'chartFuel', tobacco: 'chartTobacco',
   durables: 'chartDurables', onlineChannels: 'chartOnlineChannels',
-  mpceDist: 'chartMpceDist', mpceState: 'chartMpceState', mpceHHType: 'chartMpceHHType',
-  mpceReligion: 'chartMpceReligion', mpceLand: 'chartMpceLand', budgetSplit: 'chartBudgetSplit',
+  mpceDist: 'chartMpceDist', mpceState: 'chartMpceState', mpceCurve: 'chartMpceCurve', budgetSplit: 'chartBudgetSplit',
   schoolBenefits: 'chartSchoolBenefits', schoolMeals: 'chartSchoolMeals', ayushmanDetail: 'chartAyushmanDetail',
 };
 const chartId = CANVAS[key] || key;
@@ -40,8 +39,8 @@ const SECTION = {
   chartLiteracy: 'people', chartEmployment: 'households',
   chartClothing: 'spending', chartServices: 'spending', chartFuel: 'spending', chartTobacco: 'spending',
   chartDurables: 'spending', chartOnlineChannels: 'spending',
-  chartMpceDist: 'income', chartMpceState: 'income', chartMpceHHType: 'income',
-  chartMpceReligion: 'income', chartMpceLand: 'income', chartBudgetSplit: 'income',
+  chartMpceDist: 'spending', chartMpceState: 'spending', chartMpceCurve: 'spending',
+  chartBudgetSplit: 'spending',
   chartSchoolBenefits: 'schemes', chartSchoolMeals: 'schemes', chartAyushmanDetail: 'schemes',
 };
 
@@ -77,17 +76,15 @@ const TBL = {
   chartSchoolSplit: { key: 'schemes.school_govt_private' },
   chartLiteracy: { key: 'people.literacy' },
   chartEmployment: { key: 'householdExtras.employment' },
-  chartClothing: { key: 'spendingExtras.clothing', map: 'clothing' },
-  chartServices: { key: 'spendingExtras.services', map: 'services' },
-  chartFuel: { key: 'spendingExtras.fuel', map: 'fuel' },
-  chartTobacco: { key: 'spendingExtras.tobacco', map: 'tobacco' },
+  chartClothing: { key: 'spendingExtras.clothing', map: 'clothing', moneyCr: true },
+  chartServices: { key: 'spendingExtras.services', map: 'services', moneyCr: true },
+  chartFuel: { key: 'spendingExtras.fuel', map: 'fuel', moneyCr: true },
+  chartTobacco: { key: 'spendingExtras.tobacco', map: 'tobacco', moneyCr: true },
   chartDurables: { key: 'spendingExtras.durables', map: 'durables' },
   chartOnlineChannels: { key: 'spendingExtras.online_channels' },
   chartMpceDist: { key: 'income.dist' },
   chartMpceState: { key: 'income.state' },
-  chartMpceHHType: { key: 'income.hhtype', map: 'hhtype' },
-  chartMpceReligion: { key: 'income.religion', map: 'religion' },
-  chartMpceLand: { key: 'income.land', map: 'land' },
+  chartMpceCurve: { key: 'income.curves', curve: true, curveMap: { sector: null, state: null, hhtype: 'hhtype', social: 'social', religion: 'religion', land: 'land', cooking: 'cooking', ration: 'ration', dwelling: 'dwelling', month: null } },
   chartBudgetSplit: { key: 'income.budget' },
   chartSchoolBenefits: { key: 'schemes.school_benefits' },
   chartSchoolMeals: { key: 'schemes.school_meals' },
@@ -110,15 +107,27 @@ const COLS = {
   hospitalised: 'Hospital cases (est.)', got_benefit: 'Medical benefit (est.)',
   p10: '10th pct', p20: '20th pct', p30: '30th pct', p40: '40th pct', p50: 'Median',
   p60: '60th pct', p70: '70th pct', p80: '80th pct', p90: '90th pct', mean: 'Average',
+  p25: '25th pct', p75: '75th pct', filter: 'Compare by', group: 'Group',
   food_cr: 'Food (Cr Rs)', total_cr: 'Total (Cr Rs)', food_share_pct: 'Food share (%)',
 };
-const MONEY = new Set(['total_value_cr', 'ooh_consumption_cr', 'avg_consumption_per_item', 'median_mpce', 'mean_mpce', 'food_cr', 'total_cr']);
+const MONEY = new Set(['total_value_cr', 'ooh_consumption_cr', 'avg_consumption_per_item', 'median_mpce', 'mean_mpce', 'food_cr', 'total_cr', 'p10', 'p25', 'p50', 'p75', 'p90']);
 const COUNT = new Set(['w', 'estimated_population', 'estimated_count', 'estimated_households', 'govt', 'private', 'total_quantity', 'households_consuming', 'textbooks', 'stationery', 'school_bag', 'fee_waiver', 'card', 'hospitalised', 'got_benefit']);
 
 let filters = {};   // active sector/state filters on this page
 let csvData = null; // last rendered table, for CSV export
 
 function getRows(spec) {
+  if (spec.curve) {
+    // Flatten percentile curves: one row per (filter, group) with summary points.
+    const curves = D('income', 'curves');
+    const out = [];
+    for (const [filter, groups] of Object.entries(curves)) {
+      for (const [group, pts] of Object.entries(groups)) {
+        out.push({ filter, group, p10: pts[9], p25: pts[24], p50: pts[49], p75: pts[74], p90: pts[89] });
+      }
+    }
+    return out;
+  }
   const parts = spec.key.split('.');
   let rows = D(parts[0], parts[1]);
   if (rows && !Array.isArray(rows)) rows = [rows]; // single-object aggregates (income.dist / income.budget)
@@ -175,6 +184,8 @@ function renderTable() {
     const map = spec.map ? C[spec.map] : null;
     data = rows.map(r => headers.map(h => {
       const v = r[h];
+      if (spec.curve && h === 'filter') return ({ sector: 'Rural / Urban', state: 'State', hhtype: 'Household type', social: 'Social group', religion: 'Religion', land: 'Land ownership', cooking: 'Cooking fuel', ration: 'Ration card', dwelling: 'House type', month: 'Survey month' })[v] || v;
+      if (spec.curve && h === 'group') return (C[spec.curveMap[r.filter]] || {})[String(v)] || (spec.curveMap[r.filter] ? 'Code ' + v : v);
       return map && (h === 'code') ? (map[String(v)] || v) : v;
     }));
   }
@@ -193,6 +204,7 @@ function renderTable() {
       if (typeof v === 'number') {
         td.classList.add('num');
         td.textContent = MONEY.has(h) ? v.toLocaleString('en-IN', { maximumFractionDigits: 2 }) : COUNT.has(h) ? fmt(v) : String(v);
+        if (spec.moneyCr && h === 'w') td.textContent = '₹' + v.toLocaleString('en-IN', { maximumFractionDigits: 1 }) + ' Cr/month';
       } else td.textContent = v == null ? '' : String(v);
       trr.appendChild(td);
     });

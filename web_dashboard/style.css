@@ -11,8 +11,6 @@
     --accent: #1d4ed8;
     --accent-soft: #eaf0fe;
     --accent-ink: #ffffff;
-    --saffron: #e9820c;
-    --green: #14804a;
     --blue: #1d4ed8;
     --teal: #0e9f8a;
     --amber: #b45309;
@@ -41,12 +39,6 @@
   .header { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 20; }
   .header-inner { max-width: 1400px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; gap: 16px; }
   .brand { display: flex; align-items: center; gap: 12px; }
-  .brand-mark { width: 30px; height: 30px; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow-sm); border: 1px solid var(--border); flex-shrink: 0; }
-  .brand-mark i { display: block; flex: 1; }
-  .brand-mark .s { background: var(--saffron); }
-  .brand-mark .w { background: #ffffff; position: relative; }
-  .brand-mark .w::after { content: ""; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
-  .brand-mark .g { background: var(--green); }
   .brand h1 { font-size: 1.05rem; font-weight: 650; letter-spacing: -0.01em; }
   .brand .sub { font-size: 0.78rem; color: var(--muted); }
 
@@ -85,6 +77,8 @@
   .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 22px 18px; box-shadow: var(--shadow-sm); animation: rise 0.35s ease-out both; }
   .card.wide { grid-column: 1 / -1; }
   .card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
+  .card-head .chart-filter { margin-left: auto; padding: 4px 8px; border: 1px solid #c8cfd9; border-radius: 6px; font-size: 12px; font-family: inherit; color: inherit; background: #fff; }
+  @media (max-width: 640px) { .card-head { flex-wrap: wrap; } .card-head .chart-filter { margin-left: 0; } }
   .card h3 { font-size: 0.92rem; font-weight: 650; color: var(--ink); display: flex; align-items: center; gap: 8px; }
   .card h3 .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
   .chart-box { position: relative; height: 320px; }
@@ -143,7 +137,6 @@
   }
   @media (max-width: 480px) {
     .header-inner { padding: 10px 14px; }
-    .brand-mark { width: 26px; height: 26px; }
     .brand h1 { font-size: 0.92rem; }
     .nav { flex-direction: column; align-items: stretch; gap: 8px; }
     .seg { max-width: none; width: 100%; }

@@ -465,6 +465,101 @@ print("  11. Income & spending power ...")
 # Monthly per-capita consumption expenditure: visit-1 records only (one per household)
 MPCE = "MONTHLY_CONSUMPTION_EXP / NULLIF(HOUSEHOLD_SIZE, 0)"
 income = {}
+
+# Weighted percentile curves (p1..p99) per filter group. The survey multiplier
+# weights each household; a plain quantile would bias toward small-sample
+# groups, so cumulative weights are used and the value at each p is
+# interpolated between neighboring observations.
+def weighted_curves(rows, min_rows=1):
+    """rows: [(group, mpce, multiplier)] sorted later. Returns {group: [p1..p99]}."""
+    from collections import defaultdict
+    groups = defaultdict(list)
+    for g, m, w in rows:
+        if w is None or w <= 0 or m is None:
+            continue
+        groups[g].append((m, w))
+    out = {}
+    for g, pts in groups.items():
+        if len(pts) < min_rows:
+            continue  # tiny groups are noise; skip
+        pts.sort()
+        total = sum(w for _, w in pts)
+        cum = 0.0
+        res = []
+        idx = 0
+        for p in range(1, 100):
+            target = total * p / 100.0
+            while idx < len(pts) - 1 and cum + pts[idx][1] < target:
+                cum += pts[idx][1]
+                idx += 1
+            # interpolate within the bucket containing the target
+            lo_m, lo_w = pts[idx]
+            if idx + 1 < len(pts):
+                hi_m = pts[idx + 1][0]
+            else:
+                hi_m = lo_m
+            frac = 0.0
+            if lo_w > 0 and target > cum:
+                frac = min(1.0, (target - cum) / lo_w)
+            res.append(round(lo_m + frac * (hi_m - lo_m)))
+        out[g] = res
+    return out
+
+def mp_rows(filter_col, from_hec=False):
+    """Fetch (group, mpce, multiplier) for one filter column."""
+    if from_hec:
+        return con.execute(f"""
+            WITH mp AS (
+              SELECT {HH_KEY} hid, {MPCE} mpce, MULTIPLIER w
+              FROM supplementary_consumption
+              WHERE VISIT='1' AND MONTHLY_CONSUMPTION_EXP>0 AND HOUSEHOLD_SIZE>0
+            ), h AS (SELECT {HH_KEY} hid, {filter_col} g FROM household_economic)
+            SELECT h.g, mp.mpce, mp.w FROM mp JOIN h USING(hid) WHERE h.g IS NOT NULL
+        """).fetchall()
+    # direct column on supplementary (sector / state / visit month)
+    return con.execute(f"""
+        SELECT {filter_col}, {MPCE}, MULTIPLIER
+        FROM supplementary_consumption
+        WHERE VISIT='1' AND MONTHLY_CONSUMPTION_EXP>0 AND HOUSEHOLD_SIZE>0
+          AND {filter_col} IS NOT NULL
+    """).fetchall()
+
+# --- sector (Rural/Urban) ---
+income["curves"] = {}
+cur = weighted_curves([
+    ("Rural" if g == "1" else "Urban", m, w) for g, m, w in mp_rows("Sector")
+])
+income["curves"]["sector"] = cur
+
+# --- state (top states only; 36 lines are unreadable) ---
+state_rows = mp_rows("State")
+state_rows = [(STATE_NAMES.get(g, g), m, w) for g, m, w in state_rows]
+cur = weighted_curves(state_rows)
+# keep 12 biggest states by median p50
+ranked = sorted(cur.items(), key=lambda kv: kv[1][49], reverse=True)
+income["curves"]["state"] = dict(ranked[:12])
+
+# --- household-level filters via household_economic ---
+FILTERS = {
+    "hhtype": ("Household_Type", True),
+    "social": ("Social_Group_of_HH_Head", True),
+    "religion": ("Religion_of_HH_Head", True),
+    "land": ("Land_Ownership", True),
+    "cooking": ("Energy_Source_Cooking", True),
+    "ration": ("Ration_Card_Type", True),
+    "dwelling": ("Type_of_Dwelling_Unit", True),
+    "month": ("VISIT_MONTH", False),
+}
+for name, (col, via_hec) in FILTERS.items():
+    rows = mp_rows(col, via_hec)
+    if name == "month":
+        # VISIT_MONTH is like 102023 / 12024 -> month digits + year
+        def fmt_month(v):
+            v = str(v)
+            return f"{int(v[:-4])}/{v[-4:]}"
+        rows = [(fmt_month(g), m, w) for g, m, w in rows]
+    income["curves"][name] = weighted_curves(rows, min_rows=2000 if name in ("social", "religion", "cooking", "ration", "hhtype", "land", "dwelling") else 300)
+
 income["dist"] = con.execute(f"""
     SELECT round(quantile_cont({MPCE}, .1))::BIGINT p10,
            round(quantile_cont({MPCE}, .2))::BIGINT p20,
@@ -497,45 +592,6 @@ income["state"] = [
     {"state_name": r[0], "sector": r[1], "median_mpce": int(r[2])} for r in income["state"]
 ]
 
-income["hhtype"] = con.execute(f"""
-    WITH mp AS (
-      SELECT {HH_KEY} hid, {MPCE} mpce
-      FROM supplementary_consumption
-      WHERE VISIT='1' AND MONTHLY_CONSUMPTION_EXP>0 AND HOUSEHOLD_SIZE>0
-    ), h AS (SELECT {HH_KEY} hid, Household_Type code FROM household_economic)
-    SELECT h.code, round(median(mp.mpce))::BIGINT median_mpce, round(avg(mp.mpce))::BIGINT mean_mpce
-    FROM mp JOIN h USING(hid) WHERE h.code IS NOT NULL GROUP BY 1
-""").fetchall()
-income["hhtype"] = [
-    {"code": r[0], "median_mpce": int(r[1]), "mean_mpce": int(r[2])} for r in income["hhtype"]
-]
-
-income["religion"] = con.execute(f"""
-    WITH mp AS (
-      SELECT {HH_KEY} hid, {MPCE} mpce
-      FROM supplementary_consumption
-      WHERE VISIT='1' AND MONTHLY_CONSUMPTION_EXP>0 AND HOUSEHOLD_SIZE>0
-    ), h AS (SELECT {HH_KEY} hid, Religion_of_HH_Head code FROM household_economic)
-    SELECT h.code, round(median(mp.mpce))::BIGINT median_mpce
-    FROM mp JOIN h USING(hid) WHERE h.code IS NOT NULL GROUP BY 1
-""").fetchall()
-income["religion"] = [
-    {"code": r[0], "median_mpce": int(r[1])} for r in income["religion"]
-]
-
-income["land"] = con.execute(f"""
-    WITH mp AS (
-      SELECT {HH_KEY} hid, {MPCE} mpce
-      FROM supplementary_consumption
-      WHERE VISIT='1' AND MONTHLY_CONSUMPTION_EXP>0 AND HOUSEHOLD_SIZE>0
-    ), h AS (SELECT {HH_KEY} hid, Land_Ownership code FROM household_economic)
-    SELECT h.code, round(median(mp.mpce))::BIGINT median_mpce
-    FROM mp JOIN h USING(hid) WHERE h.code IS NOT NULL GROUP BY 1
-""").fetchall()
-income["land"] = [
-    {"code": r[0], "median_mpce": int(r[1])} for r in income["land"]
-]
-
 # Food vs non-food share of the total monthly budget (visit-1 weights)
 food_cr = con.execute("SELECT SUM(Total_Consumption_Value * Multiplier)/1e7 FROM food_consumption").fetchone()[0]
 total_cr = con.execute("""
@@ -552,40 +608,69 @@ print(f"    OK income.json")
 
 # ----------------------------------------------------------------
 # 12. Non-food spending (clothing, services, durables, fuel, tobacco)
+#     All money rows are converted to MONTHLY CRORE so charts are comparable:
+#     raw rupees * HH_SCALE / 1e7, then recall-period normalized
+#     (365-day blocks /12, 7-day blocks *30/7, 30-day blocks as-is).
 # ----------------------------------------------------------------
+def money_rows(sql, period):
+    """Run a weighted money query and normalize to monthly crore."""
+    rows = con.execute(sql).fetchall()
+    factor = {'30d': 1.0, '7d': 30.0 / 7.0, '365d': 1.0 / 12.0}[period]
+    out = []
+    for r in rows:
+        d = dict(zip([c[0] for c in con.description], r))
+        d["w"] = round(float(d["w"]) * HH_SCALE / 1e7 * factor, 2)
+        out.append(d)
+    return out
+
 print("  12. Non-food spending ...")
-spend_extra["clothing"] = weighted_rows("""
+# clothing: 13.1/13.2/13.3 subtotals (365-day recall)
+spend_extra["clothing"] = money_rows("""
     SELECT CASE WHEN Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
            ITEM_CODE code,
            SUM(MULTIPLIER * VALUE) w
     FROM consumption_13
     WHERE ITEM_CODE IN ('379','389','399')
     GROUP BY 1,2
-""", HH_SCALE)
-spend_extra["services"] = weighted_rows("""
+""", '365d')
+# services: education (409) + hospitalisation (419) are 365-day recall;
+# medical-other (429), consumer services (499), conveyance (519) and
+# rent (539) are 30-day. Normalize per code to monthly crore.
+SVC_FACTOR = {"409": 1.0 / 12.0, "419": 1.0 / 12.0,
+              "429": 1.0, "499": 1.0, "519": 1.0, "539": 1.0}
+_rows = con.execute("""
     SELECT CASE WHEN Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
            Item_Code_9_1_to_11_4 code,
            SUM(MULTIPLIER * Value_Rs_9_1_to_11_4) w
     FROM consumption_9_10_11
     WHERE Item_Code_9_1_to_11_4 IN ('409','419','429','499','519','539')
     GROUP BY 1,2
-""", HH_SCALE)
-spend_extra["fuel"] = weighted_rows("""
+""").fetchall()
+spend_extra["services"] = [
+    {"sector": r[0], "code": r[1],
+     "w": round(float(r[2]) * HH_SCALE / 1e7 * SVC_FACTOR.get(r[1], 1.0), 2)}
+    for r in _rows
+]
+# fuel/light: 8.1 (30-day recall). Includes electricity, LPG, firewood and
+# small fuels; petrol/diesel here are near-zero because vehicle fuel is
+# recorded under conveyance (11.1).
+spend_extra["fuel"] = money_rows("""
     SELECT CASE WHEN Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
            Item_Code_8_1 code,
            SUM(MULTIPLIER * Total_consumption_value_rs) w
     FROM consumption_8_1
-    WHERE Item_Code_8_1 IN ('333','336','337','340','341','342','343','344','345','346')
+    WHERE Item_Code_8_1 IN ('331','332','333','334','335','336','337','338','340','341','342','343','346','096')
     GROUP BY 1,2
-""", HH_SCALE)
-spend_extra["tobacco"] = weighted_rows("""
+""", '30d')
+# tobacco/intoxicants: 12.2/12.3 subtotals (7-day recall)
+spend_extra["tobacco"] = money_rows("""
     SELECT CASE WHEN Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
            Item_Code_12_series code,
            SUM(MULTIPLIER * Total_Consumption_Value_12_serie) w
     FROM consumption_12
     WHERE Item_Code_12_series IN ('319','329')
     GROUP BY 1,2
-""", HH_SCALE)
+""", '7d')
 spend_extra["durables"] = weighted_rows("""
     SELECT ITEM_CODE code,
            SUM(CASE WHEN FIRST_PURCHASE_NUMBER > 0 THEN MULTIPLIER ELSE 0 END) w
