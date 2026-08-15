@@ -15,7 +15,7 @@ import os
 PORT = 8080
 os.chdir("web_dashboard")
 
-DASHBOARD_PATHS = {"/", "/consumption", "/demographics", "/households"}
+DASHBOARD_PATHS = {"/", "/people", "/households", "/spending", "/schemes", "/consumption", "/demographics"}
 
 
 class Handler(http.server.SimpleHTTPRequestHandler):
@@ -29,9 +29,10 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
 print(f"HCES Dashboard running at http://localhost:{PORT}")
 print("  /              Overview")
-print("  /consumption   Consumption")
-print("  /demographics  Demographics")
+print("  /people        People")
 print("  /households    Households")
+print("  /spending      Spending")
+print("  /schemes       Govt schemes")
 print("  /metadata      Data catalog")
 print("Press Ctrl+C to stop")
 

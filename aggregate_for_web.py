@@ -279,6 +279,195 @@ with open(os.path.join(WEB, "food_rankings.json"), "w") as f:
     json.dump(food_rankings, f)
 print(f"    OK {len(food_rankings)} top food items")
 
+# ----------------------------------------------------------------
+# 7. People & lifestyle (marital status, internet, meals, family role)
+# ----------------------------------------------------------------
+def write_json(name, data):
+    with open(os.path.join(WEB, name), "w") as f:
+        json.dump(data, f)
+
+def weighted_rows(sql, scale=POP_SCALE):
+    rows = con.execute(sql).fetchall()
+    out = []
+    for r in rows:
+        d = dict(zip([c[0] for c in con.description], r))
+        for k, v in d.items():
+            if k.startswith("w_"):
+                d[k] = int(v * scale) if v is not None else 0
+        out.append(d)
+    return out
+
+print("  7. People & lifestyle ...")
+people = {}
+people["marital"] = weighted_rows("""
+    SELECT CASE WHEN Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
+           CASE WHEN Gender='1' THEN 'Male' ELSE 'Female' END gender,
+           Marital_Status code, SUM(Multiplier) w
+    FROM individual_characteristics
+    WHERE Age IS NOT NULL AND TRY_CAST(Age AS INT) >= 15 AND Marital_Status IS NOT NULL
+    GROUP BY 1,2,3
+""")
+people["internet"] = weighted_rows("""
+    SELECT CASE WHEN Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
+           CASE
+             WHEN TRY_CAST(Age AS INT) < 15 THEN 'Under 15'
+             WHEN TRY_CAST(Age AS INT) < 25 THEN '15-24'
+             WHEN TRY_CAST(Age AS INT) < 45 THEN '25-44'
+             ELSE '45+'
+           END age_group,
+           CASE WHEN Used_Internet_Last_30_Days='1' THEN 'Yes' ELSE 'No' END used,
+           SUM(Multiplier) w
+    FROM individual_characteristics
+    WHERE Used_Internet_Last_30_Days IN ('1','2')
+    GROUP BY 1,2,3
+""")
+people["meals"] = weighted_rows("""
+    SELECT CASE WHEN Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
+           Meals_Usually_Taken_Per_Day meals, SUM(Multiplier) w
+    FROM individual_characteristics
+    WHERE Meals_Usually_Taken_Per_Day IN ('0','1','2','3')
+    GROUP BY 1,2
+""")
+people["relation"] = weighted_rows("""
+    SELECT CASE WHEN Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
+           Relation_to_Head code, SUM(Multiplier) w
+    FROM individual_characteristics
+    WHERE Relation_to_Head IS NOT NULL
+    GROUP BY 1,2
+""")
+write_json("people.json", people)
+print(f"    OK people.json")
+
+# ----------------------------------------------------------------
+# 8. Household extras (social group, lighting, Ujjwala, HH size)
+# ----------------------------------------------------------------
+print("  8. Household extras ...")
+hh_extra = {}
+hh_extra["social_group"] = weighted_rows("""
+    SELECT CASE WHEN h.Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
+           e.Social_Group_of_HH_Head code, SUM(h.Multiplier) w
+    FROM household_demographics h JOIN household_economic e
+      ON h.FSU_Serial_No=e.FSU_Serial_No AND h.State=e.State
+     AND h.District=e.District AND h.Sample_Household_No=e.Sample_Household_No
+    WHERE e.Social_Group_of_HH_Head IS NOT NULL
+    GROUP BY 1,2
+""", HH_SCALE)
+hh_extra["lighting"] = weighted_rows("""
+    SELECT CASE WHEN h.Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
+           e.Energy_Source_Lighting code, SUM(h.Multiplier) w
+    FROM household_demographics h JOIN household_economic e
+      ON h.FSU_Serial_No=e.FSU_Serial_No AND h.State=e.State
+     AND h.District=e.District AND h.Sample_Household_No=e.Sample_Household_No
+    WHERE e.Energy_Source_Lighting IS NOT NULL
+    GROUP BY 1,2
+""", HH_SCALE)
+hh_extra["ujjwala"] = weighted_rows("""
+    SELECT CASE WHEN h.Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
+           CASE WHEN e.Benefitted_From_PMGKY='1' THEN 'Yes' ELSE 'No' END got,
+           SUM(h.Multiplier) w
+    FROM household_demographics h JOIN household_economic e
+      ON h.FSU_Serial_No=e.FSU_Serial_No AND h.State=e.State
+     AND h.District=e.District AND h.Sample_Household_No=e.Sample_Household_No
+    WHERE e.Benefitted_From_PMGKY IN ('1','2')
+    GROUP BY 1,2
+""", HH_SCALE)
+hh_extra["hh_size"] = weighted_rows("""
+    SELECT CASE WHEN Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
+           CASE
+             WHEN HH_Size_FDQ=1 THEN '1'
+             WHEN HH_Size_FDQ=2 THEN '2'
+             WHEN HH_Size_FDQ=3 THEN '3'
+             WHEN HH_Size_FDQ=4 THEN '4'
+             WHEN HH_Size_FDQ=5 THEN '5'
+             WHEN HH_Size_FDQ=6 THEN '6'
+             WHEN HH_Size_FDQ=7 THEN '7'
+             ELSE '8+'
+           END size, SUM(Multiplier) w
+    FROM household_economic
+    WHERE HH_Size_FDQ IS NOT NULL
+    GROUP BY 1,2
+""", HH_SCALE)
+write_json("household_extras.json", hh_extra)
+print(f"    OK household_extras.json")
+
+# ----------------------------------------------------------------
+# 9. Spending extras (food source, online groceries)
+# ----------------------------------------------------------------
+print("  9. Spending extras ...")
+spend_extra = {}
+spend_extra["food_source"] = weighted_rows("""
+    SELECT CASE WHEN Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
+           Source code, COUNT(*) w
+    FROM food_consumption
+    WHERE Source IS NOT NULL AND Source IN ('1','2','3','4','5','6','7','9')
+    GROUP BY 1,2
+""", 1)
+spend_extra["online_grocery"] = weighted_rows("""
+    SELECT CASE WHEN Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
+           CASE WHEN Online_Groceries='1' THEN 'Yes' ELSE 'No' END bought,
+           SUM(Multiplier) w
+    FROM consumption_4_1
+    WHERE Online_Groceries IN ('1', '2') OR Online_Groceries IS NULL
+    GROUP BY 1,2
+""", HH_SCALE)
+write_json("spending_extras.json", spend_extra)
+print(f"    OK spending_extras.json")
+
+# ----------------------------------------------------------------
+# 10. Govt schemes (PDS, LPG subsidy, electricity, Ayushman, schools)
+# ----------------------------------------------------------------
+print("  10. Govt schemes ...")
+schemes = {}
+schemes["pds"] = weighted_rows("""
+    SELECT CASE WHEN Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
+           CASE WHEN Ration_Any_Item_Last_30_Days='1' THEN 'Yes' ELSE 'No' END got,
+           SUM(Multiplier) w
+    FROM consumption_4_1
+    WHERE Ration_Any_Item_Last_30_Days IN ('1','2')
+    GROUP BY 1,2
+""", HH_SCALE)
+schemes["lpg_subsidy"] = weighted_rows("""
+    SELECT CASE WHEN Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
+           CASE WHEN LPG_subsidy_received='1' THEN 'Yes' ELSE 'No' END got,
+           SUM(Multiplier) w
+    FROM consumption_4_2
+    WHERE LPG_subsidy_received IN ('1','2')
+    GROUP BY 1,2
+""", HH_SCALE)
+schemes["free_electricity"] = weighted_rows("""
+    SELECT CASE WHEN Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
+           CASE WHEN Free_electricity='1' THEN 'Yes' ELSE 'No' END got,
+           SUM(Multiplier) w
+    FROM consumption_4_2
+    WHERE Free_electricity IN ('1','2')
+    GROUP BY 1,2
+""", HH_SCALE)
+schemes["ayushman"] = weighted_rows("""
+    SELECT CASE WHEN Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
+           CASE WHEN Ayushman_beneficiary='1' THEN 'Yes' ELSE 'No' END got,
+           SUM(Multiplier) w
+    FROM consumption_4_2
+    WHERE Ayushman_beneficiary IN ('1','2')
+    GROUP BY 1,2
+""", HH_SCALE)
+schemes["school"] = weighted_rows("""
+    SELECT CASE WHEN Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
+           CASE WHEN Any_member_attended_school='1' THEN 'Yes' ELSE 'No' END attended,
+           SUM(Multiplier) w
+    FROM consumption_4_2
+    WHERE Any_member_attended_school IN ('1','2')
+    GROUP BY 1,2
+""", HH_SCALE)
+schemes["school_govt_private"] = weighted_rows("""
+    SELECT CASE WHEN Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
+           SUM(COALESCE(Num_govt_school_attended,0) * Multiplier) govt,
+           SUM(COALESCE(Num_private_school_attended,0) * Multiplier) private
+    FROM consumption_4_2
+    GROUP BY 1
+""", HH_SCALE)
+write_json("schemes.json", schemes)
+print(f"    OK schemes.json")
+
 con.close()
 
 # Report final sizes
