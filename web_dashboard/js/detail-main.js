@@ -6,9 +6,6 @@ import { D, loadAll, setFocus, focusFilters } from './data.js';
 import { RENDERERS } from './charts-sections.js';
 import { setFocusChart } from './charts-core.js';
 import { INFO, PROV, C } from './content.js';
-
-let QUERIES = {};
-const qPromise = fetch('/data/queries.json').then(r => r.json()).then(q => { QUERIES = q; }).catch(() => {});
 import { fmt } from './util.js';
 
 const params = new URLSearchParams(location.search);
@@ -193,7 +190,6 @@ function downloadCsv() {
 }
 
 (async function main() {
-  await qPromise;
   const info = INFO[key];
   if (!info) {
     document.getElementById('dTitle').textContent = 'Chart not found';
@@ -214,8 +210,6 @@ function downloadCsv() {
       <div class="prov-row"><span class="prov-k">File</span><code>${prov.file}</code></div>
       <div class="prov-row"><span class="prov-k">Columns</span>${prov.cols.map(c => `<code>${c}</code>`).join(' ')}</div>
       <div class="prov-row"><span class="prov-k">Aggregate</span><code>data/${prov.agg}</code></div>
-      <h4>SQL query</h4>
-      <pre class="sql-block">${(QUERIES[key] || '').replace(/&/g, '&amp;').replace(/</g, '&lt;')}</pre>
       <p class="prov-note">Weights use the survey <code>Multiplier</code>, normalized to national estimates for display. Open the <a href="/metadata">data catalog</a> for the full schema and value counts.</p>`;
     document.getElementById('dProvCard').hidden = false;
   }

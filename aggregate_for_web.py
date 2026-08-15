@@ -447,48 +447,6 @@ schemes["school_govt_private"] = weighted_rows("""
 write_json("schemes.json", schemes)
 print(f"    OK schemes.json")
 
-# 11. Emit queries.json: the exact SQL behind each dashboard chart, extracted
-# from this file's source so the query text lives in exactly one place.
-print(" 11. Emit queries.json ...")
-import re as _re
-_src = open(os.path.abspath(__file__), encoding="utf-8").read()
-_raw = {}
-for _m in _re.finditer(r'(\w+)\["(\w+)"\] = weighted_rows\("""\n(.*?)\n\s*"""(?:, *\w+)?\)', _src, _re.S):
-    _raw[(_m.group(1), _m.group(2))] = _m.group(3)
-for _m in _re.finditer(r'(\w+) = con\.execute\((f)?"""\n(.*?)\n\s*"""(?:\.\w+\(\))?\)', _src, _re.S):
-    _sql = _m.group(3)
-    if _m.group(2):  # f-string -> resolve interpolations
-        _sql = _sql.replace("{HH_KEY}", HH_KEY)
-    _raw[(_m.group(1), None)] = _sql
-_CHART_QUERY = {
-    "stateConsumption": ("state_consumption", None), "sectorShare": ("state_consumption", None),
-    "ooh": ("state_consumption", None), "consumpDist": ("state_consumption", None),
-    "perHH": ("state_consumption", None),
-    "ageGroup": ("demographics", None), "gender": ("demographics", None),
-    "pyramid": ("demographics", None), "composition": ("demographics", None),
-    "education": ("education", None),
-    "hhtype": ("hh_chars", None), "religion": ("hh_chars", None),
-    "dwelling": ("hh_chars", None), "energy": ("hh_chars", None),
-    "land": ("hh_chars", None), "ration": ("hh_chars", None),
-    "marital": ("people", "marital"), "internet": ("people", "internet"),
-    "meals": ("people", "meals"), "relation": ("people", "relation"),
-    "hhsize": ("hh_extra", "hh_size"), "socialgroup": ("hh_extra", "social_group"),
-    "lighting": ("hh_extra", "lighting"), "ujjwala": ("hh_extra", "ujjwala"),
-    "foodItems": ("food_items", None),
-    "foodSource": ("spend_extra", "food_source"),
-    "onlineGrocery": ("spend_extra", "online_grocery"),
-    "pds": ("schemes", "pds"), "lpg": ("schemes", "lpg_subsidy"),
-    "electricity": ("schemes", "free_electricity"), "ayushman": ("schemes", "ayushman"),
-    "school": ("schemes", "school"), "schoolSplit": ("schemes", "school_govt_private"),
-}
-_queries_json = {k: _raw[v] for k, v in _CHART_QUERY.items() if v in _raw}
-_missing = [k for k, v in _CHART_QUERY.items() if v not in _raw]
-with open(os.path.join(WEB, "queries.json"), "w", encoding="utf-8") as _f:
-    json.dump(_queries_json, _f, indent=1)
-if _missing:
-    raise SystemExit(f"FATAL: no SQL extracted for {_missing}")
-print(f"    OK {len(_queries_json)} chart queries")
-
 con.close()
 
 # Report final sizes
