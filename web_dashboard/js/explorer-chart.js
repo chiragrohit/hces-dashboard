@@ -33,17 +33,6 @@ export function drawChart(rows, dim, dim2, meas) {
   if (type === 'bar') {
     options.indexAxis = labels.length > 10 ? 'y' : 'x';
     options.scales = { ...baseScales };
-    options.plugins = {
-      zoom: {
-        zoom: { wheel: { enabled: true, speed: 0.05 }, mode: 'xy' },
-        pan: { enabled: true, mode: 'xy' },
-        limits: {
-          x: { min: 'original', max: 'original' },
-          y: { min: 'original', max: 'original' },
-        },
-      },
-      tooltip: { callbacks: { title: items => items.length ? full[items[0].dataIndex] : '', label: c => (money ? inr(c.parsed[options.indexAxis === 'y' ? 'x' : 'y']) : fmt(c.parsed[options.indexAxis === 'y' ? 'x' : 'y'])) } },
-    };
     if (options.indexAxis === 'y') {
       options.scales.x = { ...baseScales.x, ticks: { ...baseScales.x.ticks, callback: tick } };
       options.scales.y = { ...baseScales.y, ticks: { ...baseScales.y.ticks, font: { size: 11 } } };
@@ -51,13 +40,12 @@ export function drawChart(rows, dim, dim2, meas) {
       options.scales.x = { ...baseScales.x, ticks: { ...baseScales.x.ticks, maxRotation: 45, font: { size: 10 } } };
       options.scales.y = { ...baseScales.y, ticks: { ...baseScales.y.ticks, callback: tick } };
     }
+    options.plugins = { tooltip: { callbacks: { title: items => items.length ? full[items[0].dataIndex] : '', label: c => (money ? inr(c.parsed[options.indexAxis === 'y' ? 'x' : 'y']) : fmt(c.parsed[options.indexAxis === 'y' ? 'x' : 'y'])) } } };
   } else {
     options.cutout = '60%';
     options.plugins = { legend: { position: 'bottom' }, tooltip: { callbacks: { title: items => items.length ? full[items[0].dataIndex] : '', label: c => c.label + ': ' + fmt(c.parsed) } } };
   }
   X.chartInst = new Chart($('xChart'), { type, data: { labels, datasets }, options });
-  /* double-click resets zoom */
-  if (type === 'bar') $('xChart').addEventListener('dblclick', () => X.chartInst && X.chartInst.zoom && X.chartInst.resetZoom());
 }
 
 export function drawTable(rows, dim, dim2, meas) {
