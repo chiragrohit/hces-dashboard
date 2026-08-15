@@ -1,5 +1,13 @@
-/* ---------- Detail page: one chart + raw table + filters + CSV ---------- */
-window.DETAIL_MODE = true;
+/* Detail page entry point (detail.html? id=<chart>): one chart rendered
+ * from the same shared modules as the dashboard, plus its raw data table,
+ * sector/state filters, CSV download and provenance. */
+
+import { D, loadAll, setFocus, focusFilters } from './data.js';
+import { RENDERERS } from './charts-sections.js';
+import { setFocusChart } from './charts-core.js';
+import { INFO, PROV, C } from './content.js';
+import { openInfo, wireModal } from './modal.js';
+import { fmt } from './util.js';
 
 const params = new URLSearchParams(location.search);
 const key = params.get('id');
@@ -76,6 +84,9 @@ const COLS = {
 const MONEY = new Set(['total_value_cr', 'ooh_consumption_cr', 'avg_consumption_per_item']);
 const COUNT = new Set(['w', 'estimated_population', 'estimated_count', 'estimated_households', 'govt', 'private', 'total_quantity', 'households_consuming']);
 
+let filters = {};   // active sector/state filters on this page
+let csvData = null; // last rendered table, for CSV export
+
 function getRows(spec) {
   const parts = spec.key.split('.');
   return D(parts[0], parts[1]);
@@ -105,9 +116,9 @@ function addFilter(k, label, values) {
   opt.value = 'all'; opt.textContent = 'All';
   sel.appendChild(opt);
   values.forEach(v => { const o = document.createElement('option'); o.value = v; o.textContent = v; sel.appendChild(o); });
-  sel.value = (window.FILTERS && window.FILTERS[k]) || 'all';
+  sel.value = filters[k] || 'all';
   sel.addEventListener('change', () => {
-    window.FILTERS[k] = sel.value === 'all' ? undefined : sel.value;
+    filters[k] = sel.value === 'all' ? undefined : sel.value;
     rerender();
   });
   wrap.appendChild(lab); wrap.appendChild(sel);
@@ -151,26 +162,26 @@ function renderTable() {
   });
   tbl.appendChild(thead); tbl.appendChild(tbody);
   document.getElementById('dCount').textContent = data.length + ' rows';
-  window.__csv = { headers, data };
+  csvData = { headers, data };
 }
 
 function updateFilterNote() {
-  const f = window.FILTERS || {};
   const parts = [];
-  if (f.sector) parts.push('Sector: ' + f.sector);
-  if (f.state) parts.push('State: ' + f.state);
+  if (filters.sector) parts.push('Sector: ' + filters.sector);
+  if (filters.state) parts.push('State: ' + filters.state);
   document.getElementById('dFilterNote').textContent = parts.length ? 'Showing: ' + parts.join(' · ') : '';
 }
 
 function rerender() {
-  renderSection(SECTION[chartId]);
+  setFocus(filters);
+  RENDERERS[SECTION[chartId]]();
   renderTable();
   updateFilterNote();
 }
 
 function downloadCsv() {
-  const { headers, data } = window.__csv || {};
-  if (!headers) return;
+  if (!csvData) return;
+  const { headers, data } = csvData;
   const lines = [headers, ...data.map(row => row.map(v => typeof v === 'number' ? v : '"' + String(v).replace(/"/g, '""') + '"'))];
   const csv = '\uFEFF' + lines.map(r => r.join(',')).join('\r\n');
   const a = document.createElement('a');
@@ -178,6 +189,8 @@ function downloadCsv() {
   a.download = chartId + '.csv';
   a.click();
 }
+
+wireModal();
 
 (async function main() {
   const info = INFO[key];
@@ -187,8 +200,8 @@ function downloadCsv() {
     document.getElementById('dChart').remove();
     return;
   }
-  window.FOCUS_CHART = chartId;
-  window.FILTERS = {};
+  setFocusChart(chartId);
+  setFocus(filters);
   document.getElementById('dTitle').textContent = info.title;
   document.getElementById('dWhat').textContent = info.what + ' ' + info.look;
   document.getElementById('dCrumb').textContent = ' / ' + info.title;
