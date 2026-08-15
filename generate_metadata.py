@@ -2,33 +2,18 @@
 Generate a data catalog (metadata.json) from the HCES parquet files.
 For each table: schema, row count, null %, distinct counts, and the
 actual category values for low-cardinality columns.
+Run: python generate_metadata.py  (from the project root)
 """
-import duckdb
 import json
 import os
 
-PARQUET_DIR = "hces_parquet"
-WEB = "web_dashboard/data"
+import duckdb
+
+from pipeline_common import WEB, PARQUET_DIR, TABLE_MAP
+
 os.makedirs(WEB, exist_ok=True)
 
 con = duckdb.connect()
-
-TABLE_MAP = {
-    "household_demographics": "LEVEL 01 - Household roster & sampling",
-    "individual_characteristics": "LEVEL 02 - Individual demographics (Section 3)",
-    "household_economic": "LEVEL 03 - Economic activity, land, dwelling",
-    "consumption_4_1": "LEVEL 04 - Consumption (Section 4_1)",
-    "food_consumption": "LEVEL 05 - Food consumption (Sections 5-6)",
-    "consumption_7": "LEVEL 06 - Consumption (Section 7)",
-    "consumption_4_2": "LEVEL 07 - Consumption (Section 4_2)",
-    "consumption_8_1": "LEVEL 08 - Consumption (Section 8_1)",
-    "consumption_9_10_11": "LEVEL 09 - Consumption (Sections 9-11)",
-    "consumption_12": "LEVEL 10 - Consumption (Section 12)",
-    "consumption_13": "LEVEL 12 - Consumption (Section 13)",
-    "consumption_14": "Level 13 - Consumption (Section 14)",
-    "imputed_rent_durables": "LEVEL 14 - Imputed rent, durables (A1,B1,C1)",
-    "supplementary_consumption": "LEVEL 15 - Supplementary (A2,B2,C2)",
-}
 
 # Known code meanings (from HCES questionnaire structure)
 CODE_MAP = {
@@ -77,7 +62,7 @@ for table, description in TABLE_MAP.items():
         if n_distinct and n_distinct <= 50:
             rows = con.execute(
                 f'SELECT "{col}" AS v, COUNT(*) AS c FROM t '
-                f'WHERE "{col}" IS NOT NULL GROUP BY 1 ORDER BY c DESC LIMIT 50'
+                f'WHERE "{col}" IS NOT NULL GROUP BY 1 ORDER BY c DESC, v ASC LIMIT 50'
             ).fetchall()
             values = [{"value": r[0], "count": int(r[1])} for r in rows]
 

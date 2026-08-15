@@ -1,42 +1,16 @@
 """
 Pre-aggregate HCES data for web dashboard.
 Creates small JSON summaries that load instantly in browser.
+Run: python aggregate_for_web.py  (from the project root)
 """
-import duckdb
 import json
 import os
 
-PARQUET_DIR = "hces_parquet"
-WEB = "web_dashboard/data"
+from pipeline_common import WEB, STATE_NAMES, connect
+
 os.makedirs(WEB, exist_ok=True)
+con = connect()
 
-# In-memory DuckDB with views over the parquet files (no .duckdb file needed)
-con = duckdb.connect()
-
-TABLE_MAP = {
-    "household_demographics", "individual_characteristics", "household_economic",
-    "consumption_4_1", "food_consumption", "consumption_7", "consumption_4_2",
-    "consumption_8_1", "consumption_9_10_11", "consumption_12", "consumption_13",
-    "consumption_14", "imputed_rent_durables", "supplementary_consumption",
-}
-for t in TABLE_MAP:
-    pq_path = os.path.join(PARQUET_DIR, f"{t}.parquet")
-    if os.path.exists(pq_path):
-        con.execute(f"CREATE OR REPLACE VIEW {t} AS SELECT * FROM read_parquet('{pq_path}')")
-
-# State names lookup
-STATE_NAMES = {
-    "01":"Jammu & Kashmir","02":"Himachal Pradesh","03":"Punjab","04":"Chandigarh",
-    "05":"Uttarakhand","06":"Haryana","07":"Delhi","08":"Rajasthan",
-    "09":"Uttar Pradesh","10":"Bihar","11":"Sikkim","12":"Arunachal Pradesh",
-    "13":"Nagaland","14":"Manipur","15":"Mizoram","16":"Tripura",
-    "17":"Meghalaya","18":"Assam","19":"West Bengal","20":"Jharkhand",
-    "21":"Odisha","22":"Chhattisgarh","23":"Madhya Pradesh","24":"Gujarat",
-    "25":"Daman & Diu","26":"Dadra & Nagar Haveli","27":"Maharashtra",
-    "28":"Andhra Pradesh","29":"Karnataka","30":"Goa","31":"Lakshadweep",
-    "32":"Kerala","33":"Tamil Nadu","34":"Puducherry","35":"Andaman & Nicobar",
-    "36":"Telangana","37":"Ladakh"
-}
 state_values = ", ".join(f"('{k}', '{v}')" for k, v in STATE_NAMES.items())
 con.execute(f"""
     CREATE OR REPLACE VIEW state_master AS
