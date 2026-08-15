@@ -114,6 +114,9 @@
   .calc-steps code { background: var(--surface); border: 1px solid var(--border); border-radius: 5px; padding: 1px 7px; font-family: Consolas, "Cascadia Mono", monospace; font-size: 0.75rem; color: var(--purple); }
   .calc-foot { font-size: 0.78rem; color: var(--muted); line-height: 1.5; margin: 0; }
   .modal-source { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border); font-size: 0.78rem; color: var(--muted); }
+  .modal-datalink { margin-top: 12px; }
+  .modal-datalink a { display: inline-flex; align-items: center; gap: 7px; color: var(--accent); font-weight: 600; font-size: 0.88rem; text-decoration: none; background: var(--accent-soft); border: 1px solid var(--accent); border-radius: 8px; padding: 8px 13px; }
+  .modal-datalink a:hover { background: var(--accent); color: #fff; }
 
   .loading { display: flex; align-items: center; gap: 12px; color: var(--muted); padding: 8px 2px; font-size: 0.9rem; }
   .spinner { width: 20px; height: 20px; border: 2.5px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.7s linear infinite; }

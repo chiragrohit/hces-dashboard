@@ -40,6 +40,7 @@ function renderTable(t) {
       </div>
       <div style="display:flex;align-items:center;gap:20px">
         <div class="meta"><span class="big">${fmtRows(t.rows)}</span> rows · ${t.columns.length} cols · ${t.size_mb} MB</div>
+        <a class="view-data" href="/metadata/${t.table}" onclick="event.stopPropagation()" title="Browse the raw rows of ${t.table}">View data →</a>
         <span class="expand">Expand ▾</span>
       </div>
     </div>

@@ -8,6 +8,7 @@ build a server against any directory/port.
 import http.server
 import json
 import os
+from urllib.parse import parse_qs, urlparse
 
 from . import config
 from . import db
@@ -26,6 +27,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
     db = None
     scales = {}
     metadata = {}
+    views = {}
     api_key = ""
     zen_model = config.DEFAULT_ZEN_MODEL
 
@@ -35,7 +37,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         super().end_headers()
 
     def do_GET(self):
-        path = self.path.split("?")[0]
+        parsed = urlparse(self.path)
+        path = parsed.path
         if path in config.DASHBOARD_PATHS:
             self.path = "/index.html"
         elif path in config.PAGES:
@@ -46,6 +49,28 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             except Exception as e:
                 self._json(500, {"error": str(e)})
             return
+        elif path == "/api/rows":
+            try:
+                q = parse_qs(parsed.query)
+                table = q.get("table", [""])[0]
+                page = q.get("page", ["1"])[0]
+                per = q.get("per", ["50"])[0]
+                cols = q.get("cols", [""])[0]
+                # every other query param is a raw-code equality filter
+                filters = {k: v[0] for k, v in q.items()
+                           if k not in ("table", "page", "per", "cols")}
+                columns, rows, total = db.run_paged(
+                    self.db, self.views, table, filters, page, per, cols)
+                self._json(200, {"columns": columns, "rows": rows, "total": total,
+                                 "page": int(page), "per": int(per)})
+            except ValueError as e:
+                self._json(400, {"error": str(e)})
+            except Exception as e:
+                self._json(500, {"error": str(e)})
+            return
+        elif path.startswith("/metadata/") and len(path) > len("/metadata/"):
+            # /metadata/<table> -> raw-data browser; JS reads the name from the URL
+            self.path = "/dataset.html"
         return super().do_GET()
 
     def do_POST(self):
@@ -97,6 +122,7 @@ def create_httpd(port=config.PORT, parquet_dir=config.PARQUET):
     Handler.db = con
     Handler.scales = scales
     Handler.metadata = metadata
+    Handler.views = views
     Handler.api_key = api_key
     Handler.zen_model = model
 

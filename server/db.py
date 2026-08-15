@@ -63,6 +63,41 @@ def compute_scales(con, views, max_ratio=200.0):
     return scales
 
 
+def run_paged(con, views, table, filters=None, page=1, per=50, cols=None):
+    """Paginated raw-data read of one registered table.
+
+    filters is a {column: value} dict of equality filters (raw survey codes).
+    Column names are validated against the live schema; values are SQL-escaped.
+    Returns (columns, rows, total). Rows are limited to one page, so large
+    tables (millions of rows) transfer only the visible slice.
+    """
+    if table not in views:
+        raise ValueError(f"Unknown table: {table}")
+    page = max(1, int(page))
+    per = max(1, min(int(per), config.QUERY_ROW_LIMIT))
+    schema = {c[0]: c[1] for c in con.execute(f'DESCRIBE SELECT * FROM "{table}"').fetchall()}
+    if cols:
+        cols = [c.strip() for c in cols.split(",") if c.strip()]
+        unknown = [c for c in cols if c not in schema]
+        if unknown:
+            raise ValueError(f"Unknown columns: {', '.join(unknown)}")
+    else:
+        cols = list(schema)
+    where = []
+    for col, val in (filters or {}).items():
+        if col not in schema:
+            raise ValueError(f"Unknown filter column: {col}")
+        where.append(f'"{col}" = \'{str(val).replace(chr(39), chr(39) * 2)}\'')
+    cond = (" WHERE " + " AND ".join(where)) if where else ""
+    sel = ", ".join(f'"{c}"' for c in cols)
+    total = con.execute(f'SELECT COUNT(*) FROM "{table}"{cond}').fetchone()[0]
+    cur = con.execute(
+        f'SELECT {sel} FROM "{table}"{cond} LIMIT {per} OFFSET {(page - 1) * per}'
+    )
+    columns = [d[0] for d in cur.description]
+    return columns, [list(r) for r in cur.fetchall()], total
+
+
 def run_query(con, sql, row_limit=config.QUERY_ROW_LIMIT):
     """Validate + run a read-only SELECT. Returns (columns, rows)."""
     stripped = sql.strip().rstrip(";").strip()
