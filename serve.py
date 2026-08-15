@@ -47,7 +47,12 @@ for view in _TABLE_VIEWS:
         raw = CON.execute(f'SELECT SUM(Multiplier) FROM "{view}"').fetchone()[0]
         if raw:
             target = 1428000000 if "individual" in view else 304000000
-            SCALES[view] = round(target / raw, 8)
+            # only offer weighted count where SUM(Multiplier) is a sane
+            # national total (one row per person/household, ~85-96x
+            # inflated). Multi-row tables (food, consumption items) are
+            # hundreds to thousands of times national - exclude them.
+            if 0.1 <= raw / target <= 200:
+                SCALES[view] = round(target / raw, 8)
     except Exception:
         pass
 

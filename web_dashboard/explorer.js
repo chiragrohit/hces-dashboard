@@ -88,11 +88,7 @@ function onTableChange() {
   const measures = [];
   const mult = colMeta(table, 'Multiplier');
   const scale = CAT.scales[table];
-  if (mult && scale) {
-    const target = /individual/.test(table) ? 1428000000 : 304000000;
-    const raw = target / scale;
-    if (raw / target >= 0.25 && raw / target <= 4) measures.push({ value: 'Multiplier', label: 'Weighted count (people/households, national estimate)' });
-  }
+  if (mult && scale) measures.push({ value: 'Multiplier', label: 'Weighted count (people/households, national estimate)' });
   cols.filter(c => NUMERIC.includes(c.type) && c.name !== 'Multiplier').forEach(c =>
     measures.push({ value: c.name, label: c.name + (c.meaning ? ' — ' + c.meaning : '') }));
   measures.push({ value: 'COUNT_STAR', label: 'Row count' });
