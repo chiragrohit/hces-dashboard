@@ -100,7 +100,13 @@
   .modal-close:hover { color: var(--ink); background: var(--border); }
   .modal-body h4 { font-size: 0.72rem; font-weight: 700; color: var(--accent); letter-spacing: 0.06em; text-transform: uppercase; margin: 16px 0 6px; }
   .modal-body p { font-size: 0.92rem; color: var(--ink-2); line-height: 1.55; }
-  .modal-source { margin-top: 18px; padding-top: 12px; border-top: 1px solid var(--border); font-size: 0.78rem; color: var(--muted); }
+  .modal-prov { background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; }
+  .prov-row { display: flex; align-items: baseline; gap: 10px; font-size: 0.84rem; flex-wrap: wrap; }
+  .prov-k { color: var(--muted); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; min-width: 70px; }
+  .prov-row code { background: var(--surface); border: 1px solid var(--border); border-radius: 5px; padding: 1px 7px; font-family: Consolas, "Cascadia Mono", monospace; font-size: 0.78rem; color: var(--purple); }
+  .prov-note { font-size: 0.78rem; color: var(--muted); margin-top: 2px; line-height: 1.5; }
+  .prov-note a { color: var(--accent); }
+  .modal-source { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border); font-size: 0.78rem; color: var(--muted); }
 
   .loading { display: flex; align-items: center; gap: 12px; color: var(--muted); padding: 8px 2px; font-size: 0.9rem; }
   .spinner { width: 20px; height: 20px; border: 2.5px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.7s linear infinite; }
@@ -272,6 +278,8 @@
     <p id="modalWhat"></p>
     <h4>What to look for</h4>
     <p id="modalLook"></p>
+    <h4>Data source · verify it</h4>
+    <div class="modal-prov" id="modalProv"></div>
     <p class="modal-source" id="modalSource"></p>
   </div>
 </dialog>
@@ -323,6 +331,43 @@ const INFO = {
   ayushman: { title: 'Ayushman health card', what: 'This circle shows households with an Ayushman Bharat health card. The card gives free treatment in listed hospitals.', look: 'Compare the yes and no parts.', source: 'Level 7 household records.' },
   school: { title: 'Children in school', what: 'This circle shows households with a child in school. The school can be government or private.', look: 'Compare villages and cities.', source: 'Level 7 household records.' },
   schoolSplit: { title: 'Government vs private schools', what: 'These bars show the number of children in government schools and private schools. Blue is government and green is private.', look: 'Government schools serve more village children. Private schools serve more city children.', source: 'Level 7 household records.' },
+};
+
+/* ---------- Data provenance for cross-verification ---------- */
+const PROV = {
+  stateConsumption: { file: 'food_consumption.parquet', cols: ['State', 'Sector', 'Total_Consumption_Value', 'Multiplier'], agg: 'state_consumption.json' },
+  sectorShare: { file: 'food_consumption.parquet', cols: ['Sector', 'Total_Consumption_Value', 'Multiplier'], agg: 'state_consumption.json' },
+  ooh: { file: 'food_consumption.parquet', cols: ['OutOfHome_Consumption_Value', 'Total_Consumption_Value', 'Multiplier'], agg: 'state_consumption.json' },
+  ageGroup: { file: 'individual_characteristics.parquet', cols: ['Age', 'Gender', 'Multiplier'], agg: 'demographics.json' },
+  gender: { file: 'individual_characteristics.parquet', cols: ['Gender', 'Multiplier'], agg: 'demographics.json' },
+  pyramid: { file: 'individual_characteristics.parquet', cols: ['Age', 'Gender', 'Multiplier'], agg: 'demographics.json' },
+  composition: { file: 'individual_characteristics.parquet', cols: ['Age', 'Gender', 'Multiplier'], agg: 'demographics.json' },
+  education: { file: 'individual_characteristics.parquet', cols: ['Education_Level', 'State', 'Multiplier'], agg: 'education.json' },
+  marital: { file: 'individual_characteristics.parquet', cols: ['Marital_Status', 'Age', 'Gender', 'Multiplier'], agg: 'people.json' },
+  internet: { file: 'individual_characteristics.parquet', cols: ['Used_Internet_Last_30_Days', 'Age', 'Sector', 'Multiplier'], agg: 'people.json' },
+  meals: { file: 'individual_characteristics.parquet', cols: ['Meals_Usually_Taken_Per_Day', 'Sector', 'Multiplier'], agg: 'people.json' },
+  relation: { file: 'individual_characteristics.parquet', cols: ['Relation_to_Head', 'Sector', 'Multiplier'], agg: 'people.json' },
+  hhsize: { file: 'household_economic.parquet', cols: ['HH_Size_FDQ', 'Sector', 'Multiplier'], agg: 'household_extras.json' },
+  hhtype: { file: 'household_economic.parquet', cols: ['Household_Type', 'Multiplier'], agg: 'household_characteristics.json' },
+  socialgroup: { file: 'household_economic.parquet', cols: ['Social_Group_of_HH_Head', 'Sector', 'Multiplier'], agg: 'household_extras.json' },
+  religion: { file: 'household_economic.parquet', cols: ['Religion_of_HH_Head', 'Multiplier'], agg: 'household_characteristics.json' },
+  dwelling: { file: 'household_economic.parquet', cols: ['Type_of_Dwelling_Unit', 'Multiplier'], agg: 'household_characteristics.json' },
+  energy: { file: 'household_economic.parquet', cols: ['Energy_Source_Cooking', 'Multiplier'], agg: 'household_characteristics.json' },
+  lighting: { file: 'household_economic.parquet', cols: ['Energy_Source_Lighting', 'Sector', 'Multiplier'], agg: 'household_extras.json' },
+  land: { file: 'household_economic.parquet', cols: ['Land_Ownership', 'Multiplier'], agg: 'household_characteristics.json' },
+  ration: { file: 'household_economic.parquet', cols: ['Ration_Card_Type', 'Multiplier'], agg: 'household_characteristics.json' },
+  ujjwala: { file: 'household_economic.parquet', cols: ['Benefitted_From_PMGKY', 'Sector', 'Multiplier'], agg: 'household_extras.json' },
+  foodItems: { file: 'food_consumption.parquet', cols: ['Item_Code', 'Total_Consumption_Value', 'Multiplier'], agg: 'food_rankings.json' },
+  consumpDist: { file: 'food_consumption.parquet', cols: ['State', 'Total_Consumption_Value', 'Multiplier'], agg: 'state_consumption.json' },
+  perHH: { file: 'food_consumption.parquet', cols: ['State', 'Sector', 'Total_Consumption_Value', 'Multiplier'], agg: 'state_consumption.json' },
+  foodSource: { file: 'food_consumption.parquet', cols: ['Source', 'Sector'], agg: 'spending_extras.json' },
+  onlineGrocery: { file: 'consumption_4_1.parquet', cols: ['Online_Groceries', 'Sector', 'Multiplier'], agg: 'spending_extras.json' },
+  pds: { file: 'consumption_4_1.parquet', cols: ['Ration_Any_Item_Last_30_Days', 'Sector', 'Multiplier'], agg: 'schemes.json' },
+  lpg: { file: 'consumption_4_2.parquet', cols: ['LPG_subsidy_received', 'Sector', 'Multiplier'], agg: 'schemes.json' },
+  electricity: { file: 'consumption_4_2.parquet', cols: ['Free_electricity', 'Sector', 'Multiplier'], agg: 'schemes.json' },
+  ayushman: { file: 'consumption_4_2.parquet', cols: ['Ayushman_beneficiary', 'Sector', 'Multiplier'], agg: 'schemes.json' },
+  school: { file: 'consumption_4_2.parquet', cols: ['Any_member_attended_school', 'Sector', 'Multiplier'], agg: 'schemes.json' },
+  schoolSplit: { file: 'consumption_4_2.parquet', cols: ['Num_govt_school_attended', 'Num_private_school_attended', 'Multiplier'], agg: 'schemes.json' },
 };
 
 /* ---------- Code labels ---------- */
@@ -414,7 +459,13 @@ function openInfo(key) {
   document.getElementById('modalTitle').textContent = info.title;
   document.getElementById('modalWhat').textContent = info.what;
   document.getElementById('modalLook').textContent = info.look;
-  document.getElementById('modalSource').textContent = 'Source: ' + info.source;
+  document.getElementById('modalSource').textContent = 'From: ' + info.source;
+  const prov = PROV[key];
+  document.getElementById('modalProv').innerHTML = prov ? `
+      <div class="prov-row"><span class="prov-k">File</span><code>${prov.file}</code></div>
+      <div class="prov-row"><span class="prov-k">Columns</span>${prov.cols.map(c => `<code>${c}</code>`).join(' ')}</div>
+      <div class="prov-row"><span class="prov-k">Aggregate</span><code>data/${prov.agg}</code></div>
+      <p class="prov-note">Weights use the survey <code>Multiplier</code>, normalized to national estimates for display. Open the <a href="/metadata">data catalog</a> for the full schema and value counts.</p>` : '';
   modal.showModal();
 }
 document.addEventListener('click', e => {

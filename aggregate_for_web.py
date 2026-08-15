@@ -292,7 +292,7 @@ def weighted_rows(sql, scale=POP_SCALE):
     for r in rows:
         d = dict(zip([c[0] for c in con.description], r))
         for k, v in d.items():
-            if k.startswith("w_"):
+            if k == "w" or k.startswith("w_") or k in ("govt", "private"):
                 d[k] = int(v * scale) if v is not None else 0
         out.append(d)
     return out
