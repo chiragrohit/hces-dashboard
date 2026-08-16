@@ -1,88 +1,113 @@
 # HCES 2023-24 — India's household spending, visualized
 
-A web dashboard for the **Household Consumption Expenditure Survey (HCES) 2023-24** —
-the official survey of what Indian households spend money on. It turns ~46 million
-survey records into simple charts and plain-English explanations anyone can follow.
+A web dashboard for the **Household Consumption Expenditure Survey (HCES) 2023-24**.
+This is the official Government of India survey of what households spend money on.
+The dashboard turns ~46 million survey records into simple charts and plain-English
+explanations. You do not need to know statistics or programming to use it.
 
+**See it live (no setup):** https://hces-dashboard.vercel.app
 
 ## What you can do on the site
 
 - **Overview** — headline numbers: households, population, average spending, food's share of the budget.
 - **People** — population, age, gender, education, internet use, family roles.
 - **Households** — size, income source, social group, religion, housing, cooking fuel, land.
-- **Spending** — per-person spending curves (poor to rich), state comparisons, food vs non-food, clothing, services, fuel, durables, tobacco.
+- **Spending** — per-person spending curves (poor to rich), state comparisons, food vs non-food.
 - **Schemes** — who gets free school supplies, who has Ayushman Bharat cards.
 - **Raw data browser** — every table, searchable and filterable, with codes shown as words.
 - **Query explorer** — build your own charts (pick table, dimension, measure, filter).
-- **Ask box** — type a question in plain English; an LLM turns it into a chart.
+- **Ask box** — type a question in plain English; the tool turns it into a chart.
 
-## The data
+## Where the data comes from
 
-- **Source:** Household Consumption Expenditure Survey 2023-24, conducted by the **National Statistical Office (NSO)** under the **Ministry of Statistics and Programme Implementation (MoSPI), Government of India**. Public release, August 2023 – July 2024 reference period.
-- **Scale:** 14 tables, ~46 million rows, 154 MB of Parquet. Visit-1 households: 261,953 (about 304 million households and 1.43 billion people when weighted).
-- **Attribution:** the survey is NSO/MoSPI data. This project adds only visualizations and summaries — no logo, no claims of official endorsement.
-- Survey weights are **normalized for display** so totals read as national estimates.
+The Household Consumption Expenditure Survey 2023-24 was conducted by the
+**National Statistical Office (NSO)** under the **Ministry of Statistics and
+Programme Implementation (MoSPI), Government of India**. The survey ran from
+August 2023 to July 2024. This project uses the public release and adds only
+visualizations and summaries. It is not an official NSO product.
 
-## Architecture
+- 14 tables, ~46 million rows, 154 MB.
+- About 304 million households and 1.43 billion people when weighted.
+- Survey weights are normalized for display, so totals read as national estimates.
 
-```
-┌─────────────┐    /api/*    ┌──────────────────────┐
-│  Vercel CDN │ ───────────► │  Modal (FastAPI)     │
-│  static app │   (proxy)    │  DuckDB over Volume  │
-└─────────────┘              │  + LLM ask (opencode)│
-   HTML + JS + JSON charts    └──────────────────────┘
-```
+## Run it on your own computer
 
-- **Frontend:** vanilla JavaScript, no build step, Chart.js from CDN. Pre-computed aggregates ship as static JSON (loads in under a second); live queries go through the API.
-- **Backend:** FastAPI on Modal reuses the same `server/` package as the local app. DuckDB reads Parquet from a Modal Volume (per-request connections). The LLM ask box calls opencode.ai with a key from a Modal Secret.
-- **Vercel** rewrites `/api/*` to Modal, so the browser stays same-origin (no CORS).
+You can run the full dashboard on a laptop. You need Python only. This takes
+about 10 minutes the first time.
 
-## Repo layout
+### 1. Install Python
 
-```
-serve.py                  Local server (python serve.py → :8080)
-aggregate_for_web.py      Builds the static JSON charts (web_dashboard/data/)
-build_parquet_code_map.py Builds the code→word maps for filters
-generate_metadata.py      Builds table/column metadata (API + dataset pages)
-convert_to_parquet.py     Converts the public release files to Parquet
-colab_convert.py          Same, for Google Colab
-pipeline_common.py        Shared pipeline helpers
-server/                   Python package reused by serve.py and the Modal API
-  catalog.py db.py llm.py config.py httpd.py
-deploy/                   Modal app + data upload script
-web_dashboard/            The static site (HTML, CSS, JS, data JSONs)
-hces-code/                OCR questionnaire annotations, code maps, schema
-```
+Download Python 3.12 or newer from https://www.python.org/downloads/ and install it.
+On Windows, tick **"Add Python to PATH"** during install.
 
-## Run locally
+### 2. Get the code
+
+Option A — with git (recommended for updates):
 
 ```bash
-# 1. Prepare the data (one-time)
-#    Put the public HCES release files in place, then:
-python convert_to_parquet.py     # → hces_parquet/ (14 Parquet files)
-python build_parquet_code_map.py # → code maps
-python generate_metadata.py      # → metadata.json
-python aggregate_for_web.py      # → web_dashboard/data/*.json
-
-# 2. Serve
-python serve.py                  # → http://localhost:8080
+git clone https://github.com/cognirivus/hces-dashboard.git
+cd hces-dashboard
 ```
 
-Optional: add `OPENCODE_API_KEY=...` (and optionally `ZEN_MODEL=...`) to a `.env`
-file to enable the natural-language ask box.
+Option B — no git: on the GitHub page, click **Code ▾ → Download ZIP**, extract it,
+then open a terminal in the extracted folder (`cd hces-dashboard`).
 
-## Deploy (maintainer only — the live site is already deployed)
+### 3. Download the survey data
+
+The data files are large, so they are not stored in this repository. One command
+gets them from the project's public copy:
 
 ```bash
-# Modal API
-python deploy/upload_data.py     # upload Parquet + metadata to the Volume
-modal deploy deploy/modal_app.py # deploy FastAPI app
+python download_data.py
+```
+
+This downloads ~130 MB and sets up the `hces_parquet/` folder.
+
+### 4. Install the one Python package
+
+```bash
+pip install -r requirements.txt
+```
+
+### 5. Start the dashboard
+
+```bash
+python serve.py
+```
+
+Then open **http://localhost:8080** in your browser. Everything works offline
+from this point.
+
+**Optional — the ask box:** typing a question (step "Ask box" above) calls a
+paid AI service. It works only if you add a key to a file named `.env`:
+
+```
+OPENCODE_API_KEY=your-key-here
+```
+
+Without the key, the rest of the dashboard works normally; only the ask box
+shows a clear message. See `.env.example`.
+
+## Deploy (advanced users only)
+
+The live site runs on free tiers: the static site on Vercel, the API on Modal.
+The live deployment is already running, so most people never need this.
+
+```bash
+# Modal API — creates your own endpoint
+set MODAL_APP_NAME=my-hces-api     # optional; defaults to hces-api
+python deploy/upload_data.py       # upload data to your Modal volume
+modal deploy deploy/modal_app.py   # deploy the API app
 
 # Vercel static site
-cd web_dashboard && vercel --prod
+cd web_dashboard
+vercel --prod
+vercel env add MODAL_API_URL production   # your Modal URL, e.g. https://you--my-hces-api-api.modal.run
 ```
 
-`hces-dashboard.vercel.app` is a project domain, so it tracks every production deploy.
+`hces-dashboard.vercel.app` is a project domain, so it tracks every production
+deploy. The proxy (`web_dashboard/api`) reads `MODAL_API_URL` from Vercel env —
+no endpoint is committed. You also need `pip install modal` for the Modal steps.
 
 ## API
 
@@ -96,11 +121,17 @@ cd web_dashboard && vercel --prod
 ## Methodology notes
 
 - **Per-person spending (MPCE)** = `MONTHLY_CONSUMPTION_EXP ÷ HOUSEHOLD_SIZE`, visit-1 records only.
-- Percentile curves, the poor-to-rich distribution, and state medians are **person-weighted** (`Multiplier × household size`) — each person counts once through their household, matching how NSO publishes per-capita expenditure distributions.
-- Subgroup curves appear only when the raw sample is large enough (2,000+ households for household filters, 300+ for survey month) — a display choice, not an HCES rule.
-- "Our calculation" charts (percentiles, shares) are computed from raw fields; they are not columns in the source files.
+- Percentile curves, the poor-to-rich distribution, and state medians are
+  **person-weighted** (`Multiplier × household size`) — each person counts once
+  through their household, matching how NSO publishes per-capita expenditure
+  distributions.
+- Subgroup curves appear only when the raw sample is large enough (2,000+
+  households for household filters, 300+ for survey month) — a display choice,
+  not an HCES rule.
+- Charts marked "our calculation" (percentiles, shares) are computed from raw
+  fields; they are not columns in the source files.
 
 ## License
 
-The survey data is © NSO/MoSPI, Government of India (public release). This project's
-code is available for educational use. No official endorsement implied.
+The survey data is © NSO/MoSPI, Government of India (public release). This
+project's code is available for educational use. No official endorsement implied.
