@@ -43,7 +43,11 @@ export default async function handler(req, res) {
     const text = await r.text();
     res.status(r.status);
     res.setHeader('content-type', r.headers.get('content-type') || 'application/json');
-    res.setHeader('cache-control', 'no-store'); // filter queries are per-request
+    // GET endpoints (/api/tables, /api/rows) return static survey data that
+    // only changes on redeploy -> CDN-cache them (Vercel purges on deploy),
+    // so repeated calls never hit Modal or burn a function invocation.
+    // POSTs (query/ask) are user-specific and can never be CDN-cached.
+    res.setHeader('cache-control', req.method === 'GET' ? 'public, s-maxage=3600' : 'no-store');
     res.end(text);
   } catch (e) {
     res.status(502).json({ detail: 'API proxy error: ' + (e && e.message ? e.message : e) });
