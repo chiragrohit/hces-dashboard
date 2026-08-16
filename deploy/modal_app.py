@@ -28,13 +28,81 @@ secret = modal.Secret.from_name("hces-opencode-key")
 PARQUET_DIR = "/data/hces_parquet"
 METADATA_JSON = "/data/metadata.json"
 
+# --------------------------------------------------------------------------
+# Rate limiting (in-memory, per container). Sliding window per client IP;
+# the real IP arrives via x-forwarded-for set by the Vercel proxy. Per-
+# container state means the real ceiling is ~(limits x containers); good
+# enough to stop abuse, cheap, zero dependencies.
+#   ponytail: per-container counters, add a shared store (volume/redis)
+#   if distributed abuse ever outruns a handful of containers.
+# --------------------------------------------------------------------------
+from collections import defaultdict, deque
+import time
+
+LIMITS = {  # kind: (per-minute, window_s, per-day, window_s)
+    "/api/ask": (5, 60, 200, 86400),        # LLM calls cost money
+    "/api/query": (20, 60, 5000, 86400),    # SQL can burn compute
+    "/api/rows": (60, 60, 60000, 86400),
+    "/api/tables": (60, 60, 60000, 86400),
+    "/": (60, 60, 60000, 86400),
+}
+_wins = defaultdict(lambda: defaultdict(deque))  # key -> {window_s: deque}
+ASK_DAILY_CAP = 400  # per container; the /api/ask per-IP day cap is 200
+_ask_day = {"date": "", "count": 0}
+
+
+def _client_ip(request):
+    xff = request.headers.get("x-forwarded-for", "")
+    if xff:
+        return xff.split(",")[0].strip()
+    return request.client.host if request.client else "unknown"
+
+
+def _limited(key, kind):
+    per_min, win_s, per_day, day_s = LIMITS.get(kind, LIMITS["/api/query"])
+    now = time.time()
+    for window, cap, w in ((win_s, per_min, 60), (day_s, per_day, 86400)):
+        dq = _wins[key][w]
+        while dq and dq[0] <= now - window:
+            dq.popleft()
+        if len(dq) >= cap:
+            return True
+        dq.append(now)
+    return False
+
+
+def _ask_cap_open():
+    today = time.strftime("%Y-%m-%d")
+    if _ask_day["date"] != today:
+        _ask_day.update(date=today, count=0)
+    if _ask_day["count"] >= ASK_DAILY_CAP:
+        return False
+    _ask_day["count"] += 1
+    return True
+
+
+if __name__ == "__main__":
+    # Run with plain python (no Modal):  python deploy/modal_app.py
+    _wins.clear()
+    for _ in range(5):
+        assert not _limited("check-ip|/api/ask", "/api/ask"), "first 5 must pass"
+    assert _limited("check-ip|/api/ask", "/api/ask"), "6th ask in a minute must be limited"
+    assert not _limited("other-ip|/api/ask", "/api/ask"), "other IP unaffected"
+    _wins.clear()  # fresh container / new day
+    assert not _limited("check-ip|/api/ask", "/api/ask"), "fresh window re-admits"
+    _ask_day.update(date=time.strftime("%Y-%m-%d"), count=ASK_DAILY_CAP)
+    assert not _ask_cap_open(), "cap reached today stays closed"
+    _ask_day.update(date="2000-01-01", count=ASK_DAILY_CAP)
+    assert _ask_cap_open(), "day cap resets on a new day"
+    print("rate limiter self-check: OK")
+
 
 @app.function(
     volumes={"/data": volume.with_mount_options(read_only=True)},
     secrets=[secret],
     scaledown_window=900,
 )
-@modal.concurrent(max_inputs=100)
+@modal.concurrent(max_inputs=8)  # bound per-container burst; rate limits stop floods
 @modal.asgi_app()
 def api():
     from fastapi import FastAPI, Request
@@ -50,6 +118,18 @@ def api():
         allow_methods=["*"],
         allow_headers=["*"],
     )
+
+    @web.middleware("http")
+    async def _rate_limit(request, call_next):
+        from fastapi.responses import JSONResponse
+        kind = request.url.path if request.url.path in LIMITS else "/api/query"
+        if _limited(_client_ip(request) + "|" + kind, kind):
+            return JSONResponse(
+                status_code=429,
+                content={"detail": "Too many requests. Please wait a minute and try again."},
+                headers={"Retry-After": "60"},
+            )
+        return await call_next(request)
 
     # Startup (once per container): open DuckDB to compute the weight scales,
     # then close; data requests open their own short-lived connection so many
@@ -109,6 +189,9 @@ def api():
 
     @web.post("/api/ask")
     def api_ask(body: dict):
+        if not _ask_cap_open():
+            from fastapi import HTTPException
+            raise HTTPException(status_code=429, detail="Daily ask limit reached — try again tomorrow.")
         cfg = llm.ask_question(str(body.get("question", "")), api_key, model, tables, scales)
         return {"config": cfg}
 

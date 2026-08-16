@@ -27,7 +27,12 @@ export default async function handler(req, res) {
 
   const init = {
     method: req.method,
-    headers: { 'content-type': req.headers['content-type'] || 'application/json' },
+    headers: {
+      'content-type': req.headers['content-type'] || 'application/json',
+      // Forward the real client IP (set by Vercel, trusted) so Modal can
+      // rate-limit per user; otherwise every request looks like one IP.
+      'x-forwarded-for': (req.headers['x-real-ip'] || '').split(',')[0].trim(),
+    },
   };
   if (req.method === 'POST' || req.method === 'PUT' || req.method === 'PATCH') {
     init.body = typeof req.body === 'string' ? req.body : JSON.stringify(req.body ?? {});

@@ -118,6 +118,9 @@ no endpoint is committed. You also need `pip install modal` for the Modal steps.
 | `/api/query` | POST | Run a SQL query (`{"sql": "..."}`) |
 | `/api/ask` | POST | Ask a question in plain English (`{"question": "..."}`) |
 
+**Rate limits (per IP, 429 when exceeded):** `/api/ask` 5/min + 200/day, `/api/query` 20/min,
+data endpoints 60/min. Limits keep the shared demo safe; the survey data itself is public.
+
 ## Methodology notes
 
 - **Per-person spending (MPCE)** = `MONTHLY_CONSUMPTION_EXP ÷ HOUSEHOLD_SIZE`, visit-1 records only.
