@@ -269,7 +269,7 @@ function drawMpceCurve() {
   makeChart('chartMpceCurve', { type: 'line', data: { labels, datasets: entries.map(([g, pts], i) => ({
     label: g, data: pts, borderColor: palette[i % palette.length], backgroundColor: palette[i % palette.length],
     borderWidth: 2, pointRadius: 0, tension: 0.25, fill: false })) },
-    options: { scales: { ...baseScales, x: { ...baseScales.x, title: { display: true, text: 'Percentile of households (poorest → richest)', font: { size: 11 } }, ticks: { ...baseScales.x.ticks, maxRotation: 0, autoSkip: true, maxTicksLimit: 10, callback: v => v + '%' } }, y: { ...baseScales.y, ticks: { ...baseScales.y.ticks, callback: v => '₹' + Math.round(v).toLocaleString('en-IN') } } }, plugins: { legend: { position: 'bottom', labels: { usePointStyle: false, generateLabels(chart) {
+    options: { scales: { ...baseScales, x: { ...baseScales.x, title: { display: true, text: 'Percentile of people (bottom → top)', font: { size: 11 } }, ticks: { ...baseScales.x.ticks, maxRotation: 0, autoSkip: true, maxTicksLimit: 10, callback: v => v + '%' } }, y: { ...baseScales.y, ticks: { ...baseScales.y.ticks, callback: v => '₹' + Math.round(v).toLocaleString('en-IN') } } }, plugins: { legend: { position: 'bottom', labels: { usePointStyle: false, generateLabels(chart) {
       // show each group's value at the cut percentile in the legend itself
       const idx = chart.$cutIdx == null ? 49 : chart.$cutIdx;
       return chart.data.datasets.map((ds, i) => ({
@@ -286,7 +286,7 @@ function updateIncome() {  // spending-power cluster inside the Spending section
 
   const inc = D('income');
   const d = inc.dist;
-  const distLabels = ['Poorest 10%', 'Next 10%', '20%', '30%', '40%', '50%', '60%', '70%', 'Richest 10%', 'National avg'];
+  const distLabels = ['Bottom 10%', 'Next 10%', '20%', '30%', '40%', '50%', '60%', '70%', 'Top 10%', 'National avg'];
   const distVals = [d.p10, d.p20, d.p30, d.p40, d.p50, d.p60, d.p70, d.p80, d.p90, d.mean];
   makeChart('chartMpceDist', { type: 'bar', data: { labels: distLabels, datasets: [{
     label: 'Monthly spending per person (₹)', data: distVals,

@@ -466,10 +466,11 @@ print("  11. Income & spending power ...")
 MPCE = "MONTHLY_CONSUMPTION_EXP / NULLIF(HOUSEHOLD_SIZE, 0)"
 income = {}
 
-# Weighted percentile curves (p1..p99) per filter group. The survey multiplier
-# weights each household; a plain quantile would bias toward small-sample
-# groups, so cumulative weights are used and the value at each p is
-# interpolated between neighboring observations.
+# Weighted percentile curves (p1..p99) per filter group. Person-weighted:
+# each person counts once through their household, so the weight is the
+# survey multiplier times household size. A plain quantile would bias toward
+# small-sample groups, so cumulative weights are used and the value at each
+# p is interpolated between neighboring observations.
 def weighted_curves(rows, min_rows=1):
     """rows: [(group, mpce, multiplier)] sorted later. Returns {group: [p1..p99]}."""
     from collections import defaultdict
@@ -506,12 +507,13 @@ def weighted_curves(rows, min_rows=1):
     return out
 
 def mp_rows(filter_col, from_hec=False):
-    """Fetch (group, mpce, multiplier) for one filter column."""
+    """Fetch (group, mpce, person-weight) for one filter column."""
     if from_hec:
         # 1:1 join on the 7-part household key (Second_Stage_Stratum_No included).
         return con.execute(f"""
             WITH mp AS (
-              SELECT {HH_KEY} hid, {MPCE} mpce, MULTIPLIER w
+              SELECT {HH_KEY} hid, {MPCE} mpce,
+                     MULTIPLIER * HOUSEHOLD_SIZE w
               FROM supplementary_consumption
               WHERE VISIT='1' AND MONTHLY_CONSUMPTION_EXP>0 AND HOUSEHOLD_SIZE>0
             ), h AS (
@@ -522,7 +524,7 @@ def mp_rows(filter_col, from_hec=False):
         """).fetchall()
     # direct column on supplementary (sector / state / visit month)
     return con.execute(f"""
-        SELECT {filter_col}, {MPCE}, MULTIPLIER
+        SELECT {filter_col}, {MPCE}, MULTIPLIER * HOUSEHOLD_SIZE
         FROM supplementary_consumption
         WHERE VISIT='1' AND MONTHLY_CONSUMPTION_EXP>0 AND HOUSEHOLD_SIZE>0
           AND {filter_col} IS NOT NULL
@@ -564,37 +566,30 @@ for name, (col, via_hec) in FILTERS.items():
         rows = [(fmt_month(g), m, w) for g, m, w in rows]
     income["curves"][name] = weighted_curves(rows, min_rows=2000 if name in ("social", "religion", "cooking", "ration", "hhtype", "land", "dwelling") else 300)
 
-income["dist"] = con.execute(f"""
-    SELECT round(quantile_cont({MPCE}, .1))::BIGINT p10,
-           round(quantile_cont({MPCE}, .2))::BIGINT p20,
-           round(quantile_cont({MPCE}, .3))::BIGINT p30,
-           round(quantile_cont({MPCE}, .4))::BIGINT p40,
-           round(quantile_cont({MPCE}, .5))::BIGINT p50,
-           round(quantile_cont({MPCE}, .6))::BIGINT p60,
-           round(quantile_cont({MPCE}, .7))::BIGINT p70,
-           round(quantile_cont({MPCE}, .8))::BIGINT p80,
-           round(quantile_cont({MPCE}, .9))::BIGINT p90,
-           round(avg({MPCE}))::BIGINT mean
+income["dist"] = {}
+_dist_rows = con.execute(f"""
+    SELECT {MPCE} m, MULTIPLIER * HOUSEHOLD_SIZE w
     FROM supplementary_consumption
     WHERE VISIT='1' AND MONTHLY_CONSUMPTION_EXP>0 AND HOUSEHOLD_SIZE>0
-""").fetchone()
-income["dist"] = {
-    k: int(v) for k, v in zip(
-        ["p10", "p20", "p30", "p40", "p50", "p60", "p70", "p80", "p90", "mean"], income["dist"])
-}
-
-income["state"] = con.execute(f"""
-    SELECT sm.name state_name,
-           CASE WHEN s.Sector='1' THEN 'Rural' ELSE 'Urban' END sector,
-           round(median({MPCE}))::BIGINT median_mpce
-    FROM supplementary_consumption s
-    LEFT JOIN state_master sm ON s.State = sm.code
-    WHERE VISIT='1' AND MONTHLY_CONSUMPTION_EXP>0 AND HOUSEHOLD_SIZE>0
-    GROUP BY 1,2
 """).fetchall()
-income["state"] = [
-    {"state_name": r[0], "sector": r[1], "median_mpce": int(r[2])} for r in income["state"]
-]
+_dist = weighted_curves([("all", m, w) for m, w in _dist_rows]).get("all", [])
+_ws = sum(w for m, w in _dist_rows)
+for p, k in [(10, "p10"), (20, "p20"), (30, "p30"), (40, "p40"), (50, "p50"),
+             (60, "p60"), (70, "p70"), (80, "p80"), (90, "p90")]:
+    income["dist"][k] = _dist[p - 1]
+income["dist"]["mean"] = round(sum(m * w for m, w in _dist_rows) / _ws)
+
+income["state"] = []
+_state_rows = con.execute(f"""
+    SELECT s.State st, CASE WHEN s.Sector='1' THEN 'Rural' ELSE 'Urban' END sec,
+           {MPCE} m, s.MULTIPLIER * s.HOUSEHOLD_SIZE w
+    FROM supplementary_consumption s
+    WHERE VISIT='1' AND MONTHLY_CONSUMPTION_EXP>0 AND HOUSEHOLD_SIZE>0
+""").fetchall()
+for (st, sec), cur in sorted(weighted_curves([((r[0], r[1]), r[2], r[3]) for r in _state_rows]).items()):
+    income["state"].append({
+        "state_name": STATE_NAMES.get(st, st), "sector": sec, "median_mpce": cur[49],
+    })
 
 # Food vs non-food share of the total monthly budget (visit-1 weights)
 food_cr = con.execute("SELECT SUM(Total_Consumption_Value * Multiplier)/1e7 FROM food_consumption").fetchone()[0]
