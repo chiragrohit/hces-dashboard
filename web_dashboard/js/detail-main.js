@@ -42,15 +42,13 @@ function buildIssueUrl(info) {
     '- [ ] Something is wrong — a number, label, or the data',
     '- [ ] Suggestion — a better label, chart, or data source',
     '- [ ] Question about how this chart is made',
+    '- [ ] Other',
     '',
     '## What is the issue or suggestion?',
-    'Describe it in your own words. Add the exact number or wording you expect.',
+    'Describe your issue or suggestion.',
     '',
     '## What change do you want to see?',
     'Optional. State the fix you would like.',
-    '',
-    '## How to check the numbers yourself',
-    'The data table, the source columns, and the SQL behind this chart are on the page above.',
   ].join('\n');
   return ISSUE_BASE + '?title=' + encodeURIComponent('Feedback: ' + info.title)
     + '&body=' + encodeURIComponent(body);
