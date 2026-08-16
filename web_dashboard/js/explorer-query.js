@@ -58,8 +58,9 @@ export async function run() {
     body: JSON.stringify({ sql }),
   }).then(r => r.json());
   const note = $('xNote');
-  if (res.error) {
-    note.textContent = 'Query error: ' + res.error;
+  const err = res.error || res.detail;
+  if (err) {
+    note.textContent = 'Query error: ' + err;
     if (show) $('xSteps').hidden = true;
     $('xChartCard').hidden = true;
     $('xTableCard').hidden = true;

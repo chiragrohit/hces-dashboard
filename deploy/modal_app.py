@@ -101,6 +101,9 @@ def api():
         except ValueError as e:
             from fastapi import HTTPException
             raise HTTPException(status_code=400, detail=str(e))
+        except Exception as e:  # bad SQL (bad column, syntax, …) -> friendly 400
+            from fastapi import HTTPException
+            raise HTTPException(status_code=400, detail=f"Query failed: {e}")
         finally:
             con.close()
 
