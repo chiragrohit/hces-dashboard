@@ -76,6 +76,15 @@
       <p class="calc-foot">The inputs are raw survey data. The percentiles are a standard statistical summary computed from them — no percentile column exists in the source files. Only visit-1 households are used. Weighting: every person counts once, through the household they live in (<code>Multiplier × household size</code>). For display we show a group only when its raw sample is large enough: at least 2,000 households for household filters, at least 300 for the survey-month filter. The state view keeps the 12 states/UTs with the highest median. The percentile math is the same for every filter.</p>
     </div>
   </div>
+
+  <div class="card wide" id="dSqlCard" hidden>
+    <div class="card-head">
+      <h3><span class="dot"></span>SQL behind this chart <span class="hint">copy, run, verify</span></h3>
+      <div class="card-actions"><button class="btn small" id="dSqlCopy">Copy SQL</button></div>
+    </div>
+    <p class="hint">How to run: <code>python download_data.py</code> → <code>duckdb</code> → paste the SQL. Every query has comments that explain each step. Run the same numbers on your own machine.</p>
+    <div class="sql-wrap"><pre class="sql-block"><code id="dSql"></code></pre></div>
+  </div>
 </main>
 
 <footer class="footer">

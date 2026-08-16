@@ -242,3 +242,11 @@
   .detail-head { flex-direction: column; }
   .table-wrap { max-height: 380px; }
 }
+
+/* SQL behind this chart — editor-style block with syntax colors */
+.sql-wrap { max-height: 460px; overflow: auto; border: 1px solid var(--border); border-radius: 10px; background: #f8fafc; }
+.sql-block { margin: 0; padding: 16px 18px; font-family: Consolas, "Cascadia Mono", "JetBrains Mono", monospace; font-size: 12.5px; line-height: 1.6; color: var(--ink-2); white-space: pre; tab-size: 4; }
+.sql-kw { color: #1d4ed8; font-weight: 600; }
+.sql-com { color: #0e9f8a; font-style: italic; }
+.sql-str { color: #b45309; }
+.sql-num { color: #0e7490; }

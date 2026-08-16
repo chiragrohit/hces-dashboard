@@ -7,6 +7,7 @@ import { RENDERERS } from './charts-sections.js';
 import { setFocusChart, setShowValues } from './charts-core.js';
 import { INFO, PROV, C } from './content.js';
 import { fmt } from './util.js';
+import { SQL, sqlHighlight } from './sql.js';
 
 const params = new URLSearchParams(location.search);
 const key = params.get('id');
@@ -297,6 +298,26 @@ function downloadCsv() {
     if (TBL[chartId] && TBL[chartId].curve) document.getElementById('dCalc').hidden = false;
   }
   document.getElementById('dCsv').addEventListener('click', downloadCsv);
+
+  // SQL behind this chart — copy-paste runnable, syntax-highlighted
+  const sqlText = SQL[key] || SQL[chartId];
+  if (sqlText) {
+    document.getElementById('dSql').innerHTML = sqlHighlight(sqlText);
+    document.getElementById('dSqlCard').hidden = false;
+    const copy = document.getElementById('dSqlCopy');
+    copy.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(sqlText);
+      } catch (e) {
+        // fallback for non-secure contexts
+        const ta = document.createElement('textarea');
+        ta.value = sqlText; document.body.appendChild(ta); ta.select();
+        document.execCommand('copy'); ta.remove();
+      }
+      copy.textContent = 'Copied ✓';
+      setTimeout(() => { copy.textContent = 'Copy SQL'; }, 1500);
+    });
+  }
   try {
     await loadAll();
     buildFilters();
