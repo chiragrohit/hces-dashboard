@@ -1,7 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "rewrites": [
-    { "source": "/api/:path*", "destination": "https://https://<your-modal-endpoint>/api/:path*" },
     { "source": "/people", "destination": "/index.html" },
     { "source": "/households", "destination": "/index.html" },
     { "source": "/spending", "destination": "/index.html" },
@@ -13,11 +12,5 @@
     { "source": "/explore", "destination": "/explorer.html" },
     { "source": "/metadata", "destination": "/metadata.html" },
     { "source": "/metadata/:table", "destination": "/dataset.html" }
-  ],
-  "headers": [
-    {
-      "source": "/api/:path*",
-      "headers": [{ "key": "x-vercel-enable-rewrite-caching", "value": "0" }]
-    }
   ]
 }
