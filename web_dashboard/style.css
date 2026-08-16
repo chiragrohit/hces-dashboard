@@ -250,3 +250,5 @@
 .sql-com { color: #0e9f8a; font-style: italic; }
 .sql-str { color: #b45309; }
 .sql-num { color: #0e7490; }
+.detail-issue { flex-shrink: 0; color: var(--accent); border-color: var(--accent); }
+.detail-issue:hover { background: var(--accent-soft); }

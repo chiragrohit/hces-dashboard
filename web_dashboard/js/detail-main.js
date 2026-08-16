@@ -28,6 +28,34 @@ const CANVAS = {
 };
 const chartId = CANVAS[key] || key;
 
+// Report / Suggest — pre-filled GitHub issue (no account code needed; GitHub handles login)
+const ISSUE_BASE = 'https://github.com/chiragrohit/hces-dashboard/issues/new';
+const PAGE_URL = 'https://hces-dashboard.vercel.app/detail.html?id=' + key;
+
+function buildIssueUrl(info) {
+  const body = [
+    '**Chart:** ' + info.title + ' (chart `' + key + '`)',
+    '**Page:** ' + PAGE_URL,
+    '**Shows:** ' + String(info.what || '').slice(0, 160),
+    '',
+    '## Type of feedback',
+    '- [ ] Something is wrong — a number, label, or the data',
+    '- [ ] Suggestion — a better label, chart, or data source',
+    '- [ ] Question about how this chart is made',
+    '',
+    '## What is the issue or suggestion?',
+    'Describe it in your own words. Add the exact number or wording you expect.',
+    '',
+    '## What change do you want to see?',
+    'Optional. State the fix you would like.',
+    '',
+    '## How to check the numbers yourself',
+    'The data table, the source columns, and the SQL behind this chart are on the page above.',
+  ].join('\n');
+  return ISSUE_BASE + '?title=' + encodeURIComponent('Feedback: ' + info.title)
+    + '&body=' + encodeURIComponent(body);
+}
+
 const SECTION = {
   chartStateConsumption: 'overview', chartSectorShare: 'overview', chartOOH: 'overview',
   chartAgeGroup: 'people', chartGender: 'people', chartPyramid: 'people',
@@ -285,6 +313,8 @@ function downloadCsv() {
   document.getElementById('dSource').textContent = 'From: ' + info.source;
   document.getElementById('dCrumb').textContent = ' / ' + info.title;
   document.getElementById('dChart').id = chartId;
+  document.getElementById('dIssue').href = buildIssueUrl(info);
+  document.getElementById('dIssue').hidden = false;
   const prov = PROV[key];
   if (prov) {
     document.getElementById('dProv').innerHTML = `
