@@ -19,6 +19,9 @@ export default async function handler(req, res) {
   }
 
   const url = new URL(req.url, 'https://proxy.local');
+  // Vercel injects catch-all params as query params; don't forward them.
+  url.searchParams.delete('path');
+  url.searchParams.delete('...path');
   const rest = url.pathname.replace(/^\/api\/?/, '');
   const target = modalApi + '/api' + (rest ? '/' + rest : '') + url.search;
 
