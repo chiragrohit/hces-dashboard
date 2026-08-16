@@ -21,7 +21,7 @@ image = (
     .add_local_dir(str(REPO_ROOT / "server"), "/root/server")
 )
 
-app = modal.App("hces-api", image=image)
+app = modal.App(os.environ.get("MODAL_APP_NAME", "hces-api"), image=image)
 volume = modal.Volume.from_name("hces-parquet", create_if_missing=True)
 secret = modal.Secret.from_name("hces-opencode-key")
 

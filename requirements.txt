@@ -1,0 +1,3 @@
+# Local dashboard only needs DuckDB. Deploy tools (modal, vercel) are
+# documented in the README and are NOT required to run locally.
+duckdb
